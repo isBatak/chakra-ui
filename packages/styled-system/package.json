@@ -37,7 +37,9 @@
   },
   "dependencies": {
     "@chakra-ui/utils": "1.9.1",
-    "csstype": "^3.0.9"
+    "@types/lodash.kebabcase": "^4.1.6",
+    "csstype": "^3.0.9",
+    "lodash.kebabcase": "^4.1.1"
   },
   "sideEffects": false
 }

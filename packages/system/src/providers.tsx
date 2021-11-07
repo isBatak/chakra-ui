@@ -4,17 +4,24 @@ import {
   SystemStyleObject,
   toCSSVar,
   WithCSSVar,
+  toGlobalStyles,
 } from "@chakra-ui/styled-system"
 import { Dict, memoizedGet as get, runIfFn } from "@chakra-ui/utils"
 import { createContext } from "@chakra-ui/react-utils"
 import {
   Global,
+  CacheProvider,
   Interpolation,
   ThemeContext,
   ThemeProvider as EmotionThemeProvider,
   ThemeProviderProps as EmotionThemeProviderProps,
 } from "@emotion/react"
+import createCache from "@emotion/cache"
 import * as React from "react"
+
+const chakraCache = createCache({
+  key: "chakra",
+})
 
 export interface ThemeProviderProps extends EmotionThemeProviderProps {
   /**
@@ -25,12 +32,20 @@ export interface ThemeProviderProps extends EmotionThemeProviderProps {
 }
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const { cssVarsRoot = ":host, :root", theme, children } = props
-  const computedTheme = React.useMemo(() => toCSSVar(theme), [theme])
+  const { cssVarsRoot = ":host, :root", theme: rawTheme, children } = props
+  const computedTheme = React.useMemo(() => toGlobalStyles(toCSSVar(rawTheme)), [rawTheme])
   return (
     <EmotionThemeProvider theme={computedTheme}>
-      <Global styles={(theme: any) => ({ [cssVarsRoot]: theme.__cssVars })} />
-      {children}
+      {/* @ts-ignore */}
+      <CacheProvider value={chakraCache}>
+        <Global
+          styles={(theme: any) => ({
+            [cssVarsRoot]: theme.__cssVars,
+            ...theme.__globalStyles,
+          })}
+        />
+        {children}
+      </CacheProvider>
     </EmotionThemeProvider>
   )
 }
