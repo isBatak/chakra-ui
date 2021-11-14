@@ -6,7 +6,8 @@
       "packages/*",
       "examples/*",
       "tooling/*",
-      "website"
+      "website",
+      "benchmark"
     ],
     "nohoist": [
       "@emotion/core/types",
