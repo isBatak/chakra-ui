@@ -1,4 +1,4 @@
-import React, { FC, Profiler, useEffect } from "react"
+import React, { FC, Profiler, ReactElement, ReactNode, useEffect } from "react"
 import { useRouter } from "next/router"
 import { createId } from "./utils/createId"
 import { TestResults } from "./TestResults"
@@ -46,15 +46,21 @@ export type TestComponentProps = {
   testIndex: number
 }
 
+export type Wrapper = (children: ReactNode) => ReactElement<any, any> | null
+
+export interface TestAndRefreshProps {
+  runIndex: number
+  testInfo: TestInfo
+  TestComponent: FC<TestComponentProps>
+  wrapper?: Wrapper
+}
+
 /** This component runs a single run of the test, from 0...N */
-const TestAndRefresh = ({
+const TestAndRefresh: FC<TestAndRefreshProps> = ({
   runIndex,
   testInfo,
   TestComponent,
-}: {
-  runIndex: number
-  testInfo: TestInfo
-  TestComponent: React.FunctionComponent<TestComponentProps>
+  wrapper,
 }) => {
   /** Stores individual results in an array until the test is done and we can crunch them */
   const iterationResults: Array<number> = []
@@ -135,9 +141,9 @@ const TestAndRefresh = ({
   /** An array with the size of N */
   const loops = [...Array(testInfo.N)]
 
-  return (
+  const children = (
     <>
-      {loops.map((value, index) => {
+      {loops.map((_, index) => {
         return (
           <Profiler
             key={index}
@@ -150,6 +156,8 @@ const TestAndRefresh = ({
       })}
     </>
   )
+
+  return wrapper?.(children) ?? children
 }
 
 interface ITestRunner {
@@ -159,12 +167,15 @@ interface ITestRunner {
   numberOfRuns: number
   /** The N number of iterations to run inside each test */
   iterationN: number
+  /** For wrapping components with context providers */
+  wrapper?: Wrapper
 }
 
 export const TestRunner: FC<ITestRunner> = ({
   TestComponent,
   numberOfRuns,
   iterationN,
+  wrapper,
 }) => {
   const router = useRouter()
   const { testId, runIndex, finished } = router.query
@@ -188,7 +199,7 @@ export const TestRunner: FC<ITestRunner> = ({
     // We are mid-test or finished with a test
     if (typeof finished !== "undefined") {
       // Test is done!
-      const testInfo: TestInfo = JSON.parse(localStorage.getItem(testId))
+      const testInfo: TestInfo = JSON.parse(localStorage.getItem(testId) ?? "")
 
       return <TestResults testInfo={testInfo} />
     }
@@ -199,12 +210,13 @@ export const TestRunner: FC<ITestRunner> = ({
 
     try {
       /** Grab the test info cache from storage */
-      const testInfo: TestInfo = JSON.parse(localStorage.getItem(testId))
+      const testInfo: TestInfo = JSON.parse(localStorage.getItem(testId) ?? "")
       return (
         <TestAndRefresh
           runIndex={runNumber}
           testInfo={testInfo}
           TestComponent={TestComponent}
+          wrapper={wrapper}
         />
       )
     } catch (err) {

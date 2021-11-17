@@ -1,5 +1,5 @@
+import React from "react"
 import dynamic from "next/dynamic"
-import { ChakraProvider } from "@chakra-ui/react"
 
 const CreateAndMountComponent = () => {
   const ChakraUiTest = dynamic(
@@ -7,11 +7,7 @@ const CreateAndMountComponent = () => {
     { ssr: false },
   )
 
-  return (
-    <ChakraProvider>
-      <ChakraUiTest />
-    </ChakraProvider>
-  )
+  return <ChakraUiTest />
 }
 
 export default CreateAndMountComponent
