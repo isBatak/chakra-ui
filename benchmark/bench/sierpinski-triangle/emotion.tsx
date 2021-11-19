@@ -137,7 +137,7 @@ function SierpinskiTriangle({
   }
 }
 
-const StitchesTest = () => {
+const BenchTest = () => {
   return (
     <TestRunner
       numberOfRuns={3}
@@ -147,4 +147,4 @@ const StitchesTest = () => {
   )
 }
 
-export default StitchesTest
+export default BenchTest

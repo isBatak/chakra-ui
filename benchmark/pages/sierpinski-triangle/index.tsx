@@ -6,12 +6,10 @@ export default function Home() {
     <div>
       <ul>
         <li>
-          <Link href="sierpinski-triangle/styled-components">
-            Styled components
-          </Link>
+          <Link href="/sierpinski-triangle/chakra-ui">Chakra UI</Link>
         </li>
         <li>
-          <Link href="sierpinski-triangle/emotion">Emotion</Link>
+          <Link href="/sierpinski-triangle/emotion">Emotion</Link>
         </li>
       </ul>
     </div>

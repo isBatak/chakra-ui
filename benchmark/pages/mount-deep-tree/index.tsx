@@ -6,12 +6,10 @@ export default function Home() {
     <div>
       <ul>
         <li>
-          <Link href="mount-deep-tree/styled-components">
-            Styled components
-          </Link>
+          <Link href="/mount-deep-tree/chakra-ui">Chakra-UI</Link>
         </li>
         <li>
-          <Link href="mount-deep-tree/emotion">Emotion</Link>
+          <Link href="/mount-deep-tree/emotion">Emotion</Link>
         </li>
       </ul>
     </div>

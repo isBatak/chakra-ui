@@ -4,7 +4,11 @@ import React from "react"
 export default function Home() {
   return (
     <div>
-      <ul></ul>
+      <ul>
+        <li>
+          <Link href="/create-theme/chakra-ui">Chakra UI</Link>
+        </li>
+      </ul>
     </div>
   )
 }

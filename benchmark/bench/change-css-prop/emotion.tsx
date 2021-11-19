@@ -22,7 +22,7 @@ const Test = ({ testIndex }: TestComponentProps) => {
   )
 }
 
-const StitchesTest = () => {
+const BenchTest = () => {
   return (
     <>
       <TestRunner numberOfRuns={3} iterationN={1000} TestComponent={Test} />
@@ -37,4 +37,4 @@ const StitchesTest = () => {
   )
 }
 
-export default StitchesTest
+export default BenchTest

@@ -1,9 +1,16 @@
 import React from "react"
-import { Button, ChakraProvider } from "@chakra-ui/react"
 import { TestComponentProps, TestRunner } from "../TestRunner"
+import { Button, ChakraProvider } from "@chakra-ui/react"
 
-const Test = ({ testIndex }: TestComponentProps) => {
-  return <Button sx={{ "--test-index": `${testIndex}` }}>testing</Button>
+const Test: React.FunctionComponent<TestComponentProps> = ({
+  testIndex,
+}: TestComponentProps) => {
+  const variants = {
+    variant: testIndex % 2 === 0 ? "solid" : "outline",
+    size: testIndex % 2 === 0 ? "md" : "lg",
+  }
+
+  return <Button {...variants}>testing</Button>
 }
 
 const ChakraUITest = () => {

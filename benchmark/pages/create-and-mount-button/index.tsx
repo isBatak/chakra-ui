@@ -9,15 +9,7 @@ export default function Home() {
           <Link href="/create-and-mount-button/chakra-ui">Chakra UI</Link>
         </li>
         <li>
-          <Link href="/create-and-mount-button/styled-components">
-            Styled Components
-          </Link>
-        </li>
-        <li>
           <Link href="/create-and-mount-button/emotion">Emotion</Link>
-        </li>
-        <li>
-          <Link href="/create-and-mount-button/baseline">Baseline</Link>
         </li>
       </ul>
     </div>

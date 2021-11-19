@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic"
 
 const SierpinskiTriangle = () => {
-  const SCTest = dynamic(
-    () => import("../../bench/mount-wide-tree/styled-components"),
+  const Test = dynamic(
+    () => import("../../bench/sierpinski-triangle/chakra-ui"),
     { ssr: false },
   )
 
-  return <SCTest />
+  return <Test />
 }
 
 export default SierpinskiTriangle

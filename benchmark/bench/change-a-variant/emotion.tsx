@@ -18,7 +18,7 @@ const Test: React.FunctionComponent<TestComponentProps> = ({
   return <Button {...variants}>testing</Button>
 }
 
-const StitchesTest = () => {
+const BenchTest = () => {
   return (
     <>
       <TestRunner numberOfRuns={3} iterationN={1000} TestComponent={Test} />
@@ -33,4 +33,4 @@ const StitchesTest = () => {
   )
 }
 
-export default StitchesTest
+export default BenchTest

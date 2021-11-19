@@ -152,7 +152,7 @@ function ResultCells({ result }) {
       <td>{firstIteration.toFixed(6)}</td>
       <td style={alertLastRender}>{lastIteration.toFixed(6)}</td>
       <td>{meanIteration.toFixed(6)}</td>
-      <td>{medianIteration.toFixed(6)}</td>
+      <td>{medianIteration?.toFixed(6)}</td>
       <td>{fastestIteration.toFixed(6)}</td>
       <td>{slowestIteration.toFixed(6)}</td>
       <td>{Math.sqrt(variance).toFixed(6)}</td>

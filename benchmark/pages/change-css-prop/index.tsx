@@ -6,15 +6,10 @@ export default function Home() {
     <div>
       <ul>
         <li>
-          <Link href="change-css-prop/styled-components">
-            Styled Components
-          </Link>
+          <Link href="/change-css-prop/chakra-ui">Chakra UI</Link>
         </li>
         <li>
-          <Link href="change-css-prop/emotion">Emotion</Link>
-        </li>
-        <li>
-          <Link href="change-css-prop/baseline">Baseline</Link>
+          <Link href="/change-css-prop/emotion">Emotion</Link>
         </li>
       </ul>
     </div>

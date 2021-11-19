@@ -23,47 +23,53 @@
  * SOFTWARE.
  */
 
-import React from "react"
+import React, { FC } from "react"
 import { TestRunner } from "../TestRunner"
 import {
   interpolatePurples,
   interpolateBuPu,
   interpolateRdPu,
 } from "d3-scale-chromatic"
-import styled from "styled-components"
+import { ChakraProvider, Box, ChakraProps } from "@chakra-ui/react"
 
-const View = styled("div")({
-  alignItems: "stretch",
-  borderWidth: "0",
-  borderStyle: "solid",
-  boxSizing: "border-box",
-  display: "flex",
-  flexBasis: "auto",
-  flexDirection: "column",
-  flexShrink: 0,
-  margin: "0",
-  padding: "0",
-  position: "relative",
-  minHeight: "0",
-  minWidth: "0",
-})
+interface IDotProps extends ChakraProps {
+  x: number
+  y: number
+  size: number
+}
 
-const Dot: any = styled(View)((props: any) => ({
-  position: "absolute",
-  cursor: "pointer",
-  width: "0",
-  height: "0",
-  borderColor: "transparent",
-  borderStyle: "solid",
-  borderTopWidth: "0",
-  transform: "translate(50%, 50%)",
-  marginLeft: `${props.x}px`,
-  marginTop: `${props.y}px`,
-  borderRightWidth: `${props.size / 2}px`,
-  borderBottomWidth: `${props.size / 2}px`,
-  borderLeftWidth: `${props.size / 2}px`,
-  ...props.css,
-}))
+const Dot: FC<IDotProps> = ({ x, y, size, sx, ...rest }) => {
+  return (
+    <Box
+      alignItems="stretch"
+      borderWidth="0"
+      borderStyle="solid"
+      boxSizing="border-box"
+      display="flex"
+      flexBasis="auto"
+      flexDirection="column"
+      flexShrink={0}
+      m="0"
+      p="0"
+      minH="0"
+      minW="0"
+      position="absolute"
+      cursor="pointer"
+      width="0"
+      height="0"
+      borderColor="transparent"
+      borderTopWidth="0"
+      transform="translate(50%, 50%)"
+      marginLeft={`${x}px`}
+      marginTop={`${y}px`}
+      borderRightWidth={`${size / 2}px`}
+      borderBottomWidth={`${size / 2}px`}
+      borderLeftWidth={`${size / 2}px`}
+      sx={sx}
+      {...rest}
+    />
+  )
+}
 
 const targetSize = 10
 
@@ -98,7 +104,7 @@ function SierpinskiTriangle({
           size={targetSize}
           x={x - targetSize / 2}
           y={y - targetSize / 2}
-          css={{
+          sx={{
             borderBottomColor: color,
           }}
         />
@@ -137,14 +143,15 @@ function SierpinskiTriangle({
   }
 }
 
-const StitchesTest = () => {
+const BenchTest = () => {
   return (
     <TestRunner
       numberOfRuns={3}
       iterationN={50}
       TestComponent={SierpinskiTriangle as any}
+      wrapper={(children) => <ChakraProvider>{children}</ChakraProvider>}
     />
   )
 }
 
-export default StitchesTest
+export default BenchTest

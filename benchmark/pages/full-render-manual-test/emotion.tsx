@@ -3,9 +3,9 @@ import styled from "@emotion/styled"
 
 const Box: any = styled("div")((props: any) => ({
   display: "inline-block",
-  width: 100,
+  minWidth: 100,
   height: 100,
-  backgroundColor: "$gray400",
+  backgroundColor: "rgb(160, 174, 192)",
   textAlign: "center",
   lineHeight: 1,
   fontSize: 100,
