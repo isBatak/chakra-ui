@@ -7,7 +7,7 @@
       "examples/*",
       "tooling/*",
       "website",
-      "benchmark"
+      "benchmarks/*"
     ],
     "nohoist": [
       "@emotion/core/types",
@@ -66,7 +66,10 @@
     "docs": "yarn workspace @chakra-ui/docs",
     "docs:deploy": "yarn build && yarn docs:build && cp -r website/public .",
     "docs:build": "yarn search-meta:gen && yarn build:prop-docs && yarn docs build",
-    "docs:dev": "yarn build:prop-docs && yarn docs dev"
+    "docs:dev": "yarn build:prop-docs && yarn docs dev",
+    "benchmark:web-dev": "yarn pkg benchmark-web dev",
+    "benchmark:web-start": "yarn pkg benchmark-web build && yarn pkg benchmark-web start",
+    "benchmark:script-run": ""
   },
   "resolutions": {
     "**/react": "17.0.2",

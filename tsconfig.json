@@ -23,7 +23,7 @@
     "incremental": true,
     "declarationMap": true
   },
-  "include": ["packages", "scripts", "tooling", "website", "benchmark"],
+  "include": ["packages", "scripts", "tooling", "website", "benchmarks"],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {

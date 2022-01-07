@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "benchmark-script",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url .",
+    "run-benchmark": "node run.js",
+    "test:typescript": "exit 0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "babel-plugin-react-native-web": "^0.17.5",
+    "d3-scale-chromatic": "^3.0.0",
+    "http-server": "^14.0.0",
+    "parcel": "^2.0.1",
+    "puppeteer": "^11.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.2",
+    "stats-analysis": "^2.0.0"
+  }
+}
