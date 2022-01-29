@@ -45,6 +45,7 @@
     "test": "jest --maxWorkers=50%",
     "test:watch": "jest --maxWorkers=25% --watch --onlyChanged",
     "test:ci": "jest --color --runInBand --ci",
+    "test:perf": "NODE_ENV=production node benchmarks/perf.cjs",
     "lint": "concurrently yarn:lint:*",
     "lint:eslint": "eslint packages/**/src/ --ext .ts,.tsx --config .eslintrc",
     "lint:types": "tsc --noEmit",
@@ -157,5 +158,8 @@
     "storybook-addon-performance": "0.16.1",
     "ts-node": "10.4.0",
     "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "benchmark": "^2.1.4"
   }
 }
