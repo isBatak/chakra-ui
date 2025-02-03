@@ -2,11 +2,11 @@ import { useCallbackRef } from "./use-callback-ref"
 import React, { useCallback, useState, useId } from "react"
 
 export interface UseDisclosureProps {
-  isOpen?: boolean
-  defaultIsOpen?: boolean
+  isOpen?: boolean | undefined
+  defaultIsOpen?: boolean | undefined
   onClose?(): void
   onOpen?(): void
-  id?: string
+  id?: string | undefined
 }
 
 type HTMLProps = React.HTMLAttributes<HTMLElement>

@@ -5,12 +5,12 @@ import { PanEvent } from "./pan-event"
 import { AnyPointerEvent, PanEventHandler, PanEventHandlers } from "./types"
 
 export interface UsePanEventProps {
-  onPan?: PanEventHandler
-  onPanStart?: PanEventHandler
-  onPanEnd?: PanEventHandler
-  onPanSessionStart?: PanEventHandler
-  onPanSessionEnd?: PanEventHandler
-  threshold?: number
+  onPan?: PanEventHandler | undefined
+  onPanStart?: PanEventHandler | undefined
+  onPanEnd?: PanEventHandler | undefined
+  onPanSessionStart?: PanEventHandler | undefined
+  onPanSessionEnd?: PanEventHandler | undefined
+  threshold?: number | undefined
 }
 
 export function usePanEvent(

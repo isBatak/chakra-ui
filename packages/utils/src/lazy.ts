@@ -1,10 +1,10 @@
 export type LazyMode = "unmount" | "keepMounted"
 
 interface LazyOptions {
-  enabled?: boolean
-  isSelected?: boolean
-  wasSelected?: boolean
-  mode?: LazyMode
+  enabled?: boolean | undefined
+  isSelected?: boolean | undefined
+  wasSelected?: boolean | undefined
+  mode?: LazyMode | undefined
 }
 
 /**

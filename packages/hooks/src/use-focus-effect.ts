@@ -12,8 +12,8 @@ import { useUpdateEffect } from "./use-update-effect"
 
 export interface UseFocusOnHideOptions {
   focusRef: RefObject<FocusableElement>
-  shouldFocus?: boolean
-  visible?: boolean
+  shouldFocus?: boolean | undefined
+  visible?: boolean | undefined
 }
 
 function preventReturnFocus(containerRef: React.RefObject<HTMLElement>) {
@@ -67,10 +67,10 @@ export function useFocusOnHide(
 }
 
 export interface UseFocusOnShowOptions {
-  visible?: boolean
-  shouldFocus?: boolean
-  preventScroll?: boolean
-  focusRef?: React.RefObject<FocusableElement>
+  visible?: boolean | undefined
+  shouldFocus?: boolean | undefined
+  preventScroll?: boolean | undefined
+  focusRef?: React.RefObject<FocusableElement> | undefined
 }
 
 const defaultOptions: UseFocusOnShowOptions = {

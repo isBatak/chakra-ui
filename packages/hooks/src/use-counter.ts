@@ -10,30 +10,30 @@ export interface UseCounterProps {
   /**
    * The number of decimal points used to round the value
    */
-  precision?: number
+  precision?: number | undefined
   /**
    * The initial value of the counter. Should be less than `max` and greater than `min`
    */
-  defaultValue?: string | number
+  defaultValue?: string | number | undefined
   /**
    * The value of the counter. Should be less than `max` and greater than `min`
    */
-  value?: string | number
+  value?: string | number | undefined
   /**
    * The step used to increment or decrement the value
    * @default 1
    */
-  step?: number
+  step?: number | undefined
   /**
    * The minimum value of the counter
    * @default Number.MIN_SAFE_INTEGER
    */
-  min?: number
+  min?: number | undefined
   /**
    * The maximum value of the counter
    * @default Number.MAX_SAFE_INTEGER
    */
-  max?: number
+  max?: number | undefined
   /**
    * This controls the value update behavior in general.
    *
@@ -44,7 +44,7 @@ export interface UseCounterProps {
    *
    * @default true
    */
-  keepWithinRange?: boolean
+  keepWithinRange?: boolean | undefined
 }
 
 export function useCounter(props: UseCounterProps = {}) {

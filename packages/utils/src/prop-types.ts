@@ -1,39 +1,43 @@
 import { Merge } from "./types"
 
 export interface AriaLabelingProps {
-  "aria-label"?: string
-  "aria-labelledby"?: string
-  "aria-describedby"?: string
-  "aria-details"?: string
+  "aria-label"?: string | undefined
+  "aria-labelledby"?: string | undefined
+  "aria-describedby"?: string | undefined
+  "aria-details"?: string | undefined
 }
 
 export interface AriaValidationProps {
-  "aria-errormessage"?: string
+  "aria-errormessage"?: string | undefined
 }
 
 export interface IdProps {
-  id?: string
+  id?: string | undefined
 }
 
 export interface InputDOMEvents {
-  onCopy?: React.ClipboardEventHandler<HTMLInputElement>
-  onCut?: React.ClipboardEventHandler<HTMLInputElement>
-  onPaste?: React.ClipboardEventHandler<HTMLInputElement>
-  onCompositionStart?: React.CompositionEventHandler<HTMLInputElement>
-  onCompositionEnd?: React.CompositionEventHandler<HTMLInputElement>
-  onCompositionUpdate?: React.CompositionEventHandler<HTMLInputElement>
-  onSelect?: React.ReactEventHandler<HTMLInputElement>
-  onBeforeInput?: React.FormEventHandler<HTMLInputElement>
-  onInput?: React.FormEventHandler<HTMLInputElement>
+  onCopy?: React.ClipboardEventHandler<HTMLInputElement> | undefined
+  onCut?: React.ClipboardEventHandler<HTMLInputElement> | undefined
+  onPaste?: React.ClipboardEventHandler<HTMLInputElement> | undefined
+  onCompositionStart?:
+    | React.CompositionEventHandler<HTMLInputElement>
+    | undefined
+  onCompositionEnd?: React.CompositionEventHandler<HTMLInputElement> | undefined
+  onCompositionUpdate?:
+    | React.CompositionEventHandler<HTMLInputElement>
+    | undefined
+  onSelect?: React.ReactEventHandler<HTMLInputElement> | undefined
+  onBeforeInput?: React.FormEventHandler<HTMLInputElement> | undefined
+  onInput?: React.FormEventHandler<HTMLInputElement> | undefined
 }
 
 export interface InputDOMProps extends IdProps, InputDOMEvents {
-  autoComplete?: string
-  maxLength?: number
-  minLength?: number
-  name?: string
-  pattern?: string
-  placeholder?: string
+  autoComplete?: string | undefined
+  maxLength?: number | undefined
+  minLength?: number | undefined
+  name?: string | undefined
+  pattern?: string | undefined
+  placeholder?: string | undefined
   type?:
     | "text"
     | "search"
@@ -43,6 +47,7 @@ export interface InputDOMProps extends IdProps, InputDOMEvents {
     | "password"
     | "hidden"
     | (string & {})
+    | undefined
   inputMode?:
     | "none"
     | "text"
@@ -52,6 +57,7 @@ export interface InputDOMProps extends IdProps, InputDOMEvents {
     | "numeric"
     | "decimal"
     | "search"
+    | undefined
 }
 
 export interface DOMElement extends Element, HTMLOrSVGElement {}
@@ -64,10 +70,10 @@ export interface DOMAttributes<T = DOMElement>
   extends React.AriaAttributes,
     React.DOMAttributes<T>,
     DataAttributes {
-  id?: string
-  role?: React.AriaRole
-  tabIndex?: number
-  style?: React.CSSProperties
+  id?: string | undefined
+  role?: React.AriaRole | undefined
+  tabIndex?: number | undefined
+  style?: React.CSSProperties | undefined
 }
 
 export interface InputDOMAttributes

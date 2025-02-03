@@ -5,7 +5,7 @@ export interface UseOutsideClickProps {
   /**
    * Whether the hook is enabled
    */
-  enabled?: boolean
+  enabled?: boolean | undefined
   /**
    * The reference to a DOM element.
    */
@@ -13,7 +13,7 @@ export interface UseOutsideClickProps {
   /**
    * Function invoked when a click is triggered outside the referenced element.
    */
-  handler?: (e: Event) => void
+  handler?: (e: Event) => void | undefined
 }
 
 /**

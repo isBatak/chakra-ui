@@ -101,12 +101,14 @@ export async function createThemeTypingsInterface(
         allUnions[key] = extractPropertyPaths(target, maxScanDepth)
           .filter(filter)
           .flatMap(flatMap)
+          .filter((value) => value !== undefined)
       }
 
       if (isObject(theme.semanticTokens)) {
         const semanticTokenKeys = extractSemanticTokenKeys(theme, key)
           .filter(filter)
           .flatMap(flatMap)
+          .filter((value) => value !== undefined)
 
         allUnions[key].push(...semanticTokenKeys)
       }

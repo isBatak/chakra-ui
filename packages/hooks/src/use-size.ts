@@ -19,9 +19,9 @@ function trackMutation(el: HTMLElement | null, cb: () => void) {
 
 export interface UseSizesProps<T> {
   getNodes: () => T[]
-  observeMutation?: boolean
-  enabled?: boolean
-  fallback?: ElementSize[]
+  observeMutation?: boolean | undefined
+  enabled?: boolean | undefined
+  fallback?: ElementSize[] | undefined
 }
 
 export function useSizes<T extends HTMLElement | null>(
@@ -78,9 +78,9 @@ function isRef(ref: any): ref is React.RefObject<any> {
 }
 
 export interface UseSizeProps {
-  observeMutation?: boolean
-  enabled?: boolean
-  fallback?: ElementSize
+  observeMutation?: boolean | undefined
+  enabled?: boolean | undefined
+  fallback?: ElementSize | undefined
 }
 
 export function useSize<T extends HTMLElement | null>(

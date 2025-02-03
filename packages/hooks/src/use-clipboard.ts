@@ -5,11 +5,11 @@ export interface UseClipboardOptions {
   /**
    * timeout delay (in ms) to switch back to initial state once copied.
    */
-  timeout?: number
+  timeout?: number | undefined
   /**
    * Set the desired MIME type
    */
-  format?: string
+  format?: string | undefined
 }
 
 /**

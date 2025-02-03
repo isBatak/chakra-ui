@@ -6,8 +6,8 @@ const OutsideClicker = ({
   onOutsideClick,
   enabled = true,
 }: {
-  listenContextMenu?: boolean
-  enabled?: boolean
+  listenContextMenu?: boolean | undefined
+  enabled?: boolean | undefined
   onOutsideClick: () => void
 }) => {
   const ref = React.useRef<HTMLDivElement>(null)

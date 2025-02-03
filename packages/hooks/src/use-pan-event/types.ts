@@ -76,6 +76,6 @@ export interface PanEventHandlers {
 export type PanEventHistory = TimestampedPoint[]
 
 export interface PanEventOptions {
-  threshold?: number
-  window?: Window
+  threshold?: number | undefined
+  window?: Window | undefined
 }
