@@ -45,17 +45,17 @@ export interface ToastOptions {
   /**
    * Callback function to run side effects after the toast has closed.
    */
-  onCloseComplete?: () => void
+  onCloseComplete?: () => void | undefined
 
   /**
    * Internally used to queue closing a toast. Should probably not be used by
    * anyone else, but documented regardless.
    */
-  requestClose?: boolean
+  requestClose?: boolean | undefined
   /**
    * Optional style overrides for the toast component.
    */
-  containerStyle?: SystemStyleObject
+  containerStyle?: SystemStyleObject | undefined
 }
 
 export type ToastState = {
@@ -73,7 +73,7 @@ export type ToastStatus =
 export type UpdateFn = (state: ToastState) => void
 
 export type CloseAllToastsOptions = {
-  positions?: ToastPosition[]
+  positions?: ToastPosition[] | undefined
 }
 
 export {}

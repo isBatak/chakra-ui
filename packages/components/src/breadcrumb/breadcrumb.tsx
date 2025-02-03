@@ -14,7 +14,7 @@ export interface BreadcrumbProps
   extends HTMLChakraProps<"nav">,
     BreadcrumbOptions,
     ThemingProps<"Breadcrumb"> {
-  listProps?: HTMLChakraProps<"ol">
+  listProps?: HTMLChakraProps<"ol"> | undefined
 }
 
 /**

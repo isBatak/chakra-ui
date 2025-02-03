@@ -7,7 +7,7 @@ type Dict<T = any> = { [key: string]: T }
 export type StyleFunctionProps = {
   colorScheme: string
   colorMode: "light" | "dark"
-  orientation?: "horizontal" | "vertical"
+  orientation?: "horizontal" | "vertical" | undefined
   theme: Dict
   [key: string]: any
 }
@@ -27,16 +27,16 @@ export function defineStyle<T extends SystemStyleInterpolation>(styles: T) {
 // ------------------------------------------------------------------ //
 
 type DefaultProps = {
-  size?: string
-  variant?: string
-  colorScheme?: string
+  size?: string | undefined
+  variant?: string | undefined
+  colorScheme?: string | undefined
 }
 
 export type StyleConfig = {
-  baseStyle?: SystemStyleInterpolation
-  sizes?: { [size: string]: SystemStyleInterpolation }
-  variants?: { [variant: string]: SystemStyleInterpolation }
-  defaultProps?: DefaultProps
+  baseStyle?: SystemStyleInterpolation | undefined
+  sizes?: { [size: string]: SystemStyleInterpolation } | undefined
+  variants?: { [variant: string]: SystemStyleInterpolation } | undefined
+  defaultProps?: DefaultProps | undefined
 }
 
 /**
@@ -47,14 +47,16 @@ export function defineStyleConfig<
   Sizes extends Dict<SystemStyleInterpolation>,
   Variants extends Dict<SystemStyleInterpolation>,
 >(config: {
-  baseStyle?: BaseStyle
-  sizes?: Sizes
-  variants?: Variants
-  defaultProps?: {
-    size?: keyof Sizes
-    variant?: keyof Variants
-    colorScheme?: string
-  }
+  baseStyle?: BaseStyle | undefined
+  sizes?: Sizes | undefined
+  variants?: Variants | undefined
+  defaultProps?:
+    | {
+        size?: keyof Sizes | undefined
+        variant?: keyof Variants | undefined
+        colorScheme?: string | undefined
+      }
+    | undefined
 }) {
   return config
 }
@@ -77,10 +79,10 @@ export type PartsStyleInterpolation<Parts extends Anatomy = Anatomy> =
 
 export interface MultiStyleConfig<Parts extends Anatomy = Anatomy> {
   parts: Parts["keys"]
-  baseStyle?: PartsStyleInterpolation<Parts>
-  sizes?: { [size: string]: PartsStyleInterpolation<Parts> }
-  variants?: { [variant: string]: PartsStyleInterpolation<Parts> }
-  defaultProps?: DefaultProps
+  baseStyle?: PartsStyleInterpolation<Parts> | undefined
+  sizes?: { [size: string]: PartsStyleInterpolation<Parts> } | undefined
+  variants?: { [variant: string]: PartsStyleInterpolation<Parts> } | undefined
+  defaultProps?: DefaultProps | undefined
 }
 
 // ------------------------------------------------------------------ //
@@ -103,14 +105,16 @@ export function createMultiStyleConfigHelpers<Part extends string>(
       Sizes extends Dict<PartsStyleInterpolation<{ keys: Part[] }>>,
       Variants extends Dict<PartsStyleInterpolation<{ keys: Part[] }>>,
     >(config: {
-      baseStyle?: BaseStyle
-      sizes?: Sizes
-      variants?: Variants
-      defaultProps?: {
-        size?: keyof Sizes
-        variant?: keyof Variants
-        colorScheme?: string
-      }
+      baseStyle?: BaseStyle | undefined
+      sizes?: Sizes | undefined
+      variants?: Variants | undefined
+      defaultProps?:
+        | {
+            size?: keyof Sizes | undefined
+            variant?: keyof Variants | undefined
+            colorScheme?: string | undefined
+          }
+        | undefined
     }) {
       return { parts: parts as Part[], ...config }
     },

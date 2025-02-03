@@ -54,7 +54,7 @@ describe("`as` prop typings", () => {
   it("should have correct types for the ChakraComponent with optional additional props", () => {
     const OptionalAdditionalPropComp: ChakraComponent<
       "div",
-      { additionalProp?: boolean }
+      { additionalProp?: boolean | undefined }
     > = ({ additionalProp, ...restProps }) => <chakra.div {...restProps} />
 
     const renderedAdditionPropComp = <OptionalAdditionalPropComp />

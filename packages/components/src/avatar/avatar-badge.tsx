@@ -29,7 +29,7 @@ const placementMap: Record<BadgePlacement, SystemStyleObject> = {
 }
 
 export interface AvatarBadgeProps extends HTMLChakraProps<"div"> {
-  placement?: BadgePlacement
+  placement?: BadgePlacement | undefined
 }
 
 /**

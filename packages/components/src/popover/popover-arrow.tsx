@@ -7,7 +7,7 @@ export interface PopoverArrowProps extends HTMLChakraProps<"div"> {
   /**
    * The color of the arrow's shadow
    */
-  shadowColor?: SystemProps["color"]
+  shadowColor?: SystemProps["color"] | undefined
 }
 
 const resolveVar = (scale: string, value: unknown) =>

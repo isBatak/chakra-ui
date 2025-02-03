@@ -13,55 +13,55 @@ export interface UseToastOptions extends ThemingProps<"Alert"> {
    *
    * @default "bottom"
    */
-  position?: ToastPosition
+  position?: ToastPosition | undefined
   /**
    * The delay before the toast hides (in milliseconds)
    * If set to `null`, toast will never dismiss.
    *
    * @default 5000 ( = 5000ms )
    */
-  duration?: ToastOptions["duration"]
+  duration?: ToastOptions["duration"] | undefined
   /**
    * Render a component toast component.
    * Any component passed will receive 2 props: `id` and `onClose`.
    */
-  render?: (props: RenderProps) => React.ReactNode
+  render?: (props: RenderProps) => React.ReactNode | undefined
   /**
    * The title of the toast
    */
-  title?: React.ReactNode
+  title?: React.ReactNode | undefined
   /**
    * The description of the toast
    */
-  description?: React.ReactNode
+  description?: React.ReactNode | undefined
   /**
    * If `true`, toast will show a close button
    * @default false
    */
-  isClosable?: boolean
+  isClosable?: boolean | undefined
   /**
    * The status of the toast.
    */
-  status?: AlertStatus
+  status?: AlertStatus | undefined
   /**
    * A custom icon that will be displayed by the toast.
    */
-  icon?: React.ReactNode
+  icon?: React.ReactNode | undefined
   /**
    * The `id` of the toast.
    *
    * Mostly used when you need to prevent duplicate.
    * By default, we generate a unique `id` for each toast
    */
-  id?: ToastId
+  id?: ToastId | undefined
   /**
    * Callback function to run side effects after the toast has closed.
    */
-  onCloseComplete?: () => void
+  onCloseComplete?: () => void | undefined
   /**
    * Optional style overrides for the container wrapping the toast component.
    */
-  containerStyle?: SystemProps
+  containerStyle?: SystemProps | undefined
 }
 
 /**

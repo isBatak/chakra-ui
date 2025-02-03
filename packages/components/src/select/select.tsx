@@ -25,13 +25,13 @@ interface SelectOptions extends FormControlOptions {
    * @example
    * focusBorderColor = "blue.500"
    */
-  focusBorderColor?: string
+  focusBorderColor?: string | undefined
   /**
    * The border color when the select is invalid. Use color keys in `theme.colors`
    * @example
    * errorBorderColor = "red.500"
    */
-  errorBorderColor?: string
+  errorBorderColor?: string | undefined
   /**
    * The placeholder for the select. We render an `<option/>` element that has
    * empty value.
@@ -40,15 +40,15 @@ interface SelectOptions extends FormControlOptions {
    * <option value="">{placeholder}</option>
    * ```
    */
-  placeholder?: string
+  placeholder?: string | undefined
   /**
    * The size (width and height) of the icon
    */
-  iconSize?: string
+  iconSize?: string | undefined
   /**
    * The color of the icon
    */
-  iconColor?: string
+  iconColor?: string | undefined
 }
 
 export interface SelectProps
@@ -58,12 +58,12 @@ export interface SelectProps
   /**
    * Props to forward to the root `div` element
    */
-  rootProps?: RootProps
+  rootProps?: RootProps | undefined
   /**
    * The icon element to use in the select
    * @type React.ReactElement
    */
-  icon?: React.ReactElement<any>
+  icon?: React.ReactElement<any> | undefined
 }
 
 /**

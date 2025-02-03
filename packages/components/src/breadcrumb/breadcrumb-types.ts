@@ -6,22 +6,22 @@ export interface BreadcrumbOptions {
    * @default "/"
    * @type string | React.ReactElement
    */
-  separator?: string | React.ReactElement
+  separator?: string | React.ReactElement | undefined
   /**
    * The left and right margin applied to the separator
    * @default "0.5rem"
    * @type SystemStyleObject["mx"]
    */
-  spacing?: SystemStyleObject["mx"]
+  spacing?: SystemStyleObject["mx"] | undefined
 }
 
 export interface BreadcrumbItemOptions extends BreadcrumbOptions {
   /**
    * @default false
    */
-  isCurrentPage?: boolean
+  isCurrentPage?: boolean | undefined
   /**
    * @default false
    */
-  isLastChild?: boolean
+  isLastChild?: boolean | undefined
 }

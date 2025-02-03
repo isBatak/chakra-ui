@@ -22,11 +22,11 @@ export type PinInputContext = Omit<UsePinInputReturn, "descendants"> & {
   /**
    * Sets the pin input component to the disabled state
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * Sets the pin input component to the invalid state
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
 }
 
 export const [PinInputProvider, usePinInputContext] =
@@ -44,38 +44,38 @@ export interface UsePinInputProps {
   /**
    * If `true`, the pin input receives focus on mount
    */
-  autoFocus?: boolean
+  autoFocus?: boolean | undefined
   /**
    * The value of the pin input. This is the value
    * that will be returned when the pin input is filled
    */
-  value?: string
+  value?: string | undefined
   /**
    * The default value of the pin input
    */
-  defaultValue?: string
+  defaultValue?: string | undefined
   /**
    * Function called on input change
    */
-  onChange?: (value: string) => void
+  onChange?: (value: string) => void | undefined
   /**
    * Function called when all inputs have valid values
    */
-  onComplete?: (value: string) => void
+  onComplete?: (value: string) => void | undefined
   /**
    * The placeholder for the pin input
    */
-  placeholder?: string
+  placeholder?: string | undefined
   /**
    * If `true`, focus will move automatically to the next input once filled
    * @default true
    */
-  manageFocus?: boolean
+  manageFocus?: boolean | undefined
   /**
    * If `true`, the pin input component signals to its fields that they should
    * use `autocomplete="one-time-code"`.
    */
-  otp?: boolean
+  otp?: boolean | undefined
   /**
    * The top-level id string that will be applied to the input fields.
    * The index of the input will be appended to this top-level id.
@@ -83,23 +83,23 @@ export interface UsePinInputProps {
    * @example
    * if id="foo", the first input will have `foo-0`
    */
-  id?: string
+  id?: string | undefined
   /**
    * If `true`, the pin input component is put in the disabled state
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the pin input component is put in the invalid state
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   /**
    * The type of values the pin-input should allow
    */
-  type?: "alphanumeric" | "number"
+  type?: "alphanumeric" | "number" | undefined
   /**
    * If `true`, the input's value will be masked just like `type=password`
    */
-  mask?: boolean
+  mask?: boolean | undefined
 }
 
 const toArray = (value?: string) => value?.split("")
@@ -339,8 +339,8 @@ export function usePinInput(props: UsePinInputProps = {}) {
 export type UsePinInputReturn = ReturnType<typeof usePinInput>
 
 export interface UsePinInputFieldProps extends InputProps {
-  ref?: React.Ref<HTMLInputElement>
-  index?: number
+  ref?: React.Ref<HTMLInputElement> | undefined
+  index?: number | undefined
 }
 
 /**

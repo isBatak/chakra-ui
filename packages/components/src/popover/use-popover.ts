@@ -31,58 +31,58 @@ export interface UsePopoverProps extends Omit<UsePopperProps, "enabled"> {
    * This `id` is also used to auto-generate the `aria-labelledby`
    * and `aria-describedby` attributes that points to the `PopoverHeader` and `PopoverBody`
    */
-  id?: string
+  id?: string | undefined
   /**
    * If `true`, the popover will be opened in controlled mode.
    */
-  isOpen?: boolean
+  isOpen?: boolean | undefined
   /**
    * If `true`, the popover will be initially opened.
    */
-  defaultIsOpen?: boolean
+  defaultIsOpen?: boolean | undefined
   /**
    * The `ref` of the element that should receive focus when the popover opens.
    */
-  initialFocusRef?: React.RefObject<{ focus(): void }>
+  initialFocusRef?: React.RefObject<{ focus(): void }> | undefined
   /**
    * If `true`, focus will be returned to the element that triggers the popover
    * when it closes
    * @default true
    */
-  returnFocusOnClose?: boolean
+  returnFocusOnClose?: boolean | undefined
   /**
    * If `true`, focus will be transferred to the first interactive element
    * when the popover opens
    * @default true
    */
-  autoFocus?: boolean
+  autoFocus?: boolean | undefined
   /**
    * If `true`, the popover will close when you blur out it by
    * clicking outside or tabbing out
    * @default true
    */
-  closeOnBlur?: boolean
+  closeOnBlur?: boolean | undefined
   /**
    * If `true`, the popover will close when you hit the `Esc` key
    * @default true
    */
-  closeOnEsc?: boolean
+  closeOnEsc?: boolean | undefined
   /**
    * Callback fired when the popover opens
    */
-  onOpen?: () => void
+  onOpen?: () => void | undefined
   /**
    * Callback fired when the popover closes
    */
-  onClose?: () => void
+  onClose?: () => void | undefined
   /**
    * The size of the popover arrow
    */
-  arrowSize?: number
+  arrowSize?: number | undefined
   /**
    * The `box-shadow` of the popover arrow
    */
-  arrowShadowColor?: string
+  arrowShadowColor?: string | undefined
   /**
    * The interaction that triggers the popover.
    *
@@ -94,27 +94,27 @@ export interface UsePopoverProps extends Omit<UsePopperProps, "enabled"> {
    *
    * @default "click"
    */
-  trigger?: keyof typeof TRIGGER
+  trigger?: keyof typeof TRIGGER | undefined
   /**
    * Delay in milliseconds before the popover opens after a trigger event.
    * Only works when `trigger="hover"`
    *
    * @default 200
    */
-  openDelay?: number
+  openDelay?: number | undefined
   /**
    * Delay in milliseconds before the popover closes after a trigger event.
    * Only works when `trigger="hover"`
    *
    * @default 200
    */
-  closeDelay?: number
+  closeDelay?: number | undefined
   /**
    * Performance 🚀:
    * If `true`, the PopoverContent rendering will be deferred
    * until the popover is open.
    */
-  isLazy?: boolean
+  isLazy?: boolean | undefined
   /**
    * Performance 🚀:
    * The lazy behavior of popover's content when not visible.
@@ -126,7 +126,7 @@ export interface UsePopoverProps extends Omit<UsePopperProps, "enabled"> {
    *
    * @default "unmount"
    */
-  lazyBehavior?: LazyMode
+  lazyBehavior?: LazyMode | undefined
   /**
    * If `true`, the popover will be positioned when it mounts
    * (even if it's not open)
@@ -134,7 +134,7 @@ export interface UsePopoverProps extends Omit<UsePopperProps, "enabled"> {
    * Note 🚨: We don't recommend using this in a popover/menu intensive UI or page
    * as it might affect scrolling performance.
    */
-  computePositionOnMount?: boolean
+  computePositionOnMount?: boolean | undefined
 }
 
 /**

@@ -23,32 +23,32 @@ export interface UseTooltipProps
    * Delay (in ms) before showing the tooltip
    * @default 0ms
    */
-  openDelay?: number
+  openDelay?: number | undefined
   /**
    * Delay (in ms) before hiding the tooltip
    * @default 0ms
    */
-  closeDelay?: number
+  closeDelay?: number | undefined
   /**
    * If `true`, the tooltip will hide on click
    * @default true
    */
-  closeOnClick?: boolean
+  closeOnClick?: boolean | undefined
   /**
    * If `true`, the tooltip will hide while the mouse is down
    * @deprecated - use `closeOnPointerDown` instead
    */
-  closeOnMouseDown?: boolean
+  closeOnMouseDown?: boolean | undefined
   /**
    * If `true`, the tooltip will hide while the pointer is down
    * @default true
    */
-  closeOnPointerDown?: boolean
+  closeOnPointerDown?: boolean | undefined
   /**
    * If `true`, the tooltip will hide on pressing Esc key
    * @default true
    */
-  closeOnEsc?: boolean
+  closeOnEsc?: boolean | undefined
   /**
    * Callback to run when the tooltip shows
    */
@@ -60,30 +60,30 @@ export interface UseTooltipProps
   /**
    * Custom `id` to use in place of `uuid`
    */
-  id?: string
+  id?: string | undefined
   /**
    * If `true`, the tooltip will be shown (in controlled mode)
    * @default false
    */
-  isOpen?: boolean
+  isOpen?: boolean | undefined
   /**
    * If `true`, the tooltip will be initially shown
    * @default false
    */
-  defaultIsOpen?: boolean
+  defaultIsOpen?: boolean | undefined
   /**
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * @default false
    */
-  closeOnScroll?: boolean
+  closeOnScroll?: boolean | undefined
   /**
    * @default 10
    */
-  arrowSize?: number
-  arrowShadowColor?: string
+  arrowSize?: number | undefined
+  arrowShadowColor?: string | undefined
 }
 
 const getDoc = (ref: React.RefObject<Element | null>) =>

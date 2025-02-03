@@ -18,12 +18,12 @@ interface ScaleFadeOptions {
    * The initial scale of the element
    * @default 0.95
    */
-  initialScale?: number
+  initialScale?: number | undefined
   /**
    * If `true`, the element will transition back to exit state
    * @default true
    */
-  reverse?: boolean
+  reverse?: boolean | undefined
 }
 
 const variants: Variants<ScaleFadeOptions> = {

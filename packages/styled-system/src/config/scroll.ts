@@ -26,25 +26,44 @@ export const scroll: Config = {
 }
 
 export interface ScrollProps {
-  scrollBehavior?: Token<CSS.Property.ScrollBehavior>
-  scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign>
-  scrollSnapStop?: Token<CSS.Property.ScrollSnapStop>
-  scrollSnapType?: Token<CSS.Property.ScrollSnapType>
-  scrollMargin?: Token<CSS.Property.ScrollMargin | number, "space">
-  scrollMarginTop?: Token<CSS.Property.ScrollMarginTop | number, "space">
-  scrollMarginBottom?: Token<CSS.Property.ScrollMarginBottom | number, "space">
-  scrollMarginLeft?: Token<CSS.Property.ScrollMarginLeft | number, "space">
-  scrollMarginRight?: Token<CSS.Property.ScrollMarginRight | number, "space">
-  scrollMarginX?: Token<CSS.Property.ScrollMargin | number, "space">
-  scrollMarginY?: Token<CSS.Property.ScrollMargin | number, "space">
-  scrollPadding?: Token<CSS.Property.ScrollPadding | number, "space">
-  scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, "space">
-  scrollPaddingBottom?: Token<
-    CSS.Property.ScrollPaddingBottom | number,
-    "space"
-  >
-  scrollPaddingLeft?: Token<CSS.Property.ScrollPaddingLeft | number, "space">
-  scrollPaddingRight?: Token<CSS.Property.ScrollPaddingRight | number, "space">
-  scrollPaddingX?: Token<CSS.Property.ScrollPadding | number, "space">
-  scrollPaddingY?: Token<CSS.Property.ScrollPadding | number, "space">
+  scrollBehavior?: Token<CSS.Property.ScrollBehavior> | undefined
+  scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign> | undefined
+  scrollSnapStop?: Token<CSS.Property.ScrollSnapStop> | undefined
+  scrollSnapType?: Token<CSS.Property.ScrollSnapType> | undefined
+  scrollMargin?: Token<CSS.Property.ScrollMargin | number, "space"> | undefined
+  scrollMarginTop?:
+    | Token<CSS.Property.ScrollMarginTop | number, "space">
+    | undefined
+  scrollMarginBottom?:
+    | Token<CSS.Property.ScrollMarginBottom | number, "space">
+    | undefined
+  scrollMarginLeft?:
+    | Token<CSS.Property.ScrollMarginLeft | number, "space">
+    | undefined
+  scrollMarginRight?:
+    | Token<CSS.Property.ScrollMarginRight | number, "space">
+    | undefined
+  scrollMarginX?: Token<CSS.Property.ScrollMargin | number, "space"> | undefined
+  scrollMarginY?: Token<CSS.Property.ScrollMargin | number, "space"> | undefined
+  scrollPadding?:
+    | Token<CSS.Property.ScrollPadding | number, "space">
+    | undefined
+  scrollPaddingTop?:
+    | Token<CSS.Property.ScrollPaddingTop | number, "space">
+    | undefined
+  scrollPaddingBottom?:
+    | Token<CSS.Property.ScrollPaddingBottom | number, "space">
+    | undefined
+  scrollPaddingLeft?:
+    | Token<CSS.Property.ScrollPaddingLeft | number, "space">
+    | undefined
+  scrollPaddingRight?:
+    | Token<CSS.Property.ScrollPaddingRight | number, "space">
+    | undefined
+  scrollPaddingX?:
+    | Token<CSS.Property.ScrollPadding | number, "space">
+    | undefined
+  scrollPaddingY?:
+    | Token<CSS.Property.ScrollPadding | number, "space">
+    | undefined
 }

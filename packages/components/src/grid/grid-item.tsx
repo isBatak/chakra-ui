@@ -8,33 +8,33 @@ export interface GridItemProps extends BoxProps {
    * Shorthand prop for `gridArea`
    * @type SystemProps["gridArea"]
    */
-  area?: SystemProps["gridArea"]
+  area?: SystemProps["gridArea"] | undefined
   /**
    * The number of columns the grid item should `span`.
    * @type ResponsiveValue<number | "auto">
    */
-  colSpan?: ResponsiveValue<number | "auto">
+  colSpan?: ResponsiveValue<number | "auto"> | undefined
   /**
    * The column number the grid item should start.
    * @type ResponsiveValue<number | "auto">
    */
-  colStart?: ResponsiveValue<number | "auto">
+  colStart?: ResponsiveValue<number | "auto"> | undefined
   /**
    * @type ResponsiveValue<number | "auto">
    */
-  colEnd?: ResponsiveValue<number | "auto">
+  colEnd?: ResponsiveValue<number | "auto"> | undefined
   /**
    * @type ResponsiveValue<number | "auto">
    */
-  rowStart?: ResponsiveValue<number | "auto">
+  rowStart?: ResponsiveValue<number | "auto"> | undefined
   /**
    * @type ResponsiveValue<number | "auto">
    */
-  rowEnd?: ResponsiveValue<number | "auto">
+  rowEnd?: ResponsiveValue<number | "auto"> | undefined
   /**
    * @type ResponsiveValue<number | "auto">
    */
-  rowSpan?: ResponsiveValue<number | "auto">
+  rowSpan?: ResponsiveValue<number | "auto"> | undefined
 }
 
 function spanFn(span?: ResponsiveValue<number | "auto">) {

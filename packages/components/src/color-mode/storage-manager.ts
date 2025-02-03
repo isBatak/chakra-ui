@@ -6,7 +6,7 @@ type MaybeColorMode = ColorMode | undefined
 
 export interface StorageManager {
   type: "cookie" | "localStorage"
-  ssr?: boolean
+  ssr?: boolean | undefined
   get(init?: ColorMode): MaybeColorMode
   set(value: ColorMode | "system"): void
 }

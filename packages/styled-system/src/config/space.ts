@@ -63,181 +63,207 @@ export interface SpaceProps {
   /**
    * Margin on top, left, bottom and right
    */
-  m?: Token<CSS.Property.Margin | number, "space">
+  m?: Token<CSS.Property.Margin | number, "space"> | undefined
   /**
    * Margin on top, left, bottom and right
    */
-  margin?: Token<CSS.Property.Margin | number, "space">
+  margin?: Token<CSS.Property.Margin | number, "space"> | undefined
   /**
    * Margin on top
    */
-  mt?: Token<CSS.Property.Margin | number, "space">
-  marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, "space">
+  mt?: Token<CSS.Property.Margin | number, "space"> | undefined
+  marginBlockStart?:
+    | Token<CSS.Property.MarginBlockStart | number, "space">
+    | undefined
   /**
    * Margin on top
    */
-  marginTop?: Token<CSS.Property.MarginTop | number, "space">
+  marginTop?: Token<CSS.Property.MarginTop | number, "space"> | undefined
   /**
    * Margin on right
    */
-  mr?: Token<CSS.Property.MarginRight | number, "space">
+  mr?: Token<CSS.Property.MarginRight | number, "space"> | undefined
   /**
    * When direction is `ltr`, `marginInlineEnd` is equivalent to `marginRight`.
    * When direction is `rtl`, `marginInlineEnd` is equivalent to `marginLeft`.
    */
-  marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, "space">
+  marginInlineEnd?:
+    | Token<CSS.Property.MarginInlineEnd | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `marginEnd` is equivalent to `marginRight`.
    * When direction is `rtl`, `marginEnd` is equivalent to `marginLeft`.
    */
-  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "space">
+  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "space"> | undefined
   /**
    * When direction is `ltr`, `me` is equivalent to `marginRight`.
    * When direction is `rtl`, `me` is equivalent to `marginLeft`.
    */
-  me?: Token<CSS.Property.MarginInlineEnd | number, "space">
+  me?: Token<CSS.Property.MarginInlineEnd | number, "space"> | undefined
   /**
    * Margin on right
    */
-  marginRight?: Token<CSS.Property.MarginRight | number, "space">
+  marginRight?: Token<CSS.Property.MarginRight | number, "space"> | undefined
   /**
    * Margin on bottom
    */
-  mb?: Token<CSS.Property.MarginBottom | number, "space">
-  marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, "space">
+  mb?: Token<CSS.Property.MarginBottom | number, "space"> | undefined
+  marginBlockEnd?:
+    | Token<CSS.Property.MarginBlockEnd | number, "space">
+    | undefined
   /**
    * Margin on bottom
    */
-  marginBottom?: Token<CSS.Property.MarginBottom | number, "space">
+  marginBottom?: Token<CSS.Property.MarginBottom | number, "space"> | undefined
   /**
    * Margin on left
    */
-  ml?: Token<CSS.Property.MarginLeft | number, "space">
+  ml?: Token<CSS.Property.MarginLeft | number, "space"> | undefined
   /**
    * When direction is `ltr`, `marginInlineStart` is equivalent to `marginLeft`.
    * When direction is `rtl`, `marginInlineStart` is equivalent to `marginRight`.
    */
-  marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, "space">
+  marginInlineStart?:
+    | Token<CSS.Property.MarginInlineStart | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `marginStart` is equivalent to `marginLeft`.
    * When direction is `rtl`, `marginStart` is equivalent to `marginRight`.
    */
-  marginStart?: Token<CSS.Property.MarginInlineStart | number, "space">
+  marginStart?:
+    | Token<CSS.Property.MarginInlineStart | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `ms` is equivalent to `marginLeft`.
    * When direction is `rtl`, `ms` is equivalent to `marginRight`.
    */
-  ms?: Token<CSS.Property.MarginInlineStart | number, "space">
+  ms?: Token<CSS.Property.MarginInlineStart | number, "space"> | undefined
   /**
    * Margin on left
    */
-  marginLeft?: Token<CSS.Property.MarginLeft | number, "space">
+  marginLeft?: Token<CSS.Property.MarginLeft | number, "space"> | undefined
   /**
    * Margin on left and right
    */
-  mx?: Token<CSS.Property.Margin | number, "space">
-  marginInline?: Token<CSS.Property.MarginInline | number, "space">
+  mx?: Token<CSS.Property.Margin | number, "space"> | undefined
+  marginInline?: Token<CSS.Property.MarginInline | number, "space"> | undefined
   /**
    * Margin on left and right
    */
-  marginX?: Token<CSS.Property.Margin | number, "space">
+  marginX?: Token<CSS.Property.Margin | number, "space"> | undefined
   /**
    * Margin on top and bottom
    */
-  my?: Token<CSS.Property.Margin | number, "space">
-  marginBlock?: Token<CSS.Property.MarginBlock | number, "space">
+  my?: Token<CSS.Property.Margin | number, "space"> | undefined
+  marginBlock?: Token<CSS.Property.MarginBlock | number, "space"> | undefined
   /**
    * Margin on top and bottom
    */
-  marginY?: Token<CSS.Property.Margin | number, "space">
+  marginY?: Token<CSS.Property.Margin | number, "space"> | undefined
   /**
    * Padding on top, left, bottom and right
    */
-  p?: Token<CSS.Property.Padding | number, "space">
+  p?: Token<CSS.Property.Padding | number, "space"> | undefined
   /**
    * Padding on top, left, bottom and right
    */
-  padding?: Token<CSS.Property.Padding | number, "space">
+  padding?: Token<CSS.Property.Padding | number, "space"> | undefined
   /**
    * Padding on top
    */
-  pt?: Token<CSS.Property.PaddingTop | number, "space">
-  paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, "space">
+  pt?: Token<CSS.Property.PaddingTop | number, "space"> | undefined
+  paddingBlockStart?:
+    | Token<CSS.Property.PaddingBlockStart | number, "space">
+    | undefined
   /**
    * Padding on top
    */
-  paddingTop?: Token<CSS.Property.PaddingTop | number, "space">
+  paddingTop?: Token<CSS.Property.PaddingTop | number, "space"> | undefined
   /**
    * Padding on right
    */
-  pr?: Token<CSS.Property.PaddingRight | number, "space">
+  pr?: Token<CSS.Property.PaddingRight | number, "space"> | undefined
   /**
    * When direction is `ltr`, `paddingInlineEnd` is equivalent to `paddingRight`.
    * When direction is `rtl`, `paddingInlineEnd` is equivalent to `paddingLeft`.
    */
-  paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, "space">
+  paddingInlineEnd?:
+    | Token<CSS.Property.PaddingInlineEnd | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `paddingEnd` is equivalent to `paddingRight`.
    * When direction is `rtl`, `paddingEnd` is equivalent to `paddingLeft`.
    */
-  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "space">
+  paddingEnd?:
+    | Token<CSS.Property.PaddingInlineEnd | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `pe` is equivalent to `paddingRight`.
    * When direction is `rtl`, `pe` is equivalent to `paddingLeft`.
    */
-  pe?: Token<CSS.Property.PaddingInlineEnd | number, "space">
+  pe?: Token<CSS.Property.PaddingInlineEnd | number, "space"> | undefined
   /**
    * Padding on right
    */
-  paddingRight?: Token<CSS.Property.PaddingRight | number, "space">
+  paddingRight?: Token<CSS.Property.PaddingRight | number, "space"> | undefined
   /**
    * Padding on bottom
    */
-  pb?: Token<CSS.Property.PaddingBottom | number, "space">
-  paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, "space">
+  pb?: Token<CSS.Property.PaddingBottom | number, "space"> | undefined
+  paddingBlockEnd?:
+    | Token<CSS.Property.PaddingBlockEnd | number, "space">
+    | undefined
   /**
    * Padding on bottom
    */
-  paddingBottom?: Token<CSS.Property.PaddingBottom | number, "space">
+  paddingBottom?:
+    | Token<CSS.Property.PaddingBottom | number, "space">
+    | undefined
   /**
    * Padding on left
    */
-  pl?: Token<CSS.Property.PaddingLeft | number, "space">
+  pl?: Token<CSS.Property.PaddingLeft | number, "space"> | undefined
   /**
    * When direction is `ltr`, `paddingInlineStart` is equivalent to `paddingLeft`.
    * When direction is `rtl`, `paddingInlineStart` is equivalent to `paddingRight`.
    */
-  paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, "space">
+  paddingInlineStart?:
+    | Token<CSS.Property.PaddingInlineStart | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `paddingStart` is equivalent to `paddingLeft`.
    * When direction is `rtl`, `paddingStart` is equivalent to `paddingRight`.
    */
-  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "space">
+  paddingStart?:
+    | Token<CSS.Property.PaddingInlineStart | number, "space">
+    | undefined
   /**
    * When direction is `ltr`, `ps` is equivalent to `paddingLeft`.
    * When direction is `rtl`, `ps` is equivalent to `paddingRight`.
    */
-  ps?: Token<CSS.Property.PaddingInlineStart | number, "space">
+  ps?: Token<CSS.Property.PaddingInlineStart | number, "space"> | undefined
   /**
    * Padding on left
    */
-  paddingLeft?: Token<CSS.Property.PaddingLeft | number, "space">
+  paddingLeft?: Token<CSS.Property.PaddingLeft | number, "space"> | undefined
   /**
    * Padding on left and right
    */
-  px?: Token<CSS.Property.Padding | number, "space">
-  paddingInline?: Token<CSS.Property.PaddingInline | number, "space">
+  px?: Token<CSS.Property.Padding | number, "space"> | undefined
+  paddingInline?:
+    | Token<CSS.Property.PaddingInline | number, "space">
+    | undefined
   /**
    * Padding on left and right
    */
-  paddingX?: Token<CSS.Property.Padding | number, "space">
+  paddingX?: Token<CSS.Property.Padding | number, "space"> | undefined
   /**
    * Padding on top and bottom
    */
-  py?: Token<CSS.Property.Padding | number, "space">
-  paddingBlock?: Token<CSS.Property.PaddingBlock | number, "space">
+  py?: Token<CSS.Property.Padding | number, "space"> | undefined
+  paddingBlock?: Token<CSS.Property.PaddingBlock | number, "space"> | undefined
   /**
    * Padding on top and bottom
    */
-  paddingY?: Token<CSS.Property.Padding | number, "space">
+  paddingY?: Token<CSS.Property.Padding | number, "space"> | undefined
 }

@@ -5,9 +5,9 @@ const getBreakpoint = (theme: Record<string, any>, value: any) => {
 }
 
 export interface UseQueryProps {
-  breakpoint?: string
-  below?: string
-  above?: string
+  breakpoint?: string | undefined
+  below?: string | undefined
+  above?: string | undefined
 }
 
 export function useQuery(props: UseQueryProps) {

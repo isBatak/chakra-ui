@@ -8,11 +8,11 @@ export interface MenuListProps extends HTMLChakraProps<"div"> {
   /**
    * Props for the root element that positions the menu.
    */
-  rootProps?: HTMLChakraProps<"div">
+  rootProps?: HTMLChakraProps<"div"> | undefined
   /**
    * The framer-motion props to animate the menu list
    */
-  motionProps?: HTMLMotionProps<"div">
+  motionProps?: HTMLMotionProps<"div"> | undefined
 }
 
 const motionVariants: Variants = {

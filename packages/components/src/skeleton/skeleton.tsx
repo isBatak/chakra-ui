@@ -19,34 +19,34 @@ export interface SkeletonOptions {
   /**
    * The color at the animation start
    */
-  startColor?: string
+  startColor?: string | undefined
   /**
    * The color at the animation end
    */
-  endColor?: string
+  endColor?: string | undefined
   /**
    * If `true`, it'll render its children with a nice fade transition
    *
    * @default false
    */
-  isLoaded?: boolean
+  isLoaded?: boolean | undefined
   /**
    * The animation speed in seconds
    *
    * @default 0.8
    */
-  speed?: number
+  speed?: number | undefined
   /**
    * The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.
    *
    * @default 0.4
    */
-  fadeDuration?: number
+  fadeDuration?: number | undefined
   /**
    * If `true`, the skeleton will take the width of it's children
    * @default false
    */
-  fitContent?: boolean
+  fitContent?: boolean | undefined
 }
 
 const StyledSkeleton = chakra("div", {

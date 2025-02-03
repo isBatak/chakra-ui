@@ -16,15 +16,15 @@ export type CardOptions = {
   /**
    * The flex direction of the card
    */
-  direction?: SystemProps["flexDirection"]
+  direction?: SystemProps["flexDirection"] | undefined
   /**
    * The flex alignment of the card
    */
-  align?: SystemProps["alignItems"]
+  align?: SystemProps["alignItems"] | undefined
   /**
    * The flex distribution of the card
    */
-  justify?: SystemProps["justifyContent"]
+  justify?: SystemProps["justifyContent"] | undefined
 }
 
 export interface CardProps

@@ -8,37 +8,37 @@ export interface WrapProps extends HTMLChakraProps<"div"> {
    * The space between each child (even if it wraps)
    * @type SystemProps["margin"]
    */
-  spacing?: SystemProps["margin"]
+  spacing?: SystemProps["margin"] | undefined
   /**
    * The horizontal space between the each child (even if it wraps). Defaults to `spacing` if not defined.
    * @type SystemProps["margin"]
    */
-  spacingX?: SystemProps["margin"]
+  spacingX?: SystemProps["margin"] | undefined
   /**
    * The vertical space between the each child (even if it wraps). Defaults to `spacing` if not defined.
    * @type SystemProps["margin"]
    */
-  spacingY?: SystemProps["margin"]
+  spacingY?: SystemProps["margin"] | undefined
   /**
    * The `justify-content` value (for cross-axis alignment)
    * @type SystemProps["justifyContent"]
    */
-  justify?: SystemProps["justifyContent"]
+  justify?: SystemProps["justifyContent"] | undefined
   /**
    * The `align-items` value (for main axis alignment)
    * @type SystemProps["alignItems"]
    */
-  align?: SystemProps["alignItems"]
+  align?: SystemProps["alignItems"] | undefined
   /**
    * The `flex-direction` value
    * @type SystemProps["flexDirection"]
    */
-  direction?: SystemProps["flexDirection"]
+  direction?: SystemProps["flexDirection"] | undefined
   /**
    * If `true`, the children will be wrapped in a `WrapItem`
    * @default false
    */
-  shouldWrapChildren?: boolean
+  shouldWrapChildren?: boolean | undefined
 }
 
 /**

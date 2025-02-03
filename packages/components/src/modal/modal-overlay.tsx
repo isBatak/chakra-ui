@@ -10,8 +10,8 @@ const MotionDiv = chakra(motion.div)
 export interface ModalOverlayProps
   extends Omit<HTMLMotionProps<"div">, "color" | "transition">,
     ChakraProps {
-  children?: React.ReactNode
-  motionProps?: HTMLMotionProps<"div">
+  children?: React.ReactNode | undefined
+  motionProps?: HTMLMotionProps<"div"> | undefined
 }
 
 /**

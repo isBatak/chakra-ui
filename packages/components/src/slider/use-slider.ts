@@ -24,34 +24,34 @@ export interface UseSliderProps {
    * The minimum allowed value of the slider. Cannot be greater than max.
    * @default 0
    */
-  min?: number
+  min?: number | undefined
   /**
    * The maximum allowed value of the slider. Cannot be less than min.
    * @default 100
    */
-  max?: number
+  max?: number | undefined
   /**
    * The step in which increments/decrements have to be made
    * @default 1
    */
-  step?: number
+  step?: number | undefined
   /**
    * The value of the slider in controlled mode
    */
-  value?: number
+  value?: number | undefined
   /**
    * The initial value of the slider in uncontrolled mode
    */
-  defaultValue?: number
+  defaultValue?: number | undefined
   /**
    * Orientation of the slider
    * @default "horizontal"
    */
-  orientation?: "horizontal" | "vertical"
+  orientation?: "horizontal" | "vertical" | undefined
   /**
    * If `true`, the value will be incremented or decremented in reverse.
    */
-  isReversed?: boolean
+  isReversed?: boolean | undefined
   /**
    * Function called when the user starts selecting a new value (by dragging or clicking)
    */
@@ -67,22 +67,22 @@ export interface UseSliderProps {
   /**
    * The base `id` to use for the slider and its components
    */
-  id?: string
+  id?: string | undefined
   /**
    * The name attribute of the hidden `input` field.
    * This is particularly useful in forms
    */
-  name?: string
+  name?: string | undefined
   /**
    * If `true`, the slider will be disabled
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the slider will be in `read-only` state
    * @default false
    */
-  isReadOnly?: boolean
+  isReadOnly?: boolean | undefined
   /**
    * Function that returns the `aria-valuetext` for screen readers.
    * It is mostly used to generate a more human-readable
@@ -93,26 +93,26 @@ export interface UseSliderProps {
    * If `false`, the slider handle will not capture focus when value changes.
    * @default true
    */
-  focusThumbOnChange?: boolean
+  focusThumbOnChange?: boolean | undefined
   /**
    * The static string to use used for `aria-valuetext`
    */
-  "aria-valuetext"?: string
+  "aria-valuetext"?: string | undefined
   /**
    * The static string to use used for `aria-label`
    * if no visible label is used.
    */
-  "aria-label"?: string
+  "aria-label"?: string | undefined
   /**
    * The static string `aria-labelledby` that points to the
    * ID of the element that serves as label for the slider
    */
-  "aria-labelledby"?: string
+  "aria-labelledby"?: string | undefined
   /**
    * The writing mode
    * @default "ltr"
    */
-  direction?: "ltr" | "rtl"
+  direction?: "ltr" | "rtl" | undefined
 }
 
 export interface SliderState {

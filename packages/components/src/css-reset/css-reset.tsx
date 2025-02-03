@@ -36,7 +36,7 @@ export type CSSResetProps = {
   /**
    * The selector to scope the css reset styles to.
    */
-  scope?: string
+  scope?: string | undefined
 }
 
 export const CSSReset = ({ scope = "" }: CSSResetProps) => (

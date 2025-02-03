@@ -18,18 +18,18 @@ interface SlideFadeOptions {
    * The offset on the horizontal or `x` axis
    * @default 0
    */
-  offsetX?: string | number
+  offsetX?: string | number | undefined
   /**
    * The offset on the vertical or `y` axis
    * @default 8
    */
-  offsetY?: string | number
+  offsetY?: string | number | undefined
   /**
    * If `true`, the element will be transitioned back to the offset when it leaves.
    * Otherwise, it'll only fade out
    * @default true
    */
-  reverse?: boolean
+  reverse?: boolean | undefined
 }
 
 const variants: Variants<SlideFadeOptions> = {

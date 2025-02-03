@@ -31,37 +31,37 @@ interface ModalOptions extends Pick<FocusLockProps, "lockFocusAcrossFrames"> {
    *
    * @default true
    */
-  trapFocus?: boolean
+  trapFocus?: boolean | undefined
   /**
    * If `true`, the modal will autofocus the first enabled and interactive
    * element within the `ModalContent`
    *
    * @default true
    */
-  autoFocus?: boolean
+  autoFocus?: boolean | undefined
   /**
    * The `ref` of element to receive focus when the modal opens.
    */
-  initialFocusRef?: React.RefObject<FocusableElement>
+  initialFocusRef?: React.RefObject<FocusableElement> | undefined
   /**
    * The `ref` of element to receive focus when the modal closes.
    */
-  finalFocusRef?: React.RefObject<FocusableElement>
+  finalFocusRef?: React.RefObject<FocusableElement> | undefined
   /**
    * If `true`, the modal will return focus to the element that triggered it when it closes.
    * @default true
    */
-  returnFocusOnClose?: boolean
+  returnFocusOnClose?: boolean | undefined
   /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    * @default true
    */
-  blockScrollOnMount?: boolean
+  blockScrollOnMount?: boolean | undefined
   /**
    * Handle zoom/pinch gestures on iOS devices when scroll locking is enabled.
    * @default false.
    */
-  allowPinchZoom?: boolean
+  allowPinchZoom?: boolean | undefined
   /**
    * If `true`, a `padding-right` will be applied to the body element
    * that's equal to the width of the scrollbar.
@@ -71,7 +71,7 @@ interface ModalOptions extends Pick<FocusLockProps, "lockFocusAcrossFrames"> {
    *
    * @default true
    */
-  preserveScrollBarGap?: boolean
+  preserveScrollBarGap?: boolean | undefined
 }
 
 type ScrollBehavior = "inside" | "outside"
@@ -93,7 +93,7 @@ export interface ModalProps
    *  If `true`, the modal will be centered on screen.
    * @default false
    */
-  isCentered?: boolean
+  isCentered?: boolean | undefined
   /**
    * Where scroll behavior should originate.
    * - If set to `inside`, scroll only occurs within the `ModalBody`.
@@ -101,31 +101,33 @@ export interface ModalProps
    *
    * @default "outside"
    */
-  scrollBehavior?: ScrollBehavior
+  scrollBehavior?: ScrollBehavior | undefined
   /**
    * Props to be forwarded to the portal component
    */
-  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
+  portalProps?:
+    | Pick<PortalProps, "appendToParentPortal" | "containerRef">
+    | undefined
   /**
    * The transition that should be used for the modal
    * @default "scale"
    */
-  motionPreset?: MotionPreset
+  motionPreset?: MotionPreset | undefined
   /**
    * Fires when all exiting nodes have completed animating out
    */
-  onCloseComplete?: () => void
+  onCloseComplete?: () => void | undefined
   /**
    * Props to be forwarded to the `AnimatePresence` component
    */
-  animatePresenceProps?: AnimatePresenceProps
+  animatePresenceProps?: AnimatePresenceProps | undefined
 }
 
 interface ModalContext extends ModalOptions, UseModalReturn {
   /**
    * The transition that should be used for the modal
    */
-  motionPreset?: MotionPreset
+  motionPreset?: MotionPreset | undefined
 }
 
 const [ModalContextProvider, useModalContext] = createContext<ModalContext>({

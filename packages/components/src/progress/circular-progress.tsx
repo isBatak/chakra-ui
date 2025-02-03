@@ -8,48 +8,48 @@ interface CircularProgressOptions {
   /**
    * The size of the circular progress in CSS units
    */
-  size?: ResponsiveValue<string | number>
+  size?: ResponsiveValue<string | number> | undefined
   /**
    * Maximum value defining 100% progress made (must be higher than 'min')
    * @default 100
    */
-  max?: number
+  max?: number | undefined
   /**
    * Minimum value defining 'no progress' (must be lower than 'max')
    * @default 0
    */
-  min?: number
+  min?: number | undefined
   /**
    * This defines the stroke width of the svg circle.
    * @default "10px"
    */
-  thickness?: string | number
+  thickness?: string | number | undefined
   /**
    * Current progress (must be between min/max)
    */
-  value?: number
+  value?: number | undefined
   /**
    * If `true`, the cap of the progress indicator will be rounded.
    *
    * @default false
    */
-  capIsRound?: boolean
+  capIsRound?: boolean | undefined
   /**
    * The content of the circular progress bar. If passed, the content will be inside and centered in the progress bar.
    */
-  children?: React.ReactNode
+  children?: React.ReactNode | undefined
   /**
    * The color name of the progress track. Use a color key in the theme object
    */
-  trackColor?: string
+  trackColor?: string | undefined
   /**
    * The color of the progress indicator. Use a color key in the theme object
    */
-  color?: string
+  color?: string | undefined
   /**
    * The desired valueText to use in place of the value
    */
-  valueText?: string
+  valueText?: string | undefined
   /**
    * A function that returns the desired valueText to use in place of the value
    */
@@ -60,7 +60,7 @@ interface CircularProgressOptions {
    *
    * @default false
    */
-  isIndeterminate?: boolean
+  isIndeterminate?: boolean | undefined
 }
 
 export interface CircularProgressProps

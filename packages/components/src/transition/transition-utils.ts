@@ -9,15 +9,15 @@ export type TransitionProperties = {
   /**
    * Custom `transition` definition for `enter` and `exit`
    */
-  transition?: TransitionConfig
+  transition?: TransitionConfig | undefined
   /**
    * Custom `transitionEnd` definition for `enter` and `exit`
    */
-  transitionEnd?: TransitionEndConfig
+  transitionEnd?: TransitionEndConfig | undefined
   /**
    * Custom `delay` definition for `enter` and `exit`
    */
-  delay?: number | DelayConfig
+  delay?: number | DelayConfig | undefined
 }
 
 type TargetResolver<P = {}> = (
@@ -29,7 +29,7 @@ type Variant<P = {}> = TargetAndTransition | TargetResolver<P>
 export type Variants<P = {}> = {
   enter: Variant<P>
   exit: Variant<P>
-  initial?: Variant<P>
+  initial?: Variant<P> | undefined
 }
 
 type WithMotionState<P> = Partial<Record<"enter" | "exit", P>>
@@ -96,7 +96,9 @@ export const TRANSITION_VARIANTS = {
 
 export type SlideDirection = "top" | "left" | "bottom" | "right"
 
-export function getSlideTransition(options?: { direction?: SlideDirection }) {
+export function getSlideTransition(options?: {
+  direction?: SlideDirection | undefined
+}) {
   const side = options?.direction ?? "right"
   switch (side) {
     case "right":
@@ -128,15 +130,15 @@ export type WithTransitionConfig<P extends object> = Omit<P, "transition"> &
     /**
      * If `true`, the element will unmount when `in={false}` and animation is done
      */
-    unmountOnExit?: boolean
+    unmountOnExit?: boolean | undefined
     /**
      * Show the component; triggers when enter or exit states
      */
-    in?: boolean
+    in?: boolean | undefined
     /**
      * Additional props to pass to `AnimatePresence`
      */
-    animatePresenceProps?: AnimatePresenceProps
+    animatePresenceProps?: AnimatePresenceProps | undefined
   }
 
 export const withDelay = {

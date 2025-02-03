@@ -17,21 +17,21 @@ interface MenuItemOptions
    * The icon to render before the menu item's label.
    * @type React.ReactElement
    */
-  icon?: React.ReactElement
+  icon?: React.ReactElement | undefined
   /**
    * The spacing between the icon and menu item's label.
    * @type SystemProps["mr"]
    */
-  iconSpacing?: SystemProps["mr"]
+  iconSpacing?: SystemProps["mr"] | undefined
   /**
    * Right-aligned label text content, useful for displaying hotkeys.
    */
-  command?: string
+  command?: string | undefined
   /**
    * The spacing between the command and menu item's label.
    * @type SystemProps["ml"]
    */
-  commandSpacing?: SystemProps["ml"]
+  commandSpacing?: SystemProps["ml"] | undefined
 }
 
 type HTMLAttributes = React.HTMLAttributes<HTMLElement>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useEnvironment } from "../env"
 
 export type UseMediaQueryOptions = {
-  fallback?: boolean | boolean[]
-  ssr?: boolean
+  fallback?: boolean | boolean[] | undefined
+  ssr?: boolean | undefined
 }
 
 /**

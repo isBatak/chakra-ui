@@ -8,11 +8,11 @@ export interface SelectFieldProps
   /**
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * The placeholder text for the select field
    */
-  placeholder?: string
+  placeholder?: string | undefined
 }
 
 export const SelectField = forwardRef<SelectFieldProps, "select">(

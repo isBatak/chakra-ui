@@ -87,7 +87,7 @@ export interface TagCloseButtonProps
   /**
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
 }
 
 /**

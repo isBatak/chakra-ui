@@ -7,7 +7,7 @@ import { useCheckboxGroup } from "./use-checkbox-group"
 export interface CheckboxGroupProps
   extends UseCheckboxGroupProps,
     Omit<ThemingProps<"Checkbox">, "orientation"> {
-  children?: React.ReactNode
+  children?: React.ReactNode | undefined
 }
 
 /**

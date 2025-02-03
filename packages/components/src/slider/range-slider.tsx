@@ -20,7 +20,7 @@ import {
 
 interface RangeSliderContext
   extends Omit<UseRangeSliderReturn, "getRootProps"> {
-  name?: string | string[]
+  name?: string | string[] | undefined
 }
 
 const [RangeSliderProvider, useRangeSliderContext] =

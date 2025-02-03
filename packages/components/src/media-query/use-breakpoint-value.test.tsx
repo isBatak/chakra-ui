@@ -232,7 +232,7 @@ const TestComponent = ({
   defaultBreakpoint = undefined,
 }: {
   values: any
-  defaultBreakpoint?: string
+  defaultBreakpoint?: string | undefined
 }) => {
   const value = useBreakpointValue(values, defaultBreakpoint)
   return <>{value}</>

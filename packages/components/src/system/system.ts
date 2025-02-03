@@ -22,10 +22,10 @@ import { DOMElements } from "./system.utils"
 const emotion_styled = interopDefault(createStyled)
 
 type StyleResolverProps = SystemStyleObject & {
-  __css?: SystemStyleObject
-  sx?: SystemStyleObject
+  __css?: SystemStyleObject | undefined
+  sx?: SystemStyleObject | undefined
   theme: any
-  css?: CSSObject
+  css?: CSSObject | undefined
 }
 
 interface GetStyleObject {
@@ -33,6 +33,7 @@ interface GetStyleObject {
     baseStyle?:
       | SystemStyleObject
       | ((props: StyleResolverProps) => SystemStyleObject)
+      | undefined
   }): FunctionInterpolation<StyleResolverProps>
 }
 
@@ -69,10 +70,11 @@ export const toCSSObject: GetStyleObject =
 
 export interface ChakraStyledOptions extends Dict {
   shouldForwardProp?(prop: string): boolean
-  label?: string
+  label?: string | undefined
   baseStyle?:
     | SystemStyleObject
     | ((props: StyleResolverProps) => SystemStyleObject)
+    | undefined
 }
 
 export function styled<T extends ElementType, P extends object = {}>(

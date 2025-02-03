@@ -6,7 +6,7 @@ export interface BreadcrumbLinkProps extends HTMLChakraProps<"a"> {
   /**
    * @default false
    */
-  isCurrentPage?: boolean
+  isCurrentPage?: boolean | undefined
 }
 /**
  * Breadcrumb link.

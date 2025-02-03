@@ -12,13 +12,13 @@ export interface SquareProps extends Omit<BoxProps, Omitted> {
   /**
    * The size (width and height) of the square
    */
-  size?: BoxProps["width"]
+  size?: BoxProps["width"] | undefined
   /**
    * If `true`, the content will be centered in the square
    *
    * @default false
    */
-  centerContent?: boolean
+  centerContent?: boolean | undefined
 }
 
 export const Square = forwardRef<SquareProps, "div">(

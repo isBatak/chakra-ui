@@ -40,6 +40,6 @@ export type WithCSSVar<T> = T & {
 
 export type CssTheme = WithCSSVar<{
   breakpoints: Record<string, any>
-  direction?: "ltr" | "rtl"
+  direction?: "ltr" | "rtl" | undefined
   [key: string]: any
 }>

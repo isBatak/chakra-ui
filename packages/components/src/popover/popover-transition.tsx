@@ -18,7 +18,7 @@ type HTMLMotionChakraProps<T extends keyof React.ReactHTML> = Omit<
     | "transition"
     | "children"
   > & {
-    variants?: MotionVariants
+    variants?: MotionVariants | undefined
   }
 
 type MotionVariants = Partial<Record<"enter" | "exit", Variant>>

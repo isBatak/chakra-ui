@@ -24,7 +24,7 @@ export interface CloseButtonProps
    * If `true`, the close button will be disabled.
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
 }
 
 /**

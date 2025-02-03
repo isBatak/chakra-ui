@@ -15,7 +15,7 @@ import { useMemo, type JSX } from "react"
 import { useColorMode } from "../color-mode"
 
 export interface ThemeProviderProps extends EmotionThemeProviderProps {
-  cssVarsRoot?: string
+  cssVarsRoot?: string | undefined
 }
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
@@ -34,7 +34,7 @@ export interface CSSVarsProps {
    * The element to attach the CSS custom properties to.
    * @default ":host, :root"
    */
-  root?: string
+  root?: string | undefined
 }
 
 export function CSSVars({ root = ":host, :root" }: CSSVarsProps): JSX.Element {

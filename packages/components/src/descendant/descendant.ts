@@ -5,11 +5,11 @@ export type DescendantOptions<T = {}> = T & {
    * If `true`, the item will be registered in all nodes map
    * but omitted from enabled nodes map
    */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /**
    * The id of the item
    */
-  id?: string
+  id?: string | undefined
 }
 
 export type Descendant<T, K> = DescendantOptions<K> & {

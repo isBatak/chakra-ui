@@ -46,13 +46,13 @@ interface InputOptions {
    * @example
    * focusBorderColor = "blue.500"
    */
-  focusBorderColor?: string
+  focusBorderColor?: string | undefined
   /**
    * The border color when the input is invalid. Use color keys in `theme.colors`
    * @example
    * errorBorderColor = "red.500"
    */
-  errorBorderColor?: string
+  errorBorderColor?: string | undefined
 }
 
 export interface NumberInputProps

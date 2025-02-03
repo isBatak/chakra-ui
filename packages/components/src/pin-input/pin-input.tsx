@@ -16,13 +16,13 @@ interface InputOptions {
    * @example
    * focusBorderColor = "blue.500"
    */
-  focusBorderColor?: string
+  focusBorderColor?: string | undefined
   /**
    * The border color when the input is invalid. Use color keys in `theme.colors`
    * @example
    * errorBorderColor = "red.500"
    */
-  errorBorderColor?: string
+  errorBorderColor?: string | undefined
 }
 
 export interface PinInputProps
@@ -60,7 +60,7 @@ export function PinInput(props: PinInputProps) {
 PinInput.displayName = "PinInput"
 
 export interface PinInputFieldProps extends HTMLChakraProps<"input"> {
-  index?: number
+  index?: number | undefined
 }
 
 export const PinInputField = forwardRef<PinInputFieldProps, "input">(

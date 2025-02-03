@@ -21,7 +21,7 @@ const [TableStylesProvider, useTableStyles] = createContext<
 export { useTableStyles }
 
 export interface TableOptions {
-  layout?: SystemStyleObject["tableLayout"]
+  layout?: SystemStyleObject["tableLayout"] | undefined
 }
 
 export interface TableProps

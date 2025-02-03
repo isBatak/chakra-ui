@@ -12,23 +12,23 @@ export interface FocusLockProps {
   /**
    * `ref` of the element to receive focus initially
    */
-  initialFocusRef?: React.RefObject<FocusableElement>
+  initialFocusRef?: React.RefObject<FocusableElement> | undefined
   /**
    * `ref` of the element to return focus to when `FocusLock`
    * unmounts
    */
-  finalFocusRef?: React.RefObject<FocusableElement>
+  finalFocusRef?: React.RefObject<FocusableElement> | undefined
   /**
    * The `ref` of the wrapper for which the focus-lock wraps
    */
-  contentRef?: React.RefObject<HTMLElement>
+  contentRef?: React.RefObject<HTMLElement> | undefined
   /**
    * If `true`, focus will be restored to the element that
    * triggered the `FocusLock` once it unmounts
    *
    * @default false
    */
-  restoreFocus?: boolean
+  restoreFocus?: boolean | undefined
   /**
    * The component to render
    */
@@ -38,20 +38,20 @@ export interface FocusLockProps {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the first focusable element within the `children`
    * will auto-focused once `FocusLock` mounts
    *
    * @default false
    */
-  autoFocus?: boolean
+  autoFocus?: boolean | undefined
   /**
    * If `true`, disables text selections inside, and outside focus lock
    *
    * @default false
    */
-  persistentFocus?: boolean
+  persistentFocus?: boolean | undefined
   /**
    * Enables aggressive focus capturing within iframes.
    * - If `true`: keep focus in the lock, no matter where lock is active
@@ -59,7 +59,7 @@ export interface FocusLockProps {
    *
    * @default false
    */
-  lockFocusAcrossFrames?: boolean
+  lockFocusAcrossFrames?: boolean | undefined
 }
 
 export const FocusLock: React.FC<FocusLockProps> = (props) => {

@@ -7,7 +7,7 @@ export interface AvatarOptions {
    * - if `src` has loaded, the name will be used as the `alt` attribute of the `img`
    * - If `src` is not loaded, the name will be used to create the initials
    */
-  name?: string
+  name?: string | undefined
   /**
    * If `true`, the `Avatar` will show a border around it.
    *
@@ -15,45 +15,45 @@ export interface AvatarOptions {
    *
    * @default false
    */
-  showBorder?: boolean
+  showBorder?: boolean | undefined
   /**
    * The badge in the bottom right corner of the avatar.
    */
-  children?: React.ReactNode
+  children?: React.ReactNode | undefined
   /**
    * The image url of the `Avatar`
    */
-  src?: string
+  src?: string | undefined
   /**
    * List of sources to use for different screen resolutions
    */
-  srcSet?: string
+  srcSet?: string | undefined
   /**
    * Defines loading strategy
    */
-  loading?: "eager" | "lazy"
+  loading?: "eager" | "lazy" | undefined
   /**
    * The border color of the avatar
    * @type SystemProps["borderColor"]
    */
-  borderColor?: SystemProps["borderColor"]
+  borderColor?: SystemProps["borderColor"] | undefined
   /**
    * Function called when image failed to load
    */
-  onError?: () => void
+  onError?: () => void | undefined
   /**
    * The default avatar used as fallback when `name`, and `src`
    * is not specified.
    * @type React.ReactElement
    */
-  icon?: React.ReactElement
+  icon?: React.ReactElement | undefined
   /**
    * Function to get the initials to display
    */
-  getInitials?: (name: string) => string
+  getInitials?: (name: string) => string | undefined
   /**
    * Defining which referrer is sent when fetching the resource.
    * @type React.HTMLAttributeReferrerPolicy
    */
-  referrerPolicy?: React.HTMLAttributeReferrerPolicy
+  referrerPolicy?: React.HTMLAttributeReferrerPolicy | undefined
 }

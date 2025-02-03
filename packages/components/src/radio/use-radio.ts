@@ -19,73 +19,73 @@ export interface UseRadioProps {
   /**
    * id assigned to input
    */
-  id?: string
+  id?: string | undefined
   /**
    * The name of the input field in a radio
    * (Useful for form submission).
    */
-  name?: string
+  name?: string | undefined
   /**
    * The value to be used in the radio button.
    * This is the value that will be returned on form submission.
    */
-  value?: string
+  value?: string | undefined
   /**
    * If `true`, the radio will be checked.
    * You'll need to pass `onChange` to update its value (since it is now controlled)
    *
    * @default false
    */
-  isChecked?: boolean
+  isChecked?: boolean | undefined
   /**
    * If `true`, the radio will be initially checked.
    *
    * @default false
    */
-  defaultChecked?: boolean
+  defaultChecked?: boolean | undefined
   /**
    * If `true`, the radio will be disabled
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true` and `isDisabled` is true, the radio will remain
    * focusable but not interactive.
    *
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * If `true`, the radio will be read-only
    *
    * @default false
    */
-  isReadOnly?: boolean
+  isReadOnly?: boolean | undefined
   /**
    * If `true`, the radio button will be invalid. This also sets `aria-invalid` to `true`.
    *
    * @default false
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   /**
    * If `true`, the radio button will be required. This also sets `aria-required` to `true`.
    *
    * @default false
    */
-  isRequired?: boolean
+  isRequired?: boolean | undefined
   /**
    * Function called when checked state of the `input` changes
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void | undefined
   /**
    * @internal
    */
-  "data-radiogroup"?: any
+  "data-radiogroup"?: any | undefined
   /**
    * Refers to the `id` of the element that labels the radio element.
    */
-  "aria-describedby"?: string
+  "aria-describedby"?: string | undefined
 }
 
 export interface RadioState {

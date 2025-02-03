@@ -2,17 +2,17 @@ import { SystemStyleObject } from "@chakra-ui/styled-system"
 import { chakra, HTMLChakraProps } from "../system"
 
 export interface ControlBoxOptions {
-  type?: "checkbox" | "radio"
-  _hover?: SystemStyleObject
-  _invalid?: SystemStyleObject
-  _disabled?: SystemStyleObject
-  _focus?: SystemStyleObject
-  _checked?: SystemStyleObject
-  _child?: SystemStyleObject
-  _checkedAndChild?: SystemStyleObject
-  _checkedAndDisabled?: SystemStyleObject
-  _checkedAndFocus?: SystemStyleObject
-  _checkedAndHover?: SystemStyleObject
+  type?: "checkbox" | "radio" | undefined
+  _hover?: SystemStyleObject | undefined
+  _invalid?: SystemStyleObject | undefined
+  _disabled?: SystemStyleObject | undefined
+  _focus?: SystemStyleObject | undefined
+  _checked?: SystemStyleObject | undefined
+  _child?: SystemStyleObject | undefined
+  _checkedAndChild?: SystemStyleObject | undefined
+  _checkedAndDisabled?: SystemStyleObject | undefined
+  _checkedAndFocus?: SystemStyleObject | undefined
+  _checkedAndHover?: SystemStyleObject | undefined
 }
 
 export type IControlBox = ControlBoxOptions

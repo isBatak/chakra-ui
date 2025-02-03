@@ -10,7 +10,7 @@ import {
 } from "."
 
 interface BasicUsageProps {
-  isOpen?: boolean
+  isOpen?: boolean | undefined
 }
 
 const BasicUsage = (props: BasicUsageProps) => {

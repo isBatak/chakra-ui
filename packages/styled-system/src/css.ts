@@ -29,8 +29,8 @@ const resolveTokenValue = (theme: Record<string, any>, value: string) => {
 
 interface GetCSSOptions {
   theme: CssTheme
-  configs?: Config
-  pseudos?: Record<string, CSS.Pseudos | (string & {})>
+  configs?: Config | undefined
+  pseudos?: Record<string, CSS.Pseudos | (string & {})> | undefined
 }
 
 export function getCss(options: GetCSSOptions) {

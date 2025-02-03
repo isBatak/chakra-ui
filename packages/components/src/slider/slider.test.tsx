@@ -15,9 +15,9 @@ const defaultValue = 10
 const themeRtl = { ...baseTheme, direction: "rtl" }
 
 const SimpleSlider = (props: {
-  defaultValue?: number
-  isReversed?: boolean
-  orientation?: UseSliderProps["orientation"]
+  defaultValue?: number | undefined
+  isReversed?: boolean | undefined
+  orientation?: UseSliderProps["orientation"] | undefined
 }) => (
   <Slider
     aria-label="slider-2"
@@ -53,9 +53,9 @@ const StyledSliderThumb = styled(SliderThumb)`
 `
 
 const SimpleStyledSlider = (props: {
-  defaultValue?: number
-  isReversed?: boolean
-  orientation?: UseSliderProps["orientation"]
+  defaultValue?: number | undefined
+  isReversed?: boolean | undefined
+  orientation?: UseSliderProps["orientation"] | undefined
 }) => (
   <StyledSlider
     data-testid="slider"

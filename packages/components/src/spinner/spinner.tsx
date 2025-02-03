@@ -17,11 +17,11 @@ interface SpinnerOptions {
    * The color of the empty area in the spinner
    * @default "transparent"
    */
-  emptyColor?: string
+  emptyColor?: string | undefined
   /**
    * The color of the spinner
    */
-  color?: string
+  color?: string | undefined
   /**
    * The thickness of the spinner
    * @default "2px"
@@ -30,7 +30,7 @@ interface SpinnerOptions {
    * <Spinner thickness="4px"/>
    * ```
    */
-  thickness?: string
+  thickness?: string | undefined
   /**
    * The speed of the spinner.
    * @default "0.45s"
@@ -39,13 +39,13 @@ interface SpinnerOptions {
    * <Spinner speed="0.2s"/>
    * ```
    */
-  speed?: string
+  speed?: string | undefined
   /**
    * For accessibility, it is important to add a fallback loading text.
    * This text will be visible to screen readers.
    * @default "Loading..."
    */
-  label?: string
+  label?: string | undefined
 }
 
 export interface SpinnerProps

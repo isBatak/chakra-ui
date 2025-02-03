@@ -20,59 +20,61 @@ export interface TransformProps {
   /**
    * The CSS `transform` property
    */
-  transform?: Token<CSS.Property.Transform | "auto" | "auto-gpu">
+  transform?: Token<CSS.Property.Transform | "auto" | "auto-gpu"> | undefined
   /**
    * The CSS `transform-origin` property
    */
-  transformOrigin?: Token<CSS.Property.TransformOrigin | number, "sizes">
+  transformOrigin?:
+    | Token<CSS.Property.TransformOrigin | number, "sizes">
+    | undefined
   /**
    * The CSS `clip-path` property.
    *
    * It creates a clipping region that sets what part of an element should be shown.
    */
-  clipPath?: Token<CSS.Property.ClipPath>
+  clipPath?: Token<CSS.Property.ClipPath> | undefined
   /**
    * Translate value of an elements in the x-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-translate-x`
    */
-  translateX?: Token<Length>
+  translateX?: Token<Length> | undefined
   /**
    * Translate value of an elements in the y-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-translate-y`
    */
-  translateY?: Token<Length>
+  translateY?: Token<Length> | undefined
   /**
    * Sets the rotation value of the element
    */
-  rotate?: Token<Length>
+  rotate?: Token<Length> | undefined
   /**
    * Skew value of an elements in the x-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-skew-x`
    */
-  skewX?: Token<Length>
+  skewX?: Token<Length> | undefined
   /**
    * Skew value of an elements in the y-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-skew-y`
    */
-  skewY?: Token<Length>
+  skewY?: Token<Length> | undefined
   /**
    * Scale value of an elements in the x-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-scale-x`
    */
-  scaleX?: Token<Length>
+  scaleX?: Token<Length> | undefined
   /**
    * Scale value of an elements in the y-direction.
    * - Only works if `transform=auto`
    * - It sets the value of `--chakra-scale-y`
    */
-  scaleY?: Token<Length>
+  scaleY?: Token<Length> | undefined
   /**
    * Sets the scale value of the element
    */
-  scale?: Token<Length>
+  scale?: Token<Length> | undefined
 }

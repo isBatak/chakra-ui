@@ -19,12 +19,12 @@ export async function generateThemeTypings({
   onError,
 }: {
   theme: Record<string, any>
-  out?: string
-  strictComponentTypes?: boolean
-  format?: boolean
-  strictTokenTypes?: boolean
-  template?: TypingsTemplate
-  onError?: () => void
+  out?: string | undefined
+  strictComponentTypes?: boolean | undefined
+  format?: boolean | undefined
+  strictTokenTypes?: boolean | undefined
+  template?: TypingsTemplate | undefined
+  onError?: () => void | undefined
 }) {
   const { default: ora } = await import("ora")
   const spinner = ora("Generating Theme Typings").start()

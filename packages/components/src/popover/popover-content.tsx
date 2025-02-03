@@ -6,8 +6,8 @@ import { usePopoverContext, usePopoverStyles } from "./popover-context"
 import { PopoverTransition, PopoverTransitionProps } from "./popover-transition"
 
 export interface PopoverContentProps extends PopoverTransitionProps {
-  rootProps?: HTMLChakraProps<"div">
-  motionProps?: HTMLMotionProps<"section">
+  rootProps?: HTMLChakraProps<"div"> | undefined
+  motionProps?: HTMLMotionProps<"section"> | undefined
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, "section">(

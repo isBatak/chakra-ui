@@ -41,7 +41,7 @@ export interface UseTabsProps {
    * The orientation of the tab list.
    * @default "horizontal"
    */
-  orientation?: "vertical" | "horizontal"
+  orientation?: "vertical" | "horizontal" | undefined
   /**
    * If `true`, the tabs will be manually activated and
    * display its panel by pressing Space or Enter.
@@ -51,29 +51,29 @@ export interface UseTabsProps {
    *
    * @default false
    */
-  isManual?: boolean
+  isManual?: boolean | undefined
   /**
    * Callback when the index (controlled or un-controlled) changes.
    */
-  onChange?: (index: number) => void
+  onChange?: (index: number) => void | undefined
   /**
    * The index of the selected tab (in controlled mode)
    */
-  index?: number
+  index?: number | undefined
   /**
    * The initial index of the selected tab (in uncontrolled mode)
    */
-  defaultIndex?: number
+  defaultIndex?: number | undefined
   /**
    * The id of the tab
    */
-  id?: string
+  id?: string | undefined
   /**
    * Performance 🚀:
    * If `true`, rendering of the tab panel's will be deferred until it is selected.
    * @default false
    */
-  isLazy?: boolean
+  isLazy?: boolean | undefined
   /**
    * Performance 🚀:
    * The lazy behavior of tab panels' content when not active.
@@ -85,14 +85,14 @@ export interface UseTabsProps {
    *
    * @default "unmount"
    */
-  lazyBehavior?: LazyMode
+  lazyBehavior?: LazyMode | undefined
   /**
    * The writing mode direction.
    *
    * - When in RTL, the left and right navigation is flipped
    * @default "ltr"
    */
-  direction?: "rtl" | "ltr"
+  direction?: "rtl" | "ltr" | undefined
 }
 
 /**
@@ -187,9 +187,9 @@ export const [TabsProvider, useTabsContext] = createContext<UseTabsReturn>({
 })
 
 export interface UseTabListProps {
-  children?: React.ReactNode
-  onKeyDown?: React.KeyboardEventHandler
-  ref?: React.Ref<any>
+  children?: React.ReactNode | undefined
+  onKeyDown?: React.KeyboardEventHandler | undefined
+  ref?: React.Ref<any> | undefined
 }
 
 /**
@@ -264,12 +264,12 @@ export interface UseTabOptions {
    * If `true`, the `Tab` won't be toggleable
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true` and `isDisabled`, the `Tab` will be focusable but not interactive.
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
 }
 
 export interface UseTabProps
@@ -330,7 +330,7 @@ export function useTab<P extends UseTabProps>(props: P) {
 }
 
 export interface UseTabPanelsProps {
-  children?: React.ReactNode
+  children?: React.ReactNode | undefined
 }
 
 const [TabPanelProvider, useTabPanelContext] = createContext<{

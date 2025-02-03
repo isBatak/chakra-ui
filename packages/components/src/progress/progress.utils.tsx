@@ -41,13 +41,13 @@ export const stripe: Keyframe = keyframes({
 })
 
 export interface GetProgressPropsOptions {
-  value?: number
+  value?: number | undefined
   min: number
   max: number
-  valueText?: string
+  valueText?: string | undefined
   getValueText?(value: number, percent: number): string
-  isIndeterminate?: boolean
-  role?: React.AriaRole
+  isIndeterminate?: boolean | undefined
+  role?: React.AriaRole | undefined
 }
 
 /**

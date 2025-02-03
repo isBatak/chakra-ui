@@ -13,7 +13,7 @@ const data = [
 
 interface FruitProps {
   name: string
-  onUnmount?: (v: string) => void
+  onUnmount?: (v: string) => void | undefined
 }
 const Fruit = ({ name, onUnmount }: FruitProps) => {
   useEffect(() => {

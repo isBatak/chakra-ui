@@ -3,8 +3,8 @@ import { useTheme } from "../system"
 import { useMediaQuery } from "./use-media-query"
 
 export type UseBreakpointOptions = {
-  ssr?: boolean
-  fallback?: string
+  ssr?: boolean | undefined
+  fallback?: string | undefined
 }
 
 /**

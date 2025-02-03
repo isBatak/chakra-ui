@@ -56,13 +56,13 @@ export interface SlideOptions {
    * The direction to slide from
    * @default "right"
    */
-  direction?: SlideDirection
+  direction?: SlideDirection | undefined
 }
 
 export interface SlideProps
   extends WithTransitionConfig<HTMLMotionProps<"div">>,
     SlideOptions {
-  motionProps?: HTMLMotionProps<"div">
+  motionProps?: HTMLMotionProps<"div"> | undefined
 }
 
 export const Slide = forwardRef<HTMLDivElement, SlideProps>(

@@ -15,25 +15,25 @@ export interface ColorProps {
   /**
    * The CSS `color` property
    */
-  textColor?: Token<CSS.Property.Color, "colors">
+  textColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `color` property
    */
-  color?: Token<CSS.Property.Color, "colors">
+  color?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `accent-color` property
    */
-  accentColor?: Token<CSS.Property.Color, "colors">
+  accentColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `fill` property for icon svgs and paths
    */
-  fill?: Token<CSS.Property.Color, "colors">
+  fill?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `stroke` property for icon svgs and paths
    */
-  stroke?: Token<CSS.Property.Color, "colors">
+  stroke?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `text-fill-color` property
    */
-  textFillColor?: Token<CSS.Property.Color, "colors">
+  textFillColor?: Token<CSS.Property.Color, "colors"> | undefined
 }

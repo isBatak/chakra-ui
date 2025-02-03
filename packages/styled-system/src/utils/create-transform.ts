@@ -4,8 +4,8 @@ import type { Transform } from "./types"
 
 interface CreateTransformOptions {
   scale: ThemeScale
-  compose?: Transform
-  transform?: Transform
+  compose?: Transform | undefined
+  transform?: Transform | undefined
 }
 
 const isImportant = (value: string) => /!(important)?$/.test(value)

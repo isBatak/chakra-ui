@@ -9,7 +9,7 @@ export function forwardRef<Props extends object, Component extends ElementType>(
   component: React.ForwardRefRenderFunction<
     any,
     RightJoinProps<PropsOf<Component>, Props> & {
-      as?: ElementType
+      as?: ElementType | undefined
     }
   >,
 ) {

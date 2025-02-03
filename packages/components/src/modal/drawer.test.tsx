@@ -10,8 +10,8 @@ import {
 } from "."
 
 const SimpleDrawer = (props: {
-  placement?: DrawerProps["placement"]
-  isOpen?: boolean
+  placement?: DrawerProps["placement"] | undefined
+  isOpen?: boolean | undefined
 }) => {
   const [isOpen, setIsOpen] = React.useState(props.isOpen || false)
   const onClose = () => setIsOpen(false)

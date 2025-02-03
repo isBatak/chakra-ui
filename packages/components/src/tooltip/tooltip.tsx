@@ -36,7 +36,7 @@ export interface TooltipProps
   /**
    * The label of the tooltip
    */
-  label?: React.ReactNode
+  label?: React.ReactNode | undefined
   /**
    * The accessible, human friendly label to use for
    * screen readers.
@@ -44,24 +44,26 @@ export interface TooltipProps
    * If passed, tooltip will show the content `label`
    * but expose only `aria-label` to assistive technologies
    */
-  "aria-label"?: string
+  "aria-label"?: string | undefined
   /**
    * If `true`, the tooltip will wrap its children
    * in a `<span/>` with `tabIndex=0`
    * @default false
    */
-  shouldWrapChildren?: boolean
+  shouldWrapChildren?: boolean | undefined
   /**
    * If `true`, the tooltip will show an arrow tip
    * @default false
    */
-  hasArrow?: boolean
+  hasArrow?: boolean | undefined
   /**
    * Props to be forwarded to the portal component
    */
-  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
-  motionProps?: HTMLMotionProps<"div">
-  animatePresenceProps?: AnimatePresenceProps
+  portalProps?:
+    | Pick<PortalProps, "appendToParentPortal" | "containerRef">
+    | undefined
+  motionProps?: HTMLMotionProps<"div"> | undefined
+  animatePresenceProps?: AnimatePresenceProps | undefined
 }
 
 const MotionDiv = chakra(motion.div)
@@ -121,7 +123,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">((props, ref) => {
      * Ensure tooltip has only one child node
      */
     const child = Children.only(children) as React.ReactElement & {
-      ref?: React.Ref<any>
+      ref?: React.Ref<any> | undefined
     }
     trigger = cloneElement(
       child,

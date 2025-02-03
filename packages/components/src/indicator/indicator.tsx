@@ -9,30 +9,32 @@ export interface IndicatorOptions {
   /**
    * The x offset of the indicator
    */
-  offsetX?: SystemStyleObject["left"]
+  offsetX?: SystemStyleObject["left"] | undefined
   /**
    * The y offset of the indicator
    */
-  offsetY?: SystemStyleObject["top"]
+  offsetY?: SystemStyleObject["top"] | undefined
   /**
    * The x and y offset of the indicator
    */
-  offset?: SystemStyleObject["top"]
+  offset?: SystemStyleObject["top"] | undefined
   /**
    * The placement of the indicator
    * @default "top-end"
    */
-  placement?: ResponsiveValue<
-    | "bottom-end"
-    | "bottom-start"
-    | "top-end"
-    | "top-start"
-    | "bottom-center"
-    | "top-center"
-    | "middle-center"
-    | "middle-end"
-    | "middle-start"
-  >
+  placement?:
+    | ResponsiveValue<
+        | "bottom-end"
+        | "bottom-start"
+        | "top-end"
+        | "top-start"
+        | "bottom-center"
+        | "top-center"
+        | "middle-center"
+        | "middle-end"
+        | "middle-start"
+      >
+    | undefined
 }
 
 export interface IndicatorProps

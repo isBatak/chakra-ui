@@ -13,7 +13,10 @@ const buttonLabel = "Hover me"
 const tooltipLabel = "tooltip label"
 
 const DummyComponent = (
-  props: Omit<TooltipProps & { isButtonDisabled?: boolean }, "children">,
+  props: Omit<
+    TooltipProps & { isButtonDisabled?: boolean | undefined },
+    "children"
+  >,
 ) => {
   const { isButtonDisabled, ...tooltipProps } = props
   return (

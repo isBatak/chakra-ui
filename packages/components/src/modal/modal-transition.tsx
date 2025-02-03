@@ -13,7 +13,8 @@ export interface ModalTransitionProps
     | "slideInLeft"
     | "scale"
     | "none"
-  motionProps?: HTMLMotionProps<"section">
+    | undefined
+  motionProps?: HTMLMotionProps<"section"> | undefined
 }
 
 const transitions = {

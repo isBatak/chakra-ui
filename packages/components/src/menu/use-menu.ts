@@ -63,28 +63,28 @@ export interface UseMenuProps
   /**
    * The `ref` of the element that should receive focus when the popover opens.
    */
-  initialFocusRef?: React.RefObject<{ focus(): void }>
+  initialFocusRef?: React.RefObject<{ focus(): void }> | undefined
   /**
    * If `true`, the menu will close when a menu item is
    * clicked
    *
    * @default true
    */
-  closeOnSelect?: boolean
+  closeOnSelect?: boolean | undefined
   /**
    * If `true`, the menu will close when you click outside
    * the menu list
    *
    * @default true
    */
-  closeOnBlur?: boolean
+  closeOnBlur?: boolean | undefined
   /**
    * If `true`, the first enabled menu item will receive focus and be selected
    * when the menu opens.
    *
    * @default true
    */
-  autoSelect?: boolean
+  autoSelect?: boolean | undefined
   /**
    * Performance 🚀:
    * If `true`, the MenuItem rendering will be deferred
@@ -92,7 +92,7 @@ export interface UseMenuProps
    *
    * @default false
    */
-  isLazy?: boolean
+  isLazy?: boolean | undefined
   /**
    * Performance 🚀:
    * The lazy behavior of menu's content when not visible.
@@ -104,12 +104,12 @@ export interface UseMenuProps
    *
    * @default "unmount"
    */
-  lazyBehavior?: LazyMode
+  lazyBehavior?: LazyMode | undefined
   /**
    * If `rtl`, proper placement positions will be flipped i.e. 'top-right' will
    * become 'top-left' and vice-verse
    */
-  direction?: "ltr" | "rtl"
+  direction?: "ltr" | "rtl" | undefined
   /*
    * If `true`, the menu will be positioned when it mounts
    * (even if it's not open).
@@ -119,7 +119,7 @@ export interface UseMenuProps
    *
    * @default false
    */
-  computePositionOnMount?: boolean
+  computePositionOnMount?: boolean | undefined
 }
 
 function getOwnerDocument(node?: Element | null): Document {
@@ -579,20 +579,20 @@ export interface UseMenuItemProps
   /**
    * If `true`, the menuitem will be disabled
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true` and the menuitem is disabled, it'll
    * remain keyboard-focusable
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * Overrides the parent menu's `closeOnSelect` prop.
    */
-  closeOnSelect?: boolean
+  closeOnSelect?: boolean | undefined
   /**
    * The type of the menuitem.
    */
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"] | undefined
 }
 
 export function useMenuItem(
@@ -713,10 +713,10 @@ export function useMenuItem(
  * -----------------------------------------------------------------------------------------------*/
 
 export interface UseMenuOptionOptions {
-  value?: string
-  isChecked?: boolean
-  type?: "radio" | "checkbox"
-  children?: React.ReactNode
+  value?: string | undefined
+  isChecked?: boolean | undefined
+  type?: "radio" | "checkbox" | undefined
+  children?: React.ReactNode | undefined
 }
 
 export interface UseMenuOptionProps
@@ -741,11 +741,11 @@ export function useMenuOption(
  * -----------------------------------------------------------------------------------------------*/
 
 export interface UseMenuOptionGroupProps {
-  value?: string | string[]
-  defaultValue?: string | string[]
-  type?: "radio" | "checkbox"
-  onChange?: (value: string | string[]) => void
-  children?: React.ReactNode
+  value?: string | string[] | undefined
+  defaultValue?: string | string[] | undefined
+  type?: "radio" | "checkbox" | undefined
+  onChange?: (value: string | string[]) => void | undefined
+  children?: React.ReactNode | undefined
 }
 
 export function useMenuOptionGroup(props: UseMenuOptionGroupProps = {}) {

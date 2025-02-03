@@ -8,13 +8,13 @@ export type ColorModeWithSystem = ColorMode | "system" | undefined
 export type ConfigColorMode = ColorModeWithSystem
 
 export interface ColorModeOptions {
-  initialColorMode?: ColorModeWithSystem
-  useSystemColorMode?: boolean
-  disableTransitionOnChange?: boolean
+  initialColorMode?: ColorModeWithSystem | undefined
+  useSystemColorMode?: boolean | undefined
+  disableTransitionOnChange?: boolean | undefined
 }
 
 export interface ColorModeContextType {
-  forced?: boolean
+  forced?: boolean | undefined
   colorMode: ColorMode
   toggleColorMode: () => void
   setColorMode: (value: any) => void

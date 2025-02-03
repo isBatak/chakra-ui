@@ -40,7 +40,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/align-items)
    */
-  alignItems?: Token<CSS.Property.AlignItems>
+  alignItems?: Token<CSS.Property.AlignItems> | undefined
   /**
    * The CSS `align-content` property.
    *
@@ -49,7 +49,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/align-content)
    */
-  alignContent?: Token<CSS.Property.AlignContent>
+  alignContent?: Token<CSS.Property.AlignContent> | undefined
   /**
    * The CSS `justify-items` property.
    *
@@ -59,7 +59,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/justify-items)
    */
-  justifyItems?: Token<CSS.Property.JustifyItems>
+  justifyItems?: Token<CSS.Property.JustifyItems> | undefined
   /**
    * The CSS `justify-content` property.
    *
@@ -68,7 +68,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/justify-content)
    */
-  justifyContent?: Token<CSS.Property.JustifyContent>
+  justifyContent?: Token<CSS.Property.JustifyContent> | undefined
   /**
    * The CSS `flex-wrap` property.
    *
@@ -78,7 +78,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-wrap)
    */
-  flexWrap?: Token<CSS.Property.FlexWrap>
+  flexWrap?: Token<CSS.Property.FlexWrap> | undefined
   /**
    * The CSS `flex-flow` property.
    *
@@ -87,7 +87,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-flow)
    */
-  flexFlow?: Token<CSS.Property.FlexFlow>
+  flexFlow?: Token<CSS.Property.FlexFlow> | undefined
   /**
    * The CSS `flex-basis` property.
    *
@@ -95,7 +95,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-basis)
    */
-  flexBasis?: Token<CSS.Property.FlexBasis<Length>>
+  flexBasis?: Token<CSS.Property.FlexBasis<Length>> | undefined
   /**
    * The CSS `flex-direction` property.
    *
@@ -104,7 +104,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-direction)
    */
-  flexDirection?: Token<CSS.Property.FlexDirection>
+  flexDirection?: Token<CSS.Property.FlexDirection> | undefined
   /**
    * The CSS `flex-direction` property.
    *
@@ -113,7 +113,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-direction)
    */
-  flexDir?: Token<CSS.Property.FlexDirection>
+  flexDir?: Token<CSS.Property.FlexDirection> | undefined
   /**
    * The CSS `flex` property.
    *
@@ -122,7 +122,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex)
    */
-  flex?: Token<CSS.Property.Flex<Length>>
+  flex?: Token<CSS.Property.Flex<Length>> | undefined
   /**
    * The CSS `gap` property.
    *
@@ -131,7 +131,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/gap)
    */
-  gap?: Token<CSS.Property.Gap<Length>, "space">
+  gap?: Token<CSS.Property.Gap<Length>, "space"> | undefined
   /**
    * The CSS `row-gap` property.
    *
@@ -139,7 +139,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/row-gap)
    */
-  rowGap?: Token<CSS.Property.RowGap<Length>, "space">
+  rowGap?: Token<CSS.Property.RowGap<Length>, "space"> | undefined
   /**
    * The CSS `column-gap` property.
    *
@@ -147,7 +147,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/column-gap)
    */
-  columnGap?: Token<CSS.Property.ColumnGap<Length>, "space">
+  columnGap?: Token<CSS.Property.ColumnGap<Length>, "space"> | undefined
   /**
    * The CSS `justify-self` property.
    *
@@ -156,7 +156,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-flow)
    */
-  justifySelf?: Token<CSS.Property.JustifySelf>
+  justifySelf?: Token<CSS.Property.JustifySelf> | undefined
   /**
    * The CSS `align-self` property.
    *
@@ -165,7 +165,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/align-self)
    */
-  alignSelf?: Token<CSS.Property.AlignSelf>
+  alignSelf?: Token<CSS.Property.AlignSelf> | undefined
   /**
    * The CSS `order` property.
    *
@@ -173,7 +173,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/order)
    */
-  order?: Token<CSS.Property.Order>
+  order?: Token<CSS.Property.Order> | undefined
   /**
    * The CSS `flex-grow` property.
    *
@@ -182,7 +182,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-grow)
    */
-  flexGrow?: Token<CSS.Property.FlexGrow | (string & number)>
+  flexGrow?: Token<CSS.Property.FlexGrow | (string & number)> | undefined
   /**
    * The CSS `flex-shrink` property.
    *
@@ -191,7 +191,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/flex-shrink)
    */
-  flexShrink?: Token<CSS.Property.FlexShrink | (string & number)>
+  flexShrink?: Token<CSS.Property.FlexShrink | (string & number)> | undefined
   /**
    * The CSS `place-items` property.
    *
@@ -201,7 +201,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/place-items)
    */
-  placeItems?: Token<CSS.Property.PlaceItems>
+  placeItems?: Token<CSS.Property.PlaceItems> | undefined
   /**
    * The CSS `place-content` property.
    *
@@ -211,7 +211,7 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/place-content)
    */
-  placeContent?: Token<CSS.Property.PlaceContent>
+  placeContent?: Token<CSS.Property.PlaceContent> | undefined
   /**
    * The CSS `place-self` property.
    *
@@ -221,5 +221,5 @@ export interface FlexboxProps {
    *
    * @see [Mozilla Docs](https://developer.mozilla.org/docs/Web/CSS/place-self)
    */
-  placeSelf?: Token<CSS.Property.PlaceSelf>
+  placeSelf?: Token<CSS.Property.PlaceSelf> | undefined
 }

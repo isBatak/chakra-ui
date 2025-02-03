@@ -31,77 +31,79 @@ export interface BackgroundProps {
   /**
    * The CSS `background` property
    */
-  bg?: Token<CSS.Property.Color, "colors">
+  bg?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `background-clip` property
    */
-  bgClip?: Token<CSS.Property.BackgroundClip | "text">
+  bgClip?: Token<CSS.Property.BackgroundClip | "text"> | undefined
   /**
    * The CSS `background-clip` property
    */
-  backgroundClip?: Token<CSS.Property.BackgroundClip | "text">
+  backgroundClip?: Token<CSS.Property.BackgroundClip | "text"> | undefined
   /**
    * The CSS `background` property
    */
-  background?: Token<CSS.Property.Color, "colors">
+  background?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `background-color` property
    */
-  bgColor?: Token<CSS.Property.Color, "colors">
+  bgColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `background-color` property
    */
-  backgroundColor?: Token<CSS.Property.Color, "colors">
+  backgroundColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The CSS `background-image` property
    */
-  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients"> | undefined
   /**
    * The background-gradient shorthand
    */
-  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients"> | undefined
   /**
    * The CSS `background-size` property
    */
-  backgroundSize?: Token<CSS.Property.BackgroundSize | number>
+  backgroundSize?: Token<CSS.Property.BackgroundSize | number> | undefined
   /**
    * The CSS `background-position` property
    */
-  bgPos?: Token<CSS.Property.BackgroundPosition | number>
+  bgPos?: Token<CSS.Property.BackgroundPosition | number> | undefined
   /**
    * The CSS `background-position` property
    */
-  backgroundPosition?: Token<CSS.Property.BackgroundPosition | number>
+  backgroundPosition?:
+    | Token<CSS.Property.BackgroundPosition | number>
+    | undefined
   /**
    * The CSS `background-image` property
    */
-  bgImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgImage?: Token<CSS.Property.BackgroundImage, "gradients"> | undefined
   /**
    * The CSS `background-image` property
    */
-  bgImg?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgImg?: Token<CSS.Property.BackgroundImage, "gradients"> | undefined
   /**
    * The CSS `background-repeat` property
    */
-  bgRepeat?: Token<CSS.Property.BackgroundRepeat>
+  bgRepeat?: Token<CSS.Property.BackgroundRepeat> | undefined
   /**
    * The CSS `background-repeat` property
    */
-  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
+  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat> | undefined
   /**
    * The CSS `background-size` property
    */
-  bgSize?: Token<CSS.Property.BackgroundSize | number>
+  bgSize?: Token<CSS.Property.BackgroundSize | number> | undefined
   /**
    * The CSS `background-attachment` property
    */
-  bgAttachment?: Token<CSS.Property.BackgroundAttachment>
+  bgAttachment?: Token<CSS.Property.BackgroundAttachment> | undefined
   /**
    * The CSS `background-attachment` property
    */
-  backgroundAttachment?: Token<CSS.Property.BackgroundAttachment>
+  backgroundAttachment?: Token<CSS.Property.BackgroundAttachment> | undefined
   /**
    * The CSS `background-position` property
    */
-  bgPosition?: Token<CSS.Property.BackgroundPosition | number>
+  bgPosition?: Token<CSS.Property.BackgroundPosition | number> | undefined
 }

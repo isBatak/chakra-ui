@@ -7,23 +7,23 @@ interface SimpleGridOptions {
   /**
    * The width at which child elements will break into columns. Pass a number for pixel values or a string for any other valid CSS length.
    */
-  minChildWidth?: GridProps["minWidth"]
+  minChildWidth?: GridProps["minWidth"] | undefined
   /**
    * The number of columns
    */
-  columns?: ResponsiveValue<number>
+  columns?: ResponsiveValue<number> | undefined
   /**
    * The gap between the grid items
    */
-  spacing?: GridProps["gridGap"]
+  spacing?: GridProps["gridGap"] | undefined
   /**
    * The column gap between the grid items
    */
-  spacingX?: GridProps["gridGap"]
+  spacingX?: GridProps["gridGap"] | undefined
   /**
    * The row gap between the grid items
    */
-  spacingY?: GridProps["gridGap"]
+  spacingY?: GridProps["gridGap"] | undefined
 }
 
 export interface SimpleGridProps extends GridProps, SimpleGridOptions {}

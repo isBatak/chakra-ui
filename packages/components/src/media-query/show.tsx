@@ -6,19 +6,19 @@ export interface ShowProps {
    * A custom css media query that determines when the `children` are rendered.
    * Will render `children` if that query resolves to `true`.
    */
-  breakpoint?: string
+  breakpoint?: string | undefined
   /**
    * A value from the `breakpoints` section in the theme. Will render `children`
    * from that breakpoint and below. Default breakpoint values: `sm`, `md`, `lg`, `xl`, `2xl`.
    */
-  below?: string
+  below?: string | undefined
   /**
    * A value from the `breakpoints` section in the theme. Will render `children`
    * from that breakpoint and above. Default breakpoint values: `sm`, `md`, `lg`, `xl`, `2xl`.
    */
-  above?: string
-  ssr?: boolean
-  children?: React.ReactNode
+  above?: string | undefined
+  ssr?: boolean | undefined
+  children?: React.ReactNode | undefined
 }
 
 /**

@@ -66,17 +66,17 @@ export interface OtherProps {
    * If `focusable`, the sr-only styles will be undone, making the element visible
    * to sighted users as well as screen readers.
    */
-  srOnly?: true | "focusable"
+  srOnly?: true | "focusable" | undefined
   /**
    * The layer style object to apply.
    * Note: Styles must be located in `theme.layerStyles`
    */
-  layerStyle?: Token<string & {}, "layerStyles">
+  layerStyle?: Token<string & {}, "layerStyles"> | undefined
   /**
    * The text style object to apply.
    * Note: Styles must be located in `theme.textStyles`
    */
-  textStyle?: Token<string & {}, "textStyles">
+  textStyle?: Token<string & {}, "textStyles"> | undefined
   /**
    * Apply theme-aware style objects in `theme`
    *
@@ -87,5 +87,5 @@ export interface OtherProps {
    *
    * This will apply styles defined in `theme.styles.h3`
    */
-  apply?: ResponsiveValue<string>
+  apply?: ResponsiveValue<string> | undefined
 }

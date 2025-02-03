@@ -9,11 +9,13 @@ export interface PopoverProps extends UsePopoverProps, ThemingProps<"Popover"> {
    * The content of the popover. It is usually the `PopoverTrigger`,
    * and `PopoverContent`
    */
-  children?: MaybeRenderProp<{
-    isOpen: boolean
-    onClose: () => void
-    forceUpdate: (() => void) | undefined
-  }>
+  children?:
+    | MaybeRenderProp<{
+        isOpen: boolean
+        onClose: () => void
+        forceUpdate: (() => void) | undefined
+      }>
+    | undefined
 }
 
 /**

@@ -22,16 +22,16 @@ export interface MenuItemOptionProps
   /**
    * @type React.ReactElement
    */
-  icon?: ReactElement | null
+  icon?: ReactElement | null | undefined
   /**
    * @type SystemProps["mr"]
    */
-  iconSpacing?: SystemProps["mr"]
+  iconSpacing?: SystemProps["mr"] | undefined
   /**
    * The placement of the icon in the option
    * @default start
    */
-  iconPlacement?: "start" | "end"
+  iconPlacement?: "start" | "end" | undefined
 }
 
 export const MenuItemOption = forwardRef<MenuItemOptionProps, "button">(

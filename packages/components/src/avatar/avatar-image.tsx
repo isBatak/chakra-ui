@@ -6,11 +6,11 @@ import { AvatarName } from "./avatar-name"
 import { GenericAvatarIcon } from "./generic-avatar-icon"
 
 type AvatarImageProps = ImageProps & {
-  getInitials?: (name: string) => string
-  borderRadius?: SystemStyleObject["borderRadius"]
+  getInitials?: (name: string) => string | undefined
+  borderRadius?: SystemStyleObject["borderRadius"] | undefined
   icon: React.ReactElement
-  iconLabel?: string
-  name?: string
+  iconLabel?: string | undefined
+  name?: string | undefined
 }
 
 export function AvatarImage(props: AvatarImageProps) {

@@ -23,8 +23,8 @@ export type FlatToken = PlainToken | SemanticToken
 export type FlatTokens = Record<string, FlatToken>
 
 export type FlattenTokensParam = {
-  tokens?: object
-  semanticTokens?: object
+  tokens?: object | undefined
+  semanticTokens?: object | undefined
 }
 
 export function flattenTokens(theme: Record<string, any>) {

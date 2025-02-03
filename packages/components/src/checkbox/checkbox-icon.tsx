@@ -35,11 +35,11 @@ export interface CheckboxIconProps extends HTMLChakraProps<"svg"> {
   /**
    * @default false
    */
-  isIndeterminate?: boolean
+  isIndeterminate?: boolean | undefined
   /**
    * @default false
    */
-  isChecked?: boolean
+  isChecked?: boolean | undefined
 }
 
 /**

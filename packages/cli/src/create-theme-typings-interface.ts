@@ -25,30 +25,30 @@ export interface ThemeKeyOptions {
    * level: 1---|2--|
    * @default 3
    */
-  maxScanDepth?: number
+  maxScanDepth?: number | undefined
   /**
    * Pass a function to filter extracted values
    * @example
    * Exclude numeric index values from `breakpoints`
    * @default () => true
    */
-  filter?: (value: string) => boolean
+  filter?: (value: string) => boolean | undefined
 
   /**
    * Pass a function to flatMap extracted values
    * @default value => value
    */
-  flatMap?: (value: string) => string | string[]
+  flatMap?: (value: string) => string | string[] | undefined
 }
 
 export type TypingsTemplate = "default" | "augmentation"
 
 export interface CreateThemeTypingsInterfaceOptions {
   config: ThemeKeyOptions[]
-  strictComponentTypes?: boolean
-  format?: boolean
-  strictTokenTypes?: boolean
-  template?: TypingsTemplate
+  strictComponentTypes?: boolean | undefined
+  format?: boolean | undefined
+  strictTokenTypes?: boolean | undefined
+  template?: TypingsTemplate | undefined
 }
 
 function applyThemeTypingTemplate(

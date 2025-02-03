@@ -10,11 +10,11 @@ function range(count: number) {
 }
 
 export interface SkeletonTextProps extends SkeletonProps {
-  spacing?: SkeletonProps["margin"]
-  skeletonHeight?: SkeletonProps["height"]
-  startColor?: SkeletonProps["startColor"]
-  endColor?: SkeletonProps["endColor"]
-  isLoaded?: SkeletonProps["isLoaded"]
+  spacing?: SkeletonProps["margin"] | undefined
+  skeletonHeight?: SkeletonProps["height"] | undefined
+  startColor?: SkeletonProps["startColor"] | undefined
+  endColor?: SkeletonProps["endColor"] | undefined
+  isLoaded?: SkeletonProps["isLoaded"] | undefined
 }
 const defaultNoOfLines = 3
 /**

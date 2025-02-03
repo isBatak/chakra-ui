@@ -6,7 +6,7 @@ export interface TableColumnHeaderProps extends HTMLChakraProps<"th"> {
    * Aligns the cell content to the right
    * @default false
    */
-  isNumeric?: boolean
+  isNumeric?: boolean | undefined
 }
 export const Th = forwardRef<TableColumnHeaderProps, "th">(
   ({ isNumeric, ...rest }, ref) => {

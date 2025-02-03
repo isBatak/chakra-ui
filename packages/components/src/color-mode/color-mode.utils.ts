@@ -6,8 +6,8 @@ const classNames = {
 }
 
 type UtilOptions = {
-  preventTransition?: boolean
-  nonce?: string
+  preventTransition?: boolean | undefined
+  nonce?: string | undefined
 }
 
 export function getColorModeUtils(options: UtilOptions = {}) {

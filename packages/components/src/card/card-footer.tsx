@@ -4,7 +4,7 @@ import { cx } from "@chakra-ui/utils"
 import { useCardStyles } from "./card-context"
 
 export interface CardFooterProps extends HTMLChakraProps<"div"> {
-  justify?: SystemProps["justifyContent"]
+  justify?: SystemProps["justifyContent"] | undefined
 }
 
 export const CardFooter = forwardRef<CardFooterProps, "div">(

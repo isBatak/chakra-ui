@@ -17,33 +17,33 @@ export interface InteractivityProps {
   /**
    * The CSS `appearance` property
    */
-  appearance?: Token<CSS.Property.Appearance>
+  appearance?: Token<CSS.Property.Appearance> | undefined
   /**
    * The CSS `user-select` property
    */
-  userSelect?: Token<CSS.Property.UserSelect>
+  userSelect?: Token<CSS.Property.UserSelect> | undefined
   /**
    * The CSS `pointer-events` property
    */
-  pointerEvents?: Token<CSS.Property.PointerEvents>
+  pointerEvents?: Token<CSS.Property.PointerEvents> | undefined
   /**
    * The CSS `resize` property
    */
-  resize?: Token<CSS.Property.Resize>
+  resize?: Token<CSS.Property.Resize> | undefined
   /**
    * The CSS `cursor` property
    */
-  cursor?: Token<CSS.Property.Cursor>
+  cursor?: Token<CSS.Property.Cursor> | undefined
   /**
    * The CSS `outline` property
    */
-  outline?: Token<CSS.Property.Outline<Length>>
+  outline?: Token<CSS.Property.Outline<Length>> | undefined
   /**
    * The CSS `outline-offset` property
    */
-  outlineOffset?: Token<CSS.Property.OutlineOffset<Length>>
+  outlineOffset?: Token<CSS.Property.OutlineOffset<Length>> | undefined
   /**
    * The CSS `outline-color` property
    */
-  outlineColor?: Token<CSS.Property.Color, "colors">
+  outlineColor?: Token<CSS.Property.Color, "colors"> | undefined
 }

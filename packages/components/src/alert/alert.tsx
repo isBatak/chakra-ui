@@ -22,7 +22,7 @@ interface AlertOptions {
    * The status of the alert
    * @default "info"
    */
-  status?: AlertStatus
+  status?: AlertStatus | undefined
 }
 
 export interface AlertProps
@@ -32,7 +32,7 @@ export interface AlertProps
   /**
    * @default false
    */
-  addRole?: boolean
+  addRole?: boolean | undefined
 }
 
 /**

@@ -4,11 +4,11 @@ import { HTMLChakraProps, chakra } from "../system"
 import { rotate } from "./progress.utils"
 
 interface ShapeProps extends HTMLChakraProps<"svg"> {
-  size?: ResponsiveValue<string | number>
+  size?: ResponsiveValue<string | number> | undefined
   /**
    * @default false
    */
-  isIndeterminate?: boolean
+  isIndeterminate?: boolean | undefined
 }
 
 export const Shape = (props: ShapeProps) => {

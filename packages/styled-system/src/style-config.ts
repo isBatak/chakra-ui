@@ -9,10 +9,10 @@ import { ResponsiveValue, WithCSSVar } from "./utils"
 type Theme = WithCSSVar<Record<string, any>>
 
 type Config = {
-  parts?: string[]
-  baseStyle?: Record<string, any>
-  variants?: Record<string, any>
-  sizes?: Record<string, any>
+  parts?: string[] | undefined
+  baseStyle?: Record<string, any> | undefined
+  variants?: Record<string, any> | undefined
+  sizes?: Record<string, any> | undefined
 }
 
 type ValueType = ResponsiveValue<string | boolean>
@@ -86,8 +86,8 @@ function createResolver(theme: Theme) {
 
 type Values = {
   theme: Theme
-  variant?: ValueType
-  size?: ValueType
+  variant?: ValueType | undefined
+  size?: ValueType | undefined
 }
 
 export function resolveStyleConfig(config: Config) {

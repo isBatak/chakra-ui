@@ -6,7 +6,7 @@ export interface TableCaptionProps extends HTMLChakraProps<"caption"> {
    * The placement of the table caption. This sets the `caption-side` CSS attribute.
    * @default "bottom"
    */
-  placement?: "top" | "bottom"
+  placement?: "top" | "bottom" | undefined
 }
 
 export const TableCaption = forwardRef<TableCaptionProps, "caption">(

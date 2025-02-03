@@ -104,7 +104,7 @@ const TestComponent = ({
   defaultBreakpoint = undefined,
 }: {
   breakpoints: any
-  defaultBreakpoint?: string
+  defaultBreakpoint?: string | undefined
 }) => {
   const value = useBreakpointValue(breakpoints, defaultBreakpoint)
   return <>{value}</>

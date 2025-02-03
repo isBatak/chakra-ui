@@ -9,12 +9,12 @@ import {
 import { initCLI } from "./utils/init-cli.js"
 
 interface OptionsType {
-  out?: string
-  strictComponentTypes?: boolean
+  out?: string | undefined
+  strictComponentTypes?: boolean | undefined
   format: boolean
-  watch?: string
-  strictTokenTypes?: boolean
-  template?: "default" | "augmentation"
+  watch?: string | undefined
+  strictTokenTypes?: boolean | undefined
+  template?: "default" | "augmentation" | undefined
 }
 
 export async function run() {

@@ -13,11 +13,11 @@ export interface DrawerContentProps extends HTMLChakraProps<"section"> {
   /**
    * The props to forward to the modal's content wrapper
    */
-  containerProps?: HTMLChakraProps<"div">
+  containerProps?: HTMLChakraProps<"div"> | undefined
   /**
    * The custom framer-motion transition to use for the modal
    */
-  motionProps?: HTMLMotionProps<"section">
+  motionProps?: HTMLMotionProps<"section"> | undefined
 }
 
 /**

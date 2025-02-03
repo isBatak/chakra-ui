@@ -17,65 +17,65 @@ export interface UseEditableProps {
   /**
    * The value of the Editable in both edit & preview mode
    */
-  value?: string
+  value?: string | undefined
   /**
    * The initial value of the Editable in both edit & preview mode
    */
-  defaultValue?: string
+  defaultValue?: string | undefined
   /**
    * If `true`, the Editable will be disabled.
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the Editable will start with edit mode by default.
    */
-  startWithEditView?: boolean
+  startWithEditView?: boolean | undefined
   /**
    * If `true`, the read only view, has a `tabIndex` set to `0`
    * so it can receive focus via the keyboard or click.
    * @default true
    */
-  isPreviewFocusable?: boolean
+  isPreviewFocusable?: boolean | undefined
   /**
    * If `true`, it'll update the value onBlur and turn off the edit mode.
    * @default true
    */
-  submitOnBlur?: boolean
+  submitOnBlur?: boolean | undefined
   /**
    * Callback invoked when user changes input.
    */
-  onChange?: (nextValue: string) => void
+  onChange?: (nextValue: string) => void | undefined
   /**
    * Callback invoked when user cancels input with the `Esc` key.
    * It provides the last confirmed value as argument.
    */
-  onCancel?: (previousValue: string) => void
+  onCancel?: (previousValue: string) => void | undefined
   /**
    * Callback invoked when user confirms value with `enter` key or by blurring input.
    */
-  onSubmit?: (nextValue: string) => void
+  onSubmit?: (nextValue: string) => void | undefined
   /**
    * Callback invoked once the user enters edit mode.
    */
-  onEdit?: () => void
+  onEdit?: () => void | undefined
   /**
    * Callback invoked when the user either submits or cancels.
    * It provides the last confirmed value as argument.
    */
-  onBlur?: (nextValue: string) => void
+  onBlur?: (nextValue: string) => void | undefined
   /**
    * If `true`, the input's text will be highlighted on focus.
    * @default true
    */
-  selectAllOnFocus?: boolean
+  selectAllOnFocus?: boolean | undefined
   /**
    * The placeholder text when the value is empty.
    */
-  placeholder?: string
+  placeholder?: string | undefined
   /**
    * The `ref` of element to receive focus when the modal closes.
    */
-  finalFocusRef?: RefObject<FocusableElement>
+  finalFocusRef?: RefObject<FocusableElement> | undefined
 }
 
 function contains(parent: HTMLElement | null, child: HTMLElement) {

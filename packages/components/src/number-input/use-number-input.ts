@@ -45,7 +45,7 @@ export interface UseNumberInputProps extends UseCounterProps {
    *
    * @default true
    */
-  focusInputOnChange?: boolean
+  focusInputOnChange?: boolean | undefined
   /**
    * This controls the value update when you blur out of the input.
    * - If `true` and the value is greater than `max`, the value will be reset to `max`
@@ -53,7 +53,7 @@ export interface UseNumberInputProps extends UseCounterProps {
    *
    * @default true
    */
-  clampValueOnBlur?: boolean
+  clampValueOnBlur?: boolean | undefined
   /**
    * This is used to format the value so that screen readers
    * can speak out a more human-friendly value.
@@ -64,30 +64,30 @@ export interface UseNumberInputProps extends UseCounterProps {
   /**
    * If `true`, the input will be in readonly mode
    */
-  isReadOnly?: boolean
+  isReadOnly?: boolean | undefined
   /**
    * If `true`, the input will have `aria-invalid` set to `true`
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   /**
    * Whether the input should be disabled
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * Whether the input is required
    */
-  isRequired?: boolean
+  isRequired?: boolean | undefined
   /**
    * The `id` to use for the number input field.
    */
-  id?: string
+  id?: string | undefined
   /**
    * The pattern used to check the <input> element's value against on form submission.
    *
    * @default
    * "[0-9]*(.[0-9]+)?"
    */
-  pattern?: React.InputHTMLAttributes<any>["pattern"]
+  pattern?: React.InputHTMLAttributes<any>["pattern"] | undefined
   /**
    * Hints at the type of data that might be entered by the user. It also determines
    * the type of keyboard shown to the user on mobile devices
@@ -95,38 +95,38 @@ export interface UseNumberInputProps extends UseCounterProps {
    * @default
    * "decimal"
    */
-  inputMode?: React.InputHTMLAttributes<any>["inputMode"]
+  inputMode?: React.InputHTMLAttributes<any>["inputMode"] | undefined
   /**
    * If `true`, the input's value will change based on mouse wheel
    */
-  allowMouseWheel?: boolean
+  allowMouseWheel?: boolean | undefined
   /**
    * The HTML `name` attribute used for forms
    */
-  name?: string
-  "aria-describedby"?: string
-  "aria-label"?: string
-  "aria-labelledby"?: string
-  onFocus?: React.FocusEventHandler<HTMLInputElement>
-  onBlur?: React.FocusEventHandler<HTMLInputElement>
+  name?: string | undefined
+  "aria-describedby"?: string | undefined
+  "aria-label"?: string | undefined
+  "aria-labelledby"?: string | undefined
+  onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined
   onInvalid?: (
     message: ValidityState,
     value: string,
     valueAsNumber: number,
-  ) => void
+  ) => void | undefined
   /**
    * Whether the pressed key should be allowed in the input.
    * The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/
    */
-  isValidCharacter?: (value: string) => boolean
+  isValidCharacter?: (value: string) => boolean | undefined
   /**
    * If using a custom display format, this converts the custom format to a format `parseFloat` understands.
    */
-  parse?: (value: string) => string
+  parse?: (value: string) => string | undefined
   /**
    * If using a custom display format, this converts the default format to the custom format.
    */
-  format?: (value: string | number) => string | number
+  format?: (value: string | number) => string | number | undefined
 }
 
 type ValidityState = "rangeUnderflow" | "rangeOverflow"

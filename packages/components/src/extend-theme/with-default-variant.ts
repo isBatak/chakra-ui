@@ -7,7 +7,7 @@ export function withDefaultVariant({
   components,
 }: {
   variant: ThemingProps["variant"]
-  components?: string[] | Record<string, any>
+  components?: string[] | Record<string, any> | undefined
 }): ThemeExtension {
   return (theme) => {
     let names = Object.keys(theme.components || {})

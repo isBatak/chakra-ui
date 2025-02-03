@@ -28,7 +28,7 @@ export function StatUpArrow(props: IconProps) {
 StatUpArrow.displayName = "StatUpArrow"
 
 export interface StatArrowProps extends IconProps {
-  type?: "increase" | "decrease"
+  type?: "increase" | "decrease" | undefined
 }
 
 export function StatArrow(props: StatArrowProps) {

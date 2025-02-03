@@ -9,7 +9,7 @@ interface AspectRatioOptions {
    *
    * `21/9`, `16/9`, `9/16`, `4/3`, `1.85/1`
    */
-  ratio?: ResponsiveValue<number>
+  ratio?: ResponsiveValue<number> | undefined
 }
 
 export interface AspectRatioProps

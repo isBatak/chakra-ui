@@ -26,7 +26,7 @@ export interface AccordionProps
    *
    * @default false
    */
-  reduceMotion?: boolean
+  reduceMotion?: boolean | undefined
 }
 
 /**

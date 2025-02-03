@@ -26,11 +26,11 @@ interface AvatarGroupOptions {
    * @default "-0.75rem"
    * @type SystemProps["margin"]
    */
-  spacing?: SystemProps["margin"]
+  spacing?: SystemProps["margin"] | undefined
   /**
    * The maximum number of visible avatars
    */
-  max?: number
+  max?: number | undefined
 }
 
 export interface AvatarGroupProps

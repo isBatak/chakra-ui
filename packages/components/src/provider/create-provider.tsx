@@ -11,7 +11,7 @@ export interface ChakraProviderProps extends ProviderProps {
   /**
    * Provide defaults for `useToast()` usages for `ChakraProvider`s children
    */
-  toastOptions?: ToastProviderProps
+  toastOptions?: ToastProviderProps | undefined
 }
 
 export type ChakraProviderComponent = React.FC<ChakraProviderProps>

@@ -12,7 +12,7 @@ export interface UseModalProps {
   /**
    * The `id` of the modal
    */
-  id?: string
+  id?: string | undefined
   /**
    * Callback invoked to close the modal.
    */
@@ -21,12 +21,12 @@ export interface UseModalProps {
    * If `true`, the modal will close when the overlay is clicked
    * @default true
    */
-  closeOnOverlayClick?: boolean
+  closeOnOverlayClick?: boolean | undefined
   /**
    * If `true`, the modal will close when the `Esc` key is pressed
    * @default true
    */
-  closeOnEsc?: boolean
+  closeOnEsc?: boolean | undefined
   /**
    * Callback fired when the overlay is clicked.
    */
@@ -43,7 +43,7 @@ export interface UseModalProps {
    *
    * @default true
    */
-  useInert?: boolean
+  useInert?: boolean | undefined
 }
 
 /**

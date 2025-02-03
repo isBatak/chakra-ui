@@ -32,11 +32,11 @@ interface TabsOptions {
    * If `true`, tabs will stretch to width of the tablist.
    * @default false
    */
-  isFitted?: boolean
+  isFitted?: boolean | undefined
   /**
    * The alignment of the tabs
    */
-  align?: "start" | "end" | "center"
+  align?: "start" | "end" | "center" | undefined
 }
 
 export interface TabsProps

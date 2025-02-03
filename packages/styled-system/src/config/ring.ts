@@ -17,21 +17,21 @@ export interface RingProps {
   /**
    * Creates outline rings with CSS `box-shadow` property
    */
-  ring?: Token<Length>
+  ring?: Token<Length> | undefined
   /**
    * The color of the outline ring
    */
-  ringColor?: Token<CSS.Property.Color, "colors">
+  ringColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * The thickness of the offset shadow when using outline rings
    */
-  ringOffset?: Token<Length>
+  ringOffset?: Token<Length> | undefined
   /**
    * The color of the offset shadow when adding outline rings
    */
-  ringOffsetColor?: Token<CSS.Property.Color, "colors">
+  ringOffsetColor?: Token<CSS.Property.Color, "colors"> | undefined
   /**
    * If the outline ring should an `inset`
    */
-  ringInset?: Token<"inset" | "none">
+  ringInset?: Token<"inset" | "none"> | undefined
 }

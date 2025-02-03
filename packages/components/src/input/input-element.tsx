@@ -4,7 +4,7 @@ import { cx } from "@chakra-ui/utils"
 import { useInputGroupStyles } from "./input-group"
 
 export interface InputElementProps extends HTMLChakraProps<"div"> {
-  placement?: "left" | "right"
+  placement?: "left" | "right" | undefined
 }
 
 const StyledInputElement = chakra("div", {

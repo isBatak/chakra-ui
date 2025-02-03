@@ -6,44 +6,44 @@ export interface FlexOptions {
    * Shorthand for `alignItems` style prop
    * @type SystemProps["alignItems"]
    */
-  align?: SystemProps["alignItems"]
+  align?: SystemProps["alignItems"] | undefined
 
   /**
    * Shorthand for `justifyContent` style prop
    * @type SystemProps["justifyContent"]
    */
-  justify?: SystemProps["justifyContent"]
+  justify?: SystemProps["justifyContent"] | undefined
 
   /**
    * Shorthand for `flexWrap` style prop
    * @type SystemProps["flexWrap"]
    */
-  wrap?: SystemProps["flexWrap"]
+  wrap?: SystemProps["flexWrap"] | undefined
 
   /**
    * Shorthand for `flexDirection` style prop
    * @type SystemProps["flexDirection"]
    * @default "row"
    */
-  direction?: SystemProps["flexDirection"]
+  direction?: SystemProps["flexDirection"] | undefined
 
   /**
    * Shorthand for `flexBasis` style prop
    * @type SystemProps["flexBasis"]
    */
-  basis?: SystemProps["flexBasis"]
+  basis?: SystemProps["flexBasis"] | undefined
 
   /**
    * Shorthand for `flexGrow` style prop
    * @type SystemProps["flexGrow"]
    */
-  grow?: SystemProps["flexGrow"]
+  grow?: SystemProps["flexGrow"] | undefined
 
   /**
    * Shorthand for `flexShrink` style prop
    * @type SystemProps["flexShrink"]
    */
-  shrink?: SystemProps["flexShrink"]
+  shrink?: SystemProps["flexShrink"] | undefined
 }
 
 export interface FlexProps extends HTMLChakraProps<"div">, FlexOptions {}

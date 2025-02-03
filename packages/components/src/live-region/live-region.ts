@@ -6,7 +6,7 @@ export interface LiveRegionOptions {
   /**
    * A unique id for the created live region element
    */
-  id?: string
+  id?: string | undefined
   /**
    * Used to mark a part of the page as "live" so that updates will
    * be communicated to users by screen readers.
@@ -19,28 +19,28 @@ export interface LiveRegionOptions {
    *
    * @default "polite".
    */
-  "aria-live"?: "polite" | "assertive"
+  "aria-live"?: "polite" | "assertive" | undefined
   /**
    * The desired value of the role attribute
    * @default "status"
    */
-  role?: "status" | "alert" | "log"
+  role?: "status" | "alert" | "log" | undefined
   /**
    * Indicates what types of changes should be presented to the user.
    * @default "all"
    */
-  "aria-relevant"?: React.AriaAttributes["aria-relevant"]
+  "aria-relevant"?: React.AriaAttributes["aria-relevant"] | undefined
   /**
    * Indicates whether the entire region should be
    * considered as a whole when communicating updates
    *
    * @default true
    */
-  "aria-atomic"?: React.AriaAttributes["aria-atomic"]
+  "aria-atomic"?: React.AriaAttributes["aria-atomic"] | undefined
   /**
    * The node to append the live region node to
    */
-  parentNode?: HTMLElement
+  parentNode?: HTMLElement | undefined
 }
 
 export class LiveRegion {

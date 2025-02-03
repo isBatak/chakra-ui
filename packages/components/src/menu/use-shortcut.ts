@@ -10,8 +10,8 @@ function isPrintableCharacter(event: React.KeyboardEvent) {
 }
 
 export interface UseShortcutProps {
-  timeout?: number
-  preventDefault?: (event: React.KeyboardEvent) => boolean
+  timeout?: number | undefined
+  preventDefault?: (event: React.KeyboardEvent) => boolean | undefined
 }
 
 /**

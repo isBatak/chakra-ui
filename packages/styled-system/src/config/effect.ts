@@ -22,29 +22,29 @@ export interface EffectProps {
   /**
    * The `box-shadow` property
    */
-  boxShadow?: Token<CSS.Property.BoxShadow | number, "shadows">
+  boxShadow?: Token<CSS.Property.BoxShadow | number, "shadows"> | undefined
   /**
    * The `box-shadow` property
    */
-  shadow?: Token<CSS.Property.BoxShadow | number, "shadows">
+  shadow?: Token<CSS.Property.BoxShadow | number, "shadows"> | undefined
   /**
    * The `mix-blend-mode` property
    */
-  mixBlendMode?: Token<CSS.Property.MixBlendMode>
+  mixBlendMode?: Token<CSS.Property.MixBlendMode> | undefined
   /**
    * The `blend-mode` property
    */
-  blendMode?: Token<CSS.Property.MixBlendMode>
+  blendMode?: Token<CSS.Property.MixBlendMode> | undefined
   /**
    * The CSS `background-blend-mode` property
    */
-  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode> | undefined
   /**
    * The CSS `background-blend-mode` property
    */
-  bgBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  bgBlendMode?: Token<CSS.Property.BackgroundBlendMode> | undefined
   /**
    * The CSS `opacity` property
    */
-  opacity?: Token<CSS.Property.Opacity>
+  opacity?: Token<CSS.Property.Opacity> | undefined
 }

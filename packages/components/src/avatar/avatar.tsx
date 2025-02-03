@@ -33,15 +33,15 @@ export interface AvatarProps
   extends Omit<HTMLChakraProps<"span">, "onError">,
     AvatarOptions,
     ThemingProps<"Avatar"> {
-  crossOrigin?: HTMLChakraProps<"img">["crossOrigin"]
-  iconLabel?: string
+  crossOrigin?: HTMLChakraProps<"img">["crossOrigin"] | undefined
+  iconLabel?: string | undefined
   /**
    * If `true`, opt out of the avatar's `fallback` logic and
    * renders the `img` at all times.
    *
    * @default false
    */
-  ignoreFallback?: boolean
+  ignoreFallback?: boolean | undefined
 }
 
 /**

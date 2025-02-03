@@ -39,61 +39,71 @@ export interface PositionProps {
   /**
    * The CSS `z-index` property
    */
-  zIndex?: Token<CSS.Property.ZIndex, "zIndices">
+  zIndex?: Token<CSS.Property.ZIndex, "zIndices"> | undefined
   /**
    * The CSS `top` property
    */
-  top?: Token<CSS.Property.Top | number, "sizes">
-  insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, "sizes">
+  top?: Token<CSS.Property.Top | number, "sizes"> | undefined
+  insetBlockStart?:
+    | Token<CSS.Property.InsetBlockStart | number, "sizes">
+    | undefined
   /**
    * The CSS `right` property
    */
-  right?: Token<CSS.Property.Right | number, "sizes">
+  right?: Token<CSS.Property.Right | number, "sizes"> | undefined
   /**
    * When the direction is `ltr`, `insetInlineEnd` is equivalent to `right`.
    * When the direction is `rtl`, `insetInlineEnd` is equivalent to `left`.
    */
-  insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, "sizes">
+  insetInlineEnd?:
+    | Token<CSS.Property.InsetInlineEnd | number, "sizes">
+    | undefined
   /**
    * When the direction is `ltr`, `insetEnd` is equivalent to `right`.
    * When the direction is `rtl`, `insetEnd` is equivalent to `left`.
    */
-  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "sizes">
+  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "sizes"> | undefined
   /**
    * The CSS `bottom` property
    */
-  bottom?: Token<CSS.Property.Bottom | number, "sizes">
-  insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, "sizes">
+  bottom?: Token<CSS.Property.Bottom | number, "sizes"> | undefined
+  insetBlockEnd?:
+    | Token<CSS.Property.InsetBlockEnd | number, "sizes">
+    | undefined
   /**
    * The CSS `left` property
    */
-  left?: Token<CSS.Property.Left | number, "sizes">
-  insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, "sizes">
+  left?: Token<CSS.Property.Left | number, "sizes"> | undefined
+  insetInlineStart?:
+    | Token<CSS.Property.InsetInlineStart | number, "sizes">
+    | undefined
   /**
    * When the direction is `start`, `end` is equivalent to `left`.
    * When the direction is `start`, `end` is equivalent to `right`.
    */
-  insetStart?: Token<CSS.Property.InsetInlineStart | number, "sizes">
+  insetStart?:
+    | Token<CSS.Property.InsetInlineStart | number, "sizes">
+    | undefined
   /**
    * The CSS `left`, `right`, `top`, `bottom` property
    */
-  inset?: Token<CSS.Property.Inset | number, "sizes">
+  inset?: Token<CSS.Property.Inset | number, "sizes"> | undefined
   /**
    * The CSS `left`, and `right` property
    */
-  insetX?: Token<CSS.Property.Inset | number, "sizes">
+  insetX?: Token<CSS.Property.Inset | number, "sizes"> | undefined
   /**
    * The CSS `top`, and `bottom` property
    */
-  insetY?: Token<CSS.Property.Inset | number, "sizes">
+  insetY?: Token<CSS.Property.Inset | number, "sizes"> | undefined
   /**
    * The CSS `position` property
    */
-  pos?: Token<CSS.Property.Position>
+  pos?: Token<CSS.Property.Position> | undefined
   /**
    * The CSS `position` property
    */
-  position?: Token<CSS.Property.Position>
-  insetInline?: Token<CSS.Property.InsetInline>
-  insetBlock?: Token<CSS.Property.InsetBlock>
+  position?: Token<CSS.Property.Position> | undefined
+  insetInline?: Token<CSS.Property.InsetInline> | undefined
+  insetBlock?: Token<CSS.Property.InsetBlock> | undefined
 }

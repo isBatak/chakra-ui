@@ -24,7 +24,7 @@ export function orient(options: {
 export function getStyles(options: {
   orientation: Orientation
   thumbPercents: number[]
-  isReversed?: boolean
+  isReversed?: boolean | undefined
 }) {
   const { orientation, thumbPercents, isReversed } = options
 
@@ -100,9 +100,9 @@ export function getStyles(options: {
 }
 
 export function getIsReversed(options: {
-  isReversed?: boolean
+  isReversed?: boolean | undefined
   direction: "ltr" | "rtl"
-  orientation?: "horizontal" | "vertical"
+  orientation?: "horizontal" | "vertical" | undefined
 }) {
   const { isReversed, direction, orientation } = options
 

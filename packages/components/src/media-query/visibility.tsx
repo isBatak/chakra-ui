@@ -1,9 +1,9 @@
 import { useMediaQuery } from "./use-media-query"
 
 interface VisibilityProps {
-  ssr?: boolean
+  ssr?: boolean | undefined
   breakpoint: string
-  hide?: boolean
+  hide?: boolean | undefined
   children: React.ReactNode
 }
 

@@ -13,40 +13,40 @@ interface StackOptions {
    * Shorthand for `alignItems` style prop
    * @type SystemProps["alignItems"]
    */
-  align?: SystemProps["alignItems"]
+  align?: SystemProps["alignItems"] | undefined
   /**
    * Shorthand for `justifyContent` style prop
    * @type SystemProps["justifyContent"]
    */
-  justify?: SystemProps["justifyContent"]
+  justify?: SystemProps["justifyContent"] | undefined
   /**
    * Shorthand for `flexWrap` style prop
    * @type SystemProps["flexWrap"]
    */
-  wrap?: SystemProps["flexWrap"]
+  wrap?: SystemProps["flexWrap"] | undefined
   /**
    * The space between each stack item
    * @type SystemProps["margin"]
    * @default "0.5rem"
    */
-  spacing?: SystemProps["margin"]
+  spacing?: SystemProps["margin"] | undefined
   /**
    * The direction to stack the items.
    * @default "column"
    */
-  direction?: StackDirection
+  direction?: StackDirection | undefined
   /**
    * If `true`, each stack item will show a divider
    * @type React.ReactElement
    */
-  divider?: React.ReactElement
+  divider?: React.ReactElement | undefined
   /**
    * If `true`, the children will be wrapped in a `Box` with
    * `display: inline-block`, and the `Box` will take the spacing props
    *
    * @default false
    */
-  shouldWrapChildren?: boolean
+  shouldWrapChildren?: boolean | undefined
   /**
    * If `true` the items will be stacked horizontally.
    *
@@ -54,7 +54,7 @@ interface StackOptions {
    *
    * @deprecated - Use `direction="row"` or `HStack` instead
    */
-  isInline?: boolean
+  isInline?: boolean | undefined
 }
 
 export interface StackProps extends HTMLChakraProps<"div">, StackOptions {}

@@ -4,11 +4,11 @@ export interface NativeImageOptions {
   /**
    * The native HTML `width` attribute to the passed to the `img`
    */
-  htmlWidth?: string | number
+  htmlWidth?: string | number | undefined
   /**
    * The native HTML `height` attribute to the passed to the `img`
    */
-  htmlHeight?: string | number
+  htmlHeight?: string | number | undefined
 }
 
 interface NativeImageProps extends PropsOf<"img">, NativeImageOptions {}

@@ -10,30 +10,30 @@ export interface UseClickableProps extends React.HTMLAttributes<HTMLElement> {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true` and isDisabled, the element will
    * have only `aria-disabled` set to `true`
    *
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * Whether or not trigger click on pressing `Enter`.
    *
    * @default true
    */
-  clickOnEnter?: boolean
+  clickOnEnter?: boolean | undefined
   /**
    * Whether or not trigger click on pressing `Space`.
    *
    * @default true
    */
-  clickOnSpace?: boolean
+  clickOnSpace?: boolean | undefined
   /**
    * The ref for the element
    */
-  ref?: React.Ref<HTMLElement>
+  ref?: React.Ref<HTMLElement> | undefined
 }
 
 function isValidElement(event: KeyboardEvent): boolean {

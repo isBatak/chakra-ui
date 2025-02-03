@@ -22,21 +22,21 @@ export interface UseAccordionProps {
    *
    * @default false
    */
-  allowMultiple?: boolean
+  allowMultiple?: boolean | undefined
   /**
    * If `true`, any expanded accordion item can be collapsed again.
    *
    * @default false
    */
-  allowToggle?: boolean
+  allowToggle?: boolean | undefined
   /**
    * The index(es) of the expanded accordion item
    */
-  index?: ExpandedIndex
+  index?: ExpandedIndex | undefined
   /**
    * The initial index(es) of the expanded accordion item
    */
-  defaultIndex?: ExpandedIndex
+  defaultIndex?: ExpandedIndex | undefined
   /**
    * The callback invoked when accordion items are expanded or collapsed.
    */
@@ -174,17 +174,17 @@ export interface UseAccordionItemProps {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the accordion item will be focusable.
    *
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * A unique id for the accordion item.
    */
-  id?: string
+  id?: string | undefined
 }
 
 /**
@@ -375,7 +375,7 @@ function focusableNotDisabledWarning(props: UseAccordionItemProps) {
 
 function warnIfOpenAndDisabled(props: {
   isOpen: boolean
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
 }) {
   warn({
     condition: props.isOpen && !!props.isDisabled,

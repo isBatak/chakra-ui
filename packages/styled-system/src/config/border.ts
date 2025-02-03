@@ -144,240 +144,307 @@ export interface BorderProps {
   /**
    * The CSS `border` property
    */
-  border?: Token<CSS.Property.Border | number, "borders">
+  border?: Token<CSS.Property.Border | number, "borders"> | undefined
   /**
    * The CSS `border-width` property
    */
-  borderWidth?: Token<CSS.Property.BorderWidth | number>
+  borderWidth?: Token<CSS.Property.BorderWidth | number> | undefined
   /**
    * The CSS `border-style` property
    */
-  borderStyle?: Token<CSS.Property.BorderStyle>
+  borderStyle?: Token<CSS.Property.BorderStyle> | undefined
   /**
    * The CSS `border-color` property
    */
-  borderColor?: Token<CSS.Property.BorderTopColor, "colors">
+  borderColor?: Token<CSS.Property.BorderTopColor, "colors"> | undefined
   /**
    * The CSS `border-radius` property
    */
-  borderRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * The CSS `border-radius` property
    */
-  rounded?: Token<CSS.Property.BorderRadius | number, "radii">
+  rounded?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * The CSS `border-top` property
    */
-  borderTop?: Token<CSS.Property.BorderTop | number, "borders">
-  borderBlockStart?: Token<CSS.Property.BorderBlockStart | number>
+  borderTop?: Token<CSS.Property.BorderTop | number, "borders"> | undefined
+  borderBlockStart?: Token<CSS.Property.BorderBlockStart | number> | undefined
   /**
    * The CSS `border-top-width` property
    */
-  borderTopWidth?: Token<CSS.Property.BorderWidth | number>
-  borderBlockStartWidth?: Token<CSS.Property.BorderBlockStartWidth | number>
+  borderTopWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderBlockStartWidth?:
+    | Token<CSS.Property.BorderBlockStartWidth | number>
+    | undefined
   /**
    * The CSS `border-bottom-width` property
    */
-  borderBottomWidth?: Token<CSS.Property.BorderWidth | number>
-  borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
+  borderBottomWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderBlockEndWidth?:
+    | Token<CSS.Property.BorderBlockEndWidth | number>
+    | undefined
   /**
    * The CSS `border-left-width` property
    */
-  borderLeftWidth?: Token<CSS.Property.BorderWidth | number>
-  borderStartWidth?: Token<CSS.Property.BorderWidth | number>
-  borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
+  borderLeftWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderStartWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderInlineStartWidth?:
+    | Token<CSS.Property.BorderInlineStartWidth | number>
+    | undefined
   /**
    * The CSS `border-right-width` property
    */
-  borderRightWidth?: Token<CSS.Property.BorderWidth | number>
-  borderEndWidth?: Token<CSS.Property.BorderWidth | number>
-  borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
+  borderRightWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderEndWidth?: Token<CSS.Property.BorderWidth | number> | undefined
+  borderInlineEndWidth?:
+    | Token<CSS.Property.BorderInlineEndWidth | number>
+    | undefined
   /**
    * The CSS `border-top-style` property
    */
-  borderTopStyle?: Token<CSS.Property.BorderTopStyle>
-  borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle>
+  borderTopStyle?: Token<CSS.Property.BorderTopStyle> | undefined
+  borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle> | undefined
   /**
    * The CSS `border-bottom-style` property
    */
-  borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
-  borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle>
+  borderBottomStyle?: Token<CSS.Property.BorderBottomStyle> | undefined
+  borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle> | undefined
   /**
    * The CSS `border-left-style` property
    */
-  borderLeftStyle?: Token<CSS.Property.BorderLeftStyle>
-  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
-  borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
+  borderLeftStyle?: Token<CSS.Property.BorderLeftStyle> | undefined
+  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle> | undefined
+  borderInlineStartStyle?:
+    | Token<CSS.Property.BorderInlineStartStyle>
+    | undefined
   /**
    * The CSS `border-right-styles` property
    */
-  borderRightStyle?: Token<CSS.Property.BorderRightStyle>
-  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
-  borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
+  borderRightStyle?: Token<CSS.Property.BorderRightStyle> | undefined
+  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle> | undefined
+  borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle> | undefined
   /**
    * The CSS `border-top-color` property
    */
-  borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
-  borderBlockStartColor?: Token<CSS.Property.BorderBlockStartColor, "colors">
+  borderTopColor?: Token<CSS.Property.BorderTopColor, "colors"> | undefined
+  borderBlockStartColor?:
+    | Token<CSS.Property.BorderBlockStartColor, "colors">
+    | undefined
   /**
    * The CSS `border-bottom-color` property
    */
-  borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
-  borderBlockEndColor?: Token<CSS.Property.BorderBlockEndColor, "colors">
+  borderBottomColor?:
+    | Token<CSS.Property.BorderBottomColor, "colors">
+    | undefined
+  borderBlockEndColor?:
+    | Token<CSS.Property.BorderBlockEndColor, "colors">
+    | undefined
   /**
    * The CSS `border-left-color` property
    */
-  borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors">
-  borderStartColor?: Token<CSS.Property.BorderInlineStartColor>
-  borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors"> | undefined
+  borderStartColor?: Token<CSS.Property.BorderInlineStartColor> | undefined
+  borderInlineStartColor?:
+    | Token<CSS.Property.BorderInlineStartColor, "colors">
+    | undefined
   /**
    * The CSS `border-right-color` property
    */
-  borderRightColor?: Token<CSS.Property.BorderRightColor, "colors">
-  borderEndColor?: Token<CSS.Property.BorderInlineEndColor>
-  borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderRightColor?: Token<CSS.Property.BorderRightColor, "colors"> | undefined
+  borderEndColor?: Token<CSS.Property.BorderInlineEndColor> | undefined
+  borderInlineEndColor?:
+    | Token<CSS.Property.BorderInlineEndColor, "colors">
+    | undefined
   /**
    * The CSS `border-right` property
    */
-  borderRight?: Token<CSS.Property.BorderRight | number, "borders">
+  borderRight?: Token<CSS.Property.BorderRight | number, "borders"> | undefined
 
-  borderEnd?: Token<CSS.Property.BorderInlineStart | number>
-  borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number>
+  borderEnd?: Token<CSS.Property.BorderInlineStart | number> | undefined
+  borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number> | undefined
   /**
    * The CSS `border-bottom` property
    */
-  borderBottom?: Token<CSS.Property.BorderBottom | number, "borders">
+  borderBottom?:
+    | Token<CSS.Property.BorderBottom | number, "borders">
+    | undefined
 
-  borderBlockEnd?: Token<CSS.Property.BorderBlockEnd | number>
+  borderBlockEnd?: Token<CSS.Property.BorderBlockEnd | number> | undefined
   /**
    * The CSS `border-left` property
    */
-  borderLeft?: Token<CSS.Property.BorderLeft | number, "borders">
-  borderStart?: Token<CSS.Property.BorderInlineStart | number>
-  borderInlineStart?: Token<CSS.Property.BorderInlineStart | number>
+  borderLeft?: Token<CSS.Property.BorderLeft | number, "borders"> | undefined
+  borderStart?: Token<CSS.Property.BorderInlineStart | number> | undefined
+  borderInlineStart?: Token<CSS.Property.BorderInlineStart | number> | undefined
   /**
    * The CSS `border-top-radius` property
    */
-  borderTopRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderTopRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-top-radius` property
    */
-  roundedTop?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedTop?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * The CSS `border-right-radius` property
    */
-  borderRightRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderRightRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-right-radius` property
    */
-  roundedRight?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedRight?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * When direction is `ltr`, `roundedEnd` is equivalent to `borderRightRadius`.
    * When direction is `rtl`, `roundedEnd` is equivalent to `borderLeftRadius`.
    */
-  roundedEnd?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedEnd?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * When direction is `ltr`, `borderInlineEndRadius` is equivalent to `borderRightRadius`.
    * When direction is `rtl`, `borderInlineEndRadius` is equivalent to `borderLeftRadius`.
    */
-  borderInlineEndRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderInlineEndRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * When direction is `ltr`, `borderEndRadius` is equivalent to `borderRightRadius`.
    * When direction is `rtl`, `borderEndRadius` is equivalent to `borderLeftRadius`.
    */
-  borderEndRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderEndRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-bottom-radius` property
    */
-  borderBottomRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderBottomRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-bottom-radius` property
    */
-  roundedBottom?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedBottom?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * The CSS `border-left-radius` property
    */
-  borderLeftRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderLeftRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-left-radius` property
    */
-  roundedLeft?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedLeft?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * When direction is `ltr`, `roundedEnd` is equivalent to `borderRightRadius`.
    * When direction is `rtl`, `roundedEnd` is equivalent to `borderLeftRadius`.
    */
-  roundedStart?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedStart?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * When direction is `ltr`, `borderInlineStartRadius` is equivalent to `borderLeftRadius`.
    * When direction is `rtl`, `borderInlineStartRadius` is equivalent to `borderRightRadius`.
    */
-  borderInlineStartRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderInlineStartRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * When direction is `ltr`, `borderStartRadius` is equivalent to `borderLeftRadius`.
    * When direction is `rtl`, `borderStartRadius` is equivalent to `borderRightRadius`.
    */
-  borderStartRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderStartRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-top-left-radius` property
    */
-  borderTopLeftRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderTopStartRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderStartStartRadius?: Token<
-    CSS.Property.BorderStartStartRadius | number,
-    "radii"
-  >
+  borderTopLeftRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderTopStartRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderStartStartRadius?:
+    | Token<CSS.Property.BorderStartStartRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-top-left-radius` property
    */
-  roundedTopLeft?: Token<CSS.Property.BorderRadius | number, "radii">
-  roundedTopStart?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedTopLeft?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  roundedTopStart?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-top-right-radius` property
    */
-  borderTopRightRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderTopEndRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderStartEndRadius?: Token<
-    CSS.Property.BorderStartEndRadius | number,
-    "radii"
-  >
+  borderTopRightRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderTopEndRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderStartEndRadius?:
+    | Token<CSS.Property.BorderStartEndRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-top-right-radius` property
    */
-  roundedTopRight?: Token<CSS.Property.BorderRadius | number, "radii">
-  roundedTopEnd?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedTopRight?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  roundedTopEnd?: Token<CSS.Property.BorderRadius | number, "radii"> | undefined
   /**
    * The CSS `border-bottom-left-radius` property
    */
-  borderBottomLeftRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderBottomStartRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderEndStartRadius?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  borderBottomLeftRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderBottomStartRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderEndStartRadius?:
+    | Token<CSS.Property.BorderEndStartRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-bottom-left-radius` property
    */
-  roundedBottomLeft?: Token<CSS.Property.BorderRadius | number, "radii">
-  roundedBottomStart?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedBottomLeft?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  roundedBottomStart?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-bottom-right-radius` property
    */
-  borderBottomRightRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderBottomEndRadius?: Token<CSS.Property.BorderRadius | number, "radii">
-  borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  borderBottomRightRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderBottomEndRadius?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  borderEndEndRadius?:
+    | Token<CSS.Property.BorderEndEndRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-bottom-right-radius` property
    */
-  roundedBottomRight?: Token<CSS.Property.BorderRadius | number, "radii">
-  roundedBottomEnd?: Token<CSS.Property.BorderRadius | number, "radii">
+  roundedBottomRight?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
+  roundedBottomEnd?:
+    | Token<CSS.Property.BorderRadius | number, "radii">
+    | undefined
   /**
    * The CSS `border-right` and `border-left` property
    */
-  borderX?: Token<CSS.Property.Border | number, "borders">
-  borderInline?: Token<CSS.Property.BorderInline | number>
+  borderX?: Token<CSS.Property.Border | number, "borders"> | undefined
+  borderInline?: Token<CSS.Property.BorderInline | number> | undefined
   /**
    * The CSS `border-top` and `border-bottom` property
    */
-  borderY?: Token<CSS.Property.Border | number, "borders">
-  borderBlock?: Token<CSS.Property.BorderBlock | number>
+  borderY?: Token<CSS.Property.Border | number, "borders"> | undefined
+  borderBlock?: Token<CSS.Property.BorderBlock | number> | undefined
 }

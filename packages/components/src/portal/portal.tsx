@@ -35,7 +35,9 @@ const Container = (props: React.PropsWithChildren<{ zIndex: number }>) => (
  * Portal that uses `document.body` as container
  */
 const DefaultPortal = (
-  props: React.PropsWithChildren<{ appendToParentPortal?: boolean }>,
+  props: React.PropsWithChildren<{
+    appendToParentPortal?: boolean | undefined
+  }>,
 ) => {
   const { appendToParentPortal, children } = props
 
@@ -97,7 +99,7 @@ interface ContainerPortalProps extends React.PropsWithChildren<{}> {
   /**
    * @default false
    */
-  appendToParentPortal?: boolean
+  appendToParentPortal?: boolean | undefined
 }
 
 /**
@@ -142,7 +144,7 @@ export interface PortalProps {
   /**
    * The `ref` to the component where the portal will be attached to.
    */
-  containerRef?: React.RefObject<HTMLElement | null>
+  containerRef?: React.RefObject<HTMLElement | null> | undefined
   /**
    * The content or node you'll like to portal
    */
@@ -157,7 +159,7 @@ export interface PortalProps {
    *
    * @default true
    */
-  appendToParentPortal?: boolean
+  appendToParentPortal?: boolean | undefined
 }
 
 /**

@@ -9,24 +9,24 @@ export interface ProviderProps extends Pick<ThemeProviderProps, "cssVarsRoot"> {
   /**
    * a theme. if omitted, uses the default theme provided by chakra
    */
-  theme?: Dict
+  theme?: Dict | undefined
   /**
    * Common z-index to use for `Portal`
    *
    * @default undefined
    */
-  portalZIndex?: number
+  portalZIndex?: number | undefined
   /**
    * If `true`, `CSSReset` component will be mounted to help
    * you reset browser styles
    *
    * @default true
    */
-  resetCSS?: boolean
+  resetCSS?: boolean | undefined
   /**
    * The selector to scope the css reset styles to.
    */
-  resetScope?: string
+  resetScope?: string | undefined
   /**
    * manager to persist a users color mode preference in
    *
@@ -35,11 +35,11 @@ export interface ProviderProps extends Pick<ThemeProviderProps, "cssVarsRoot"> {
    *
    * @default localStorageManager
    */
-  colorModeManager?: ColorModeProviderProps["colorModeManager"]
+  colorModeManager?: ColorModeProviderProps["colorModeManager"] | undefined
   /**
    * Your application content
    */
-  children?: React.ReactNode
+  children?: React.ReactNode | undefined
   /**
    * The environment (`window` and `document`) to be used by
    * all components and hooks.
@@ -47,16 +47,16 @@ export interface ProviderProps extends Pick<ThemeProviderProps, "cssVarsRoot"> {
    * By default, we smartly determine the ownerDocument and defaultView
    * based on where `ChakraProvider` is rendered.
    */
-  environment?: EnvironmentProviderProps["environment"]
+  environment?: EnvironmentProviderProps["environment"] | undefined
   /**
    * Disabled the use of automatic window and document detection.
    * This removed the injected `<span/>` element
    */
-  disableEnvironment?: boolean
+  disableEnvironment?: boolean | undefined
   /**
    * If `true`, Chakra will not mount the global styles defined in the theme.
    */
-  disableGlobalStyle?: boolean
+  disableGlobalStyle?: boolean | undefined
 }
 
 /**

@@ -14,6 +14,7 @@ export interface AccordionItemProps
   children?:
     | React.ReactNode
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => React.ReactNode)
+    | undefined
 }
 /**
  * AccordionItem is a single accordion that provides the open-close

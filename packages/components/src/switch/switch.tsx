@@ -23,7 +23,7 @@ export interface SwitchProps
    * @default 0.5rem
    * @type SystemProps["marginLeft"]
    */
-  spacing?: SystemProps["marginLeft"]
+  spacing?: SystemProps["marginLeft"] | undefined
 }
 
 /**

@@ -5,11 +5,11 @@ export interface UseCheckboxGroupProps {
   /**
    * The value of the checkbox group
    */
-  value?: Array<string | number>
+  value?: Array<string | number> | undefined
   /**
    * The initial value of the checkbox group
    */
-  defaultValue?: Array<string | number>
+  defaultValue?: Array<string | number> | undefined
   /**
    * The callback fired when any children Checkbox is checked or unchecked
    */
@@ -19,7 +19,7 @@ export interface UseCheckboxGroupProps {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, input elements will receive
    * `checked` attribute instead of `isChecked`.
@@ -28,7 +28,7 @@ export interface UseCheckboxGroupProps {
    *
    * @default false
    */
-  isNative?: boolean
+  isNative?: boolean | undefined
 }
 
 export type EventOrValue = React.ChangeEvent<HTMLInputElement> | string | number
@@ -40,7 +40,7 @@ export interface UseCheckboxProps {
    *
    * @default false
    */
-  isChecked?: boolean
+  isChecked?: boolean | undefined
   /**
    * If `true`, the checkbox will be indeterminate.
    * This only affects the icon shown inside checkbox
@@ -48,86 +48,86 @@ export interface UseCheckboxProps {
    *
    * @default false
    */
-  isIndeterminate?: boolean
+  isIndeterminate?: boolean | undefined
   /**
    * If `true`, the checkbox will be disabled
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true` and `isDisabled` is passed, the checkbox will
    * remain tabbable but not interactive
    *
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * If `true`, the checkbox will be readonly
    *
    * @default false
    */
-  isReadOnly?: boolean
+  isReadOnly?: boolean | undefined
   /**
    * If `true`, the checkbox is marked as invalid.
    * Changes style of unchecked state.
    *
    * @default false
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   /**
    * If `true`, the checkbox input is marked as required,
    * and `required` attribute will be added
    *
    * @default false
    */
-  isRequired?: boolean
+  isRequired?: boolean | undefined
   /**
    * If `true`, the checkbox will be initially checked.
    *
    * @default false
    */
-  defaultChecked?: boolean
+  defaultChecked?: boolean | undefined
   /**
    * The callback invoked when the checked state of the `Checkbox` changes.
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void | undefined
   /**
    * The callback invoked when the checkbox is blurred (loses focus)
    */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void | undefined
   /**
    * The callback invoked when the checkbox is focused
    */
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void | undefined
   /**
    * The name of the input field in a checkbox
    * (Useful for form submission).
    */
-  name?: string
+  name?: string | undefined
   /**
    * The value to be used in the checkbox input.
    * This is the value that will be returned on form submission.
    */
-  value?: string | number
+  value?: string | number | undefined
   /**
    * id assigned to input
    */
-  id?: string
+  id?: string | undefined
   /**
    * Defines the string that labels the checkbox element.
    */
-  "aria-label"?: string
+  "aria-label"?: string | undefined
   /**
    * Refers to the `id` of the element that labels the checkbox element.
    */
-  "aria-labelledby"?: string
+  "aria-labelledby"?: string | undefined
   "aria-invalid"?: true | undefined
-  "aria-describedby"?: string
+  "aria-describedby"?: string | undefined
   /**
    * The tab-index property of the underlying input element.
    */
-  tabIndex?: number
+  tabIndex?: number | undefined
 }
 
 export type CheckboxOptions = {
@@ -136,26 +136,26 @@ export type CheckboxOptions = {
    * @default 0.5rem
    * @type SystemProps["marginLeft"]
    */
-  spacing?: SystemProps["marginLeft"]
+  spacing?: SystemProps["marginLeft"] | undefined
   /**
    * The color of the checkbox icon when checked or indeterminate
    */
-  iconColor?: string
+  iconColor?: string | undefined
   /**
    * The size of the checkbox icon when checked or indeterminate
    */
-  iconSize?: string | number
+  iconSize?: string | number | undefined
   /**
    * The checked icon to use
    *
    * @type React.ReactElement
    * @default CheckboxIcon
    */
-  icon?: React.ReactElement
+  icon?: React.ReactElement | undefined
   /**
    * Additional props to be forwarded to the `input` element
    */
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement> | undefined
 }
 
 export interface CheckboxGroupContext
@@ -163,13 +163,13 @@ export interface CheckboxGroupContext
     Omit<ThemingProps<"Checkbox">, "orientation"> {}
 
 export interface CheckboxState {
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   isFocused: boolean
   isChecked: boolean
   isActive: boolean
   isHovered: boolean
-  isIndeterminate?: boolean
-  isDisabled?: boolean
-  isReadOnly?: boolean
-  isRequired?: boolean
+  isIndeterminate?: boolean | undefined
+  isDisabled?: boolean | undefined
+  isReadOnly?: boolean | undefined
+  isRequired?: boolean | undefined
 }

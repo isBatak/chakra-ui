@@ -3,13 +3,13 @@ import { FormControlOptions, useFormControlContext } from "./form-control"
 
 export interface UseFormControlProps<T extends HTMLElement>
   extends FormControlOptions {
-  id?: string
-  onFocus?: React.FocusEventHandler<T>
-  onBlur?: React.FocusEventHandler<T>
-  disabled?: boolean
-  readOnly?: boolean
-  required?: boolean
-  "aria-describedby"?: string
+  id?: string | undefined
+  onFocus?: React.FocusEventHandler<T> | undefined
+  onBlur?: React.FocusEventHandler<T> | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  required?: boolean | undefined
+  "aria-describedby"?: string | undefined
 }
 
 /**

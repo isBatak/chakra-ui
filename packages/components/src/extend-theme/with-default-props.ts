@@ -12,7 +12,7 @@ export function withDefaultProps({
   components,
 }: {
   defaultProps: ComponentDefaultProps
-  components?: string[] | Record<string, any>
+  components?: string[] | Record<string, any> | undefined
 }) {
   const identity = <T>(t: T) => t
   const fns = [

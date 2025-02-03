@@ -15,24 +15,24 @@ export interface PropConfig {
    *
    * It does not get replicated if value is responsive or styles are nested.
    */
-  static?: Record<string, any>
+  static?: Record<string, any> | undefined
   /**
    * The theme scale this maps to
    */
-  scale?: ThemeScale
+  scale?: ThemeScale | undefined
   /**
    * Css property or Css variable the prop maps to
    */
-  property?: MaybeThemeFunction<MaybeArray<StringUnion<CSSProp>>>
+  property?: MaybeThemeFunction<MaybeArray<StringUnion<CSSProp>>> | undefined
   /**
    * Function to transform the value passed
    */
-  transform?: Transform
+  transform?: Transform | undefined
   /**
    * Useful for `layerStyle`, tex`tStyles and `apply` where their
    * transform function returns theme aware styles
    */
-  processResult?: boolean
+  processResult?: boolean | undefined
 }
 
 export type Config = Record<string, PropConfig | true>
@@ -49,9 +49,9 @@ export function toConfig(scale: ThemeScale, transform?: Transform) {
 }
 
 interface Opts {
-  scale?: ThemeScale
+  scale?: ThemeScale | undefined
   property: { ltr: MaybeArray<CSSProp>; rtl: MaybeArray<CSSProp> }
-  transform?: Transform
+  transform?: Transform | undefined
 }
 
 const getRtl =

@@ -7,7 +7,7 @@ export function withDefaultColorScheme({
   components,
 }: {
   colorScheme: ThemingProps["colorScheme"]
-  components?: string[] | Record<string, any>
+  components?: string[] | Record<string, any> | undefined
 }): ThemeExtension {
   return (theme) => {
     let names = Object.keys(theme.components || {})

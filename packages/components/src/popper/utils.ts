@@ -54,8 +54,8 @@ export function getEventListenerOptions(
   value?: boolean | Partial<typeof defaultEventListeners>,
 ) {
   let eventListeners: {
-    enabled?: boolean
-    options?: typeof defaultEventListeners
+    enabled?: boolean | undefined
+    options?: typeof defaultEventListeners | undefined
   }
   if (typeof value === "object") {
     eventListeners = {

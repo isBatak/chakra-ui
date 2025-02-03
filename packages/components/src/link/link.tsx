@@ -8,7 +8,7 @@ export interface LinkProps extends HTMLChakraProps<"a">, ThemingProps<"Link"> {
    *
    * @default false
    */
-  isExternal?: boolean
+  isExternal?: boolean | undefined
 }
 
 /**

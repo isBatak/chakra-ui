@@ -1,8 +1,8 @@
 export interface ColorModeScriptProps {
-  type?: "localStorage" | "cookie"
-  initialColorMode?: "light" | "dark" | "system"
-  storageKey?: string
-  nonce?: string
+  type?: "localStorage" | "cookie" | undefined
+  initialColorMode?: "light" | "dark" | "system" | undefined
+  storageKey?: string | undefined
+  nonce?: string | undefined
 }
 
 const VALID_VALUES = new Set(["dark", "light", "system"])

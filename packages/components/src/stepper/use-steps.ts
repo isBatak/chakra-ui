@@ -1,8 +1,8 @@
 import { useState } from "react"
 
 export type UseStepsProps = {
-  index?: number
-  count?: number
+  index?: number | undefined
+  count?: number | undefined
 }
 
 export type StepStatus = "complete" | "active" | "incomplete"

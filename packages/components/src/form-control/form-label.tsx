@@ -9,11 +9,11 @@ export interface FormLabelProps
   /**
    * @type React.ReactNode
    */
-  requiredIndicator?: React.ReactNode
+  requiredIndicator?: React.ReactNode | undefined
   /**
    * @type React.ReactNode
    */
-  optionalIndicator?: React.ReactNode
+  optionalIndicator?: React.ReactNode | undefined
 }
 
 /**

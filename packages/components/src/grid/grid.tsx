@@ -6,57 +6,57 @@ export interface GridOptions {
    * Shorthand prop for `gridTemplateColumns`
    * @type SystemProps["gridTemplateColumns"]
    */
-  templateColumns?: SystemProps["gridTemplateColumns"]
+  templateColumns?: SystemProps["gridTemplateColumns"] | undefined
   /**
    * Shorthand prop for `gridGap`
    * @type SystemProps["gridGap"]
    */
-  gap?: SystemProps["gridGap"]
+  gap?: SystemProps["gridGap"] | undefined
   /**
    * Shorthand prop for `gridRowGap`
    * @type SystemProps["gridRowGap"]
    */
-  rowGap?: SystemProps["gridRowGap"]
+  rowGap?: SystemProps["gridRowGap"] | undefined
   /**
    * Shorthand prop for `gridColumnGap`
    * @type SystemProps["gridColumnGap"]
    */
-  columnGap?: SystemProps["gridColumnGap"]
+  columnGap?: SystemProps["gridColumnGap"] | undefined
   /**
    * Shorthand prop for `gridAutoFlow`
    * @type SystemProps["gridAutoFlow"]
    */
-  autoFlow?: SystemProps["gridAutoFlow"]
+  autoFlow?: SystemProps["gridAutoFlow"] | undefined
   /**
    * Shorthand prop for `gridAutoRows`
    * @type SystemProps["gridAutoRows"]
    */
-  autoRows?: SystemProps["gridAutoRows"]
+  autoRows?: SystemProps["gridAutoRows"] | undefined
   /**
    * Shorthand prop for `gridAutoColumns`
    * @type SystemProps["gridAutoColumns"]
    */
-  autoColumns?: SystemProps["gridAutoColumns"]
+  autoColumns?: SystemProps["gridAutoColumns"] | undefined
   /**
    * Shorthand prop for `gridTemplateRows`
    * @type SystemProps["gridTemplateRows"]
    */
-  templateRows?: SystemProps["gridTemplateRows"]
+  templateRows?: SystemProps["gridTemplateRows"] | undefined
   /**
    * Shorthand prop for `gridTemplateAreas`
    * @type SystemProps["gridTemplateAreas"]
    */
-  templateAreas?: SystemProps["gridTemplateAreas"]
+  templateAreas?: SystemProps["gridTemplateAreas"] | undefined
   /**
    * Shorthand prop for `gridColumn`
    * @type SystemProps["gridColumn"]
    */
-  column?: SystemProps["gridColumn"]
+  column?: SystemProps["gridColumn"] | undefined
   /**
    * Shorthand prop for `gridRow`
    * @type SystemProps["gridRow"]
    */
-  row?: SystemProps["gridRow"]
+  row?: SystemProps["gridRow"] | undefined
 }
 
 export interface GridProps

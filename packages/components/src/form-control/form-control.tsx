@@ -30,7 +30,7 @@ export interface FormControlOptions {
    *
    * @default false
    */
-  isRequired?: boolean
+  isRequired?: boolean | undefined
   /**
    * If `true`, the form control will be disabled. This has 2 side effects:
    * - The `FormLabel` will have `data-disabled` attribute
@@ -38,7 +38,7 @@ export interface FormControlOptions {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
   /**
    * If `true`, the form control will be invalid. This has 2 side effects:
    * - The `FormLabel` and `FormErrorIcon` will have `data-invalid` set to `true`
@@ -46,13 +46,13 @@ export interface FormControlOptions {
    *
    * @default false
    */
-  isInvalid?: boolean
+  isInvalid?: boolean | undefined
   /**
    * If `true`, the form control will be readonly
    *
    * @default false
    */
-  isReadOnly?: boolean
+  isReadOnly?: boolean | undefined
 }
 
 interface FormControlContext extends FormControlOptions {
@@ -60,7 +60,7 @@ interface FormControlContext extends FormControlOptions {
    * The label text used to inform users as to what information is
    * requested for a text field.
    */
-  label?: string
+  label?: string | undefined
   /**
    * The custom `id` to use for the form control. This is passed directly to the form element (e.g, Input).
    * - The form element (e.g. Input) gets the `id`
@@ -68,7 +68,7 @@ interface FormControlContext extends FormControlOptions {
    * - The form error text id: `form-error-text-${id}`
    * - The form helper text id: `form-helper-text-${id}`
    */
-  id?: string
+  id?: string | undefined
 }
 
 type FormControlProviderContext = Omit<

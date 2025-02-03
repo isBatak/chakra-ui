@@ -11,7 +11,7 @@ export interface ContainerProps
    *
    * @default false
    */
-  centerContent?: boolean
+  centerContent?: boolean | undefined
 }
 
 /**

@@ -28,7 +28,7 @@ const StyledAddon = chakra("div", {
 })
 
 export interface InputAddonProps extends HTMLChakraProps<"div"> {
-  placement?: Placement
+  placement?: Placement | undefined
 }
 
 /**

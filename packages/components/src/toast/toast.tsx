@@ -14,7 +14,7 @@ import type { UseToastOptions } from "./use-toast"
 export interface ToastProps
   extends UseToastOptions,
     Omit<AlertProps, keyof UseToastOptions> {
-  onClose?: () => void
+  onClose?: () => void | undefined
 }
 
 /**
@@ -81,7 +81,7 @@ export const Toast: React.FC<ToastProps> = (props) => {
 
 export function createRenderToast(
   options: UseToastOptions & {
-    toastComponent?: React.FC<ToastProps>
+    toastComponent?: React.FC<ToastProps> | undefined
   } = {},
 ) {
   const { render, toastComponent: ToastComponent = Toast } = options

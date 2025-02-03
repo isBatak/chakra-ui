@@ -15,34 +15,34 @@ interface ImageOptions extends NativeImageOptions {
    *
    * Note 🚨: We recommend you use a local image
    */
-  fallbackSrc?: string
+  fallbackSrc?: string | undefined
   /**
    * Fallback element to show if image is loading or image fails.
    * @type React.ReactElement
    */
-  fallback?: React.ReactElement
+  fallback?: React.ReactElement | undefined
   /**
    * Defines loading strategy
    */
-  loading?: "eager" | "lazy"
+  loading?: "eager" | "lazy" | undefined
   /**
    * How the image to fit within its bounds.
    * It maps to css `object-fit` property.
    * @type SystemProps["objectFit"]
    */
-  fit?: SystemProps["objectFit"]
+  fit?: SystemProps["objectFit"] | undefined
   /**
    * How to align the image within its bounds.
    * It maps to css `object-position` property.
    * @type SystemProps["objectPosition"]
    */
-  align?: SystemProps["objectPosition"]
+  align?: SystemProps["objectPosition"] | undefined
   /**
    * If `true`, opt out of the `fallbackSrc` logic and use as `img`
    *
    * @default false
    */
-  ignoreFallback?: boolean
+  ignoreFallback?: boolean | undefined
 
   /**
    * - beforeLoadOrError(default): loads the fallbackImage while loading the src
@@ -51,12 +51,12 @@ interface ImageOptions extends NativeImageOptions {
    * @default "beforeLoadOrError"
    * @see Issue https://github.com/chakra-ui/chakra-ui/issues/5581
    */
-  fallbackStrategy?: FallbackStrategy
+  fallbackStrategy?: FallbackStrategy | undefined
   /**
    * Defining which referrer is sent when fetching the resource.
    * @type React.HTMLAttributeReferrerPolicy
    */
-  referrerPolicy?: React.HTMLAttributeReferrerPolicy
+  referrerPolicy?: React.HTMLAttributeReferrerPolicy | undefined
 }
 
 export interface ImageProps

@@ -11,21 +11,23 @@ export const list: Config = {
 }
 
 export interface ListProps {
-  listStyleType?: ResponsiveValue<CSS.Property.ListStyleType>
+  listStyleType?: ResponsiveValue<CSS.Property.ListStyleType> | undefined
   /**
    * The CSS `list-style-position` property
    */
-  listStylePosition?: ResponsiveValue<CSS.Property.ListStylePosition>
+  listStylePosition?:
+    | ResponsiveValue<CSS.Property.ListStylePosition>
+    | undefined
   /**
    * The CSS `list-style-position` property
    */
-  listStylePos?: ResponsiveValue<CSS.Property.ListStylePosition>
+  listStylePos?: ResponsiveValue<CSS.Property.ListStylePosition> | undefined
   /**
    * The CSS `list-style-image` property
    */
-  listStyleImage?: ResponsiveValue<CSS.Property.ListStyleImage>
+  listStyleImage?: ResponsiveValue<CSS.Property.ListStyleImage> | undefined
   /**
    * The CSS `list-style-image` property
    */
-  listStyleImg?: ResponsiveValue<CSS.Property.ListStyleImage>
+  listStyleImg?: ResponsiveValue<CSS.Property.ListStyleImage> | undefined
 }

@@ -28,11 +28,11 @@ export interface RadioProps
    * @default 0.5rem
    * @type SystemProps["marginLeft"]
    */
-  spacing?: SystemProps["marginLeft"]
+  spacing?: SystemProps["marginLeft"] | undefined
   /**
    * Additional props to be forwarded to the `input` element
    */
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement> | undefined
 }
 
 /**

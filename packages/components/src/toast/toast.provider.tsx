@@ -55,7 +55,7 @@ export type ToastProviderProps = React.PropsWithChildren<{
    * @example
    * <ToastProvider defaultOptions={{ duration: 10_000, isClosable: true }} />
    */
-  defaultOptions?: UseToastOptions
+  defaultOptions?: UseToastOptions | undefined
 
   /**
    * Customize the default motion config to animate the toasts your way
@@ -64,7 +64,7 @@ export type ToastProviderProps = React.PropsWithChildren<{
    * const motionVariants =
    * <ToastProvider motionVariants={motionVariants} />
    */
-  motionVariants?: Variants
+  motionVariants?: Variants | undefined
 
   /**
    * Are you looking for a way to style the toast? Use a custom `Alert` variant in the theme.
@@ -76,22 +76,24 @@ export type ToastProviderProps = React.PropsWithChildren<{
    *
    * @default ToastComponent
    */
-  component?: React.FC<ToastComponentProps>
+  component?: React.FC<ToastComponentProps> | undefined
 
   /**
    * Define the margin between toasts
    *
    * @default 0.5rem
    */
-  toastSpacing?: string | number
+  toastSpacing?: string | number | undefined
   /**
    * Props to be forwarded to the portal component
    */
-  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
+  portalProps?:
+    | Pick<PortalProps, "appendToParentPortal" | "containerRef">
+    | undefined
   /**
    * Props to be forwarded to the `AnimatePresence` component
    */
-  animatePresenceProps?: AnimatePresenceProps
+  animatePresenceProps?: AnimatePresenceProps | undefined
 }>
 
 /**

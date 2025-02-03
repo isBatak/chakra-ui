@@ -10,25 +10,25 @@ export interface ChakraProps extends SystemProps {
   /**
    * Used to truncate text at a specific number of lines
    */
-  noOfLines?: ResponsiveValue<number>
+  noOfLines?: ResponsiveValue<number> | undefined
   /**
    * Used for internal css management
    * @private
    */
-  __css?: SystemStyleObject
+  __css?: SystemStyleObject | undefined
   /**
    * Used to pass theme-aware style props.
    * NB: This is the public API for user-land
    */
-  sx?: SystemStyleObject
+  sx?: SystemStyleObject | undefined
   /**
    * The emotion's css style object
    */
-  css?: Interpolation<{}>
+  css?: Interpolation<{}> | undefined
 }
 
 export interface AsProps<T extends ElementType = ElementType> {
-  as?: T
+  as?: T | undefined
 }
 
 /**
@@ -63,7 +63,7 @@ export type MergeWithAs<
   | RightJoinProps<ComponentProps, AdditionalProps>
   | RightJoinProps<AsProps, AdditionalProps>
 ) & {
-  as?: AsComponent
+  as?: AsComponent | undefined
 }
 
 export type ComponentWithAs<
@@ -79,11 +79,11 @@ export type ComponentWithAs<
     >,
   ): JSX.Element
 
-  displayName?: string
-  propTypes?: React.WeakValidationMap<any>
-  contextTypes?: React.ValidationMap<any>
-  defaultProps?: Partial<any>
-  id?: string
+  displayName?: string | undefined
+  propTypes?: React.WeakValidationMap<any> | undefined
+  contextTypes?: React.ValidationMap<any> | undefined
+  defaultProps?: Partial<any> | undefined
+  id?: string | undefined
 }
 
 export interface ChakraComponent<T extends ElementType, P extends object = {}>

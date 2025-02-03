@@ -7,7 +7,7 @@ export interface LinkOverlayProps extends HTMLChakraProps<"a"> {
    *
    * @default false
    */
-  isExternal?: boolean
+  isExternal?: boolean | undefined
 }
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(

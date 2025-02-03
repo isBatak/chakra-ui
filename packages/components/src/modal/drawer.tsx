@@ -33,12 +33,12 @@ interface DrawerOptions {
    * The placement of the drawer
    * @default "right"
    */
-  placement?: DrawerPlacement
+  placement?: DrawerPlacement | undefined
   /**
    * If `true` and drawer's placement is `top` or `bottom`,
    * the drawer will occupy the viewport height (100vh)
    */
-  isFullHeight?: boolean
+  isFullHeight?: boolean | undefined
 }
 
 export interface DrawerProps

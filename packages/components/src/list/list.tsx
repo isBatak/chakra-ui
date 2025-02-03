@@ -23,17 +23,17 @@ interface ListOptions {
    * Shorthand prop for `listStyleType`
    * @type SystemProps["listStyleType"]
    */
-  styleType?: SystemProps["listStyleType"]
+  styleType?: SystemProps["listStyleType"] | undefined
   /**
    * Shorthand prop for `listStylePosition`
    * @type SystemProps["listStylePosition"]
    */
-  stylePosition?: SystemProps["listStylePosition"]
+  stylePosition?: SystemProps["listStylePosition"] | undefined
   /**
    * The space between each list item
    * @type SystemProps["margin"]
    */
-  spacing?: SystemProps["margin"]
+  spacing?: SystemProps["margin"] | undefined
 }
 
 export interface ListProps

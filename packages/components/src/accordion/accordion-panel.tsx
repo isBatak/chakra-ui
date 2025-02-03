@@ -11,7 +11,7 @@ export interface AccordionPanelProps extends HTMLChakraProps<"div"> {
   /**
    * The properties passed to the underlying `Collapse` component.
    */
-  motionProps?: CollapseProps
+  motionProps?: CollapseProps | undefined
 }
 
 /**

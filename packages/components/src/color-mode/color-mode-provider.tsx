@@ -21,10 +21,10 @@ const noop = () => {}
 const useSafeLayoutEffect = isBrowser() ? useLayoutEffect : useEffect
 
 export interface ColorModeProviderProps {
-  value?: ColorMode
-  children?: React.ReactNode
-  options?: ColorModeOptions
-  colorModeManager?: StorageManager
+  value?: ColorMode | undefined
+  children?: React.ReactNode | undefined
+  options?: ColorModeOptions | undefined
+  colorModeManager?: StorageManager | undefined
 }
 
 function getTheme(manager: StorageManager, fallback?: ColorMode) {

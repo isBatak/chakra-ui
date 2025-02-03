@@ -13,12 +13,12 @@ export interface UseRadioGroupProps {
    * The value of the radio to be `checked`
    * (in controlled mode)
    */
-  value?: string
+  value?: string | undefined
   /**
    * The value of the radio to be `checked`
    * initially (in uncontrolled mode)
    */
-  defaultValue?: string
+  defaultValue?: string | undefined
   /**
    * Function called once a radio is checked
    * @param nextValue the value of the checked radio
@@ -29,7 +29,7 @@ export interface UseRadioGroupProps {
    *
    * @default false
    */
-  isDisabled?: boolean
+  isDisabled?: boolean | undefined
 
   /**
    * If `true` and `isDisabled` is true, all wrapped radio inputs will remain
@@ -37,11 +37,11 @@ export interface UseRadioGroupProps {
    *
    * @default false
    */
-  isFocusable?: boolean
+  isFocusable?: boolean | undefined
   /**
    * The `name` attribute forwarded to each `radio` element
    */
-  name?: string
+  name?: string | undefined
   /**
    * If `true`, input elements will receive
    * `checked` attribute instead of `isChecked`.
@@ -50,7 +50,7 @@ export interface UseRadioGroupProps {
    *
    * @default false
    */
-  isNative?: boolean
+  isNative?: boolean | undefined
 }
 
 /**
@@ -129,7 +129,7 @@ export function useRadioGroup(props: UseRadioGroupProps = {}) {
   )
 
   const getRadioProps: PropGetter<
-    InputDOMAttributes & { isChecked?: boolean },
+    InputDOMAttributes & { isChecked?: boolean | undefined },
     InputDOMAttributes
   > = useCallback(
     (props = {}, ref = null) => {

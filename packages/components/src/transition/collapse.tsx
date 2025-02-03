@@ -21,17 +21,17 @@ export interface CollapseOptions {
    * If `true`, the opacity of the content will be animated
    * @default true
    */
-  animateOpacity?: boolean
+  animateOpacity?: boolean | undefined
   /**
    * The height you want the content in its collapsed state.
    * @default 0
    */
-  startingHeight?: number | string
+  startingHeight?: number | string | undefined
   /**
    * The height you want the content in its expanded state.
    * @default "auto"
    */
-  endingHeight?: number | string
+  endingHeight?: number | string | undefined
 }
 
 const defaultTransitions = {

@@ -17,35 +17,43 @@ export interface TextDecorationProps {
   /**
    * The CSS `text-decoration` property
    */
-  textDecoration?: Token<CSS.Property.TextDecoration | number>
+  textDecoration?: Token<CSS.Property.TextDecoration | number> | undefined
   /**
    * The CSS `text-decoration` property
    */
-  textDecor?: Token<CSS.Property.TextDecoration | number>
+  textDecor?: Token<CSS.Property.TextDecoration | number> | undefined
   /**
    * The CSS `text-decoration-color` property
    */
-  textDecorationColor?: Token<CSS.Property.TextDecorationColor, "colors">
+  textDecorationColor?:
+    | Token<CSS.Property.TextDecorationColor, "colors">
+    | undefined
   /**
    * The CSS `text-decoration-thickness` property
    */
-  textDecorationThickness?: ResponsiveValue<CSS.Property.TextDecorationThickness>
+  textDecorationThickness?:
+    | ResponsiveValue<CSS.Property.TextDecorationThickness>
+    | undefined
   /**
    * The CSS `text-decoration-style` property
    */
-  textDecorationStyle?: ResponsiveValue<CSS.Property.TextDecorationStyle>
+  textDecorationStyle?:
+    | ResponsiveValue<CSS.Property.TextDecorationStyle>
+    | undefined
   /**
    * The CSS `text-decoration-line` property
    */
-  textDecorationLine?: ResponsiveValue<CSS.Property.TextDecorationLine>
+  textDecorationLine?:
+    | ResponsiveValue<CSS.Property.TextDecorationLine>
+    | undefined
   /**
    * The CSS `text-underline-offset` property
    */
-  textUnderlineOffset?: ResponsiveValue<
-    CSS.Property.TextUnderlineOffset | number
-  >
+  textUnderlineOffset?:
+    | ResponsiveValue<CSS.Property.TextUnderlineOffset | number>
+    | undefined
   /**
    * The `text-shadow` property
    */
-  textShadow?: Token<CSS.Property.TextShadow | number, "shadows">
+  textShadow?: Token<CSS.Property.TextShadow | number, "shadows"> | undefined
 }

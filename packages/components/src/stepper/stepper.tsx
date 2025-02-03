@@ -25,11 +25,11 @@ export interface StepperProps
    * The orientation of the stepper
    * @default horizontal
    */
-  orientation?: Orientation
+  orientation?: Orientation | undefined
   /**
    * Whether to show or not the last separator while in vertical orientation
    */
-  showLastSeparator?: boolean
+  showLastSeparator?: boolean | undefined
   /**
    */
   children: React.ReactNode

@@ -11,17 +11,17 @@ export interface TextProps extends HTMLChakraProps<"p">, ThemingProps<"Text"> {
    * The CSS `text-align` property
    * @type SystemProps["textAlign"]
    */
-  align?: SystemProps["textAlign"]
+  align?: SystemProps["textAlign"] | undefined
   /**
    * The CSS `text-decoration` property
    * @type SystemProps["textDecoration"]
    */
-  decoration?: SystemProps["textDecoration"]
+  decoration?: SystemProps["textDecoration"] | undefined
   /**
    * The CSS `text-transform` property
    * @type SystemProps["textTransform"]
    */
-  casing?: SystemProps["textTransform"]
+  casing?: SystemProps["textTransform"] | undefined
 }
 
 /**

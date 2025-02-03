@@ -17,7 +17,9 @@ const EnvironmentContext = createContext<Environment>({
 
 EnvironmentContext.displayName = "EnvironmentContext"
 
-export function useEnvironment({ defer }: { defer?: boolean } = {}) {
+export function useEnvironment({
+  defer,
+}: { defer?: boolean | undefined } = {}) {
   const [, forceUpdate] = useReducer((c) => c + 1, 0)
 
   useSafeLayoutEffect(() => {
@@ -30,8 +32,8 @@ export function useEnvironment({ defer }: { defer?: boolean } = {}) {
 
 export interface EnvironmentProviderProps {
   children: React.ReactNode
-  disabled?: boolean
-  environment?: Environment
+  disabled?: boolean | undefined
+  environment?: Environment | undefined
 }
 
 export function EnvironmentProvider(props: EnvironmentProviderProps) {

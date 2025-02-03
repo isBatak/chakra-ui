@@ -9,13 +9,13 @@ interface TextareaOptions {
    * @example
    * focusBorderColor = "blue.500"
    */
-  focusBorderColor?: string
+  focusBorderColor?: string | undefined
   /**
    * The border color when the textarea is invalid. Use color keys in `theme.colors`
    * @example
    * errorBorderColor = "red.500"
    */
-  errorBorderColor?: string
+  errorBorderColor?: string | undefined
 }
 
 type Omitted = "disabled" | "required" | "readOnly"

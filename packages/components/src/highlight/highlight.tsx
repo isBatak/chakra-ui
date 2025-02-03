@@ -7,7 +7,7 @@ import { useHighlight } from "./use-highlight"
 export interface HighlightProps {
   query: string | string[]
   children: string | ((props: Chunk[]) => React.ReactNode)
-  styles?: SystemStyleObject
+  styles?: SystemStyleObject | undefined
 }
 
 /**
