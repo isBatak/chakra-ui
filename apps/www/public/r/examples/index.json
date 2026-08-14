@@ -90,6 +90,7 @@
   "button-as-link",
   "button-basic",
   "button-icons",
+  "button-with-accessible-when-disabled",
   "button-with-colors",
   "button-with-custom-spinner",
   "button-with-disabled-link",

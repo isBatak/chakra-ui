@@ -34,6 +34,16 @@
       ]
     },
     {
+      "name": "button-with-accessible-when-disabled",
+      "content": "\"use client\"\nexport const ButtonWithAccessibleWhenDisabled = () => {\n  const [loading, setLoading] = useState(false)\n\n  const handleClick = async () => {\n    setLoading(true)\n    await new Promise((resolve) => setTimeout(resolve, 4000))\n    setLoading(false)\n  }\n\n  return (\n    <Button\n      loading={loading}\n      loadingText=\"Submitting\"\n      accessibleWhenDisabled\n      onClick={handleClick}\n    >\n      Submit\n    </Button>\n  )\n}\n",
+      "hasSnippet": false,
+      "importPaths": [
+        "import { Button } from \"@chakra-ui/react\"",
+        "import { useState } from \"react\""
+      ],
+      "importPath": "import { Button } from \"@chakra-ui/react\""
+    },
+    {
       "name": "button-with-colors",
       "content": "export const ButtonWithColors = () => {\n  return (\n    <Stack gap=\"2\" align=\"flex-start\">\n      {colorPalettes.map((colorPalette) => (\n        <Stack align=\"center\" key={colorPalette} direction=\"row\" gap=\"10\">\n          <Text minW=\"8ch\">{colorPalette}</Text>\n          <Button colorPalette={colorPalette}>Button</Button>\n          <Button colorPalette={colorPalette} variant=\"outline\">\n            Button\n          </Button>\n          <Button colorPalette={colorPalette} variant=\"surface\">\n            Button\n          </Button>\n          <Button colorPalette={colorPalette} variant=\"subtle\">\n            Button\n          </Button>\n        </Stack>\n      ))}\n    </Stack>\n  )\n}\n",
       "hasSnippet": false,

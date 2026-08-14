@@ -70,6 +70,18 @@ the width of the button the same.
 
 <ExampleTabs name="button-with-loading-toggle" />
 
+### Accessible When Disabled
+
+Use the `accessibleWhenDisabled` prop to keep a disabled button in the keyboard
+focus order. This is useful when discoverability is important, such as toolbar
+actions that are temporarily unavailable based on the current selection or
+clipboard contents.
+
+For buttons that enter a loading state after being clicked, this also keeps
+focus on the button while it is disabled and preserves the tab order.
+
+<ExampleTabs name="button-with-accessible-when-disabled" />
+
 ### Spinner Placement
 
 Use the `spinnerPlacement` prop to change the placement of the spinner.
