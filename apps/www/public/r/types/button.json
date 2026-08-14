@@ -1,6 +1,12 @@
 {
   "Button": {
     "props": {
+      "accessibleWhenDisabled": {
+        "type": "boolean | undefined",
+        "defaultValue": false,
+        "isRequired": false,
+        "description": "When `true`, the button will use `aria-disabled` instead of the native\n`disabled` attribute, keeping the button focusable and accessible to\nassistive technologies.\n\nWhen enabled, the button's click handler will be suppressed to prevent\naction triggers while the button is in a disabled state."
+      },
       "loading": {
         "type": "boolean | undefined",
         "defaultValue": false,
@@ -55,6 +61,12 @@
   },
   "IconButton": {
     "props": {
+      "accessibleWhenDisabled": {
+        "type": "boolean | undefined",
+        "defaultValue": false,
+        "isRequired": false,
+        "description": "When `true`, the button will use `aria-disabled` instead of the native\n`disabled` attribute, keeping the button focusable and accessible to\nassistive technologies.\n\nWhen enabled, the button's click handler will be suppressed to prevent\naction triggers while the button is in a disabled state."
+      },
       "loading": {
         "type": "boolean | undefined",
         "defaultValue": false,
@@ -117,6 +129,12 @@
   },
   "CloseButton": {
     "props": {
+      "accessibleWhenDisabled": {
+        "type": "boolean | undefined",
+        "defaultValue": false,
+        "isRequired": false,
+        "description": "When `true`, the button will use `aria-disabled` instead of the native\n`disabled` attribute, keeping the button focusable and accessible to\nassistive technologies.\n\nWhen enabled, the button's click handler will be suppressed to prevent\naction triggers while the button is in a disabled state."
+      },
       "loading": {
         "type": "boolean | undefined",
         "defaultValue": false,
