@@ -1,0 +1,32 @@
+# ADR 0001: Docs-first Panda proof of concept
+
+Status: Proposed
+
+## Decision
+
+Use the documentation app as the first Panda CSS migration target.
+
+Pin the proof of concept to Panda CSS `2.0.0-beta.11` and Ark UI v6. Do not migrate the React package in this phase.
+
+## Why
+
+The docs exercise tokens, recipes, responsive styles, color mode, SSR, code examples, and many components while keeping production-package risk low.
+
+## Scope
+
+- Configure Panda and generated code in the docs app.
+- Migrate one simple component, one multipart component, and one page.
+- Keep the current Emotion docs path available for comparison.
+- Record build time, CSS size, hydration warnings, and visual differences.
+
+## Not in scope
+
+- Publishing v4 packages.
+- Removing Emotion.
+- Migrating every docs page.
+- Finalizing the public adapter API.
+
+## Open questions
+
+- Should the POC use a dedicated docs route or a provider toggle on the same route?
+- Is beta 11 a strict reproducibility pin or may fixes use a newer Panda beta?
