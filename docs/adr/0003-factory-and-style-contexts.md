@@ -10,7 +10,7 @@ For Panda mode, compose Panda's generated JSX factory with Ark UI's factory:
 
 - String elements become Ark elements first.
 - Panda adds style props and recipes.
-- Ark owns polymorphism and `asChild`.
+- Ark owns polymorphism and v6 `render` composition; Chakra must decide how long to preserve `asChild` compatibility.
 - Cache intrinsic elements so `chakra.div` has stable identity.
 
 Conceptually:
@@ -89,7 +89,7 @@ function createChakraFactory(): ChakraFactory {
 export const chakra = createChakraFactory()
 ```
 
-This prototype keeps `chakra(Component, recipe)` and `chakra.element` while routing intrinsic elements through Ark before Panda. Ark therefore supplies polymorphism and `asChild`, Panda supplies styling and recipe behavior, and the cache preserves stable intrinsic component identity.
+This prototype keeps `chakra(Component, recipe)` and `chakra.element` while routing intrinsic elements through Ark before Panda. Ark therefore supplies polymorphism and v6 `render` composition, Panda supplies styling and recipe behavior, and the cache preserves stable intrinsic component identity. The prototype must not assume Ark v6 still provides `asChild`.
 
 Import paths and generated Panda types are provisional. The POC must verify refs, prop forwarding, recipe defaults, component selectors, server rendering, and every supported framework's equivalent factory.
 
@@ -152,6 +152,6 @@ Test one multipart component before choosing between wrapping Panda's helper or 
 
 ## Open questions
 
-- Can Ark's factory fully replace Chakra's custom `asChild` logic?
+- Should Chakra adopt Ark v6's `render` prop directly, or temporarily preserve `asChild` in Chakra's compatibility layer?
 - Can provider selection preserve stable component identity?
 - Should each engine expose a separate internal package entry point?
