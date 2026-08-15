@@ -15,6 +15,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 4. [Multi-framework documentation](./0004-multi-framework-docs.md)
 5. [Shared theme model](./0005-shared-theme.md)
 6. [Multi-framework package structure](./0006-package-structure.md)
+7. [Lint dynamic styling pitfalls](./0007-eslint-dynamic-styling.md)
 
 ## Initial plan
 
