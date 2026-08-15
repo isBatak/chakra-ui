@@ -14,6 +14,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 3. [Factory and style contexts](./0003-factory-and-style-contexts.md)
 4. [Multi-framework documentation](./0004-multi-framework-docs.md)
 5. [Shared theme model](./0005-shared-theme.md)
+6. [Multi-framework package structure](./0006-package-structure.md)
 
 ## Initial plan
 
@@ -22,7 +23,8 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 3. Add a root provider option for Emotion or Panda.
 4. Validate the factory, recipes, hooks, SSR/RSC, and CSS output.
 5. Prototype framework-aware examples and navigation.
-6. Decide whether dual engines are viable before migrating packages.
+6. Validate the shared-definition/framework-renderer package structure.
+7. Decide whether dual engines are viable before migrating packages.
 
 ## Exit criteria
 
@@ -32,5 +34,6 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 - One multipart component validates style-context compatibility.
 - One page contains working React, Solid, Vue, and Svelte examples.
 - Theme tokens have one source of truth.
+- Framework packages can build and publish independently from shared source.
 
 No public v4 API is accepted by these ADRs yet.
