@@ -1,7 +1,7 @@
 # Chakra UI v4 architecture plan
 
 Status: Proposed  
-Scope: Panda CSS v2 beta 11 and Ark UI v6 exploration
+Scope: Panda CSS v2 and Ark UI v6 exploration
 
 ## Goal
 
@@ -19,7 +19,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 
 ## Initial plan
 
-1. Add Panda v2 beta 11 to the docs only.
+1. Add Panda v2 to the docs only.
 2. Rebuild one representative component and page.
 3. Add a root provider option for Emotion or Panda.
 4. Validate the factory, recipes, hooks, SSR/RSC, and CSS output.

@@ -6,7 +6,7 @@ Status: Proposed
 
 Use the documentation app as the first Panda CSS migration target.
 
-Pin the proof of concept to Panda CSS `2.0.0-beta.11` and Ark UI v6. Do not migrate the React package in this phase.
+Pin the proof of concept to Panda CSS v2 and Ark UI v6. Do not migrate the React package in this phase.
 
 ## Why
 
@@ -29,4 +29,3 @@ The docs exercise tokens, recipes, responsive styles, color mode, SSR, code exam
 ## Open questions
 
 - Should the POC use a dedicated docs route or a provider toggle on the same route?
-- Is beta 11 a strict reproducibility pin or may fixes use a newer Panda beta?
