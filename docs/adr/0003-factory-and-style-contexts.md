@@ -24,6 +24,38 @@ chakra(Component, recipe) = panda(Component, recipe)
 
 Panda must recognize calls to the public `chakra()` factory. Prototype a narrowly scoped `parser:before` plugin that rewrites imported `chakra(...)` calls to a configured Panda JSX-factory alias for extraction only.
 
+Potential implementation:
+
+```ts
+import { definePlugin } from "@pandacss/dev"
+
+const chakraFactoryImport =
+  /import\\s*{[^}]*\\bchakra\\b[^}]*}\\s*from\\s*['"](?:@chakra-ui\\/react|(?:\\.\\.\\/)+styled-system\\/factory)['"]/
+
+/**
+ * Teach Panda extraction about Chakra's public factory without renaming it
+ * or transforming unrelated functions named `chakra`.
+ */
+export const chakraFactoryPlugin = definePlugin({
+  name: "@chakra-ui/panda-chakra-factory",
+  hooks: {
+    "parser:before": ({ content }) => {
+      if (!chakraFactoryImport.test(content)) return
+
+      return [
+        'import { panda as __chakraPandaExtract } from "@chakra-ui/react/jsx"',
+        content.replace(
+          /\\bchakra(\\s*)\\(/g,
+          "__chakraPandaExtract$1(",
+        ),
+      ].join("\\n")
+    },
+  },
+})
+```
+
+The generated JSX-factory import path is provisional. This example handles direct `chakra(...)` calls; the POC must extend or replace it for aliased imports, namespace imports, `chakra.div`, and other supported factory forms.
+
 The plugin must:
 
 - Match only Chakra factory imports.
