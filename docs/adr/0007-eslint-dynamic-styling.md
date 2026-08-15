@@ -1,4 +1,4 @@
-# ADR 0007: Prepare applications for Chakra v4 styling
+# ADR 0007: Prevent dynamic styling pitfalls
 
 Status: Proposed
 
@@ -6,7 +6,7 @@ Status: Proposed
 
 Publish consumer-facing migration tooling in `@chakra-ui/eslint-plugin`.
 
-Its `v4-migration` configuration enables an engine-aware `no-dynamic-styling` rule. Chakra v3 users run it across an existing application, resolve every finding, and reach a styling baseline compatible with both Emotion and Panda before upgrading to Chakra v4.
+Its `recommended` configuration enables the engine-aware `no-dynamic-styling` rule. Users run it across an existing application, resolve every finding, and reach a styling baseline compatible with both Emotion and Panda. This improves current Emotion performance and prepares the codebase for Panda or Chakra v4.
 
 The rule targets patterns that are expensive with Emotion or cannot be reliably extracted by Panda.
 
@@ -22,7 +22,7 @@ References:
 import chakra from "@chakra-ui/eslint-plugin"
 
 export default [
-  chakra.configs["v4-migration"],
+  chakra.configs.recommended,
 ]
 ```
 
@@ -34,7 +34,7 @@ eslint . --max-warnings=0
 Suggested workflow:
 
 1. Install the plugin while the application still uses Chakra v3.
-2. Enable the `v4-migration` configuration as warnings.
+2. Enable the `recommended` configuration as warnings.
 3. Apply safe automatic fixes.
 4. Resolve structural findings using the diagnostic suggestions.
 5. Make the rule error-level in CI.
@@ -111,7 +111,7 @@ Statically analyzable conditional branches may be allowed when conditional-perfo
 {
   rules: {
     "@chakra-ui/no-dynamic-styling": ["warn", {
-      engine: "migration",
+      engine: "both",
       checkConditionals: true,
       styleFunctions: ["css", "chakra"],
       styleProps: "generated"
@@ -124,7 +124,7 @@ Modes:
 
 - `emotion`: detect render-time allocation and conditional-style costs.
 - `panda`: detect values Panda cannot statically extract.
-- `migration`: apply the compatible superset; used by `v4-migration`.
+- `both`: apply the compatible Emotion and Panda superset; used by `recommended`.
 
 ## Detection model
 
@@ -132,7 +132,7 @@ Use generated Chakra style-property, component-tracking, and recipe metadata rat
 
 Resolve local constants only when they are in the same file and statically analyzable. Treat function calls, computed runtime lookups, props, state, and values imported from unknown modules as dynamic.
 
-Panda can extract some conditional branches. Migration mode still reports them when recipe variants or data attributes better express the intent and avoid Emotion runtime work.
+Panda can extract some conditional branches. `both` mode still reports them when recipe variants or data attributes better express the intent and avoid Emotion runtime work.
 
 Each diagnostic has:
 
@@ -157,7 +157,7 @@ An application is ready when all findings are fixed or explicitly reviewed and s
 packages/
   eslint-plugin/  # @chakra-ui/eslint-plugin
     src/rules/no-dynamic-styling.ts
-    src/configs/v4-migration.ts
+    src/configs/recommended.ts
 ```
 
 The plugin must support the currently maintained Chakra v3 toolchain so it can run before the v4 upgrade.
@@ -174,7 +174,7 @@ The plugin must support the currently maintained Chakra v3 toolchain so it can r
 
 ## Scope
 
-This rule prepares styling code for the v4 engine migration. Other v4 breaking API changes remain the responsibility of separate lint rules or codemods collected by the same `v4-migration` configuration.
+This rule prepares styling code for the v4 engine migration. Other v4 breaking API changes remain the responsibility of separate lint rules or codemods. They should not change the stable purpose or name of this performance rule.
 
 ## Open questions
 
