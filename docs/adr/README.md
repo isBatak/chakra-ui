@@ -16,6 +16,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 5. [Shared theme model](./0005-shared-theme.md)
 6. [Multi-framework package structure](./0006-package-structure.md)
 7. [Lint dynamic styling pitfalls](./0007-eslint-dynamic-styling.md)
+8. [Compare the Panda v2 migration design](./0008-panda-v2-migration-comparison.md)
 
 ## Initial plan
 
