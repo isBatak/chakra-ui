@@ -20,6 +20,79 @@ chakra.button = panda(ark.button)
 chakra(Component, recipe) = panda(Component, recipe)
 ```
 
+Potential `factory.ts` implementation:
+
+```ts
+import { ark } from "@ark-ui/react/factory"
+import type { ElementType, JSX } from "react"
+import { panda } from "../styled-system/jsx"
+import type { PandaComponent } from "../styled-system/jsx"
+import type {
+  RecipeDefinition,
+  RecipeVariantRecord,
+} from "../styled-system/types"
+
+type StyledProps = Record<string, unknown>
+
+type ChakraElements = {
+  [Element in keyof JSX.IntrinsicElements]: PandaComponent<
+    (typeof ark)[Element]
+  >
+}
+
+interface ChakraFactoryCall {
+  <Component extends ElementType>(
+    component: Component,
+  ): PandaComponent<Component>
+
+  <Component extends ElementType, Recipe extends { __type: StyledProps }>(
+    component: Component,
+    recipe: Recipe,
+  ): PandaComponent<Component, Recipe["__type"]>
+
+  <Component extends ElementType, Variants extends RecipeVariantRecord>(
+    component: Component,
+    recipe: RecipeDefinition<Variants>,
+  ): PandaComponent<
+    Component,
+    { [Key in keyof Variants]?: keyof Variants[Key] }
+  >
+}
+
+export type ChakraFactory = ChakraFactoryCall & ChakraElements
+
+function createChakraFactory(): ChakraFactory {
+  const cache = new Map<keyof JSX.IntrinsicElements, unknown>()
+
+  return new Proxy(panda, {
+    apply(target, thisArg, args: [ElementType, ...unknown[]]) {
+      const [component, ...rest] = args
+      const base = typeof component === "string" ? ark[component] : component
+
+      return Reflect.apply(target, thisArg, [base, ...rest])
+    },
+
+    get(target, element: keyof JSX.IntrinsicElements | symbol) {
+      if (typeof element !== "string") {
+        return Reflect.get(target, element)
+      }
+
+      if (!cache.has(element)) {
+        cache.set(element, panda(ark[element]))
+      }
+
+      return cache.get(element) ?? Reflect.get(target, element)
+    },
+  }) as unknown as ChakraFactory
+}
+
+export const chakra = createChakraFactory()
+```
+
+This prototype keeps `chakra(Component, recipe)` and `chakra.element` while routing intrinsic elements through Ark before Panda. Ark therefore supplies polymorphism and `asChild`, Panda supplies styling and recipe behavior, and the cache preserves stable intrinsic component identity.
+
+Import paths and generated Panda types are provisional. The POC must verify refs, prop forwarding, recipe defaults, component selectors, server rendering, and every supported framework's equivalent factory.
+
 ## Static extraction
 
 Panda must recognize calls to the public `chakra()` factory. Prototype a narrowly scoped `parser:before` plugin that rewrites imported `chakra(...)` calls to a configured Panda JSX-factory alias for extraction only.
