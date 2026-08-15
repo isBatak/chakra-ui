@@ -1,4 +1,4 @@
-# ADR 0002: Styling engine adapter
+# ADR 0002: Styling engine boundaries
 
 Status: Proposed
 
@@ -6,66 +6,65 @@ Status: Proposed
 
 Allow Emotion and Panda components in the same React application so migration can be gradual.
 
-The root provider sets the preferred engine:
+Do not expose a dynamic `stylingEngine` prop on `ChakraProvider` or individual components. Select the engine with fixed JSX boundaries:
 
 ```tsx
-<ChakraProvider stylingEngine="emotion">
-  <App />
+<ChakraProvider>
+  <EmotionStylingEngine>
+    <App />
+  </EmotionStylingEngine>
 </ChakraProvider>
 ```
 
-A lightweight provider can override it for a subtree, and a component prop can override it for one component:
+A boundary can wrap a migrated subtree or one component:
 
 ```tsx
-<ChakraProvider stylingEngine="emotion">
-  <LegacyPage />
+<ChakraProvider>
+  <EmotionStylingEngine>
+    <LegacyPage />
 
-  <StylingEngineProvider value="panda">
-    <MigratedPage />
+    <PandaStylingEngine>
+      <MigratedSection />
 
-    <Button stylingEngine="emotion">
-      Temporary fallback
-    </Button>
-  </StylingEngineProvider>
+      <EmotionStylingEngine>
+        <TemporaryFallback />
+      </EmotionStylingEngine>
+    </PandaStylingEngine>
 
-  <Button stylingEngine="panda">
-    Migrated button
-  </Button>
+    <PandaStylingEngine>
+      <Button>Migrated button</Button>
+    </PandaStylingEngine>
+  </EmotionStylingEngine>
 </ChakraProvider>
 ```
 
 Names are provisional.
 
-## Resolution order
+## Resolution
 
-Resolve the engine in this order:
+A component uses the nearest styling-engine boundary.
 
-1. Component `stylingEngine` prop.
-2. Nearest `StylingEngineProvider`.
-3. Root `ChakraProvider` preference.
-4. Emotion compatibility default.
+When no boundary exists, use Emotion as the v3 compatibility default during migration. Consider requiring an explicit boundary in the final v4 API.
 
-The component-only prop is consumed internally and must not reach the DOM.
+The boundary components provide a fixed adapter and accept only `children`. They do not accept an engine value that application state can toggle.
 
-Engine selection is configuration, not an animation or frequent runtime toggle. Changing it may remount the engine-specific rendered element.
+Changing engines requires changing the JSX boundary. This makes the migration visible in code review and discourages engine selection as interactive runtime state.
 
 ## Provider responsibilities
 
-`ChakraProvider` owns the system, theme, global styles, and root engine preference.
+`ChakraProvider` owns the system, theme, global styles, and color mode. It does not select a styling engine.
 
-`StylingEngineProvider` only overrides engine selection. It must not re-inject resets, global styles, cascade-layer declarations, or color-mode state.
+`EmotionStylingEngine` and `PandaStylingEngine` only provide a fixed engine adapter. They must not re-inject resets, global styles, cascade-layer declarations, or color-mode state.
 
-This separation allows multiple nested migration boundaries without duplicating global output.
+This separation allows nested migration boundaries without duplicating global output.
 
 ## Adapter boundary
 
 Components depend on a stable Chakra adapter contract, not directly on Emotion or Panda.
 
-The public `chakra()` factory returns a stable Chakra wrapper. At render time, the wrapper resolves the selected engine and delegates styling to the matching implementation.
+The public `chakra()` factory returns a stable Chakra wrapper. At render time, the wrapper reads the nearest fixed boundary and delegates styling to the matching implementation.
 
 ```ts
-type StylingEngine = "emotion" | "panda"
-
 interface StylingEngineAdapter {
   createElement: ChakraFactoryImplementation
   createRecipeContext: typeof createRecipeContext
@@ -73,64 +72,77 @@ interface StylingEngineAdapter {
   token(path: string, fallback?: string): string
 }
 
-function resolveStylingEngine(
-  componentPreference?: StylingEngine,
-): StylingEngine
+const EmotionStylingEngine = createStylingEngineBoundary(emotionAdapter)
+const PandaStylingEngine = createStylingEngineBoundary(pandaAdapter)
 ```
 
 This is illustrative, not accepted API.
 
-Recipe and style-context helpers must resolve the same engine as the component. A parent recipe context must not accidentally force a different engine on its slots unless explicitly designed to do so.
+Recipe and style-context helpers must resolve the same engine as the component. A multipart component should normally have one boundary around its root so all slots use the same adapter.
+
+## Why boundaries instead of props
+
+Fixed boundaries:
+
+- make migration intent explicit
+- discourage state-driven engine changes
+- avoid adding an engine prop to every component
+- prevent the internal prop from leaking to the DOM
+- give DevTools and code search a clear migration boundary
+- let one wrapper handle the root, a subtree, or a single component
+
+A conditional application can still mount different boundaries, but that is an explicit structural choice and may remount the affected subtree.
 
 ## Build-time constraint
 
-Panda extracts CSS at build time. Runtime providers and component props cannot generate missing Panda CSS.
+Panda extracts CSS at build time. JSX boundaries cannot generate missing Panda CSS.
 
 Therefore:
 
 - Panda scans all potentially migrated components.
 - `@chakra-ui/panda-preset` and generated Panda CSS are included once.
 - Colocated `tracking.ts` files identify Chakra component usage.
-- Emotion remains available for components that resolve to Emotion.
-- Tree shaking should remove an engine only when an application statically opts out of it through a future build entry point.
+- Emotion remains available inside Emotion boundaries.
+- Tree shaking should remove an engine only when an application statically opts out through a future build entry point.
 
 ## Current client components
 
-Current components are client components and read the Emotion-backed system context. In Panda mode:
+Current components are client components and read the Emotion-backed system context. In Panda boundaries:
 
 - Emotion insertion and theme hooks must not run.
 - Hooks needed only for Emotion should use Panda-safe implementations, not unconditional React no-ops.
 - Token and recipe access should use generated, static data where possible.
 - Client boundaries should be removed where no runtime behavior remains.
 
-Mixed subtrees must share Ark/Zag state normally; the styling engine boundary should affect presentation, not component behavior.
+Mixed boundaries must share Ark/Zag state normally; an engine boundary affects presentation, not component behavior.
 
 ## POC
 
-1. Render one component with Emotion and Panda on the same page.
-2. Override the root engine for a subtree.
-3. Override one component inside that subtree.
-4. Test a multipart component whose slots inherit the selected engine.
-5. Confirm Panda CSS is extracted for component-prop and subtree usage.
-6. Confirm nested providers do not duplicate global styles.
-7. Check SSR hydration, refs, `asChild`, portals, and color mode.
+1. Render Emotion and Panda versions of one component on the same page.
+2. Wrap the application in an Emotion boundary.
+3. Override one subtree with a Panda boundary.
+4. Override one component with a nested boundary.
+5. Test a multipart component with one boundary around its root.
+6. Confirm Panda CSS is extracted for all Panda-boundary usage.
+7. Confirm nested boundaries do not duplicate global styles.
+8. Check SSR hydration, refs, `asChild`, portals, and color mode.
 
 ## Risks
 
 - Shipping both engines increases bundle size.
-- Dynamic selection limits tree shaking.
+- Context-based selection limits tree shaking.
 - Provider-selected factories can make static extraction harder to analyze.
-- Switching engines after mount may replace DOM or component identity.
-- Emotion and Panda cascade layers may conflict on the same element.
-- Portals must retain the logical provider selection.
-- A component tree can become harder to debug when every component overrides its engine.
+- Replacing a boundary after mount may remount its subtree.
+- Emotion and Panda cascade layers may conflict on the same page.
+- Portals must retain the logical boundary context.
+- Excessive single-component boundaries can make the tree noisy.
 
 ## Guardrails
 
-- Prefer subtree migration over per-component overrides.
-- Use the component prop for exceptions and debugging.
+- Prefer one boundary around a migrated feature or route.
+- Use a single-component boundary only for incremental exceptions.
+- Wrap a compound component at its root rather than mixing engines between slots.
 - Add a development data attribute or DevTools signal showing the resolved engine.
-- Warn when a compound component mixes unsupported engine combinations.
 - Keep behavior and accessibility independent from the styling adapter.
 
 ## Exit rule
