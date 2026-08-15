@@ -19,16 +19,27 @@ Define a neutral theme schema, then provide engine adapters:
 const theme = defineChakraTheme({ /* source of truth */ })
 
 createEmotionSystem(theme)
-createPandaConfig(theme)
+createPandaPreset(theme)
 ```
 
 During the POC, adapt only the subset used by migrated docs.
 
 ## Panda preset
 
-Do not assume `@chakra-ui/panda-preset` remains public or necessary. If Chakra owns the source theme and Panda generation, a separate preset may duplicate the adapter.
+Build and publish the Panda representation of the Chakra theme in the existing `@chakra-ui/panda-preset` package.
 
-Keep it only if consumers need to extend Panda outside Chakra packages.
+The preset owns Panda-specific:
+
+- token and semantic-token serialization
+- conditions and utilities
+- recipes and slot recipes
+- global styles and cascade layers
+- color-palette aliases
+- Panda compatibility transforms
+
+Framework packages must not duplicate this Panda theme representation.
+
+The preset is generated or adapted from the shared theme source. It must not become a second source of truth.
 
 ## Compatibility checks
 
@@ -43,4 +54,4 @@ Keep it only if consumers need to extend Panda outside Chakra packages.
 
 - Is the neutral schema the current system config, Panda's preset schema, or a smaller Chakra-owned format?
 - Do v3 custom themes need an automatic converter?
-- Is `@chakra-ui/panda-preset` deprecated, repurposed, or retained?
+- Does the preset also export the Chakra parser plugin, or should that remain a separate package?
