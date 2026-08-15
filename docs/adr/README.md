@@ -21,7 +21,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 
 1. Add Panda v2 to the docs only.
 2. Rebuild one representative component and page.
-3. Add a root provider option for Emotion or Panda.
+3. Add fixed Emotion and Panda styling-engine boundaries, with Panda as the default.
 4. Validate the factory, recipes, hooks, SSR/RSC, and CSS output.
 5. Prototype framework-aware examples and navigation.
 6. Validate the shared-definition/framework-renderer package structure.

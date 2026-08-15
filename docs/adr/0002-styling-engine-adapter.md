@@ -10,8 +10,13 @@ Do not expose a dynamic `stylingEngine` prop on `ChakraProvider` or individual c
 
 ```tsx
 <ChakraProvider>
+  <App />
+</ChakraProvider>
+
+// Legacy application during gradual migration
+<ChakraProvider>
   <EmotionStylingEngine>
-    <App />
+    <LegacyApp />
   </EmotionStylingEngine>
 </ChakraProvider>
 ```
@@ -44,7 +49,11 @@ Names are provisional.
 
 A component uses the nearest styling-engine boundary.
 
-When no boundary exists, use Emotion as the v3 compatibility default during migration. Consider requiring an explicit boundary in the final v4 API.
+When no boundary exists, use Panda as the Chakra v4 default.
+
+A legacy application that still needs Emotion wraps its root or remaining legacy subtree in `EmotionStylingEngine`. There is no silent runtime fallback from Panda to Emotion.
+
+The CLI and build integration may detect `panda.config.*` to install or validate `@chakra-ui/panda-preset`, generated CSS, and extraction settings. Runtime components cannot reliably inspect project configuration files, so config detection must not become a hidden runtime engine selector.
 
 The boundary components provide a fixed adapter and accept only `children`. They do not accept an engine value that application state can toggle.
 
@@ -119,8 +128,8 @@ Mixed boundaries must share Ark/Zag state normally; an engine boundary affects p
 ## POC
 
 1. Render Emotion and Panda versions of one component on the same page.
-2. Wrap the application in an Emotion boundary.
-3. Override one subtree with a Panda boundary.
+2. Confirm Panda is used when no boundary exists.
+3. Wrap a legacy application in an Emotion boundary, then override one subtree with Panda.
 4. Override one component with a nested boundary.
 5. Test a multipart component with one boundary around its root.
 6. Confirm Panda CSS is extracted for all Panda-boundary usage.
