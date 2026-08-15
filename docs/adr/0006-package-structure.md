@@ -56,10 +56,22 @@ Use the same component names across framework packages:
 
 ```text
 packages/react/src/components/button/
+  button.tsx
+  tracking.ts
 packages/solid/src/components/button/
+  button.tsx
+  tracking.ts
 packages/vue/src/components/button/
+  button.vue
+  tracking.ts
 packages/svelte/src/components/button/
+  button.svelte
+  tracking.ts
 ```
+
+Each `tracking.ts` exports the Panda recipe `jsx` matchers for that framework's public component names. Keep this file declarative: no runtime component imports or behavior.
+
+The Panda preset build aggregates these matchers into recipe definitions. Generated build input prevents a published `panda-preset -> framework package` dependency cycle.
 
 Shared definitions should use stable component IDs so documentation, tests, and generators can compare framework coverage.
 
