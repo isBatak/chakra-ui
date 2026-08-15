@@ -1,17 +1,48 @@
-# ADR 0007: Lint dynamic styling pitfalls
+# ADR 0007: Prepare applications for Chakra v4 styling
 
 Status: Proposed
 
 ## Decision
 
-Add `@chakra-ui/eslint-plugin` with an engine-aware `no-dynamic-styling` rule.
+Publish consumer-facing migration tooling in `@chakra-ui/eslint-plugin`.
 
-The rule prevents common runtime-style patterns that are expensive with Emotion and may not be extractable by Panda.
+Its `v4-migration` configuration enables an engine-aware `no-dynamic-styling` rule. Chakra v3 users run it across an existing application, resolve every finding, and reach a styling baseline compatible with both Emotion and Panda before upgrading to Chakra v4.
+
+The rule targets patterns that are expensive with Emotion or cannot be reliably extracted by Panda.
 
 References:
 
 - [Chakra styling performance](https://chakra-ui.com/guides/styling-performance)
 - [Panda dynamic styling](https://panda-css.com/docs/guides/dynamic-styling)
+
+## Migration workflow
+
+```js
+// eslint.config.mjs
+import chakra from "@chakra-ui/eslint-plugin"
+
+export default [
+  chakra.configs["v4-migration"],
+]
+```
+
+```sh
+eslint . --fix
+eslint . --max-warnings=0
+```
+
+Suggested workflow:
+
+1. Install the plugin while the application still uses Chakra v3.
+2. Enable the `v4-migration` configuration as warnings.
+3. Apply safe automatic fixes.
+4. Resolve structural findings using the diagnostic suggestions.
+5. Make the rule error-level in CI.
+6. Upgrade to Chakra v4 or enable Panda only after the application has zero findings.
+
+The Chakra CLI or codemod may install this configuration, run ESLint, and produce a migration report. The ESLint plugin remains usable without the CLI.
+
+Names and commands are provisional.
 
 ## Invalid patterns
 
@@ -31,18 +62,19 @@ The rule covers:
 - `css()`, `chakra()`, and configured Panda factory calls
 - recipe and slot-recipe calls
 - nested style objects and responsive conditions
+- renamed style props that hide extraction from Panda
 
 Do not inspect arbitrary component props unless the component or prop is known through imports, generated metadata, or configuration.
 
 ## Preferred patterns
 
-Diagnostics should recommend the closest static alternative:
+Diagnostics recommend the closest migration-safe alternative:
 
-- recipe variants for a finite set of visual states
+- recipe variants for finite visual states
 - `data-*` attributes for UI state
-- CSS custom properties for truly continuous runtime values
-- Panda `staticCss` for known runtime values that must be pre-generated
-- `css.raw()` or recipe `.raw()` when extraction needs an explicit hint
+- CSS custom properties for continuous runtime values
+- Panda `staticCss` for known values that must be pre-generated
+- `css.raw()` or recipe `.raw()` when extraction needs a hint
 - direct style-prop names instead of renamed dynamic props
 
 ```tsx
@@ -65,14 +97,15 @@ Do not report:
 
 - string, number, and boolean literals
 - static style objects
-- statically analyzable conditional branches when conditional checks are disabled
 - same-file `const` values that resolve to static literals
 - recipes and data-attribute selectors
 - CSS variables passed through `style`
 - `css.raw()` and recipe `.raw()`
 - values explicitly covered by configured Panda `staticCss`
 
-## Configuration
+Statically analyzable conditional branches may be allowed when conditional-performance checks are disabled.
+
+## Rule configuration
 
 ```js
 {
@@ -89,25 +122,34 @@ Do not report:
 
 Modes:
 
-- `emotion`: focus on render-time allocation and conditional-style cost.
-- `panda`: focus on values Panda cannot statically extract.
-- `migration`: apply the compatible superset; recommended during v4 migration.
-
-The exact option names are provisional.
+- `emotion`: detect render-time allocation and conditional-style costs.
+- `panda`: detect values Panda cannot statically extract.
+- `migration`: apply the compatible superset; used by `v4-migration`.
 
 ## Detection model
 
-Use generated Chakra style-property and recipe metadata instead of maintaining a second handwritten property list.
+Use generated Chakra style-property, component-tracking, and recipe metadata rather than a handwritten property list.
 
 Resolve local constants only when they are in the same file and statically analyzable. Treat function calls, computed runtime lookups, props, state, and values imported from unknown modules as dynamic.
 
-Panda can extract some conditional branches. In migration mode, report them as a performance warning when recipe variants or data attributes express the intent more clearly.
+Panda can extract some conditional branches. Migration mode still reports them when recipe variants or data attributes better express the intent and avoid Emotion runtime work.
+
+Each diagnostic has:
+
+- a stable problem category
+- a short explanation
+- a preferred replacement pattern
+- a link to focused migration documentation
+
+This allows the CLI to group remaining work and report migration readiness.
 
 ## Fix policy
 
-Start without automatic fixes. Converting runtime styles to recipes, data attributes, or CSS variables changes component structure and can alter behavior.
+Provide automatic fixes only when semantics are preserved.
 
-Diagnostics should include a short suggestion and documentation link. Add narrowly safe suggestions later.
+Structural conversions to recipes, data attributes, or CSS variables should use ESLint suggestions or codemods that the user explicitly selects. Do not silently rewrite component state, public props, or DOM structure.
+
+An application is ready when all findings are fixed or explicitly reviewed and suppressed with a reason.
 
 ## Package structure
 
@@ -115,21 +157,28 @@ Diagnostics should include a short suggestion and documentation link. Add narrow
 packages/
   eslint-plugin/  # @chakra-ui/eslint-plugin
     src/rules/no-dynamic-styling.ts
+    src/configs/v4-migration.ts
 ```
 
-The CLI may offer the rule during v4 migration setup, but it must remain independently configurable.
+The plugin must support the currently maintained Chakra v3 toolchain so it can run before the v4 upgrade.
 
 ## POC
 
-1. Add invalid and valid fixtures from both official guides.
-2. Test Chakra style props, `css()`, `chakra()`, and recipes.
-3. Generate the recognized style-property list from Chakra's system metadata.
-4. Run the rule against the docs and React package.
-5. Measure findings and false positives before recommending it by default.
+1. Add valid and invalid fixtures from both official guides.
+2. Add fixtures from representative Chakra v3 applications.
+3. Test style props, `css()`, `chakra()`, recipes, custom components, and renamed props.
+4. Generate recognized properties and component names from Chakra metadata.
+5. Run the migration config against the Chakra docs and example applications.
+6. Measure findings, safe-fix coverage, and false positives.
+7. Produce a zero-findings migration-readiness report.
+
+## Scope
+
+This rule prepares styling code for the v4 engine migration. Other v4 breaking API changes remain the responsibility of separate lint rules or codemods collected by the same `v4-migration` configuration.
 
 ## Open questions
 
-- Should migration mode be warning-only in the recommended config?
+- Which safe fixes belong in ESLint and which belong in codemods?
 - Can the rule reliably read `staticCss` from Panda configuration?
 - Should conditional values with two static branches be allowed in Panda mode?
-- Should framework-specific syntax live in one rule or framework adapters?
+- How should Vue, Solid, and Svelte syntax plug into the migration configuration?
