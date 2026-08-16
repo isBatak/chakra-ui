@@ -115,7 +115,7 @@ Use the new framework anatomy entry point where shared anatomy metadata is neede
 import { dialogAnatomy } from "@ark-ui/react/anatomy"
 ```
 
-Framework packages should import anatomy from their matching Ark package rather than depending on React anatomy.
+Chakra's React package should import anatomy from `@ark-ui/react/anatomy`.
 
 ## POC
 
@@ -125,17 +125,14 @@ Framework packages should import anatomy from their matching Ark package rather 
 4. Migrate Combobox selectors to component-specific attributes.
 5. Generate the same selectors into `@chakra-ui/panda-preset`.
 6. Add DOM/recipe integration snapshots.
-7. Repeat the POC in one non-React framework.
 
 ## Open questions
 
 - Does Chakra v4 expose `render` directly or keep a deprecated `asChild` adapter?
 - Will Ark v6 export stable selector or part metadata?
-- Are component-specific attribute names identical across React, Solid, Vue, and Svelte?
 - Can all duplicated Panda preset selectors be generated from the shared theme source?
 
 ## Related ADRs
 
 - [Factory and style contexts](./0003-factory-and-style-contexts.md)
 - [Shared theme model](./0005-shared-theme.md)
-- [Multi-framework package structure](./0006-package-structure.md)
