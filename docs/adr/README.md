@@ -5,7 +5,7 @@ Scope: Panda CSS v2 and Ark UI v6 exploration
 
 ## Goal
 
-Move Chakra's React package toward build-time CSS without forcing an immediate Emotion removal. Chakra v4 focuses only on React; official Solid, Vue, and Svelte packages are out of scope.
+Move Chakra's React package toward build-time CSS without forcing an immediate Emotion removal. Chakra v4 focuses only on React; official Solid, Vue, and Svelte support is planned for Chakra v5.
 
 ## ADRs
 
