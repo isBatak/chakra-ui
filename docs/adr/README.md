@@ -31,7 +31,7 @@ In v4, consumers own application theme extensions and `ChakraSystemRegister` aug
 
 ## Implementation plan
 
-The [ordered implementation plan](./PLAN.md) links to one focused file per epic. Each epic uses small, strictly ordered tasks, requested evidence, and a hard review gate.
+The [ordered implementation plan](./plan/README.md) links to one focused file per epic. Each epic uses small, strictly ordered tasks, requested evidence, and a hard review gate.
 
 The critical path is:
 
