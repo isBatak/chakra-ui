@@ -6,41 +6,40 @@ Status: Proposed
 
 Allow Emotion and Panda components in the same React application so migration can be gradual.
 
-Do not expose a dynamic `stylingEngine` prop on `ChakraProvider` or individual components. Select the engine with fixed JSX boundaries:
+Do not expose a dynamic `stylingEngine` prop on `ChakraProvider` or individual components. The Chakra CLI installs a user-owned Provider component containing one fixed root engine boundary:
 
 ```tsx
-<ChakraProvider>
-  <App />
-</ChakraProvider>
+// Panda-only Provider snippet
+<PandaStylingEngine>
+  <ChakraProvider>
+    <App />
+  </ChakraProvider>
+</PandaStylingEngine>
 
-// Legacy application during gradual migration
-<ChakraProvider>
-  <EmotionStylingEngine>
+// Emotion-only Provider snippet; default for v3 → v4 migration
+<EmotionStylingEngine>
+  <ChakraProvider>
     <LegacyApp />
-  </EmotionStylingEngine>
-</ChakraProvider>
+  </ChakraProvider>
+</EmotionStylingEngine>
 ```
 
 A boundary can wrap a migrated subtree or one component:
 
 ```tsx
-<ChakraProvider>
-  <EmotionStylingEngine>
-    <LegacyPage />
+<PandaStylingEngine>
+  <ChakraProvider>
+    <MigratedApp />
 
-    <PandaStylingEngine>
-      <MigratedSection />
+    <EmotionStylingEngine>
+      <LegacyPage />
 
-      <EmotionStylingEngine>
-        <TemporaryFallback />
-      </EmotionStylingEngine>
-    </PandaStylingEngine>
-
-    <PandaStylingEngine>
-      <Button>Migrated button</Button>
-    </PandaStylingEngine>
-  </EmotionStylingEngine>
-</ChakraProvider>
+      <PandaStylingEngine>
+        <MigratedSection />
+      </PandaStylingEngine>
+    </EmotionStylingEngine>
+  </ChakraProvider>
+</PandaStylingEngine>
 ```
 
 Names are provisional.
@@ -49,9 +48,17 @@ Names are provisional.
 
 A component uses the nearest styling-engine boundary.
 
-When no boundary exists, use Panda as the Chakra v4 default.
+The installed Provider snippet contains a root boundary. There is no runtime engine inference or silent fallback.
 
-A legacy application that still needs Emotion wraps its root or remaining legacy subtree in `EmotionStylingEngine`. There is no silent runtime fallback from Panda to Emotion.
+If a Chakra component renders without an engine boundary, throw a configuration error that tells the user to install and mount an adapter from `@chakra-ui/panda` or `@chakra-ui/emotion`.
+
+The v3 → v4 CLI migration installs or updates the Provider snippet with `EmotionStylingEngine` to preserve current behavior. Panda-only setup rewrites that owned snippet to `PandaStylingEngine`. Dual-engine setup keeps Panda in the Provider and wraps remaining legacy subtrees in Emotion boundaries.
+
+The Provider snippet belongs to the application. Users may edit its structure after installation.
+
+The CLI must never overwrite an existing Provider file. During migration it inspects the file, leaves it untouched, and stops with manual migration instructions. Applying those changes remains an explicit user action.
+
+Generating a Provider diff is the preferred future improvement, but it is out of scope for this v4 plan.
 
 The CLI and build integration may detect `panda.config.*` to install or validate `@chakra-ui/panda-preset`, generated CSS, and extraction settings. Runtime components cannot reliably inspect project configuration files, so config detection must not become a hidden runtime engine selector.
 
@@ -61,7 +68,7 @@ Changing engines requires changing the JSX boundary. This makes the migration vi
 
 ## Provider responsibilities
 
-`ChakraProvider` owns the system, theme, global styles, and color mode. It does not select a styling engine.
+`ChakraProvider` owns the system, theme, global styles, and color mode. It does not select a styling engine. The fixed engine boundary wraps `ChakraProvider` inside the user-owned Provider snippet.
 
 `EmotionStylingEngine` and `PandaStylingEngine` only provide a fixed engine adapter. They must not re-inject resets, global styles, cascade-layer declarations, or color-mode state.
 
@@ -69,7 +76,39 @@ This separation allows nested migration boundaries without duplicating global ou
 
 ## Adapter boundary
 
-Components depend on a stable Chakra adapter contract, not directly on Emotion or Panda.
+`@chakra-ui/react` owns an engine-neutral adapter contract. The contract is experimental in v4. Components depend on that contract, not directly on Emotion or Panda.
+
+Each styling engine lives in a separate package:
+
+- `@chakra-ui/panda` exports the Panda adapter and `PandaStylingEngine`.
+- `@chakra-ui/emotion` exports the Emotion adapter and `EmotionStylingEngine`.
+- Future packages may implement the same contract for Tailwind, styled-components, or another engine.
+
+Component imports remain in `@chakra-ui/react` regardless of the installed engine packages.
+
+## Stability
+
+Treat the engine adapter implementation contract as experimental in v4. Panda and Emotion are the first validation implementations.
+
+Communicate this status in the adapter documentation, release notes, and this ADR. Do not add `experimental` or `unstable` to API names, symbols, or import paths.
+
+Export the adapter-author contract from the dedicated `@chakra-ui/react/styling-engine` entry point:
+
+```ts
+import type { StylingEngineAdapter } from "@chakra-ui/react/styling-engine"
+```
+
+Do not export adapter-author helpers from the main component entry point unless normal component consumers need them.
+
+Do not mark the adapter contract stable until:
+
+1. Panda and Emotion pass the complete conformance suite.
+2. At least one independent third adapter, such as Tailwind or styled-components, implements it successfully.
+3. A later ADR accepts the resulting contract.
+
+The public component props and canonical style types are separate from this experimental status and remain part of Chakra's supported component API.
+
+All adapters implement the same Panda-canonical public style contract. Those component-facing types are stable, but the adapter implementation API is not. An adapter cannot add engine-specific values to core component props. Capabilities unique to an engine must be exposed only from that adapter package.
 
 The public `chakra()` factory returns a stable Chakra wrapper. At render time, the wrapper reads the nearest fixed boundary and delegates styling to the matching implementation.
 
@@ -81,7 +120,10 @@ interface StylingEngineAdapter {
   token(path: string, fallback?: string): string
 }
 
+// @chakra-ui/emotion
 const EmotionStylingEngine = createStylingEngineBoundary(emotionAdapter)
+
+// @chakra-ui/panda
 const PandaStylingEngine = createStylingEngineBoundary(pandaAdapter)
 ```
 
