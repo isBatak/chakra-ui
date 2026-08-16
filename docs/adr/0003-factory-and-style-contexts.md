@@ -138,6 +138,28 @@ The plugin must:
 
 Prefer an official Panda import-map/factory extension if it can provide the same result without source rewriting.
 
+## Explicit extraction hints
+
+Remember Panda's `{fn}.raw()` identity helper, available on `css`, patterns, and recipes. It does not change the runtime value; it only tells the compiler to extract an otherwise indirect usage.
+
+This is useful for Storybook args and custom component props:
+
+```tsx
+// Mark the object as valid CSS for the extractor.
+<Button rootProps={css.raw({ bg: "red.400" })} />
+
+export const Funky: Story = {
+  // Mark this as a button recipe usage.
+  args: button.raw({
+    visual: "funky",
+    shape: "circle",
+    size: "sm",
+  }),
+}
+```
+
+Include `.raw()` in the POC for supported Chakra recipes, slot recipes, patterns, and CSS helpers. Document it as an explicit extraction escape hatch, not the default authoring style.
+
 ## Style contexts
 
 Panda's generated `createStyleContext` is not API-compatible with Chakra's recipe contexts. The adapter must normalize:
