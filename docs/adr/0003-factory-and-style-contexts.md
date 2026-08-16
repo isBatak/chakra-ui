@@ -91,7 +91,7 @@ export const chakra = createChakraFactory()
 
 This prototype keeps `chakra(Component, recipe)` and `chakra.element` while routing intrinsic elements through Ark before Panda. Ark therefore supplies polymorphism and v6 `render` composition, Panda supplies styling and recipe behavior, and the cache preserves stable intrinsic component identity. The prototype must not assume Ark v6 still provides `asChild`.
 
-Import paths and generated Panda types are provisional. The POC must verify refs, prop forwarding, recipe defaults, component selectors, server rendering, and every supported framework's equivalent factory.
+Import paths and generated Panda types are provisional. The POC must verify refs, prop forwarding, recipe defaults, component selectors, and server rendering in React.
 
 ## Static extraction
 
