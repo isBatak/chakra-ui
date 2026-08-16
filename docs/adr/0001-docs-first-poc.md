@@ -6,7 +6,9 @@ Status: Proposed
 
 Use the documentation app as the first Panda CSS migration target.
 
-Pin the proof of concept to Panda CSS v2 and Ark UI v6. Do not migrate the React package in this phase.
+Pin the proof of concept to Panda CSS v2 and Chakra's current Ark UI v5 dependency. Do not migrate the React package in this phase.
+
+Run the Ark UI v6 integration only after npm publishes an official v6 beta. Do not block the Panda POC on Ark v6 alpha snapshots or an Ark source checkout.
 
 ## Why
 
@@ -25,6 +27,7 @@ The docs exercise tokens, recipes, responsive styles, color mode, SSR, code exam
 - Removing Emotion.
 - Migrating every docs page.
 - Finalizing the public adapter API.
+- Upgrading to Ark UI v6 before an official beta is published.
 
 ## Open questions
 
