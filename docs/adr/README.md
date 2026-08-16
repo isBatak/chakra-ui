@@ -17,6 +17,7 @@ Move Chakra's React package toward build-time CSS without forcing an immediate E
 8. [Compare the Panda v2 migration design](./0008-panda-v2-migration-comparison.md)
 9. [Upgrade to Ark UI v6](./0009-ark-ui-v6.md)
 10. [Canonical styling-system type contract](./0010-canonical-styling-system-types.md)
+11. [Ejected theme ownership](./0011-ejected-theme-ownership.md)
 
 ## Initial plan
 
