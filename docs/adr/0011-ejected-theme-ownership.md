@@ -29,10 +29,18 @@ This glue belongs in the consumer's installed Chakra configuration and provider 
 - Tell the user that future Chakra theme updates are no longer automatic.
 - Keep automated upstream diffs or merges out of the initial scope.
 
+## Alternative: Panda MCP server
+
+[Panda's local MCP server](https://panda-css.com/docs/ai/mcp-server) can expose the resolved design system to AI tools without ejecting the theme.
+
+AI tools can query tokens, semantic tokens, recipes, patterns, conditions, configuration, and usage. This is a good option when the goal is AI visibility rather than local theme ownership.
+
+MCP does not replace ejection when the consumer wants to directly edit and maintain the complete theme source.
+
 ## Consequences
 
 - Theme code is visible and easy to customize.
-- AI tools can inspect the actual application theme.
+- AI tools can inspect the design system through ejected files or Panda MCP.
 - Consumers accept responsibility for maintaining their ejected copy.
 - Chakra still maintains one packaged source of truth for users who do not eject.
 - Emotion and Panda adapters must accept the same ejected theme contract described in [ADR 0005](./0005-shared-theme.md).
