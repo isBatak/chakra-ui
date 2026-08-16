@@ -18,6 +18,7 @@ Move Chakra toward build-time CSS and official React, Solid, Vue, and Svelte pac
 7. [Lint dynamic styling pitfalls](./0007-eslint-dynamic-styling.md)
 8. [Compare the Panda v2 migration design](./0008-panda-v2-migration-comparison.md)
 9. [Upgrade to Ark UI v6](./0009-ark-ui-v6.md)
+10. [Canonical styling-system type contract](./0010-canonical-styling-system-types.md)
 
 ## Initial plan
 
