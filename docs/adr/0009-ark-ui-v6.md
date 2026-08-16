@@ -1,6 +1,6 @@
 # ADR 0009: Upgrade to Ark UI v6
 
-Status: Proposed
+Status: Proposed — blocked until an official Ark UI v6 beta is published
 
 ## Context
 
@@ -8,18 +8,29 @@ Chakra v4 should align with [Ark UI v6 RFC #3616](https://github.com/chakra-ui/a
 
 The RFC introduces three relevant changes:
 
-- `asChild` is replaced by an explicit `render` prop.
+- `render` becomes the preferred composition API.
+- The Ark v6 React implementation keeps `asChild` as deprecated compatibility and marks it for removal in the next major.
 - indicators use state-aware `render` callbacks
 - generic `data-scope` and `data-part` attributes become component-specific attributes
 - anatomy exports move to framework anatomy entry points
 
+## Availability
+
+As of August 16, 2026, npm has no official Ark UI v6 beta. The published release line remains v5; only timestamped v6 alpha snapshots are discoverable.
+
+Use Ark UI v5 for the Panda, type, theme, factory, docs, engine-mode, and migration-tooling POCs. Do not use a timestamped alpha or source checkout as Chakra v4's dependency.
+
+Move this upgrade to the final integration epic. Start it only when npm publishes an official v6 beta.
+
 ## Decision
 
-Use Ark UI v6 as the behavior and composition foundation for Chakra v4.
+Target Ark UI v6 as the final behavior and composition foundation for Chakra v4, after the beta availability gate passes.
 
-Do not design the new Chakra factory around Ark's current `asChild` implementation. Prototype Ark v6 `render` composition first.
+Design the new Chakra factory around Ark v6 `render` composition.
 
-Chakra may keep `asChild` temporarily as a compatibility feature, but it would be Chakra-owned migration behavior rather than inherited Ark v6 behavior.
+Preserve `asChild` in Chakra v4 by inheriting Ark v6's deprecated React compatibility. Do not build a second Chakra-owned adapter. New Chakra internals and documentation should use `render`, while existing v3 applications can keep `asChild` during the v4 migration.
+
+Remove Chakra's `asChild` support when the underlying Ark compatibility is removed in its next major.
 
 ## Composition
 
@@ -31,10 +42,19 @@ Ark v5:
 </Popover.Trigger>
 ```
 
-Ark v6:
+Ark v6 preferred API:
 
 ```tsx
 <Popover.Trigger render={<Button>Open</Button>} />
+```
+
+Ark v6 React compatibility:
+
+```tsx
+// Deprecated, but preserved for the v4 migration window.
+<Popover.Trigger asChild>
+  <Button>Open</Button>
+</Popover.Trigger>
 ```
 
 The `chakra()` factory must preserve refs, event handlers, class names, style props, and Panda recipe classes when used through `render`.
@@ -115,24 +135,32 @@ Use the new framework anatomy entry point where shared anatomy metadata is neede
 import { dialogAnatomy } from "@ark-ui/react/anatomy"
 ```
 
-Chakra's React package should import anatomy from `@ark-ui/react/anatomy`.
+Framework packages should import anatomy from their matching Ark package rather than depending on React anatomy.
 
 ## POC
 
-1. Upgrade one simple component and one multipart component to Ark v6.
-2. Replace `asChild` usage with `render`.
-3. Test the Panda + Ark `chakra()` factory through `render`.
-4. Migrate Combobox selectors to component-specific attributes.
-5. Generate the same selectors into `@chakra-ui/panda-preset`.
-6. Add DOM/recipe integration snapshots.
+0. Confirm npm publishes an official Ark UI v6 beta. Stop if it does not.
+1. Upgrade Button and Dialog to that exact beta.
+2. Use `render` in new and migrated Chakra internals.
+3. Verify existing `asChild` usage still works through Ark's deprecated compatibility.
+4. Test the Panda + Ark `chakra()` factory through both `render` and deprecated `asChild`.
+5. Migrate Combobox selectors to component-specific attributes.
+6. Generate the same selectors into `@chakra-ui/panda-preset`.
+7. Add DOM/recipe integration snapshots.
+
+## Exit rule
+
+Do not block the earlier Panda architecture work on Ark v6 availability. Do not cut the Chakra v4 prerelease until the accepted Ark v6 beta integration gate passes.
 
 ## Open questions
 
-- Does Chakra v4 expose `render` directly or keep a deprecated `asChild` adapter?
+- Does the final Ark v6 release preserve the deprecated React `asChild` compatibility exactly as implemented in PR #3920?
 - Will Ark v6 export stable selector or part metadata?
+- Are component-specific attribute names identical across React, Solid, Vue, and Svelte?
 - Can all duplicated Panda preset selectors be generated from the shared theme source?
 
 ## Related ADRs
 
 - [Factory and style contexts](./0003-factory-and-style-contexts.md)
 - [Shared theme model](./0005-shared-theme.md)
+- [Multi-framework package structure](./0006-package-structure.md)
