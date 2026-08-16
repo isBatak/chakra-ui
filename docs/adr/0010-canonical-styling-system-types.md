@@ -36,7 +36,7 @@ interface ChakraSystem {
 }
 ```
 
-Both engines implement this contract:
+`@chakra-ui/react/styling-engine` exports the adapter-author contract. Every engine adapter implements it. The component-facing types are canonical; the adapter implementation interface remains experimental in v4:
 
 ```ts
 interface StylingEngine<System extends ChakraSystem> {
@@ -48,11 +48,11 @@ interface StylingEngine<System extends ChakraSystem> {
 }
 ```
 
-Panda and Emotion may implement styling differently, but component props come from the same contract.
+Panda, Emotion, and future adapters may implement styling differently, but component props come from the same contract. An adapter that cannot represent the canonical inputs does not satisfy the Chakra adapter contract.
 
 ## Use module augmentation for application extensions
 
-Panda codegen can augment Chakra's default system:
+For v4, the consumer manually augments Chakra's default system:
 
 ```ts
 declare module "@chakra-ui/react" {
@@ -82,7 +82,7 @@ type ButtonProps = HTMLChakraProps<
 >
 ```
 
-This gives application-added tokens and variants to every component:
+This gives application-added tokens and variants to every component. The consumer is responsible for keeping this augmentation aligned with the theme extension used by Panda and Emotion:
 
 ```tsx
 <Button variant="marketing" colorPalette="brand" />
@@ -205,6 +205,10 @@ Validate:
 7. Clean public declarations with no `any` or `@ts-ignore`.
 8. Emotion-only capabilities remaining isolated in `@chakra-ui/emotion`.
 
+## Deferred automation
+
+Automatically generating `ChakraSystemRegister` from `panda.config.*` is the preferred future direction, but it is out of scope for v4. The v4 POC documents the manual declaration and validates it in consumer fixtures.
+
 ## Consequences
 
 - Consumers use the same component types under both runtimes.
@@ -212,7 +216,9 @@ Validate:
 - Panda codegen owns application type augmentation.
 - Emotion cannot introduce incompatible inputs into core component props.
 - Runtime selection and compile-time type selection remain intentionally separate.
-- The compatibility layer may need to reject or isolate Emotion features that Panda cannot represent.
+- The compatibility layer must reject or isolate Emotion features that Panda cannot represent.
+- Future Tailwind, styled-components, or other adapters must pass the same canonical type suite.
+- Passing the type suite does not make the adapter implementation API stable in v4.
 
 ## Related ADRs
 
