@@ -175,3 +175,4 @@ Panda should compose all framework packages through the same design-system contr
 - [Shared theme model](./0005-shared-theme.md)
 - [Multi-framework package structure](./0006-package-structure.md)
 - [Dynamic styling lint rule](./0007-eslint-dynamic-styling.md)
+- [Canonical styling-system type contract](./0010-canonical-styling-system-types.md)
