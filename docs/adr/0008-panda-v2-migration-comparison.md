@@ -31,7 +31,7 @@ Both approaches agree that:
 | Packaging | `@chakra-ui/styled-system` owns runtime, types, preset, and build info | Keeps `@chakra-ui/panda-preset` and explores shared theme packages |
 | App customization | App generates one composed styled-system and aliases Chakra imports to it | Preset-first POC; app composition was not fully specified |
 | Extraction | Published manifests and `panda.components.json` | Colocated `tracking.ts` plus a parser-plugin fallback |
-| Frameworks | React example over generic Panda design-system contracts | Official React, Solid, Vue, and Svelte packages |
+| Framework scope | React example over generic Panda design-system contracts | Chakra v4 focuses only on React |
 | Factory | Components directly use generated CSS and recipe helpers | `chakra()` combines Panda's factory with Ark's factory |
 | Diagnostics | Panda validates aliases, paths, manifests, and dynamic usage | ESLint prepares application styling and flags dynamic pitfalls |
 
@@ -51,7 +51,7 @@ The author of the Panda migration note clarified the intended model:
 
 This is closer to Mantine's optional Emotion integration than to a permanent runtime adapter.
 
-For framework scope, the suggested end state is deliberately thin: Panda owns styling and Ark/Zag own behavior. Chakra may become mostly a curated Panda preset plus light framework integration. Users who need Ark's other frameworks can consume Ark directly instead of Chakra maintaining four full component implementations.
+For framework scope, Chakra v4 focuses only on React. Panda owns styling and Ark/Zag own behavior. Users who need other frameworks can consume Ark directly; Chakra will not publish official Solid, Vue, or Svelte packages.
 
 ## Reported blocker: generated types
 
@@ -90,7 +90,7 @@ Prefer the author's single-engine core as the baseline:
 3. Keep any Emotion seam narrow and temporary; do not make every component dispatch through an engine registry.
 4. Preserve Chakra's factory and contexts, but implement them over generated Panda class-string helpers.
 5. Treat generated type compatibility as the first POC gate, before migrating many components.
-6. Reconsider official Chakra packages for every Ark framework. A thinner React package plus Panda preset and direct Ark usage may better reduce Chakra's maintenance surface.
+6. Keep Chakra v4 React-only. A thinner React package plus Panda preset and direct Ark usage for other frameworks reduces Chakra's maintenance surface.
 
 The existing engine-boundary ADR remains useful as an experiment, but it should not be considered the preferred architecture unless the POC proves that runtime coexistence preserves strict public types without duplicate component implementations.
 
@@ -117,7 +117,7 @@ Keep these additions from the current ADRs:
 
 - Emotion/Panda boundaries only as a POC alternative; prefer an optional Emotion package with a thin compatibility seam.
 - Ark + Panda composition behind the public `chakra()` API.
-- Re-evaluate official multi-framework Chakra packages against a thinner model where Panda owns styling and Ark is consumed directly for other frameworks.
+- Keep Chakra v4 focused on React; other frameworks can consume Panda and Ark directly.
 - Colocated component tracking as authoring input.
 - Consumer-facing ESLint guidance.
 
@@ -151,11 +151,9 @@ Treat `EmotionStylingEngine` and `PandaStylingEngine` as transitional compatibil
 
 The Panda note's direct generated imports remain the desired end state because they improve tree shaking and avoid permanent runtime registry indirection.
 
-### Multi-framework support
+### Framework scope
 
-Give every framework package its own component manifest and framework renderer while sharing the neutral theme, recipes, anatomy, and generation inputs.
-
-Panda should compose all framework packages through the same design-system contract.
+Chakra v4 publishes and documents React only. Solid, Vue, and Svelte remain outside Chakra's package and documentation scope; their users can consume Panda and the matching Ark framework packages directly.
 
 ## POC questions
 
@@ -173,6 +171,5 @@ Panda should compose all framework packages through the same design-system contr
 - [Styling engine boundaries](./0002-styling-engine-adapter.md)
 - [Factory and style contexts](./0003-factory-and-style-contexts.md)
 - [Shared theme model](./0005-shared-theme.md)
-- [Multi-framework package structure](./0006-package-structure.md)
 - [Dynamic styling lint rule](./0007-eslint-dynamic-styling.md)
 - [Canonical styling-system type contract](./0010-canonical-styling-system-types.md)
