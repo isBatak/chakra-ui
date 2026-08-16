@@ -35,15 +35,89 @@ Both approaches agree that:
 | Factory | Components directly use generated CSS and recipe helpers | `chakra()` combines Panda's factory with Ark's factory |
 | Diagnostics | Panda validates aliases, paths, manifests, and dynamic usage | ESLint prepares application styling and flags dynamic pitfalls |
 
+## Author clarification: single-engine core
+
+The author of the Panda migration note clarified the intended model:
+
+- Panda is built directly into `@chakra-ui/react`; core only knows Panda.
+- Runtime styling composes generated class strings. CSS is emitted at build time.
+- Emotion moves to an optional `@chakra-ui/emotion` compatibility package.
+- A thin seam lets that package restore the old runtime behavior without making core dual-engine.
+- Chakra keeps its public factory and framework glue, backed by Panda's generated runtime.
+- Chakra recipe and slot-recipe contexts wrap Panda's equivalents.
+- `css`, `cva`, and `sva` come from the generated styled-system.
+- Chakra publishes the preset, manifest, component metadata, and build info as one Panda design system.
+- Consumers configure `designSystem: "@chakra-ui/react"` and normally install only `@chakra-ui/react`.
+
+This is closer to Mantine's optional Emotion integration than to a permanent runtime adapter.
+
+For framework scope, the suggested end state is deliberately thin: Panda owns styling and Ark/Zag own behavior. Chakra may become mostly a curated Panda preset plus light framework integration. Users who need Ark's other frameworks can consume Ark directly instead of Chakra maintaining four full component implementations.
+
+## Reported blocker: generated types
+
+The migration attempt was blocked mainly by cleanly exposing Panda-generated types without `@ts-ignore`, especially:
+
+- `HTMLChakraProps`
+- `SystemStyleObject`
+- recipe and slot-recipe variant inference
+- public re-exports from the app-composed generated styled-system
+
+These are API-boundary problems, not minor implementation details. Chakra's public component props currently combine React/Ark polymorphic props with generated system properties. `SystemStyleObject` depends on generated conditions and system properties. Recipe props also depend on generated recipe keys, values, slots, and tokens.
+
+## Do the current ADRs have the same blocker?
+
+**Yes. The Panda path inherits it, and the dual-engine adapter makes it harder.**
+
+A JSX engine boundary is runtime context, but TypeScript resolves `ButtonProps`, `HTMLChakraProps`, `SystemStyleObject`, and recipe variants before runtime. The same `<Button>` cannot expose different prop types based on its nearest `EmotionStylingEngine` or `PandaStylingEngine`.
+
+The adapter therefore needs one public type contract that is valid for both engines. That creates additional risks:
+
+- An intersection can reject props supported by only one engine.
+- A union can weaken inference and excess-property checking.
+- Emotion style objects and Panda-extractable inputs do not have identical constraints.
+- App-added Panda tokens and variants must flow into Chakra component props through generated declarations.
+- Recipe contexts currently return style objects, while the desired Panda runtime returns class strings.
+- Slot names, conditional values, polymorphism, `asChild`, and refs must remain inferred after wrapping generated helpers.
+
+The boundaries help runtime migration, but they do not solve type selection. A permanent dual-engine core would have to stabilize a shared type ABI or accept weaker types.
+
+## Revised direction
+
+Prefer the author's single-engine core as the baseline:
+
+1. Make Panda the only engine known by `@chakra-ui/react`.
+2. Put legacy runtime styling in optional `@chakra-ui/emotion`.
+3. Keep any Emotion seam narrow and temporary; do not make every component dispatch through an engine registry.
+4. Preserve Chakra's factory and contexts, but implement them over generated Panda class-string helpers.
+5. Treat generated type compatibility as the first POC gate, before migrating many components.
+6. Reconsider official Chakra packages for every Ark framework. A thinner React package plus Panda preset and direct Ark usage may better reduce Chakra's maintenance surface.
+
+The existing engine-boundary ADR remains useful as an experiment, but it should not be considered the preferred architecture unless the POC proves that runtime coexistence preserves strict public types without duplicate component implementations.
+
+## Type-first POC
+
+Before a broad docs or component migration, build a small generated-type spike covering:
+
+1. One intrinsic factory component using `HTMLChakraProps<"button">`.
+2. One recipe component with an app-added variant.
+3. One slot recipe with inferred slot and variant types.
+4. One `css` prop using an app-added token and condition.
+5. Ark `asChild`, polymorphic props, and ref inference.
+6. Clean public re-exports from `@chakra-ui/react` with no `any` or `@ts-ignore`.
+7. Default package declarations and app-composed declarations resolving through the same import boundary.
+8. The optional Emotion package consuming the seam without widening Panda component props.
+
+If this spike fails, the project should not hide the mismatch behind assertions. The options are to improve Panda's generated contracts, reduce Chakra's public type surface, or publish separate compatibility components/types.
+
 ## Decision
 
-Use the Panda v2 design note as the baseline candidate for the final static Panda architecture.
+Use the Panda v2 design note and the author's clarified single-engine model as the baseline candidate for the final architecture.
 
 Keep these additions from the current ADRs:
 
-- Emotion/Panda boundaries as a temporary migration mechanism.
+- Emotion/Panda boundaries only as a POC alternative; prefer an optional Emotion package with a thin compatibility seam.
 - Ark + Panda composition behind the public `chakra()` API.
-- Official multi-framework packages and docs.
+- Re-evaluate official multi-framework Chakra packages against a thinner model where Panda owns styling and Ark is consumed directly for other frameworks.
 - Colocated component tracking as authoring input.
 - Consumer-facing ESLint guidance.
 
@@ -88,9 +162,11 @@ Panda should compose all framework packages through the same design-system contr
 1. Can `designSystem: "@chakra-ui/react"` compose Chakra and app theme extensions with correct CSS and types?
 2. Can `tracking.ts` generate the component manifest required by Panda?
 3. Can Chakra's public `chakra()` factory resolve through an app-composed styled-system without a parser rewrite?
-4. Can Emotion and Panda coexist temporarily without affecting the final Panda bundle?
+4. Can an optional `@chakra-ui/emotion` package plug into a narrow seam without making core dual-engine or weakening types?
 5. Should `@chakra-ui/panda-preset` remain public, or become an export of `@chakra-ui/styled-system`?
 6. Can the manifest and alias model work consistently in Vite, Next webpack, and Turbopack?
+7. Can generated `HTMLChakraProps`, `SystemStyleObject`, recipe, and slot-recipe types be re-exported with no `any` or `@ts-ignore`?
+8. Do engine boundaries provide enough migration value to justify their unresolved compile-time type contract?
 
 ## Related ADRs
 
