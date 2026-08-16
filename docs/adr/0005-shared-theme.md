@@ -37,7 +37,7 @@ The preset owns Panda-specific:
 - color-palette aliases
 - Panda compatibility transforms
 
-Framework packages must not duplicate this Panda theme representation.
+The React package must consume this Panda theme representation rather than duplicate it.
 
 ## Component tracking
 
@@ -58,7 +58,7 @@ export const buttonRecipe = defineRecipe({
 
 This lets Panda generate recipe CSS when Chakra components are used, without placing extraction rules in a central list that drifts from the component.
 
-The preset build aggregates the tracking metadata. The published preset must not introduce a runtime dependency from `panda-preset` back to a framework package.
+The preset build aggregates the tracking metadata. The published preset must not introduce a runtime dependency from `panda-preset` back to `@chakra-ui/react`.
 
 The preset is generated or adapted from the shared theme source. It must not become a second source of truth.
 
