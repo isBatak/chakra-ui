@@ -51,7 +51,7 @@ The author of the Panda migration note clarified the intended model:
 
 This is closer to Mantine's optional Emotion integration than to a permanent runtime adapter.
 
-For framework scope, Chakra v4 focuses only on React. Panda owns styling and Ark/Zag own behavior. Users who need other frameworks can consume Ark directly; Chakra will not publish official Solid, Vue, or Svelte packages.
+For framework scope, Chakra v4 focuses only on React. Official Solid, Vue, and Svelte support is deferred to Chakra v5.
 
 ## Reported blocker: generated types
 
@@ -90,7 +90,7 @@ Prefer the author's single-engine core as the baseline:
 3. Keep any Emotion seam narrow and temporary; do not make every component dispatch through an engine registry.
 4. Preserve Chakra's factory and contexts, but implement them over generated Panda class-string helpers.
 5. Treat generated type compatibility as the first POC gate, before migrating many components.
-6. Keep Chakra v4 React-only. A thinner React package plus Panda preset and direct Ark usage for other frameworks reduces Chakra's maintenance surface.
+6. Keep Chakra v4 React-only and defer official Solid, Vue, and Svelte support to Chakra v5.
 
 The existing engine-boundary ADR remains useful as an experiment, but it should not be considered the preferred architecture unless the POC proves that runtime coexistence preserves strict public types without duplicate component implementations.
 
@@ -117,7 +117,7 @@ Keep these additions from the current ADRs:
 
 - Emotion/Panda boundaries only as a POC alternative; prefer an optional Emotion package with a thin compatibility seam.
 - Ark + Panda composition behind the public `chakra()` API.
-- Keep Chakra v4 focused on React; other frameworks can consume Panda and Ark directly.
+- Keep Chakra v4 focused on React and defer official Solid, Vue, and Svelte support to Chakra v5.
 - Colocated component tracking as authoring input.
 - Consumer-facing ESLint guidance.
 
@@ -153,7 +153,7 @@ The Panda note's direct generated imports remain the desired end state because t
 
 ### Framework scope
 
-Chakra v4 publishes and documents React only. Solid, Vue, and Svelte remain outside Chakra's package and documentation scope; their users can consume Panda and the matching Ark framework packages directly.
+Chakra v4 publishes and documents React only. Official Solid, Vue, and Svelte packages and documentation are planned for Chakra v5.
 
 ## POC questions
 
