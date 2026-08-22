@@ -9,6 +9,12 @@ export interface StylingEngineSplitPropsOutput<ElementProps, StyleProps> {
   styleProps: StyleProps
 }
 
+export type StylingEngineStyleInput<SystemStyle> =
+  | SystemStyle
+  | readonly SystemStyle[]
+
+export type StylingEngineStyleOutput = string
+
 export type StylingEngineClassName =
   | string
   | false
@@ -30,7 +36,7 @@ export interface StylingEngineAdapter<
   splitProps<Props extends StylingEngineProps>(
     props: StylingEngineSplitPropsInput<Props>,
   ): StylingEngineSplitPropsOutput<Partial<Props>, Partial<Props>>
-  css(style: SystemStyle): string
+  css(style: StylingEngineStyleInput<SystemStyle>): StylingEngineStyleOutput
   recipe(name: string, props: RecipeProps): string
   slotRecipe(name: string, props: SlotRecipeProps): Record<string, string>
   cx(...classNames: StylingEngineClassName[]): string
