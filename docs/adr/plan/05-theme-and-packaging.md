@@ -4,6 +4,13 @@
 
 One theme model feeds both engines without requiring a Chakra config file.
 
+## Related ADRs
+
+- [ADR 0005 — Shared theme](../0005-shared-theme.md)
+- [ADR 0008 — Panda CSS v2 migration comparison](../0008-panda-v2-migration-comparison.md)
+- [ADR 0011 — Ejected theme ownership](../0011-ejected-theme-ownership.md)
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+
 ## Tasks
 
 - [ ] 5.1 Define the engine-neutral theme entry point.
