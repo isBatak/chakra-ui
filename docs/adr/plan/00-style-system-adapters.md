@@ -4,6 +4,11 @@
 
 Emotion and Panda implement the StyleSystem methods and types consumed by the factory. Implement Emotion first.
 
+## Related ADRs
+
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0010 — Canonical styling-system types](../0010-canonical-styling-system-types.md)
+
 ## Contract tasks
 
 - [ ] 0.1 Define the minimal StyleSystem interface from the ADR contracts.
