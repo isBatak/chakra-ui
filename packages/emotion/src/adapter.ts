@@ -9,12 +9,14 @@ import type {
   SystemContext,
   SystemStyleObject,
 } from "@chakra-ui/react/styled-system"
+import {
+  createEmotionStyleResolver,
+  type EmotionCacheLike,
+} from "./style-resolver"
 
 export interface EmotionAdapterOptions {
   system: SystemContext
-  resolveStyle(
-    style: StylingEngineStyleInput<SystemStyleObject>,
-  ): StylingEngineStyleOutput
+  cache: EmotionCacheLike
 }
 
 const cx = (...values: StylingEngineClassName[]) =>
@@ -23,7 +25,8 @@ const cx = (...values: StylingEngineClassName[]) =>
 export function createEmotionAdapter(
   options: EmotionAdapterOptions,
 ): StylingEngineAdapter<SystemStyleObject> {
-  const { system, resolveStyle } = options
+  const { system } = options
+  const resolveStyle = createEmotionStyleResolver(options.cache)
 
   return {
     splitProps<Props extends StylingEngineProps>(props: Readonly<Props>) {
