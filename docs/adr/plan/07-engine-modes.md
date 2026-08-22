@@ -4,6 +4,12 @@
 
 Emotion-only, Panda-only, and dual-engine applications are independently verified.
 
+## Related ADRs
+
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0005 — Shared theme](../0005-shared-theme.md)
+- [ADR 0010 — Canonical styling-system types](../0010-canonical-styling-system-types.md)
+
 ## Tasks
 
 - [ ] 7.1 Create the Emotion-only fixture.
