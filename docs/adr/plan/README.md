@@ -13,8 +13,6 @@ Work from top to bottom. Do one checkbox at a time. Stop at every gate and attac
 7. [Epic 6 — Documentation proof](./06-docs-poc.md)
 8. [Epic 7 — Engine modes](./07-engine-modes.md)
 9. [Epic 8 — Migration tooling](./08-migration-tooling.md)
-10. [Epic 9 — Ark UI v6](./09-ark-ui-v6.md)
-11. [Epic 10 — Prerelease](./10-prerelease.md)
 
 ## Focus rule
 
