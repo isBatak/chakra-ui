@@ -49,7 +49,7 @@ export function createPandaAdapter<
 
       for (const key in props) {
         const target = options.isStyleProp(key) ? styleProps : elementProps
-        target[key] = props[key]
+        ;(target as StylingEngineProps)[key] = props[key]
       }
 
       return { elementProps, styleProps }
