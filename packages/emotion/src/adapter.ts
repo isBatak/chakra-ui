@@ -3,18 +3,16 @@ import type {
   StylingEngineClassName,
   StylingEngineProps,
 } from "@chakra-ui/react/styling-engine"
+import type { EmotionCache } from "@emotion/cache"
 import type {
   SystemContext,
   SystemStyleObject,
 } from "@chakra-ui/react/styled-system"
-import {
-  createEmotionStyleResolver,
-  type EmotionCacheLike,
-} from "./style-resolver"
+import { createEmotionStyleResolver } from "./style-resolver"
 
 export interface EmotionAdapterOptions {
   system: SystemContext
-  cache: EmotionCacheLike
+  cache: EmotionCache
 }
 
 const cx = (...values: StylingEngineClassName[]) =>
