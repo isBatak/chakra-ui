@@ -1,6 +1,6 @@
 {
   "name": "@chakra-ui/emotion",
-  "version": "4.0.0-next.0",
+  "version": "3.36.1",
   "description": "Emotion styling adapter for Chakra UI",
   "type": "module",
   "main": "dist/cjs/index.cjs",
