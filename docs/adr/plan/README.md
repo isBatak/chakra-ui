@@ -10,9 +10,8 @@ Work from top to bottom. Do one checkbox at a time. Stop at every gate and attac
 4. [Epic 3 — Button and ButtonGroup prototype](./03-button-and-button-group.md)
 5. [Epic 4 — Dialog multipart prototype](./04-dialog.md)
 6. [Epic 5 — Theme and package boundaries](./05-theme-and-packaging.md)
-7. [Epic 6 — Documentation proof](./06-docs-poc.md)
-8. [Epic 7 — Engine modes](./07-engine-modes.md)
-9. [Epic 8 — Migration tooling](./08-migration-tooling.md)
+7. [Epic 6 — Engine modes](./06-engine-modes.md)
+8. [Epic 7 — Migration tooling](./07-migration-tooling.md)
 
 ## Focus rule
 
