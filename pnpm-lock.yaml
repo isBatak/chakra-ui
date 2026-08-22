@@ -673,6 +673,30 @@ importers:
         specifier: ^7.7.1
         version: 7.7.1
 
+
+  packages/emotion:
+    dependencies:
+      '@chakra-ui/react':
+        specifier: workspace:*
+        version: link:../react
+    peerDependencies:
+      '@emotion/react':
+        specifier: '>=11'
+      react:
+        specifier: '>=18'
+
+  packages/panda:
+    dependencies:
+      '@chakra-ui/react':
+        specifier: workspace:*
+        version: link:../react
+      '@pandacss/types':
+        specifier: ^1.4.2
+        version: 1.4.2
+    peerDependencies:
+      react:
+        specifier: '>=18'
+
   packages/panda-preset:
     dependencies:
       '@pandacss/types':
