@@ -1,3 +1,4 @@
+import type { EmotionCache } from "@emotion/cache"
 import { serializeStyles } from "@emotion/serialize"
 import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
 import { insertStyles, registerStyles } from "@emotion/utils"
@@ -8,23 +9,17 @@ import type {
 } from "@chakra-ui/react/styling-engine"
 import type { SystemStyleObject } from "@chakra-ui/react/styled-system"
 
-export interface EmotionCacheLike {
-  key: string
-  registered: Record<string, unknown>
-  sheet: { nonce?: string }
-}
-
 interface EmotionInsertionProps {
-  cache: EmotionCacheLike
+  cache: EmotionCache
   serialized: ReturnType<typeof serializeStyles>
 }
 
 function EmotionInsertion(props: EmotionInsertionProps) {
   const { cache, serialized } = props
-  registerStyles(cache as never, serialized, true)
+  registerStyles(cache, serialized, true)
 
   const rules = useInsertionEffectAlwaysWithSyncFallback(() =>
-    insertStyles(cache as never, serialized, true),
+    insertStyles(cache, serialized, true),
   )
 
   if (typeof document !== "undefined" || rules === undefined) return null
@@ -43,12 +38,12 @@ function EmotionInsertion(props: EmotionInsertionProps) {
   })
 }
 
-export function createEmotionStyleResolver(cache: EmotionCacheLike) {
+export function createEmotionStyleResolver(cache: EmotionCache) {
   return (
     style: StylingEngineStyleInput<SystemStyleObject>,
   ): StylingEngineStyleOutput => {
     const styles = Array.isArray(style) ? style : [style]
-    const serialized = serializeStyles(styles, cache.registered as never)
+    const serialized = serializeStyles(styles, cache.registered)
 
     return {
       className: serialized.styles
