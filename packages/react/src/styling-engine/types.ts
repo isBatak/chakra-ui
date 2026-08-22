@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 export type StylingEngineProps = Record<string, unknown>
 
 export type StylingEngineSplitPropsInput<
@@ -13,7 +15,31 @@ export type StylingEngineStyleInput<SystemStyle> =
   | SystemStyle
   | readonly SystemStyle[]
 
-export type StylingEngineStyleOutput = string
+export interface StylingEngineStyleOutput {
+  className: string
+  insertion: ReactNode
+}
+
+export interface StylingEngineRecipeInput<
+  RecipeProps extends StylingEngineProps = StylingEngineProps,
+> {
+  name: string
+  props: Readonly<RecipeProps>
+}
+
+export type StylingEngineRecipeOutput = StylingEngineStyleOutput
+
+export interface StylingEngineSlotRecipeInput<
+  SlotRecipeProps extends StylingEngineProps = StylingEngineProps,
+> {
+  name: string
+  props: Readonly<SlotRecipeProps>
+}
+
+export type StylingEngineSlotRecipeOutput = Record<
+  string,
+  StylingEngineStyleOutput
+>
 
 export type StylingEngineClassName =
   | string
@@ -37,8 +63,12 @@ export interface StylingEngineAdapter<
     props: StylingEngineSplitPropsInput<Props>,
   ): StylingEngineSplitPropsOutput<Partial<Props>, Partial<Props>>
   css(style: StylingEngineStyleInput<SystemStyle>): StylingEngineStyleOutput
-  recipe(name: string, props: RecipeProps): string
-  slotRecipe(name: string, props: SlotRecipeProps): Record<string, string>
+  recipe(
+    input: StylingEngineRecipeInput<RecipeProps>,
+  ): StylingEngineRecipeOutput
+  slotRecipe(
+    input: StylingEngineSlotRecipeInput<SlotRecipeProps>,
+  ): StylingEngineSlotRecipeOutput
   cx(...classNames: StylingEngineClassName[]): string
   token(path: string, fallback?: string): string
 }
