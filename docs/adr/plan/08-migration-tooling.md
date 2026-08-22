@@ -4,6 +4,14 @@
 
 A v3 Emotion application can adopt v4 without destructive CLI behavior.
 
+## Related ADRs
+
+- [ADR 0008 — Panda CSS v2 migration comparison](../0008-panda-v2-migration-comparison.md)
+- [ADR 0011 — Ejected theme ownership](../0011-ejected-theme-ownership.md)
+- [ADR 0007 — ESLint dynamic styling](../0007-eslint-dynamic-styling.md)
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0005 — Shared theme](../0005-shared-theme.md)
+
 ## Tasks
 
 - [ ] 8.1 Assume Emotion for the default migration path.
