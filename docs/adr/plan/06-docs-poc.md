@@ -4,6 +4,13 @@
 
 One documentation page proves the complete prototype without hiding setup.
 
+## Related ADRs
+
+- [ADR 0001 — Docs-first proof of concept](../0001-docs-first-poc.md)
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0005 — Shared theme](../0005-shared-theme.md)
+- [ADR 0011 — Ejected theme ownership](../0011-ejected-theme-ownership.md)
+
 ## Tasks
 
 - [ ] 6.1 Create one page containing Button, ButtonGroup, and Dialog.
