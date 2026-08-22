@@ -4,4 +4,6 @@ export type {
   StylingEngineProps,
   StylingEngineSplitPropsInput,
   StylingEngineSplitPropsOutput,
+  StylingEngineStyleInput,
+  StylingEngineStyleOutput,
 } from "./types"
