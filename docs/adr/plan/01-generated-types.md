@@ -4,6 +4,12 @@
 
 The StyleSystem and factory types exist before component implementation starts.
 
+## Related ADRs
+
+- [ADR 0010 — Canonical styling-system types](../0010-canonical-styling-system-types.md)
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0003 — Factory and style contexts](../0003-factory-and-style-contexts.md)
+
 ## Tasks
 
 - [ ] 1.1 List public style, recipe, slot-recipe, condition, and factory types.
