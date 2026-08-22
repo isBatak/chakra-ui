@@ -2,8 +2,6 @@ import type {
   StylingEngineAdapter,
   StylingEngineClassName,
   StylingEngineProps,
-  StylingEngineStyleInput,
-  StylingEngineStyleOutput,
 } from "@chakra-ui/react/styling-engine"
 import type {
   SystemContext,
