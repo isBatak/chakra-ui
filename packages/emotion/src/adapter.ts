@@ -26,8 +26,13 @@ export function createEmotionAdapter(
 
   return {
     splitProps<Props extends StylingEngineProps>(props: Readonly<Props>) {
-      const [styleProps, elementProps] = system.splitCssProps(props)
-      return { elementProps, styleProps }
+      const [styleProps, elementProps] = system.splitCssProps(
+        props as Props & SystemStyleObject,
+      )
+      return {
+        elementProps: elementProps as Partial<Props>,
+        styleProps: styleProps as Partial<Props>,
+      }
     },
     css: resolveStyle,
     recipe({ name, props }) {
