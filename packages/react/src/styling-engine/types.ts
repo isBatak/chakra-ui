@@ -1,6 +1,12 @@
-export interface StylingEngineSplitProps<Props> {
-  elementProps: Partial<Props>
-  styleProps: Partial<Props>
+export type StylingEngineProps = Record<string, unknown>
+
+export type StylingEngineSplitPropsInput<
+  Props extends StylingEngineProps,
+> = Readonly<Props>
+
+export interface StylingEngineSplitPropsOutput<ElementProps, StyleProps> {
+  elementProps: ElementProps
+  styleProps: StyleProps
 }
 
 export type StylingEngineClassName =
@@ -18,12 +24,12 @@ export type StylingEngineClassName =
  */
 export interface StylingEngineAdapter<
   SystemStyle = unknown,
-  RecipeProps extends Record<string, unknown> = Record<string, unknown>,
-  SlotRecipeProps extends Record<string, unknown> = RecipeProps,
+  RecipeProps extends StylingEngineProps = StylingEngineProps,
+  SlotRecipeProps extends StylingEngineProps = RecipeProps,
 > {
-  splitProps<Props extends Record<string, unknown>>(
-    props: Props,
-  ): StylingEngineSplitProps<Props>
+  splitProps<Props extends StylingEngineProps>(
+    props: StylingEngineSplitPropsInput<Props>,
+  ): StylingEngineSplitPropsOutput<Partial<Props>, Partial<Props>>
   css(style: SystemStyle): string
   recipe(name: string, props: RecipeProps): string
   slotRecipe(name: string, props: SlotRecipeProps): Record<string, string>
