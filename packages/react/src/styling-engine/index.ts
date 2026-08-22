@@ -1,5 +1,7 @@
 export type {
   StylingEngineAdapter,
   StylingEngineClassName,
-  StylingEngineSplitProps,
+  StylingEngineProps,
+  StylingEngineSplitPropsInput,
+  StylingEngineSplitPropsOutput,
 } from "./types"
