@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - agent/v4-style-resolution-contract
   pull_request:
     branches:
       - main
