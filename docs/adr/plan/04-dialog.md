@@ -4,6 +4,12 @@
 
 The factory, types, and both StyleSystem adapters prove one Ark v5 multipart component.
 
+## Related ADRs
+
+- [ADR 0003 — Factory and style contexts](../0003-factory-and-style-contexts.md)
+- [ADR 0002 — Styling engine adapter](../0002-styling-engine-adapter.md)
+- [ADR 0010 — Canonical styling-system types](../0010-canonical-styling-system-types.md)
+
 ## Tasks
 
 - [ ] 4.1 List the Dialog parts and their Ark v5 primitives.
