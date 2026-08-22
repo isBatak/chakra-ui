@@ -26,7 +26,7 @@ const system = {
 
 const adapters: Array<{
   name: string
-  adapter: StylingEngineAdapter<Record<string, unknown>>
+  adapter: StylingEngineAdapter<any>
   hasInsertion: boolean
 }> = [
   {
