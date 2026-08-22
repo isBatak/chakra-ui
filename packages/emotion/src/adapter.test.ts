@@ -1,3 +1,4 @@
+import type { EmotionCache } from "@emotion/cache"
 import { describe, expect, it } from "vitest"
 import type { SystemContext } from "@chakra-ui/react/styled-system"
 import { createEmotionAdapter } from "./adapter"
@@ -24,7 +25,7 @@ const system = {
 describe("createEmotionAdapter", () => {
   const adapter = createEmotionAdapter({
     system,
-    cache: { key: "css", registered: {}, sheet: {} },
+    cache: { key: "css", registered: {}, sheet: {} } as EmotionCache,
   })
 
   it("conforms to the styling engine contract", () => {
@@ -35,7 +36,9 @@ describe("createEmotionAdapter", () => {
     const result = adapter.css({ color: "red" })
     expect(result.className).toMatch(/^css-/)
     expect(result.insertion).not.toBeNull()
-    expect(adapter.recipe({ name: "button", props: { size: "sm" } }).className).toMatch(/^css-/)
+    expect(
+      adapter.recipe({ name: "button", props: { size: "sm" } }).className,
+    ).toMatch(/^css-/)
     expect(
       adapter.slotRecipe({ name: "dialog", props: { size: "sm" } }),
     ).toMatchObject({
