@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import type { SystemContext, SystemStyleObject } from "@chakra-ui/react/styled-system"
+import type { SystemContext } from "@chakra-ui/react/styled-system"
 import { createEmotionAdapter } from "./adapter"
 
 const system = {
@@ -21,30 +21,26 @@ const system = {
   },
 } as unknown as SystemContext
 
-const resolveStyle = (style: SystemStyleObject | readonly SystemStyleObject[]) => ({
-  className: "emotion-class",
-  insertion: JSON.stringify(style),
-})
-
 describe("createEmotionAdapter", () => {
-  const adapter = createEmotionAdapter({ system, resolveStyle })
+  const adapter = createEmotionAdapter({
+    system,
+    cache: { key: "css", registered: {}, sheet: {} },
+  })
 
   it("conforms to the styling engine contract", () => {
     expect(adapter.splitProps({ id: "button", color: "red" })).toEqual({
       elementProps: { id: "button" },
       styleProps: { color: "red" },
     })
-    expect(adapter.css({ color: "red" })).toEqual({
-      className: "emotion-class",
-      insertion: JSON.stringify({ color: "red" }),
-    })
-    expect(adapter.recipe({ name: "button", props: { size: "sm" } }).className)
-      .toBe("emotion-class")
+    const result = adapter.css({ color: "red" })
+    expect(result.className).toMatch(/^css-/)
+    expect(result.insertion).not.toBeNull()
+    expect(adapter.recipe({ name: "button", props: { size: "sm" } }).className).toMatch(/^css-/)
     expect(
       adapter.slotRecipe({ name: "dialog", props: { size: "sm" } }),
     ).toMatchObject({
-      root: { className: "emotion-class" },
-      label: { className: "emotion-class" },
+      root: { className: expect.stringMatching(/^css-/) },
+      label: { className: expect.stringMatching(/^css-/) },
     })
     expect(adapter.cx("base", false, "user")).toBe("base user")
     expect(adapter.token("colors.red")).toBe("#f00")
