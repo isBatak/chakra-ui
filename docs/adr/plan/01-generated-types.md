@@ -13,9 +13,9 @@ The StyleSystem and factory types exist before component implementation starts.
 ## Tasks
 
 - [x] 1.1 List public style, recipe, slot-recipe, condition, and factory types.
-- [ ] 1.2 Use `@pandacss/types` where a Panda type is required.
-- [ ] 1.3 Keep `@pandacss/dev` out of runtime dependencies.
-- [ ] 1.4 Generate Chakra-owned public aliases.
+- [x] 1.2 Use `@pandacss/types` where a Panda type is required.
+- [x] 1.3 Keep `@pandacss/dev` out of runtime dependencies.
+- [x] 1.4 Generate Chakra-owned public aliases.
 - [ ] 1.5 Generate intrinsic factory prop types.
 - [ ] 1.6 Generate polymorphic `as` types.
 - [ ] 1.7 Generate Ark `asChild` types.
