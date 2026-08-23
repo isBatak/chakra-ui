@@ -1,6 +1,6 @@
+import type { SystemContext } from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
 import { describe, expect, it } from "vitest"
-import type { SystemContext } from "@chakra-ui/react/styled-system"
 import { createEmotionAdapter } from "./adapter"
 
 const system = {
