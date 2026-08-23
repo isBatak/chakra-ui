@@ -24,6 +24,16 @@ import { tasks } from "../utils/tasks"
 
 const debug = createDebug("chakra:snippet")
 
+export function shouldSkipSnippetFile(
+  filename: string,
+  exists: boolean,
+  force: boolean,
+) {
+  if (!exists) return false
+  if (filename === "provider.tsx" || filename === "provider.jsx") return true
+  return !force
+}
+
 export const SnippetCommand = new Command("snippet")
   .description("Add snippets to your project for better DX")
   .addCommand(
@@ -45,6 +55,10 @@ export const SnippetCommand = new Command("snippet")
         })
 
         debug("context", ctx)
+
+        if (ctx.pandaConfigPath) {
+          p.log.info(`Detected Panda configuration: ${ctx.pandaConfigPath}`)
+        }
 
         const jsx = !ctx.isTypeScript
 
@@ -79,6 +93,7 @@ export const SnippetCommand = new Command("snippet")
         debug("npmDependencies", npmDependencies)
 
         let skippedFiles: string[] = []
+        let protectedProvider = false
 
         await tasks([
           {
@@ -126,7 +141,14 @@ export const SnippetCommand = new Command("snippet")
                     filename = filename.replace(".tsx", ".jsx")
                   }
 
-                  if (existsSync(join(outdir, filename)) && !force) {
+                  if (
+                    shouldSkipSnippetFile(
+                      filename,
+                      existsSync(join(outdir, filename)),
+                      force,
+                    )
+                  ) {
+                    protectedProvider ||= filename.startsWith("provider.")
                     skippedFiles.push(id)
                     return
                   }
@@ -163,7 +185,15 @@ export const SnippetCommand = new Command("snippet")
 
         if (skippedFiles.length) {
           p.log.warn(
-            `Skipping ${skippedFiles.length} file(s) that already exist. Use the --force flag to overwrite.`,
+            protectedProvider
+              ? `Skipping ${skippedFiles.length} existing file(s). The Provider is never overwritten; --force applies only to other snippets.`
+              : `Skipping ${skippedFiles.length} file(s) that already exist. Use the --force flag to overwrite.`,
+          )
+        }
+
+        if (protectedProvider) {
+          p.log.info(
+            "The installed Provider is user-owned and was not overwritten. Edit it directly to select a styling engine.",
           )
         }
 

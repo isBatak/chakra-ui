@@ -69,6 +69,15 @@ npx @chakra-ui/cli snippet add
 Wrap your application with the `Provider` component generated in the
 `components/ui/provider` component at the root of your application.
 
+The generated Provider is a closed component installed in your project. Your
+application owns this file. The Chakra CLI never overwrites an existing
+Provider, including when `snippet add --force` is used, so you can safely edit
+its theme, color-mode setup, and styling-engine boundary.
+
+Panda integration is detected at build time from `panda.config.*`. Chakra does
+not create or require a separate `chakra.config.*` file. Runtime components do
+not inspect either configuration file to select an engine.
+
 This provider composes the following:
 
 - `ChakraProvider` from `@chakra-ui/react` for the styling system

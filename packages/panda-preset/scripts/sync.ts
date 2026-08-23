@@ -1,42 +1,9 @@
 import { globby } from "globby"
 import { readFile, rm, writeFile } from "node:fs/promises"
-import { dirname, join, normalize, relative, resolve, sep } from "node:path"
+import { dirname, join, relative, resolve, sep } from "node:path"
 import { format } from "prettier"
 import { cleanFiles } from "./shared"
-
-/** Bare CSS keyword `black` in shadow strings → `{colors.black}` (not `colors.black`, not `{black/…}`). */
-const RE_SHADOW_BARE_BLACK = /(?<![.{])black\b/g
-
-const RE_RECIPES_CONTAINER_IMPORT =
-  /^\s*import\s*\{\s*containerRecipe\s*\}\s*from\s*["']\.\/container["']\s*\r?\n/m
-
-const RE_RECIPES_CONTAINER_ENTRY = /^\s*container:\s*containerRecipe,\s*\r?\n/m
-
-/**
- * Chakra → Panda adjustments: shadow token refs, and drop the `container`
- * recipe (Panda already provides a `container` pattern).
- */
-export function applyPandaThemeMappings(
-  content: string,
-  relativeFile: string,
-): string {
-  let out = content.replaceAll("{black/", "{colors.black/")
-
-  // Scoped to shadows file so comments elsewhere stay untouched.
-  if (
-    normalize(relativeFile) === normalize(join("semantic-tokens", "shadows.ts"))
-  ) {
-    out = out.replace(RE_SHADOW_BARE_BLACK, "{colors.black}")
-  }
-
-  if (normalize(relativeFile) === normalize(join("recipes", "index.ts"))) {
-    out = out
-      .replace(RE_RECIPES_CONTAINER_IMPORT, "")
-      .replace(RE_RECIPES_CONTAINER_ENTRY, "")
-  }
-
-  return out
-}
+import { applyPandaThemeMappings } from "./theme-mappings"
 
 async function main() {
   const clean = process.argv.includes("--clean")

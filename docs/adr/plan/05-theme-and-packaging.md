@@ -23,10 +23,10 @@ One theme model feeds both engines without requiring a Chakra config file.
 - [x] 5.8 Export normal consumer component APIs through the single
       `@chakra-ui/react` import. Keep adapter-author APIs in their dedicated
       package entry points.
-- [ ] 5.9 Detect Panda through `panda.config.*` and Chakra CLI workflows.
-- [ ] 5.10 Do not introduce `chakra.config.*`.
-- [ ] 5.11 Do not overwrite a user-installed ChakraProvider.
-- [ ] 5.12 Document the closed-component provider as user-owned code.
+- [x] 5.9 Detect Panda through `panda.config.*` and Chakra CLI workflows.
+- [x] 5.10 Do not introduce `chakra.config.*`.
+- [x] 5.11 Do not overwrite a user-installed ChakraProvider.
+- [x] 5.12 Document the closed-component provider as user-owned code.
 
 ## Gate
 
@@ -41,3 +41,8 @@ same theme definitions.
 
 Package boundary and public export evidence lives in
 `packages/react/src/package-boundaries.test.ts`.
+
+Theme parity evidence lives in `packages/react/__tests__/theme-parity.test.ts`.
+CLI configuration and Provider ownership evidence lives in
+`packages/cli/__tests__/context.test.ts` and
+`packages/cli/__tests__/snippet.test.ts`.

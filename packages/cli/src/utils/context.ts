@@ -10,6 +10,7 @@ export interface ProjectScope {
 
 export interface ProjectContext {
   isTypeScript: boolean
+  pandaConfigPath: string | null
   cwd: string
   scope: ProjectScope
 }
@@ -72,6 +73,17 @@ export async function getProjectContext(opts: ProjectContextOptions) {
   }
 
   const files = globbySync(["next.config.*", "vite.config.*"], { cwd })
+  const [pandaConfigPath = null] = globbySync(
+    [
+      "panda.config.ts",
+      "panda.config.js",
+      "panda.config.mjs",
+      "panda.config.mts",
+      "panda.config.cjs",
+      "panda.config.cts",
+    ],
+    { cwd, absolute: true },
+  )
 
   if (files.length > 0) {
     scope.framework = getFramework(files, cwd)
@@ -83,6 +95,7 @@ export async function getProjectContext(opts: ProjectContextOptions) {
 
   return {
     isTypeScript,
+    pandaConfigPath,
     cwd,
     scope,
   }
