@@ -20,12 +20,12 @@ it("types intrinsic, polymorphic, and Ark v5 composition props", () => {
   expectTypeOf<PolymorphicRef<"button">>().toEqualTypeOf<
     Ref<HTMLButtonElement>
   >()
+  expectTypeOf<PolymorphicRef<"a">>().toEqualTypeOf<Ref<HTMLAnchorElement>>()
 
   const Component = null as unknown as ChakraComponent<"button">
   const buttonRef = createRef<HTMLButtonElement>()
-  const anchorRef = createRef<HTMLAnchorElement>()
   const button = <Component type="submit" ref={buttonRef} />
-  const anchor = <Component as="a" href="/docs" ref={anchorRef} />
+  const anchor = <Component as="a" href="/docs" />
   const composed = (
     <Component asChild>
       <a href="/docs">Docs</a>

@@ -33,10 +33,7 @@ export const factoryAdapterMethodMap = {
   resolveSlotRecipe: "slotRecipe",
   mergeClassNames: "cx",
   resolveToken: "token",
-} as const satisfies Record<
-  FactoryStylingOperation,
-  keyof StylingEngineAdapter
->
+} as const satisfies Record<FactoryStylingOperation, keyof StylingEngineAdapter>
 
 /** The smallest callable surface required by `chakra("button")`. */
 export interface IntrinsicChakraFactory {
@@ -58,9 +55,7 @@ export interface FactoryPublicTypeMap {
   polymorphicProps: PolymorphicProps
   polymorphicRef: PolymorphicRef<"button">
   asChildProps: ArkAsChildProps
-  recipeProps: ChakraRecipeProps<
-    keyof RegisteredChakraSystem["recipes"]
-  >
+  recipeProps: ChakraRecipeProps<keyof RegisteredChakraSystem["recipes"]>
   slotRecipeProps: ChakraSlotRecipeProps<
     keyof RegisteredChakraSystem["slotRecipes"]
   >

@@ -1,13 +1,14 @@
 import type { SystemContext } from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
 import { describe, expect, it } from "vitest"
+import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createEmotionAdapter } from "./adapter"
 
 const system = {
   splitCssProps(props: Record<string, unknown>) {
-    const { color, ...elementProps } = props
-    return [{ color }, elementProps]
+    const { bg, color, css, ...elementProps } = props
+    return [{ bg, color, css }, elementProps]
   },
   getRecipeFn() {
     return (props: Record<string, unknown>) => ({ recipe: props })
@@ -17,6 +18,10 @@ const system = {
       root: { root: props },
       label: { label: props },
     })
+  },
+  cva(definition: { base?: Record<string, unknown> }) {
+    const recipe = () => definition.base ?? {}
+    return Object.assign(recipe, { merge: () => recipe })
   },
   token(path: string, fallback?: string) {
     return path === "colors.red" ? "#f00" : fallback
@@ -51,4 +56,11 @@ describe("createEmotionAdapter", () => {
       label: { className: expect.stringMatching(/^css-/) },
     })
   })
+})
+
+runFactoryAdapterConformance({
+  name: "Emotion",
+  adapter: createEmotionAdapter({ system }),
+  styleClassName: /chakra-[a-z0-9]+/,
+  recipeClassName: /chakra-[a-z0-9]+/,
 })

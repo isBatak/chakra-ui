@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createPandaAdapter } from "./adapter"
 
@@ -49,4 +50,19 @@ describe("createPandaAdapter", () => {
       "Unknown Panda slot recipe: missing",
     )
   })
+})
+
+runFactoryAdapterConformance({
+  name: "Panda",
+  adapter: createPandaAdapter({
+    isStyleProp: (prop) => prop === "bg" || prop === "css",
+    css: () => "panda-style",
+    recipes: {},
+    resolveRecipe: (definitions) =>
+      definitions.length === 1 ? "panda-inline-recipe" : "",
+    slotRecipes: {},
+    token: (path, fallback) => fallback ?? path,
+  }),
+  styleClassName: /panda-style/,
+  recipeClassName: /panda-inline-recipe/,
 })

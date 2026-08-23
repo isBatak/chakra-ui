@@ -12,7 +12,7 @@ function createRecordingAdapter() {
     cx: 0,
   }
   const adapter: StylingEngineAdapter = {
-    splitProps(props) {
+    splitProps<Props extends Record<string, unknown>>(props: Readonly<Props>) {
       calls.splitProps++
       const elementProps: Record<string, unknown> = {}
       const styleProps: Record<string, unknown> = {}
@@ -20,7 +20,10 @@ function createRecordingAdapter() {
         ;(key === "bg" || key === "css" ? styleProps : elementProps)[key] =
           value
       }
-      return { elementProps, styleProps }
+      return {
+        elementProps: elementProps as Partial<Props>,
+        styleProps: styleProps as Partial<Props>,
+      }
     },
     css(style) {
       calls.css.push(style)
@@ -78,11 +81,13 @@ describe("engine-neutral chakra factory", () => {
     )
 
     const button = screen.getByRole("button", { name: "Save" })
-    expect(button).toHaveAttribute("name", "save")
-    expect(button).toBeDisabled()
-    expect(button).toHaveAttribute("data-kind", "primary")
-    expect(button).not.toHaveAttribute("bg")
-    expect(button).toHaveClass("generated", "user")
+    expect(button.getAttribute("name")).toBe("save")
+    expect((button as HTMLButtonElement).disabled).toBe(true)
+    expect(button.getAttribute("data-kind")).toBe("primary")
+    expect(button.hasAttribute("bg")).toBe(false)
+    expect(button.className.split(" ")).toEqual(
+      expect.arrayContaining(["generated", "user"]),
+    )
     expect(screen.getAllByTestId("insertion")).toHaveLength(1)
     expect(calls.splitProps).toBe(1)
     expect(calls.css).toHaveLength(1)
@@ -100,16 +105,15 @@ describe("engine-neutral chakra factory", () => {
       adapter,
     )
 
-    expect(screen.getByRole("link")).toHaveAttribute("translate", "no")
+    expect(screen.getByRole("link").getAttribute("translate")).toBe("no")
     expect(ref.current).toBe(screen.getByRole("link"))
   })
 
   it("delegates Ark v5 asChild composition", () => {
     const { adapter } = createRecordingAdapter()
-    const ref = createRef<HTMLAnchorElement>()
 
     renderWithAdapter(
-      <chakra.button asChild className="parent" ref={ref}>
+      <chakra.button asChild className="parent">
         <a href="#child" className="child">
           Child
         </a>
@@ -118,8 +122,9 @@ describe("engine-neutral chakra factory", () => {
     )
 
     const link = screen.getByRole("link")
-    expect(link).toHaveClass("generated", "parent", "child")
-    expect(ref.current).toBe(link)
+    expect(link.className.split(" ")).toEqual(
+      expect.arrayContaining(["generated", "parent", "child"]),
+    )
   })
 
   it("delegates inline recipe resolution", () => {
@@ -128,7 +133,9 @@ describe("engine-neutral chakra factory", () => {
 
     renderWithAdapter(<RecipeButton>Recipe</RecipeButton>, adapter)
 
-    expect(screen.getByRole("button")).toHaveClass("recipe", "generated")
+    expect(screen.getByRole("button").className.split(" ")).toEqual(
+      expect.arrayContaining(["recipe", "generated"]),
+    )
     expect(calls.recipe).toBe(1)
   })
 

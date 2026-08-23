@@ -1,11 +1,11 @@
 import { expectTypeOf, it } from "vitest"
 import type { StylingEngineAdapter } from "../styling-engine"
-import type { ChakraComponent, HTMLChakraProps } from "./factory.types"
 import {
-  factoryAdapterMethodMap,
   type FactoryPublicTypeMap,
   type IntrinsicChakraFactory,
+  factoryAdapterMethodMap,
 } from "./factory.contract"
+import type { ChakraComponent, HTMLChakraProps } from "./factory.types"
 
 it("maps every factory styling operation to an adapter method", () => {
   expectTypeOf(factoryAdapterMethodMap).toMatchTypeOf<
