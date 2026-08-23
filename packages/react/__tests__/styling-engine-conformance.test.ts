@@ -1,6 +1,5 @@
-import type { EmotionCache } from "@emotion/cache"
-import { createEmotionAdapter } from "@chakra-ui/emotion"
-import { createPandaAdapter } from "@chakra-ui/panda"
+import { createEmotionAdapter } from "../../emotion/src"
+import { createPandaAdapter } from "../../panda/src"
 import type {
   StylingEngineAdapter,
   StylingEngineStyleOutput,
@@ -37,7 +36,7 @@ const adapters: Array<{
         key: "css",
         registered: {},
         sheet: {},
-      } as EmotionCache,
+      } as Parameters<typeof createEmotionAdapter>[0]["cache"],
     }),
     hasInsertion: true,
   },
