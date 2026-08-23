@@ -36,6 +36,13 @@ export type {
 
 export { useDialog, useDialogContext } from "@ark-ui/react/dialog"
 
+export type { DialogSlotRecipeProps } from "./dialog.model"
+export {
+  DialogSlotStylesProvider,
+  useDialogSlotStyles,
+} from "./dialog-style-context"
+export type { DialogSlotStyles } from "./dialog-style-context"
+
 export type {
   UseDialogProps,
   UseDialogReturn,
