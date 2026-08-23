@@ -1,6 +1,7 @@
 import type { SystemContext } from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
 import { describe, expect, it } from "vitest"
+import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createEmotionAdapter } from "./adapter"
 
 const system = {
@@ -28,14 +29,18 @@ describe("createEmotionAdapter", () => {
     cache: { key: "css", registered: {}, sheet: {} } as EmotionCache,
   })
 
-  it("conforms to the styling engine contract", () => {
-    expect(adapter.splitProps({ id: "button", color: "red" })).toEqual({
-      elementProps: { id: "button" },
-      styleProps: { color: "red" },
-    })
-    const result = adapter.css({ color: "red" })
-    expect(result.className).toMatch(/^css-/)
-    expect(result.insertion).not.toBeNull()
+  runStylingEngineConformance({
+    name: "Emotion",
+    adapter,
+    singleStyle: { color: "red" },
+    composedStyles: [{ color: "red" }, { margin: "2" }],
+    expectInsertion(output) {
+      expect(output.insertion).not.toBeNull()
+    },
+  })
+
+  it("emits Emotion class names for direct style and recipe fixtures", () => {
+    expect(adapter.css({ color: "red" }).className).toMatch(/^css-/)
     expect(
       adapter.recipe({ name: "button", props: { size: "sm" } }).className,
     ).toMatch(/^css-/)
@@ -45,8 +50,5 @@ describe("createEmotionAdapter", () => {
       root: { className: expect.stringMatching(/^css-/) },
       label: { className: expect.stringMatching(/^css-/) },
     })
-    expect(adapter.cx("base", false, "user")).toBe("base user")
-    expect(adapter.token("colors.red")).toBe("#f00")
-    expect(adapter.token("missing", "fallback")).toBe("fallback")
   })
 })
