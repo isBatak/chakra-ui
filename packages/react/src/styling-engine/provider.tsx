@@ -26,7 +26,7 @@ export function useStylingEngine(): StylingEngineAdapter {
 
   if (!adapter) {
     throw new Error(
-      "[chakra-ui] No styling engine was found. Mount an adapter from " +
+      "[chakra-ui] No styling engine boundary was found. Mount an adapter from " +
         '"@chakra-ui/emotion" or "@chakra-ui/panda" above Chakra components.',
     )
   }

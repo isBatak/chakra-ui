@@ -2,7 +2,8 @@
 
 ## Outcome
 
-Emotion-only, Panda-only, and dual-engine applications are independently verified.
+Emotion-only, Panda-only, and dual-engine applications are independently
+verified.
 
 ## Related ADRs
 
@@ -17,20 +18,24 @@ Emotion-only, Panda-only, and dual-engine applications are independently verifie
 - [x] 6.3 Create the Panda-only fixture.
 - [x] 6.4 Verify no Emotion runtime package is loaded.
 - [x] 6.5 Create the dual-engine fixture.
-- [ ] 6.6 Select the root engine explicitly.
-- [ ] 6.7 Switch one subtree to the other engine.
-- [ ] 6.8 Switch back inside a nested subtree.
-- [ ] 6.9 Verify Button, ButtonGroup, and Dialog in every fixture.
+- [x] 6.6 Select the root engine explicitly.
+- [x] 6.7 Switch one subtree to the other engine.
+- [x] 6.8 Switch back inside a nested subtree.
+- [x] 6.9 Verify Button, ButtonGroup, and Dialog in every fixture.
 - [ ] 6.10 Verify SSR and hydration.
-- [ ] 6.11 Verify class names remain additive.
-- [ ] 6.12 Verify missing adapter errors identify the boundary.
+- [x] 6.11 Verify class names remain additive.
+- [x] 6.12 Verify missing adapter errors identify the boundary.
 
 ## Gate
 
-All three fixtures pass build, type, runtime, SSR, hydration, and component tests.
+All three fixtures pass build, type, runtime, SSR, hydration, and component
+tests.
 
 ## Evidence
 
 - Mode matrix: `packages/type-tests/{emotion-only,panda-only,dual-engine}`
-- Runtime dependency report: `packages/type-tests/engine-mode-dependencies.test.ts`
+- Runtime dependency report:
+  `packages/type-tests/engine-mode-dependencies.test.ts`
 - Type matrix: `pnpm --filter "./packages/type-tests/**" typecheck`
+- Boundary runtime matrix:
+  `pnpm vitest run packages/type-tests/{emotion-only,panda-only,dual-engine}/runtime.test.tsx packages/type-tests/missing-engine-boundary.test.tsx`
