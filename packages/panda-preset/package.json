@@ -32,7 +32,7 @@
     "url": "https://storybook.chakra-ui.com"
   },
   "scripts": {
-    "theme:eject": "chakra eject --outdir=src",
+    "theme:eject": "cross-env NODE_OPTIONS=--conditions=dev chakra eject --outdir=src",
     "theme:sync": "tsx scripts/sync.ts",
     "theme": "pnpm theme:eject && pnpm theme:sync",
     "prepack": "tsx ../../scripts/conditions.ts",
