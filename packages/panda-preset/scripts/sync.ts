@@ -16,7 +16,7 @@ const RE_RECIPES_CONTAINER_ENTRY = /^\s*container:\s*containerRecipe,\s*\r?\n/m
  * Chakra → Panda adjustments: shadow token refs, and drop the `container`
  * recipe (Panda already provides a `container` pattern).
  */
-function applyPandaThemeMappings(
+export function applyPandaThemeMappings(
   content: string,
   relativeFile: string,
 ): string {
@@ -62,11 +62,20 @@ async function main() {
 
     const fileFromSrc = relative("src", file)
 
-    let updatedContent = content
-      .replaceAll("@chakra-ui/react", relativePath.replace(".ts", ""))
-      .replaceAll("chakra-", "")
-      .replaceAll("switch:", "swittch:")
-    updatedContent = applyPandaThemeMappings(updatedContent, fileFromSrc)
+    let updatedContent = content.replaceAll(
+      "@chakra-ui/react",
+      relativePath.replace(".ts", ""),
+    )
+    if (process.argv.includes("--compat")) {
+      // Removal condition: delete this branch once the neutral source is
+      // directly accepted by Panda without any legacy v3 rewrites.
+      updatedContent = applyPandaThemeMappings(
+        updatedContent
+          .replaceAll("chakra-", "")
+          .replaceAll("switch:", "swittch:"),
+        fileFromSrc,
+      )
+    }
 
     updatedContent = await format(updatedContent, {
       parser: "typescript",
@@ -98,15 +107,17 @@ export default definePreset({
   name: "@chakra-ui/panda-preset",
   globalCss,
   theme: {
-    breakpoints,
-    keyframes,
-    tokens,
-    semanticTokens,
-    recipes,
-    slotRecipes,
-    textStyles,
-    layerStyles,
-    animationStyles,
+    extend: {
+      breakpoints,
+      keyframes,
+      tokens,
+      semanticTokens,
+      recipes,
+      slotRecipes,
+      textStyles,
+      layerStyles,
+      animationStyles,
+    },
   },
   utilities: {
     extend: utilities,

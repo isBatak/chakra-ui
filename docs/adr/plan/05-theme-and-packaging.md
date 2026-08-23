@@ -13,11 +13,11 @@ One theme model feeds both engines without requiring a Chakra config file.
 
 ## Tasks
 
-- [ ] 5.1 Define the engine-neutral theme entry point.
-- [ ] 5.2 Align the Chakra theme format with Panda CSS v2 where possible.
-- [ ] 5.3 Support Panda preset extension through `theme.extend`.
-- [ ] 5.4 Support multiple Emotion `defineConfig` inputs in `defineSystem`.
-- [ ] 5.5 Keep the temporary v3-to-Panda transformer optional.
+- [x] 5.1 Define the engine-neutral theme entry point.
+- [x] 5.2 Align the Chakra theme format with Panda CSS v2 where possible.
+- [x] 5.3 Support Panda preset extension through `theme.extend`.
+- [x] 5.4 Support multiple Emotion `defineConfig` inputs in `defineSystem`.
+- [x] 5.5 Keep the temporary v3-to-Panda transformer optional.
 - [ ] 5.6 Put Panda-specific implementation in the Panda package.
 - [ ] 5.7 Keep Emotion-specific implementation in the Emotion package.
 - [ ] 5.8 Export everything through the single `@chakra-ui/react` import.
@@ -28,7 +28,8 @@ One theme model feeds both engines without requiring a Chakra config file.
 
 ## Gate
 
-The package graph stays engine-neutral at the core, and both engines consume the same theme definitions.
+The package graph stays engine-neutral at the core, and both engines consume the
+same theme definitions.
 
 ## Evidence
 

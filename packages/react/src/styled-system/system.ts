@@ -277,6 +277,14 @@ export function createSystem(...configs: SystemConfig[]): SystemContext {
   }
 }
 
+/**
+ * Creates the Emotion-compatible runtime system from one or more configs.
+ * Later configs extend or override earlier configs.
+ */
+export function defineSystem(...configs: SystemConfig[]): SystemContext {
+  return createSystem(...configs)
+}
+
 function getTokenMap(tokens: TokenDictionary) {
   const map = new Map<string, { value: string; variable: string }>()
   const names = new Set(tokens.allTokens.map((token) => token.name))

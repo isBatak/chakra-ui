@@ -59,7 +59,7 @@ export type { ColorPalette, Token, Tokens } from "./generated/token.gen"
 export * from "./provider"
 export * from "./recipe-props"
 export type * from "./recipe.types"
-export { createSystem, isValidSystem } from "./system"
+export { createSystem, defineSystem, isValidSystem } from "./system"
 export type {
   BreakpointName,
   SystemConfig,

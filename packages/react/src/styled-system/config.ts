@@ -9,6 +9,7 @@ import type {
   ConditionRecord,
   SemanticTokenDefinition,
   SystemConfig,
+  ThemingConfig,
   TokenDefinition,
 } from "./types"
 
@@ -66,5 +67,8 @@ export const defineSemanticTokens =
  * -----------------------------------------------------------------------------*/
 
 export const defineConfig = (v: SystemConfig) => v
+
+/** Defines theme data that can be consumed by any Chakra styling engine. */
+export const defineTheme = <T extends ThemingConfig>(theme: T): T => theme
 
 export { mergeConfigs } from "./merge-config"

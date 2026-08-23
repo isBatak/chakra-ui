@@ -1,4 +1,4 @@
-import { defineConfig } from "../styled-system"
+import { defineConfig, defineTheme } from "../styled-system"
 import { breakpoints } from "./breakpoints"
 import { globalCss } from "./global-css"
 import { layerStyles } from "./layer-styles"
@@ -57,22 +57,25 @@ export const semanticTokens = {
 export const cssVarsPrefix = "chakra"
 export const cssVarsRoot = ":where(html, .chakra-theme)"
 
+/** Engine-neutral source of truth for the packaged Chakra theme. */
+export const defaultTheme = defineTheme({
+  breakpoints,
+  keyframes,
+  tokens,
+  semanticTokens,
+  recipes,
+  slotRecipes,
+  textStyles,
+  layerStyles,
+  animationStyles,
+})
+
 export const defaultThemeConfig = defineConfig({
   preflight: true,
   cssVarsPrefix,
   cssVarsRoot,
   globalCss,
-  theme: {
-    breakpoints,
-    keyframes,
-    tokens,
-    semanticTokens,
-    recipes,
-    slotRecipes,
-    textStyles,
-    layerStyles,
-    animationStyles,
-  },
+  theme: defaultTheme,
 })
 
 export {
