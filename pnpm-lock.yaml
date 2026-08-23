@@ -719,6 +719,9 @@ importers:
       '@chakra-ui/cli':
         specifier: workspace:*
         version: link:../cli
+      '@chakra-ui/react':
+        specifier: workspace:*
+        version: link:../react
       globby:
         specifier: 16.2.0
         version: 16.2.0
