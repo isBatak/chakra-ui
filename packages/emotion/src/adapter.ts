@@ -1,12 +1,12 @@
 import type {
+  SystemContext,
+  SystemStyleObject,
+} from "@chakra-ui/react/styled-system"
+import type {
   StylingEngineAdapter,
   StylingEngineClassName,
   StylingEngineProps,
 } from "@chakra-ui/react/styling-engine"
-import type {
-  SystemContext,
-  SystemStyleObject,
-} from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
 import { createEmotionStyleResolver } from "./style-resolver"
 
