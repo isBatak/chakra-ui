@@ -18,9 +18,11 @@ One theme model feeds both engines without requiring a Chakra config file.
 - [x] 5.3 Support Panda preset extension through `theme.extend`.
 - [x] 5.4 Support multiple Emotion `defineConfig` inputs in `defineSystem`.
 - [x] 5.5 Keep the temporary v3-to-Panda transformer optional.
-- [ ] 5.6 Put Panda-specific implementation in the Panda package.
-- [ ] 5.7 Keep Emotion-specific implementation in the Emotion package.
-- [ ] 5.8 Export everything through the single `@chakra-ui/react` import.
+- [x] 5.6 Put Panda-specific implementation in the Panda package.
+- [x] 5.7 Keep Emotion-specific implementation in the Emotion package.
+- [x] 5.8 Export normal consumer component APIs through the single
+      `@chakra-ui/react` import. Keep adapter-author APIs in their dedicated
+      package entry points.
 - [ ] 5.9 Detect Panda through `panda.config.*` and Chakra CLI workflows.
 - [ ] 5.10 Do not introduce `chakra.config.*`.
 - [ ] 5.11 Do not overwrite a user-installed ChakraProvider.
@@ -36,3 +38,6 @@ same theme definitions.
 - Package dependency graph
 - Theme parity fixture
 - Export test
+
+Package boundary and public export evidence lives in
+`packages/react/src/package-boundaries.test.ts`.
