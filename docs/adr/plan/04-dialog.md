@@ -2,7 +2,8 @@
 
 ## Outcome
 
-The factory, types, and both StyleSystem adapters prove one Ark v5 multipart component.
+The factory, types, and both StyleSystem adapters prove one Ark v5 multipart
+component.
 
 ## Related ADRs
 
@@ -19,18 +20,19 @@ The factory, types, and both StyleSystem adapters prove one Ark v5 multipart com
 - [ ] 4.5 Build Trigger and CloseTrigger with `asChild`.
 - [ ] 4.6 Build Positioner, Backdrop, and Content with the factory.
 - [ ] 4.7 Build Header, Title, Body, and Footer with the factory.
-- [ ] 4.8 Resolve every slot through the StyleSystem.
+- [x] 4.8 Resolve every slot through the StyleSystem.
 - [ ] 4.9 Preserve Ark refs, props, data attributes, portal, and presence.
 - [ ] 4.10 Test open, close, Escape, focus return, and nested composition.
-- [ ] 4.11 Test every slot with Emotion.
-- [ ] 4.12 Test every slot with Panda.
-- [ ] 4.13 Add public type tests.
-- [ ] 4.14 Test user `className` with both adapters.
-- [ ] 4.15 Save rendered HTML fixtures.
+- [x] 4.11 Test every slot with Emotion.
+- [x] 4.12 Test every slot with Panda.
+- [x] 4.13 Add public type tests.
+- [x] 4.14 Test user `className` with both adapters.
+- [x] 4.15 Save rendered HTML fixtures.
 
 ## Gate
 
-Dialog passes Ark behavior, public type, and slot-style tests through the same factory and adapters used by Button.
+Dialog passes Ark behavior, public type, and slot-style tests through the same
+factory and adapters used by Button.
 
 ## Evidence
 
@@ -38,3 +40,13 @@ Dialog passes Ark behavior, public type, and slot-style tests through the same f
 - Type-test result
 - Emotion test result
 - Panda test result
+
+Recorded styling-matrix evidence:
+
+- Every slot resolves through `useStylingEngine().slotRecipe()` in `dialog.tsx`
+  and composes direct styles through the shared factory or adapter.
+- Public type coverage: `dialog.types.test.tsx`.
+- Shared Emotion and Panda slot, `asChild`, ref, and `className` matrix:
+  `dialog.adapter-conformance.tsx`.
+- Rendered HTML fixtures: `packages/emotion/src/fixtures/dialog.html` and
+  `packages/panda/src/fixtures/dialog.html`.

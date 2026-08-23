@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { runButtonAdapterConformance } from "../../react/src/components/button/button.adapter-conformance"
+import { runDialogAdapterConformance } from "../../react/src/components/dialog/dialog.adapter-conformance"
 import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createPandaAdapter } from "./adapter"
@@ -13,7 +14,18 @@ describe("createPandaAdapter", () => {
       button: (props) => `button-${props.size}`,
     },
     slotRecipes: {
-      dialog: () => ({ root: "dialog-root", content: "dialog-content" }),
+      dialog: () => ({
+        trigger: "dialog-trigger",
+        backdrop: "dialog-backdrop",
+        positioner: "dialog-positioner",
+        content: "dialog-content",
+        header: "dialog-header",
+        title: "dialog-title",
+        description: "dialog-description",
+        body: "dialog-body",
+        footer: "dialog-footer",
+        closeTrigger: "dialog-closeTrigger",
+      }),
     },
     token: (path, fallback) =>
       path === "colors.red" ? "#f00" : (fallback ?? path),
@@ -39,8 +51,19 @@ describe("createPandaAdapter", () => {
       insertion: null,
     })
     expect(adapter.slotRecipe({ name: "dialog", props: {} })).toEqual({
-      root: { className: "dialog-root", insertion: null },
+      trigger: { className: "dialog-trigger", insertion: null },
+      backdrop: { className: "dialog-backdrop", insertion: null },
+      positioner: { className: "dialog-positioner", insertion: null },
       content: { className: "dialog-content", insertion: null },
+      header: { className: "dialog-header", insertion: null },
+      title: { className: "dialog-title", insertion: null },
+      description: { className: "dialog-description", insertion: null },
+      body: { className: "dialog-body", insertion: null },
+      footer: { className: "dialog-footer", insertion: null },
+      closeTrigger: {
+        className: "dialog-closeTrigger",
+        insertion: null,
+      },
     })
   })
 
@@ -78,6 +101,16 @@ describe("createPandaAdapter", () => {
     ).trim(),
     groupHtml: readFileSync(
       "packages/panda/src/fixtures/button-group.html",
+      "utf8",
+    ).trim(),
+  })
+
+  runDialogAdapterConformance({
+    name: "Panda",
+    adapter,
+    slotClassName: (slot) => `dialog-${slot}`,
+    html: readFileSync(
+      "packages/panda/src/fixtures/dialog.html",
       "utf8",
     ).trim(),
   })

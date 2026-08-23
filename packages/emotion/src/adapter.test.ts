@@ -3,6 +3,7 @@ import type { EmotionCache } from "@emotion/cache"
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { runButtonAdapterConformance } from "../../react/src/components/button/button.adapter-conformance"
+import { runDialogAdapterConformance } from "../../react/src/components/dialog/dialog.adapter-conformance"
 import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createEmotionAdapter } from "./adapter"
@@ -28,10 +29,21 @@ const system = {
     return (props: Record<string, unknown>) => ({ recipe: props })
   },
   getSlotRecipeFn() {
-    return (props: Record<string, unknown>) => ({
-      root: { root: props },
-      label: { label: props },
-    })
+    return (props: Record<string, unknown>) =>
+      Object.fromEntries(
+        [
+          "trigger",
+          "backdrop",
+          "positioner",
+          "content",
+          "header",
+          "title",
+          "description",
+          "body",
+          "footer",
+          "closeTrigger",
+        ].map((slot) => [slot, { [slot]: props }]),
+      )
   },
   cva(definition: { base?: Record<string, unknown> }) {
     const recipe = () => definition.base ?? {}
@@ -66,8 +78,8 @@ describe("createEmotionAdapter", () => {
     expect(
       adapter.slotRecipe({ name: "dialog", props: { size: "sm" } }),
     ).toMatchObject({
-      root: { className: expect.stringMatching(/^css-/) },
-      label: { className: expect.stringMatching(/^css-/) },
+      trigger: { className: expect.stringMatching(/^css-/) },
+      content: { className: expect.stringMatching(/^css-/) },
     })
   })
 
@@ -83,6 +95,16 @@ describe("createEmotionAdapter", () => {
     ).trim(),
     groupHtml: readFileSync(
       "packages/emotion/src/fixtures/button-group.html",
+      "utf8",
+    ).trim(),
+  })
+
+  runDialogAdapterConformance({
+    name: "Emotion",
+    adapter: createEmotionAdapter({ system }),
+    slotClassName: () => /chakra-[a-z0-9]+/,
+    html: readFileSync(
+      "packages/emotion/src/fixtures/dialog.html",
       "utf8",
     ).trim(),
   })

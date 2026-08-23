@@ -36,7 +36,20 @@ const adapter: StylingEngineAdapter = {
     return { className: "recipe", insertion: null }
   },
   slotRecipe() {
-    return {}
+    return Object.fromEntries(
+      [
+        "trigger",
+        "backdrop",
+        "positioner",
+        "content",
+        "header",
+        "title",
+        "description",
+        "body",
+        "footer",
+        "closeTrigger",
+      ].map((slot) => [slot, { className: `dialog-${slot}`, insertion: null }]),
+    )
   },
   cx(...values) {
     return values.filter(Boolean).join(" ")
@@ -87,14 +100,16 @@ describe("Dialog behavior shell", () => {
     fireEvent.click(trigger)
 
     const dialog = await screen.findByRole("dialog")
-    expect(dialog).toHaveAttribute("data-state", "open")
-    expect(screen.getByTestId("backdrop")).toHaveAttribute("data-state", "open")
+    expect(dialog.getAttribute("data-state")).toBe("open")
+    expect(screen.getByTestId("backdrop").getAttribute("data-state")).toBe(
+      "open",
+    )
     expect(screen.getByTestId("positioner").parentElement).toBe(document.body)
 
     fireEvent.click(screen.getByTestId("close"))
 
     await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull())
-    await waitFor(() => expect(trigger).toHaveFocus())
+    await waitFor(() => expect(document.activeElement).toBe(trigger))
   })
 
   it("closes on Escape and preserves focus return", async () => {
@@ -104,13 +119,13 @@ describe("Dialog behavior shell", () => {
     fireEvent.click(trigger)
     const dialog = await screen.findByRole("dialog")
     await waitFor(() =>
-      expect(dialog).toContainElement(document.activeElement as HTMLElement),
+      expect(dialog.contains(document.activeElement)).toBe(true),
     )
 
     fireEvent.keyDown(document, { key: "Escape" })
 
     await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull())
-    await waitFor(() => expect(trigger).toHaveFocus())
+    await waitFor(() => expect(document.activeElement).toBe(trigger))
   })
 
   it("preserves refs, DOM props, data attributes, and nested parts", async () => {
@@ -140,13 +155,13 @@ describe("Dialog behavior shell", () => {
 
     const dialog = await screen.findByTestId("nested-content")
     expect(contentRef.current).toBe(dialog)
-    expect(dialog).toHaveAttribute("data-owner", "application")
-    expect(dialog).toHaveAttribute("data-scope", "dialog")
-    expect(screen.getByTestId("header")).toContainElement(
-      screen.getByText("Title"),
-    )
-    expect(screen.getByTestId("body")).toHaveTextContent("Body")
-    expect(screen.getByTestId("footer")).toHaveTextContent("Footer")
+    expect(dialog.getAttribute("data-owner")).toBe("application")
+    expect(dialog.getAttribute("data-scope")).toBe("dialog")
+    expect(
+      screen.getByTestId("header").contains(screen.getByText("Title")),
+    ).toBe(true)
+    expect(screen.getByTestId("body").textContent).toBe("Body")
+    expect(screen.getByTestId("footer").textContent).toBe("Footer")
   })
 
   it("allows callers to keep closed content mounted for presence", async () => {
@@ -159,10 +174,9 @@ describe("Dialog behavior shell", () => {
     )
 
     await waitFor(() =>
-      expect(screen.getByTestId("persistent-content")).toHaveAttribute(
-        "data-state",
-        "closed",
-      ),
+      expect(
+        screen.getByTestId("persistent-content").getAttribute("data-state"),
+      ).toBe("closed"),
     )
   })
 
@@ -196,9 +210,7 @@ describe("Dialog behavior shell", () => {
       name: "Child dialog",
     })
     await waitFor(() =>
-      expect(childDialog).toContainElement(
-        document.activeElement as HTMLElement,
-      ),
+      expect(childDialog.contains(document.activeElement)).toBe(true),
     )
 
     fireEvent.keyDown(document, { key: "Escape" })
@@ -206,8 +218,6 @@ describe("Dialog behavior shell", () => {
     await waitFor(() =>
       expect(screen.queryByRole("dialog", { name: "Child dialog" })).toBeNull(),
     )
-    expect(
-      screen.getByRole("dialog", { name: "Parent dialog" }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole("dialog", { name: "Parent dialog" })).not.toBeNull()
   })
 })
