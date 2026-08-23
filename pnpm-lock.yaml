@@ -706,6 +706,9 @@ importers:
       '@pandacss/types':
         specifier: ^1.4.2
         version: 1.11.1
+      '@pandacss/dev':
+        specifier: ^1.4.2
+        version: 1.11.1(jsdom@26.1.0)(typescript@5.9.3)
       react:
         specifier: 19.2.6
         version: 19.2.6
