@@ -4,8 +4,7 @@ import { createPandaAdapter } from "./adapter"
 describe("createPandaAdapter", () => {
   const adapter = createPandaAdapter({
     isStyleProp: (prop) => prop === "color",
-    css: (...styles: Array<Record<string, unknown>>) =>
-      `css-${styles.length}`,
+    css: (...styles: Array<Record<string, unknown>>) => `css-${styles.length}`,
     recipes: {
       button: (props) => `button-${props.size}`,
     },
@@ -25,15 +24,11 @@ describe("createPandaAdapter", () => {
       className: "css-2",
       insertion: null,
     })
-    expect(
-      adapter.recipe({ name: "button", props: { size: "sm" } }),
-    ).toEqual({
+    expect(adapter.recipe({ name: "button", props: { size: "sm" } })).toEqual({
       className: "button-sm",
       insertion: null,
     })
-    expect(
-      adapter.slotRecipe({ name: "dialog", props: {} }),
-    ).toEqual({
+    expect(adapter.slotRecipe({ name: "dialog", props: {} })).toEqual({
       root: { className: "dialog-root", insertion: null },
       content: { className: "dialog-content", insertion: null },
     })
@@ -46,8 +41,8 @@ describe("createPandaAdapter", () => {
     expect(() => adapter.recipe({ name: "missing", props: {} })).toThrow(
       "Unknown Panda recipe: missing",
     )
-    expect(() =>
-      adapter.slotRecipe({ name: "missing", props: {} }),
-    ).toThrow("Unknown Panda slot recipe: missing")
+    expect(() => adapter.slotRecipe({ name: "missing", props: {} })).toThrow(
+      "Unknown Panda slot recipe: missing",
+    )
   })
 })

@@ -2,9 +2,8 @@ import type { ReactNode } from "react"
 
 export type StylingEngineProps = Record<string, unknown>
 
-export type StylingEngineSplitPropsInput<
-  Props extends StylingEngineProps,
-> = Readonly<Props>
+export type StylingEngineSplitPropsInput<Props extends StylingEngineProps> =
+  Readonly<Props>
 
 export interface StylingEngineSplitPropsOutput<ElementProps, StyleProps> {
   elementProps: ElementProps
@@ -41,11 +40,7 @@ export type StylingEngineSlotRecipeOutput = Record<
   StylingEngineStyleOutput
 >
 
-export type StylingEngineClassName =
-  | string
-  | false
-  | null
-  | undefined
+export type StylingEngineClassName = string | false | null | undefined
 
 /**
  * Engine-neutral styling contract consumed by Chakra's factory and

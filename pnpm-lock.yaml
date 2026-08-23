@@ -691,11 +691,12 @@ importers:
       '@emotion/utils':
         specifier: ^1.4.2
         version: 1.4.2
-    peerDependencies:
       '@emotion/react':
         specifier: '>=11'
+        version: 11.14.0(@types/react@19.2.17)(react@19.2.6)
       react:
-        specifier: '>=18'
+        specifier: 19.2.6
+        version: 19.2.6
 
   packages/panda:
     dependencies:
@@ -704,10 +705,10 @@ importers:
         version: link:../react
       '@pandacss/types':
         specifier: ^1.4.2
-        version: 1.4.2
-    peerDependencies:
+        version: 1.11.1
       react:
-        specifier: '>=18'
+        specifier: 19.2.6
+        version: 19.2.6
 
   packages/panda-preset:
     dependencies:

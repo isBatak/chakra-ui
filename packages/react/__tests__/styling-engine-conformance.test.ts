@@ -1,12 +1,11 @@
-import type { EmotionCache } from "@emotion/cache"
-import { createEmotionAdapter } from "@chakra-ui/emotion"
-import { createPandaAdapter } from "@chakra-ui/panda"
+import type { SystemContext } from "@chakra-ui/react/styled-system"
 import type {
   StylingEngineAdapter,
   StylingEngineStyleOutput,
 } from "@chakra-ui/react/styling-engine"
-import type { SystemContext } from "@chakra-ui/react/styled-system"
 import { describe, expect, it } from "vitest"
+import { createEmotionAdapter } from "../../emotion/src"
+import { createPandaAdapter } from "../../panda/src"
 
 const system = {
   splitCssProps(props: Record<string, unknown>) {
@@ -37,7 +36,7 @@ const adapters: Array<{
         key: "css",
         registered: {},
         sheet: {},
-      } as EmotionCache,
+      } as Parameters<typeof createEmotionAdapter>[0]["cache"],
     }),
     hasInsertion: true,
   },
