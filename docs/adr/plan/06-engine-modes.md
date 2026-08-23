@@ -38,4 +38,4 @@ tests.
   `packages/type-tests/engine-mode-dependencies.test.ts`
 - Type matrix: `pnpm --filter "./packages/type-tests/**" typecheck`
 - Boundary runtime matrix:
-  `pnpm vitest run packages/type-tests/{emotion-only,panda-only,dual-engine}/runtime.test.tsx packages/type-tests/missing-engine-boundary.test.tsx`
+  `pnpm vitest run packages/type-tests/{emotion-only,panda-only,dual-engine}/runtime.test.tsx packages/type-tests/dual-engine/missing-engine-boundary.test.tsx`

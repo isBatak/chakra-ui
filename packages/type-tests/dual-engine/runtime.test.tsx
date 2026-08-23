@@ -1,7 +1,7 @@
 import { StylingEngineProvider } from "@chakra-ui/react/styling-engine"
 import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it } from "vitest"
-import { EngineComponents, EngineProbe } from "../engine-components"
+import { EngineComponents, EngineProbe } from "./engine-components"
 import { DualEngineFixture, emotionAdapter, pandaAdapter } from "./runtime"
 
 describe("dual-engine mode", () => {

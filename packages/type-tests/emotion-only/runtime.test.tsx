@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it } from "vitest"
-import { EngineComponents } from "../engine-components"
+import { EngineComponents } from "../dual-engine/engine-components"
 import { EmotionOnlyFixture } from "./runtime"
 
 describe("Emotion-only engine mode", () => {
