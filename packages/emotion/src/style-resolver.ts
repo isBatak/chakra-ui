@@ -1,13 +1,13 @@
-import type { EmotionCache } from "@emotion/cache"
-import { serializeStyles } from "@emotion/serialize"
-import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
-import { insertStyles, registerStyles } from "@emotion/utils"
-import { createElement } from "react"
 import type {
   StylingEngineStyleInput,
   StylingEngineStyleOutput,
 } from "@chakra-ui/react/styling-engine"
 import type { SystemStyleObject } from "@chakra-ui/react/styled-system"
+import type { EmotionCache } from "@emotion/cache"
+import { serializeStyles } from "@emotion/serialize"
+import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
+import { insertStyles, registerStyles } from "@emotion/utils"
+import { createElement } from "react"
 
 interface EmotionInsertionProps {
   cache: EmotionCache
@@ -46,9 +46,7 @@ export function createEmotionStyleResolver(cache: EmotionCache) {
     const serialized = serializeStyles(styles, cache.registered)
 
     return {
-      className: serialized.styles
-        ? `${cache.key}-${serialized.name}`
-        : "",
+      className: serialized.styles ? `${cache.key}-${serialized.name}` : "",
       insertion: createElement(EmotionInsertion, { cache, serialized }),
     }
   }
