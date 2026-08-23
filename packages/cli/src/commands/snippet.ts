@@ -20,20 +20,10 @@ import {
   addCommandFlagsSchema,
 } from "../utils/schema"
 import { uniq } from "../utils/shared"
+import { shouldSkipSnippetFile } from "../utils/snippet-files"
 import { tasks } from "../utils/tasks"
 
 const debug = createDebug("chakra:snippet")
-
-export function shouldSkipSnippetFile(
-  filename: string,
-  exists: boolean,
-  force: boolean | undefined,
-) {
-  if (!exists) return false
-  const name = basename(filename)
-  if (name === "provider.tsx" || name === "provider.jsx") return true
-  return !force
-}
 
 export const SnippetCommand = new Command("snippet")
   .description("Add snippets to your project for better DX")

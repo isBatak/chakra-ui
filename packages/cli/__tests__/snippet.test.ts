@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest"
-import { shouldSkipSnippetFile } from "../src/commands/snippet"
+import { shouldSkipSnippetFile } from "../src/utils/snippet-files"
 
 describe("shouldSkipSnippetFile", () => {
   test("never overwrites an installed Provider", () => {
