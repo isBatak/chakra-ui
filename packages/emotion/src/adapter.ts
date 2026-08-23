@@ -3,11 +3,11 @@ import type {
   StylingEngineClassName,
   StylingEngineProps,
 } from "@chakra-ui/react/styling-engine"
-import type { EmotionCache } from "@emotion/cache"
 import type {
   SystemContext,
   SystemStyleObject,
 } from "@chakra-ui/react/styled-system"
+import type { EmotionCache } from "@emotion/cache"
 import { createEmotionStyleResolver } from "./style-resolver"
 
 export interface EmotionAdapterOptions {
@@ -43,7 +43,7 @@ export function createEmotionAdapter(
       return Object.fromEntries(
         Object.entries(styles).map(([slot, style]) => [
           slot,
-          resolveStyle(style),
+          resolveStyle(style as SystemStyleObject),
         ]),
       )
     },
