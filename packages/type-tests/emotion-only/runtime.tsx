@@ -1,6 +1,6 @@
 import { createEmotionAdapter } from "@chakra-ui/emotion"
-import { StylingEngineProvider } from "@chakra-ui/react/styling-engine"
 import type { SystemContext } from "@chakra-ui/react/styled-system"
+import { StylingEngineProvider } from "@chakra-ui/react/styling-engine"
 import type { ReactNode } from "react"
 
 const system = {
