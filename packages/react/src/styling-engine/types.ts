@@ -2,9 +2,8 @@ import type { ReactNode } from "react"
 
 export type StylingEngineProps = Record<string, unknown>
 
-export type StylingEngineSplitPropsInput<
-  Props extends StylingEngineProps,
-> = Readonly<Props>
+export type StylingEngineSplitPropsInput<Props extends StylingEngineProps> =
+  Readonly<Props>
 
 export interface StylingEngineSplitPropsOutput<ElementProps, StyleProps> {
   elementProps: ElementProps
