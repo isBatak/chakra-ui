@@ -4,7 +4,7 @@ import { Command } from "commander"
 import createDebug from "debug"
 import { existsSync } from "fs"
 import { writeFile } from "fs/promises"
-import { join } from "node:path/posix"
+import { basename, join } from "node:path/posix"
 import { getProjectContext } from "../utils/context"
 import { convertTsxToJsx } from "../utils/convert-tsx-to-jsx"
 import { fetchComposition, fetchCompositions } from "../utils/fetch"
@@ -27,10 +27,11 @@ const debug = createDebug("chakra:snippet")
 export function shouldSkipSnippetFile(
   filename: string,
   exists: boolean,
-  force: boolean,
+  force: boolean | undefined,
 ) {
   if (!exists) return false
-  if (filename === "provider.tsx" || filename === "provider.jsx") return true
+  const name = basename(filename)
+  if (name === "provider.tsx" || name === "provider.jsx") return true
   return !force
 }
 
@@ -108,7 +109,14 @@ export const SnippetCommand = new Command("snippet")
             task: async () => {
               await Promise.all(
                 fileDependencies.map(async (dep) => {
-                  if (existsSync(join(outdir, dep)) && !force) {
+                  if (
+                    shouldSkipSnippetFile(
+                      dep,
+                      existsSync(join(outdir, dep)),
+                      force,
+                    )
+                  ) {
+                    protectedProvider ||= basename(dep).startsWith("provider.")
                     skippedFiles.push(dep)
                     return
                   }
@@ -148,7 +156,8 @@ export const SnippetCommand = new Command("snippet")
                       force,
                     )
                   ) {
-                    protectedProvider ||= filename.startsWith("provider.")
+                    protectedProvider ||=
+                      basename(filename).startsWith("provider.")
                     skippedFiles.push(id)
                     return
                   }
