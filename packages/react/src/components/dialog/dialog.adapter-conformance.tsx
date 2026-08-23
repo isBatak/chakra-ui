@@ -43,6 +43,9 @@ const normalizeHtml = (html: string) =>
     .replace(/dialog:_r_\d+_/g, "dialog:generated")
     .replace(/_r_\d+_/g, "generated")
     .replace(/\s+/g, " ")
+    .replace(/\s*>/g, ">")
+    .replace(/>\s+/g, ">")
+    .replace(/\s+</g, "<")
     .replace(/;"/g, '"')
     .trim()
 
