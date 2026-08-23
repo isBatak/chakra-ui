@@ -1,20 +1,24 @@
 "use client"
 
 import { forwardRef, useMemo } from "react"
+import { createContext } from "../../create-context"
 import { mergeProps } from "../../merge-props"
 import {
   type HTMLChakraProps,
   type RecipeProps,
   type UnstyledProp,
   chakra,
-  createRecipeContext,
 } from "../../styled-system"
-import { cx, dataAttr } from "../../utils"
+import { useStylingEngine } from "../../styling-engine"
+import { dataAttr } from "../../utils"
 import { Loader } from "../loader"
 
-const { useRecipeResult, PropsProvider, usePropsContext } = createRecipeContext(
-  { key: "button" },
-)
+const [ButtonPropsProvider, useButtonPropsContext] =
+  createContext<ButtonContextValue>({
+    strict: false,
+    name: "ButtonPropsContext",
+    providerName: "ButtonPropsProvider",
+  })
 
 export interface ButtonLoadingProps {
   /**
@@ -40,6 +44,8 @@ export interface ButtonLoadingProps {
 export interface ButtonBaseProps
   extends RecipeProps<"button">, UnstyledProp, ButtonLoadingProps {}
 
+export type ButtonContextValue = Partial<ButtonBaseProps>
+
 export interface ButtonProps extends HTMLChakraProps<
   "button",
   ButtonBaseProps
@@ -47,47 +53,55 @@ export interface ButtonProps extends HTMLChakraProps<
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(inProps, ref) {
-    const propsContext = usePropsContext()
-    const props = useMemo(
-      () => mergeProps(propsContext, inProps),
+    const system = useStylingEngine()
+    const propsContext = useButtonPropsContext()
+    const props = useMemo<ButtonProps>(
+      () => mergeProps(propsContext, inProps) as ButtonProps,
       [propsContext, inProps],
     )
-    const result = useRecipeResult(props)
     const {
       loading,
       loadingText,
       children,
       spinner,
       spinnerPlacement,
+      size,
+      variant,
+      unstyled,
       ...rest
-    } = result.props
+    } = props
+    const recipe = unstyled
+      ? undefined
+      : system.recipe({ name: "button", props: { size, variant } })
+
     return (
-      <chakra.button
-        type="button"
-        ref={ref}
-        {...rest}
-        data-loading={dataAttr(loading)}
-        disabled={loading || rest.disabled}
-        className={cx(result.className, props.className)}
-        css={[result.styles, props.css]}
-      >
-        {!props.asChild && loading ? (
-          <Loader
-            spinner={spinner}
-            text={loadingText}
-            spinnerPlacement={spinnerPlacement}
-          >
-            {children}
-          </Loader>
-        ) : (
-          children
-        )}
-      </chakra.button>
+      <>
+        {recipe?.insertion}
+        <chakra.button
+          type="button"
+          ref={ref}
+          {...rest}
+          data-loading={dataAttr(loading)}
+          disabled={loading || rest.disabled}
+          className={system.cx(recipe?.className, props.className)}
+        >
+          {!props.asChild && loading ? (
+            <Loader
+              spinner={spinner}
+              text={loadingText}
+              spinnerPlacement={spinnerPlacement}
+            >
+              {children}
+            </Loader>
+          ) : (
+            children
+          )}
+        </chakra.button>
+      </>
     )
   },
 )
 
 Button.displayName = "Button"
 
-export const ButtonPropsProvider =
-  PropsProvider as React.Provider<ButtonBaseProps>
+export { ButtonPropsProvider }
