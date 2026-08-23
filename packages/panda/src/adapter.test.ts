@@ -1,4 +1,6 @@
+import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
+import { runButtonAdapterConformance } from "../../react/src/components/button/button.adapter-conformance"
 import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createPandaAdapter } from "./adapter"
@@ -49,6 +51,35 @@ describe("createPandaAdapter", () => {
     expect(() => adapter.slotRecipe({ name: "missing", props: {} })).toThrow(
       "Unknown Panda slot recipe: missing",
     )
+  })
+
+  runButtonAdapterConformance({
+    name: "Panda",
+    adapter: createPandaAdapter({
+      isStyleProp: (prop) =>
+        ["alignItems", "css", "display", "flexWrap", "justifyContent"].includes(
+          prop,
+        ),
+      css: () => "panda-style",
+      recipes: {
+        button: (props) =>
+          `button-${props.size ?? "md"}-${props.variant ?? "solid"}`,
+      },
+      resolveRecipe: () => "panda-group-layout",
+      slotRecipes: {},
+      token: (path, fallback) => fallback ?? path,
+    }),
+    buttonClassName: /button-(sm|lg)-outline/,
+    defaultButtonClassName: /button-md-solid/,
+    groupClassName: /panda-group-layout/,
+    standaloneHtml: readFileSync(
+      "packages/panda/src/fixtures/button.html",
+      "utf8",
+    ).trim(),
+    groupHtml: readFileSync(
+      "packages/panda/src/fixtures/button-group.html",
+      "utf8",
+    ).trim(),
   })
 })
 

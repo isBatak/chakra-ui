@@ -97,7 +97,7 @@ describe("Button adapter prototype", () => {
         </Button>
       </StylingEngineProvider>,
     )
-    expect(screen.getByRole("link")).toHaveAttribute("href", "#child")
+    expect(screen.getByRole("link").getAttribute("href")).toBe("#child")
   })
 
   it("shares group values while allowing child overrides", () => {

@@ -1,14 +1,28 @@
 import type { SystemContext } from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
+import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
+import { runButtonAdapterConformance } from "../../react/src/components/button/button.adapter-conformance"
 import { runFactoryAdapterConformance } from "../../react/src/styled-system/factory.adapter-conformance"
 import { runStylingEngineConformance } from "../../react/src/styling-engine/conformance"
 import { createEmotionAdapter } from "./adapter"
 
 const system = {
   splitCssProps(props: Record<string, unknown>) {
-    const { bg, color, css, ...elementProps } = props
-    return [{ bg, color, css }, elementProps]
+    const {
+      alignItems,
+      bg,
+      color,
+      css,
+      display,
+      flexWrap,
+      justifyContent,
+      ...elementProps
+    } = props
+    return [
+      { alignItems, bg, color, css, display, flexWrap, justifyContent },
+      elementProps,
+    ]
   },
   getRecipeFn() {
     return (props: Record<string, unknown>) => ({ recipe: props })
@@ -55,6 +69,22 @@ describe("createEmotionAdapter", () => {
       root: { className: expect.stringMatching(/^css-/) },
       label: { className: expect.stringMatching(/^css-/) },
     })
+  })
+
+  runButtonAdapterConformance({
+    name: "Emotion",
+    adapter: createEmotionAdapter({ system }),
+    buttonClassName: /chakra-[a-z0-9]+/,
+    defaultButtonClassName: /chakra-1jbg1v0/,
+    groupClassName: /chakra-[a-z0-9]+/,
+    standaloneHtml: readFileSync(
+      "packages/emotion/src/fixtures/button.html",
+      "utf8",
+    ).trim(),
+    groupHtml: readFileSync(
+      "packages/emotion/src/fixtures/button-group.html",
+      "utf8",
+    ).trim(),
   })
 })
 

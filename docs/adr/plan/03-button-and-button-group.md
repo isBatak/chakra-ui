@@ -23,12 +23,12 @@ and its group composition.
 - [x] 3.8 Build ButtonGroup layout.
 - [x] 3.9 Pass shared size and variant values to child Buttons.
 - [x] 3.10 Allow a child Button to override a group value.
-- [ ] 3.11 Test standalone Button with Emotion.
-- [ ] 3.12 Test ButtonGroup with Emotion.
-- [ ] 3.13 Test standalone Button with Panda.
-- [ ] 3.14 Test ButtonGroup with Panda.
-- [ ] 3.15 Add public type tests.
-- [ ] 3.16 Save rendered HTML fixtures.
+- [x] 3.11 Test standalone Button with Emotion.
+- [x] 3.12 Test ButtonGroup with Emotion.
+- [x] 3.13 Test standalone Button with Panda.
+- [x] 3.14 Test ButtonGroup with Panda.
+- [x] 3.15 Add public type tests.
+- [x] 3.16 Save rendered HTML fixtures.
 
 ## Gate
 
@@ -41,3 +41,12 @@ through both adapters.
 - Type-test result
 - Emotion test result
 - Panda test result
+
+Recorded evidence:
+
+- Component API diff: none; the matrix verifies the existing public API.
+- Type test: `packages/react/src/components/button/button.types.test.tsx`.
+- Shared Emotion and Panda behavior matrix:
+  `packages/react/src/components/button/button.adapter-conformance.tsx`.
+- Rendered HTML fixtures: `packages/emotion/src/fixtures/button*.html` and
+  `packages/panda/src/fixtures/button*.html`.
