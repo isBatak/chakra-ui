@@ -7,12 +7,13 @@ import type {
   StylingEngineClassName,
   StylingEngineProps,
 } from "@chakra-ui/react/styling-engine"
+import createCache from "@emotion/cache"
 import type { EmotionCache } from "@emotion/cache"
 import { createEmotionStyleResolver } from "./style-resolver"
 
 export interface EmotionAdapterOptions {
   system: SystemContext
-  cache: EmotionCache
+  cache?: EmotionCache
 }
 
 const cx = (...values: StylingEngineClassName[]) =>
@@ -22,7 +23,9 @@ export function createEmotionAdapter(
   options: EmotionAdapterOptions,
 ): StylingEngineAdapter<SystemStyleObject> {
   const { system } = options
-  const resolveStyle = createEmotionStyleResolver(options.cache)
+  const resolveStyle = createEmotionStyleResolver(
+    options.cache ?? createCache({ key: "chakra" }),
+  )
 
   return {
     splitProps<Props extends StylingEngineProps>(props: Readonly<Props>) {
@@ -35,7 +38,15 @@ export function createEmotionAdapter(
       }
     },
     css: resolveStyle,
-    recipe({ name, props }) {
+    recipe({ name, definitions, props }) {
+      if (definitions?.length) {
+        const recipes = definitions.map((definition) =>
+          system.cva(definition as Parameters<typeof system.cva>[0]),
+        )
+        const recipe = recipes.slice(1).reduce((a, b) => a.merge(b), recipes[0])
+        return resolveStyle(recipe(props) as SystemStyleObject)
+      }
+      if (!name) throw new Error("A recipe name or definition is required")
       return resolveStyle(system.getRecipeFn(name)(props) as SystemStyleObject)
     },
     slotRecipe({ name, props }) {

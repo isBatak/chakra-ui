@@ -2,7 +2,8 @@
 
 ## Outcome
 
-A minimal, engine-neutral Chakra factory consumes the StyleSystem adapter methods and generated types.
+A minimal, engine-neutral Chakra factory consumes the StyleSystem adapter
+methods and generated types.
 
 ## Related ADRs
 
@@ -16,14 +17,14 @@ A minimal, engine-neutral Chakra factory consumes the StyleSystem adapter method
 - [x] 2.2 Map each factory API to one generated public type.
 - [x] 2.3 Write the smallest factory API needed by `chakra("button")`.
 - [x] 2.4 Keep Emotion and Panda imports out of the factory package.
-- [ ] 2.5 Implement intrinsic element creation.
-- [ ] 2.6 Forward refs.
-- [ ] 2.7 Preserve intrinsic HTML props.
-- [ ] 2.8 Support `as`.
-- [ ] 2.9 Support Ark v5 `asChild`.
-- [ ] 2.10 Delegate prop splitting to the active StyleSystem.
-- [ ] 2.11 Delegate style and recipe resolution to the active StyleSystem.
-- [ ] 2.12 Delegate class-name merging to the active StyleSystem.
+- [x] 2.5 Implement intrinsic element creation.
+- [x] 2.6 Forward refs.
+- [x] 2.7 Preserve intrinsic HTML props.
+- [x] 2.8 Support `as`.
+- [x] 2.9 Support Ark v5 `asChild`.
+- [x] 2.10 Delegate prop splitting to the active StyleSystem.
+- [x] 2.11 Delegate style and recipe resolution to the active StyleSystem.
+- [x] 2.12 Delegate class-name merging to the active StyleSystem.
 - [ ] 2.13 Test one intrinsic element with Emotion.
 - [ ] 2.14 Test the same intrinsic element with Panda.
 - [ ] 2.15 Test runtime prop filtering.
@@ -31,7 +32,8 @@ A minimal, engine-neutral Chakra factory consumes the StyleSystem adapter method
 
 ## Gate
 
-`chakra("button")` passes runtime and type tests through both adapters without engine-specific factory logic.
+`chakra("button")` passes runtime and type tests through both adapters without
+engine-specific factory logic.
 
 ## Evidence
 

@@ -1,335 +1,153 @@
 "use client"
 
-/**
- * Forked from https://github.com/emotion-js/emotion/blob/main/packages/styled/src/base.js
- * but optimized for Chakra UI. All credits to the original authors.
- *
- * This also serves a bridge to React 19's style tag hoisting features.
- */
-import emotionIsPropValid from "@emotion/is-prop-valid"
-import { ThemeContext, withEmotionCache } from "@emotion/react"
-import { serializeStyles } from "@emotion/serialize"
-//@ts-ignore
-import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
-import {
-  getRegisteredStyles,
-  insertStyles,
-  registerStyles,
-} from "@emotion/utils"
+import { ark } from "@ark-ui/react/factory"
 import * as React from "react"
-import { mergeProps } from "../merge-props"
-import { mergeRefs } from "../merge-refs"
-import { compact, cx, getElementRef, interopDefault, uniq } from "../utils"
-import type { JsxFactory, StyledFactoryFn } from "./factory.types"
-import { useChakraContext } from "./provider"
-import { isHtmlProp, useResolvedProps } from "./use-resolved-props"
+import type { ElementType } from "react"
+import { useStylingEngine } from "../styling-engine/provider"
+import type { JsxFactoryOptions, StyledFactoryFn } from "./factory.types"
 
-const isPropValid = interopDefault(emotionIsPropValid)
+const htmlProps = new Set([
+  "htmlWidth",
+  "htmlHeight",
+  "htmlSize",
+  "htmlTranslate",
+  "htmlContent",
+])
 
-const testOmitPropsOnStringTag = isPropValid
-const testOmitPropsOnComponent = (key: string) => key !== "theme"
-
-const composeShouldForwardProps = (tag: any, options: any, isReal: boolean) => {
-  let shouldForwardProp
-  if (options) {
-    const optionsShouldForwardProp = options.shouldForwardProp
-    shouldForwardProp =
-      tag.__emotion_forwardProp && optionsShouldForwardProp
-        ? (propName: string) =>
-            tag.__emotion_forwardProp(propName) &&
-            optionsShouldForwardProp(propName)
-        : optionsShouldForwardProp
-  }
-
-  if (typeof shouldForwardProp !== "function" && isReal) {
-    shouldForwardProp = tag.__emotion_forwardProp
-  }
-
-  return shouldForwardProp
+function normalizeHtmlProp(prop: string) {
+  return htmlProps.has(prop) ? prop.replace("html", "").toLowerCase() : prop
 }
 
-let isBrowser = typeof document !== "undefined"
+function getRecipeName(recipe: unknown): string | undefined {
+  if (typeof recipe === "string") return recipe
+  if (!recipe || typeof recipe !== "object") return undefined
 
-const Insertion = ({ cache, serialized, isStringTag }: any) => {
-  registerStyles(cache, serialized, isStringTag)
+  const value = recipe as { name?: unknown; __recipeName?: unknown }
+  if (typeof value.__recipeName === "string") return value.__recipeName
+  return typeof value.name === "string" ? value.name : undefined
+}
 
-  const rules = useInsertionEffectAlwaysWithSyncFallback(() =>
-    insertStyles(cache, serialized, isStringTag),
-  )
+const arkFactory = ark as unknown as {
+  (component: ElementType): ElementType
+  [element: string]: ElementType
+}
 
-  if (!isBrowser && rules !== undefined) {
-    let serializedNames = serialized.name
-    let next = serialized.next
-    while (next !== undefined) {
-      serializedNames = cx(serializedNames, next.name)
-      next = next.next
-    }
-    return (
-      <style
-        {...{
-          [`data-emotion`]: cx(cache.key, serializedNames),
-          dangerouslySetInnerHTML: { __html: rules },
-          nonce: cache.sheet.nonce,
-        }}
-      />
+function createStyled(
+  component: ElementType,
+  recipe?: unknown,
+  options: JsxFactoryOptions<any> = {},
+) {
+  if (process.env.NODE_ENV !== "production" && component === undefined) {
+    throw new Error(
+      "You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.",
     )
   }
-  return null
-}
 
-const exceptionPropMap = {
-  path: ["d"],
-  text: ["x", "y"],
-  circle: ["cx", "cy", "r"],
-  rect: ["width", "height", "x", "y", "rx", "ry"],
-  ellipse: ["cx", "cy", "rx", "ry"],
-  g: ["transform"],
-  stop: ["offset", "stopOpacity"],
-}
+  const inheritedRecipes =
+    typeof component !== "string" && "__chakra_recipes" in component
+      ? (component.__chakra_recipes as readonly unknown[])
+      : []
+  const recipeDefinitions = recipe
+    ? [...inheritedRecipes, recipe]
+    : inheritedRecipes
+  const baseComponent =
+    typeof component === "string"
+      ? arkFactory[component]
+      : arkFactory(component)
 
-const hasProp = (obj: any, prop: string) => {
-  return Object.prototype.hasOwnProperty.call(obj, prop)
-}
-
-const createStyled = (tag: any, configOrCva: any = {}, options: any = {}) => {
-  if (process.env.NODE_ENV !== "production") {
-    if (tag === undefined) {
-      throw new Error(
-        "You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.",
+  const Styled = React.forwardRef<unknown, Record<string, unknown>>(
+    function ChakraComponent(inProps, ref) {
+      const system = useStylingEngine()
+      const props = Object.assign({}, options.defaultProps, inProps)
+      const { elementProps, styleProps } = system.splitProps(props)
+      const { className, as, asChild, children, ...rest } = elementProps
+      const { css, ...directStyleProps } = styleProps
+      const recipeName = getRecipeName(recipe)
+      const inlineRecipes = recipeDefinitions.filter(
+        (definition) => !getRecipeName(definition),
       )
-    }
-  }
+      const recipeOutput =
+        recipeName || inlineRecipes.length
+          ? system.recipe({
+              name: recipeName,
+              definitions: inlineRecipes,
+              props,
+            })
+          : undefined
+      const styleInput = [
+        ...((Array.isArray(css) ? css : [css]).filter(Boolean) as unknown[]),
+        directStyleProps,
+      ]
+      const styleOutput = system.css(styleInput)
+      const finalProps: Record<string, unknown> = {}
 
-  if (hasProp(exceptionPropMap, tag)) {
-    options.forwardProps ||= []
-    const props = exceptionPropMap[tag as keyof typeof exceptionPropMap]
-    options.forwardProps = uniq([...options.forwardProps, ...props])
-  }
-
-  const isReal = tag.__emotion_real === tag
-  const baseTag = (isReal && tag.__emotion_base) || tag
-
-  let identifierName: string | undefined
-  let targetClassName: string | undefined
-
-  if (options !== undefined) {
-    identifierName = options.label
-    targetClassName = options.target
-  }
-
-  let styles: any[] = []
-
-  const Styled: any = withEmotionCache((inProps: any, cache, ref) => {
-    const { cva, isValidProperty } = useChakraContext()
-
-    const cvaFn = configOrCva.__cva__ ? configOrCva : cva(configOrCva)
-    const baseCva =
-      tag.__emotion_cva && !tag.__emotion_cva.__cva__
-        ? cva(tag.__emotion_cva)
-        : tag.__emotion_cva
-    const cvaRecipe = mergeCva(baseCva, cvaFn)
-
-    const createShouldForwardProps = (props: string[]) => {
-      return (prop: string, variantKeys: string[]) => {
-        if (props.includes(prop)) return true
-        return !variantKeys?.includes(prop) && !isValidProperty(prop)
+      for (const [key, value] of Object.entries(rest)) {
+        if (key === "theme") continue
+        if (options.shouldForwardProp?.(key, []) === false) continue
+        finalProps[normalizeHtmlProp(key)] = value
       }
-    }
 
-    if (!options.shouldForwardProp && options.forwardProps) {
-      options.shouldForwardProp = createShouldForwardProps(options.forwardProps)
-    }
-
-    const fallbackShouldForwardProp = (prop: string, variantKeys: string[]) => {
-      const emotionSfp =
-        typeof tag === "string" && tag.charCodeAt(0) > 96
-          ? testOmitPropsOnStringTag
-          : testOmitPropsOnComponent
-      const chakraSfp = !variantKeys?.includes(prop) && !isValidProperty(prop)
-      return emotionSfp(prop) && chakraSfp
-    }
-
-    const shouldForwardProp =
-      composeShouldForwardProps(tag, options, isReal) ||
-      fallbackShouldForwardProp
-
-    const propsWithDefault = React.useMemo(
-      () => Object.assign({}, options.defaultProps, compact(inProps)),
-      [inProps],
-    )
-
-    const { props, styles: styleProps } = useResolvedProps(
-      propsWithDefault,
-      cvaRecipe,
-      shouldForwardProp,
-    )
-
-    let className = ""
-    let classInterpolations: any[] = [styleProps]
-    let mergedProps: any = props
-    if (props.theme == null) {
-      mergedProps = {}
-      for (let key in props) {
-        mergedProps[key] = props[key]
-      }
-      mergedProps.theme = React.useContext(ThemeContext)
-    }
-
-    if (typeof props.className === "string") {
-      className = getRegisteredStyles(
-        cache.registered,
-        classInterpolations,
-        props.className,
+      let FinalTag = baseComponent
+      finalProps.children = children
+      finalProps.className = system.cx(
+        recipeOutput?.className,
+        styleOutput.className,
+        className as string | undefined,
       )
-    } else if (props.className != null) {
-      className = cx(className, props.className)
-    }
+      if (!finalProps.className) delete finalProps.className
+      finalProps.ref = ref
 
-    const serialized = serializeStyles(
-      styles.concat(classInterpolations),
-      cache.registered,
-      mergedProps,
-    )
+      const forwardAsChild =
+        options.forwardAsChild || options.forwardProps?.includes("asChild")
 
-    if (serialized.styles) {
-      className = cx(className, `${cache.key}-${serialized.name}`)
-    }
-
-    if (targetClassName !== undefined) {
-      className = cx(className, targetClassName)
-    }
-
-    const shouldUseAs = !shouldForwardProp("as")
-
-    let FinalTag = (shouldUseAs && props.as) || baseTag
-    let finalProps: any = {}
-
-    for (let prop in props) {
-      if (shouldUseAs && prop === "as") continue
-
-      if (isHtmlProp(prop)) {
-        const nativeProp = prop.replace("html", "").toLowerCase()
-        finalProps[nativeProp] = props[prop]
-        continue
+      if (asChild) {
+        finalProps.asChild = true
       }
 
-      if (shouldForwardProp(prop)) {
-        finalProps[prop] = props[prop]
-      }
-    }
-
-    let classNameToUse = className.trim()
-    if (classNameToUse) {
-      finalProps.className = classNameToUse
-    } else {
-      Reflect.deleteProperty(finalProps, "className")
-    }
-
-    finalProps.ref = ref
-
-    const forwardAsChild =
-      options.forwardAsChild || options.forwardProps?.includes("asChild")
-
-    if (props.asChild && !forwardAsChild) {
-      const child = (
-        React.isValidElement(props.children)
-          ? React.Children.only(props.children)
-          : React.Children.toArray(props.children).find(React.isValidElement)
-      ) as React.ReactElement<any> | undefined
-
-      if (!child) {
-        throw new Error("[chakra-ui > factory] No valid child found")
+      if (as && forwardAsChild) {
+        finalProps.asChild = true
+        finalProps.children = React.createElement(as, null, children)
+      } else if (as) {
+        FinalTag = typeof as === "string" ? arkFactory[as] : arkFactory(as)
       }
 
-      FinalTag = child.type
-
-      // clean props
-      finalProps.children = null
-      Reflect.deleteProperty(finalProps, "asChild")
-
-      finalProps = mergeProps(finalProps, child.props)
-      finalProps.ref = mergeRefs(ref, getElementRef(child))
-    }
-
-    if (finalProps.as && forwardAsChild) {
-      finalProps.as = undefined
       return (
         <React.Fragment>
-          <Insertion
-            cache={cache}
-            serialized={serialized}
-            isStringTag={typeof FinalTag === "string"}
-          />
-          <FinalTag asChild {...finalProps}>
-            <props.as>{finalProps.children}</props.as>
-          </FinalTag>
+          {recipeOutput?.insertion}
+          {styleOutput.insertion}
+          {React.createElement(FinalTag, finalProps)}
         </React.Fragment>
       )
-    }
-
-    return (
-      <React.Fragment>
-        <Insertion
-          cache={cache}
-          serialized={serialized}
-          isStringTag={typeof FinalTag === "string"}
-        />
-        <FinalTag {...finalProps} />
-      </React.Fragment>
-    )
-  })
+    },
+  )
 
   Styled.displayName =
-    identifierName !== undefined
-      ? identifierName
-      : `chakra(${
-          typeof baseTag === "string"
-            ? baseTag
-            : baseTag.displayName || baseTag.name || "Component"
-        })`
+    options.displayName ??
+    `chakra(${
+      typeof component === "string"
+        ? component
+        : component.displayName || component.name || "Component"
+    })`
 
-  Styled.__emotion_real = Styled
-  Styled.__emotion_base = baseTag
-  Styled.__emotion_forwardProp = options.shouldForwardProp
-  Styled.__emotion_cva = configOrCva
-
-  Object.defineProperty(Styled, "toString", {
-    value() {
-      if (
-        targetClassName === undefined &&
-        process.env.NODE_ENV !== "production"
-      ) {
-        return "NO_COMPONENT_SELECTOR"
-      }
-      return `.${targetClassName}`
-    },
+  Object.defineProperty(Styled, "__chakra_recipes", {
+    value: recipeDefinitions,
   })
 
   return Styled
 }
 
-// @ts-ignore
-const styledFn = createStyled.bind() as unknown as JsxFactory
-
-const cache = new Map()
+const cache = new Map<PropertyKey, unknown>()
+const styledFn = createStyled as unknown as StyledFactoryFn
 
 const chakraImpl = new Proxy(styledFn, {
-  apply(_, __, args) {
-    // @ts-ignore
-    return styledFn(...args)
+  apply(target, thisArg, args) {
+    return Reflect.apply(target, thisArg, args)
   },
-  get(_, el) {
-    if (!cache.has(el)) {
-      cache.set(el, styledFn(el as any))
-    }
-    return cache.get(el)
+  get(target, element) {
+    if (typeof element !== "string") return Reflect.get(target, element)
+    if (!cache.has(element)) cache.set(element, createStyled(element as any))
+    return cache.get(element)
   },
 })
 
-export const chakra = chakraImpl as unknown as StyledFactoryFn
-
-const mergeCva = (cvaA: any, cvaB: any) => {
-  if (cvaA && !cvaB) return cvaA
-  if (!cvaA && cvaB) return cvaB
-  return cvaA.merge(cvaB)
-}
+export const chakra = chakraImpl as StyledFactoryFn

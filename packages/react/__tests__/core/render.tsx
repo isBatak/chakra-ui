@@ -1,10 +1,18 @@
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import { StylingEngineProvider } from "@chakra-ui/react/styling-engine"
 import "@testing-library/jest-dom/vitest"
 import { type RenderOptions, render as rtlRender } from "@testing-library/react"
 import user from "@testing-library/user-event"
+import { createEmotionAdapter } from "../../../emotion/src"
+
+const emotionAdapter = createEmotionAdapter({
+  system: defaultSystem,
+})
 
 const Provider = (props: any) => (
-  <ChakraProvider {...props} value={defaultSystem} />
+  <StylingEngineProvider value={emotionAdapter}>
+    <ChakraProvider {...props} value={defaultSystem} />
+  </StylingEngineProvider>
 )
 
 export interface ChakraRenderOptions extends RenderOptions {

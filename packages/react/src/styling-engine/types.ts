@@ -22,7 +22,8 @@ export interface StylingEngineStyleOutput {
 export interface StylingEngineRecipeInput<
   RecipeProps extends StylingEngineProps = StylingEngineProps,
 > {
-  name: string
+  name?: string
+  definitions?: readonly unknown[]
   props: Readonly<RecipeProps>
 }
 

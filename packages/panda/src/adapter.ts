@@ -22,6 +22,10 @@ export interface PandaAdapterOptions<
   isStyleProp(prop: string): boolean
   css(...styles: SystemStyle[]): string
   recipes: Record<string, PandaRecipe<RecipeProps>>
+  resolveRecipe?: (
+    definitions: readonly unknown[],
+    props: Readonly<RecipeProps>,
+  ) => string
   slotRecipes: Record<string, PandaSlotRecipe<SlotRecipeProps>>
   token(path: string, fallback?: string): string
   cx?: (...classNames: StylingEngineClassName[]) => string
@@ -58,7 +62,16 @@ export function createPandaAdapter<
       const styles = Array.isArray(style) ? style : [style]
       return output(options.css(...(styles as SystemStyle[])))
     },
-    recipe({ name, props }) {
+    recipe({ name, definitions, props }) {
+      if (definitions?.length) {
+        if (!options.resolveRecipe) {
+          throw new Error(
+            "The Panda adapter requires resolveRecipe for inline recipes",
+          )
+        }
+        return output(options.resolveRecipe(definitions, props))
+      }
+      if (!name) throw new Error("A recipe name or definition is required")
       const recipe = options.recipes[name]
       if (!recipe) throw new Error(`Unknown Panda recipe: ${name}`)
       return output(recipe(props))
