@@ -4,8 +4,7 @@ import { createPandaAdapter } from "./adapter"
 describe("createPandaAdapter", () => {
   const adapter = createPandaAdapter({
     isStyleProp: (prop) => prop === "color",
-    css: (...styles: Array<Record<string, unknown>>) =>
-      `css-${styles.length}`,
+    css: (...styles: Array<Record<string, unknown>>) => `css-${styles.length}`,
     recipes: {
       button: (props) => `button-${props.size}`,
     },
@@ -31,9 +30,7 @@ describe("createPandaAdapter", () => {
       className: "button-sm",
       insertion: null,
     })
-    expect(
-      adapter.slotRecipe({ name: "dialog", props: {} }),
-    ).toEqual({
+    expect(adapter.slotRecipe({ name: "dialog", props: {} })).toEqual({
       root: { className: "dialog-root", insertion: null },
       content: { className: "dialog-content", insertion: null },
     })
