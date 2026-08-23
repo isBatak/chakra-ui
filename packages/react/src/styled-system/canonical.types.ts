@@ -1,8 +1,5 @@
 import type { Conditions } from "./generated/conditions.gen"
-import type {
-  ConfigRecipes,
-  ConfigSlotRecipes,
-} from "./generated/recipes.gen"
+import type { ConfigRecipes, ConfigSlotRecipes } from "./generated/recipes.gen"
 import type { SystemProperties } from "./generated/system.gen"
 import type { Tokens } from "./generated/token.gen"
 
@@ -24,10 +21,11 @@ export interface ChakraSystemRegister {}
 
 export type DefaultChakraSystem = ChakraSystem
 
-export type RegisteredChakraSystem =
-  ChakraSystemRegister extends { system: infer System extends ChakraSystem }
-    ? System
-    : DefaultChakraSystem
+export type RegisteredChakraSystem = ChakraSystemRegister extends {
+  system: infer System extends ChakraSystem
+}
+  ? System
+  : DefaultChakraSystem
 
 export type ChakraSystemTokens<
   System extends ChakraSystem = RegisteredChakraSystem,
