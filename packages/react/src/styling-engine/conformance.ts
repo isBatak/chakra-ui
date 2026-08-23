@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest"
-import type {
-  StylingEngineAdapter,
-  StylingEngineStyleOutput,
-} from "./types"
+import type { StylingEngineAdapter, StylingEngineStyleOutput } from "./types"
 
 interface StylingEngineConformanceFixture<SystemStyle> {
   name: string

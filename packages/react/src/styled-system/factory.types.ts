@@ -1,13 +1,12 @@
 import type { Assign } from "@ark-ui/react"
 import type {
-  ComponentRef,
   ComponentProps,
   ComponentPropsWithoutRef,
+  ComponentRef,
   ElementType,
   JSX,
-  Ref,
   ReactElement,
-  ReactNode,
+  Ref,
 } from "react"
 import type {
   Dict,
@@ -15,10 +14,7 @@ import type {
   DistributiveUnion,
   Pretty,
 } from "../utils"
-import type {
-  ChakraSystem,
-  RegisteredChakraSystem,
-} from "./canonical.types"
+import type { ChakraSystem, RegisteredChakraSystem } from "./canonical.types"
 import type { MinimalNested, SystemStyleObject } from "./css.types"
 import type { SystemProperties } from "./generated/system.gen"
 import type {
@@ -42,7 +38,6 @@ export interface PolymorphicProps {
 export interface ArkAsChildProps {
   /** Compose the Chakra component onto its single child using Ark UI v5. */
   asChild?: boolean | undefined
-  children?: ReactNode | undefined
 }
 
 export type PolymorphicRef<T extends ElementType> = Ref<ComponentRef<T>>
@@ -71,19 +66,10 @@ export type JsxHtmlProps<T extends Dict, P extends Dict = {}> = Assign<
   P
 >
 
-export interface ChakraComponent<
-  T extends ElementType,
-  P extends Dict = {},
-> {
-  (
-    props: HTMLChakraProps<T, P> & {
-      as?: undefined
-      ref?: PolymorphicRef<T> | undefined
-    },
-  ): ReactElement | null
-  <As extends ElementType>(
+export interface ChakraComponent<T extends ElementType, P extends Dict = {}> {
+  <As extends ElementType = T>(
     props: HTMLChakraProps<As, P> & {
-      as: As
+      as?: As | undefined
       ref?: PolymorphicRef<As> | undefined
     },
   ): ReactElement | null
@@ -147,16 +133,19 @@ export interface JsxStyleProps
 /** Public JSX style props shared by every engine implementation. */
 export type ChakraJsxStyleProps<
   System extends ChakraSystem = RegisteredChakraSystem,
-> = System["properties"] & MinimalNested<SystemStyleObject> & {
+> = System["properties"] &
+  MinimalNested<SystemStyleObject> & {
     css?: JsxStyleProps["css"]
   }
 
-type RecipeType<System extends ChakraSystem, Key extends PropertyKey> =
-  Key extends keyof System["recipes"]
-    ? System["recipes"][Key] extends { __type: infer Props }
-      ? Props
-      : {}
-    : never
+type RecipeType<
+  System extends ChakraSystem,
+  Key extends PropertyKey,
+> = Key extends keyof System["recipes"]
+  ? System["recipes"][Key] extends { __type: infer Props }
+    ? Props
+    : {}
+  : never
 
 type SlotRecipeType<
   System extends ChakraSystem,

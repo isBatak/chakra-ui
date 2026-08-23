@@ -12,9 +12,7 @@ import type {
 import type { RecipeDefinition, SlotRecipeDefinition } from "./recipe.types"
 
 it("types intrinsic, polymorphic, and Ark v5 composition props", () => {
-  expectTypeOf<ChakraIntrinsicElementProps<"button">>().toHaveProperty(
-    "type",
-  )
+  expectTypeOf<ChakraIntrinsicElementProps<"button">>().toHaveProperty("type")
   expectTypeOf<ChakraIntrinsicElementProps<"button">>().toHaveProperty("css")
   expectTypeOf<ChakraIntrinsicElementProps<"button">>().toHaveProperty(
     "asChild",

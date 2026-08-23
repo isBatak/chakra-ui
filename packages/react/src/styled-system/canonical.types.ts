@@ -49,8 +49,8 @@ export type ChakraRecipeConfig<
 /** Chakra-owned alias for Panda-compatible slot-recipe metadata. */
 export type ChakraSlotRecipeConfig<
   Slot extends string = string,
-  Variants extends
-    PandaSlotRecipeVariantRecord<Slot> = PandaSlotRecipeVariantRecord<Slot>,
+  Variants extends PandaSlotRecipeVariantRecord<Slot> =
+    PandaSlotRecipeVariantRecord<Slot>,
 > = PandaSlotRecipeConfig<Slot, Variants>
 
 export type ChakraSystemTokens<
