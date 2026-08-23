@@ -36,7 +36,7 @@ export function createEmotionAdapter(
     },
     css: resolveStyle,
     recipe({ name, props }) {
-      return resolveStyle(system.getRecipeFn(name)(props))
+      return resolveStyle(system.getRecipeFn(name)(props) as SystemStyleObject)
     },
     slotRecipe({ name, props }) {
       const styles = system.getSlotRecipeFn(name)(props)
