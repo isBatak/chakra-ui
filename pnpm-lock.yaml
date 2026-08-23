@@ -673,6 +673,42 @@ importers:
         specifier: ^7.7.1
         version: 7.7.1
 
+
+  packages/emotion:
+    dependencies:
+      '@chakra-ui/react':
+        specifier: workspace:*
+        version: link:../react
+      '@emotion/cache':
+        specifier: ^11.14.0
+        version: 11.14.0
+      '@emotion/serialize':
+        specifier: ^1.3.3
+        version: 1.3.3
+      '@emotion/use-insertion-effect-with-fallbacks':
+        specifier: ^1.2.0
+        version: 1.2.0(react@19.2.6)
+      '@emotion/utils':
+        specifier: ^1.4.2
+        version: 1.4.2
+    peerDependencies:
+      '@emotion/react':
+        specifier: '>=11'
+      react:
+        specifier: '>=18'
+
+  packages/panda:
+    dependencies:
+      '@chakra-ui/react':
+        specifier: workspace:*
+        version: link:../react
+      '@pandacss/types':
+        specifier: ^1.4.2
+        version: 1.4.2
+    peerDependencies:
+      react:
+        specifier: '>=18'
+
   packages/panda-preset:
     dependencies:
       '@pandacss/types':
