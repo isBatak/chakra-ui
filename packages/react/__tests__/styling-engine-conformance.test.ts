@@ -1,11 +1,11 @@
-import { createEmotionAdapter } from "../../emotion/src"
-import { createPandaAdapter } from "../../panda/src"
 import type {
   StylingEngineAdapter,
   StylingEngineStyleOutput,
 } from "@chakra-ui/react/styling-engine"
 import type { SystemContext } from "@chakra-ui/react/styled-system"
 import { describe, expect, it } from "vitest"
+import { createEmotionAdapter } from "../../emotion/src"
+import { createPandaAdapter } from "../../panda/src"
 
 const system = {
   splitCssProps(props: Record<string, unknown>) {
