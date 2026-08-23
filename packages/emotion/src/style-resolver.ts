@@ -1,8 +1,8 @@
+import type { SystemStyleObject } from "@chakra-ui/react/styled-system"
 import type {
   StylingEngineStyleInput,
   StylingEngineStyleOutput,
 } from "@chakra-ui/react/styling-engine"
-import type { SystemStyleObject } from "@chakra-ui/react/styled-system"
 import type { EmotionCache } from "@emotion/cache"
 import { serializeStyles } from "@emotion/serialize"
 import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
