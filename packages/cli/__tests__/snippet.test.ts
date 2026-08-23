@@ -8,6 +8,12 @@ describe("shouldSkipSnippetFile", () => {
     expect(shouldSkipSnippetFile("provider.jsx", true, true)).toBe(true)
   })
 
+  test("protects Provider targets in file dependency paths", () => {
+    expect(
+      shouldSkipSnippetFile("nested/components/provider.tsx", true, true),
+    ).toBe(true)
+  })
+
   test("allows force for other installed snippets", () => {
     expect(shouldSkipSnippetFile("tooltip.tsx", true, true)).toBe(false)
   })
