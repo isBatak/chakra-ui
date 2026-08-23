@@ -2,27 +2,17 @@
 
 import type { Assign } from "@ark-ui/react"
 import { Dialog as ArkDialog, useDialogContext } from "@ark-ui/react/dialog"
-import { forwardRef } from "react"
+import { forwardRef, useMemo } from "react"
+import { createContext } from "../../create-context"
+import { mergeProps } from "../../merge-props"
 import {
   type HTMLChakraProps,
   type SlotRecipeProps,
   type UnstyledProp,
   chakra,
-  createSlotRecipeContext,
 } from "../../styled-system"
 
-////////////////////////////////////////////////////////////////////////////////////
-
-const {
-  withRootProvider,
-  withContext,
-  useStyles: useDialogStyles,
-  PropsProvider,
-} = createSlotRecipeContext({ key: "dialog" })
-
-export { useDialogStyles }
-
-////////////////////////////////////////////////////////////////////////////////////
+export { useDialogSlotStyles as useDialogStyles } from "./dialog-style-context"
 
 export interface DialogRootProviderBaseProps
   extends
@@ -33,14 +23,9 @@ export interface DialogRootProviderProps extends DialogRootProviderBaseProps {
   children: React.ReactNode
 }
 
-export const DialogRootProvider = withRootProvider<DialogRootProviderProps>(
-  ArkDialog.RootProvider,
-  {
-    defaultProps: { unmountOnExit: true, lazyMount: true },
-  },
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export function DialogRootProvider(props: DialogRootProviderProps) {
+  return <ArkDialog.RootProvider lazyMount unmountOnExit {...props} />
+}
 
 export interface DialogRootBaseProps
   extends
@@ -51,83 +36,58 @@ export interface DialogRootProps extends DialogRootBaseProps {
   children: React.ReactNode
 }
 
-export const DialogRoot = withRootProvider<DialogRootProps>(ArkDialog.Root, {
-  defaultProps: { unmountOnExit: true, lazyMount: true },
-})
+const [DialogPropsProvider, useDialogPropsContext] =
+  createContext<DialogRootBaseProps>({
+    strict: false,
+    name: "DialogPropsContext",
+    providerName: "DialogPropsProvider",
+  })
 
-////////////////////////////////////////////////////////////////////////////////////
+export function DialogRoot(inProps: DialogRootProps) {
+  const propsContext = useDialogPropsContext()
+  const props = useMemo(
+    () => mergeProps(propsContext, inProps) as DialogRootProps,
+    [propsContext, inProps],
+  )
 
-export const DialogPropsProvider =
-  PropsProvider as React.Provider<DialogRootBaseProps>
+  return <ArkDialog.Root lazyMount unmountOnExit {...props} />
+}
 
-////////////////////////////////////////////////////////////////////////////////////
+export { DialogPropsProvider }
 
 export interface DialogTriggerProps
   extends HTMLChakraProps<"button", ArkDialog.TriggerBaseProps>, UnstyledProp {}
 
-export const DialogTrigger = withContext<HTMLButtonElement, DialogTriggerProps>(
-  ArkDialog.Trigger,
-  "trigger",
-  { forwardAsChild: true },
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogTrigger = ArkDialog.Trigger
 
 export interface DialogPositionerProps
   extends HTMLChakraProps<"div", ArkDialog.PositionerBaseProps>, UnstyledProp {}
 
-export const DialogPositioner = withContext<
-  HTMLDivElement,
-  DialogPositionerProps
->(ArkDialog.Positioner, "positioner", { forwardAsChild: true })
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogPositioner = chakra(ArkDialog.Positioner)
 
 export interface DialogContentProps
   extends
     HTMLChakraProps<"section", ArkDialog.ContentBaseProps>,
     UnstyledProp {}
 
-export const DialogContent = withContext<HTMLDivElement, DialogContentProps>(
-  ArkDialog.Content,
-  "content",
-  { forwardAsChild: true },
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogContent = chakra(ArkDialog.Content)
 
 export interface DialogDescriptionProps
   extends HTMLChakraProps<"p", ArkDialog.DescriptionBaseProps>, UnstyledProp {}
 
-export const DialogDescription = withContext<
-  HTMLDivElement,
-  DialogDescriptionProps
->(ArkDialog.Description, "description", { forwardAsChild: true })
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogDescription = chakra(ArkDialog.Description)
 
 export interface DialogTitleProps
   extends HTMLChakraProps<"h2", ArkDialog.TitleBaseProps>, UnstyledProp {}
 
-export const DialogTitle = withContext<HTMLDivElement, DialogTitleProps>(
-  ArkDialog.Title,
-  "title",
-  { forwardAsChild: true },
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogTitle = chakra(ArkDialog.Title)
 
 export interface DialogCloseTriggerProps
   extends
     HTMLChakraProps<"button", ArkDialog.CloseTriggerBaseProps>,
     UnstyledProp {}
 
-export const DialogCloseTrigger = withContext<
-  HTMLButtonElement,
-  DialogCloseTriggerProps
->(ArkDialog.CloseTrigger, "closeTrigger", { forwardAsChild: true })
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogCloseTrigger = ArkDialog.CloseTrigger
 
 export interface DialogActionTriggerProps extends HTMLChakraProps<"button"> {}
 
@@ -141,52 +101,32 @@ export const DialogActionTrigger = forwardRef<
       type="button"
       {...props}
       ref={ref}
-      onClick={() => dialog.setOpen(false)}
+      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+        props.onClick?.(event)
+        if (!event.defaultPrevented) dialog.setOpen(false)
+      }}
     />
   )
 })
 
-////////////////////////////////////////////////////////////////////////////////////
-
 export interface DialogBackdropProps
   extends HTMLChakraProps<"div", ArkDialog.BackdropBaseProps>, UnstyledProp {}
 
-export const DialogBackdrop = withContext<HTMLDivElement, DialogBackdropProps>(
-  ArkDialog.Backdrop,
-  "backdrop",
-  { forwardAsChild: true },
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogBackdrop = chakra(ArkDialog.Backdrop)
 
 export interface DialogBodyProps extends HTMLChakraProps<"div">, UnstyledProp {}
 
-export const DialogBody = withContext<HTMLDivElement, DialogBodyProps>(
-  "div",
-  "body",
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogBody = chakra.div
 
 export interface DialogFooterProps
-  extends HTMLChakraProps<"footer">, UnstyledProp {}
+  extends HTMLChakraProps<"div">, UnstyledProp {}
 
-export const DialogFooter = withContext<HTMLDivElement, DialogFooterProps>(
-  "div",
-  "footer",
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogFooter = chakra.div
 
 export interface DialogHeaderProps
   extends HTMLChakraProps<"div">, UnstyledProp {}
 
-export const DialogHeader = withContext<HTMLDivElement, DialogHeaderProps>(
-  "div",
-  "header",
-)
-
-////////////////////////////////////////////////////////////////////////////////////
+export const DialogHeader = chakra.div
 
 export const DialogContext = ArkDialog.Context
 
