@@ -12,11 +12,11 @@ Emotion-only, Panda-only, and dual-engine applications are independently verifie
 
 ## Tasks
 
-- [ ] 6.1 Create the Emotion-only fixture.
-- [ ] 6.2 Verify no Panda runtime package is loaded.
-- [ ] 6.3 Create the Panda-only fixture.
-- [ ] 6.4 Verify no Emotion runtime package is loaded.
-- [ ] 6.5 Create the dual-engine fixture.
+- [x] 6.1 Create the Emotion-only fixture.
+- [x] 6.2 Verify no Panda runtime package is loaded.
+- [x] 6.3 Create the Panda-only fixture.
+- [x] 6.4 Verify no Emotion runtime package is loaded.
+- [x] 6.5 Create the dual-engine fixture.
 - [ ] 6.6 Select the root engine explicitly.
 - [ ] 6.7 Switch one subtree to the other engine.
 - [ ] 6.8 Switch back inside a nested subtree.
@@ -31,6 +31,6 @@ All three fixtures pass build, type, runtime, SSR, hydration, and component test
 
 ## Evidence
 
-- Mode matrix
-- Bundle dependency report
-- Test links
+- Mode matrix: `packages/type-tests/{emotion-only,panda-only,dual-engine}`
+- Runtime dependency report: `packages/type-tests/engine-mode-dependencies.test.ts`
+- Type matrix: `pnpm --filter "./packages/type-tests/**" typecheck`

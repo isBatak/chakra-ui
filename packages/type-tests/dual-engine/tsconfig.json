@@ -1,6 +1,6 @@
 {
   "extends": "../../../tsconfig.build.json",
-  "include": ["index.tsx"],
+  "include": ["index.tsx", "runtime.tsx"],
   "compilerOptions": {
     "paths": {
       "@chakra-ui/react": ["../public-api.ts"]

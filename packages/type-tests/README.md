@@ -16,6 +16,10 @@ Run the matrix with:
 pnpm --filter "./packages/type-tests/**" typecheck
 ```
 
+Each engine-mode fixture also has a `runtime.tsx` entry. The focused dependency
+test follows its transitive runtime imports and fails if a single-engine fixture
+loads the other adapter runtime.
+
 The compatible-version fixture deliberately installs Panda `1.11.0` while Chakra
 core resolves `1.11.1`, then verifies structural compatibility in both
 directions. The shared public-API entry isolates declaration checks from runtime
