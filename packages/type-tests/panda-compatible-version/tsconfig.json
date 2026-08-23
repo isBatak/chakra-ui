@@ -1,0 +1,9 @@
+{
+  "extends": "../../../tsconfig.build.json",
+  "include": ["index.ts"],
+  "compilerOptions": {
+    "paths": {
+      "@chakra-ui/react": ["../public-api.ts"]
+    }
+  }
+}

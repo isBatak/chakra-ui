@@ -1,0 +1,14 @@
+{
+  "name": "@chakra-ui/type-test-emotion-only",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "@chakra-ui/emotion": "workspace:*",
+    "@chakra-ui/react": "workspace:*",
+    "@emotion/react": "11.14.0",
+    "react": "19.2.6"
+  }
+}

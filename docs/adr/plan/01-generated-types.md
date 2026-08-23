@@ -22,17 +22,21 @@ The StyleSystem and factory types exist before component implementation starts.
 - [x] 1.8 Generate recipe and slot-recipe prop helpers.
 - [x] 1.9 Generate JSX style props for Emotion parity.
 - [x] 1.10 Make unused engine-specific props safe no-ops.
-- [ ] 1.11 Add type tests for Emotion-only.
-- [ ] 1.12 Add type tests for Panda-only.
-- [ ] 1.13 Add type tests for dual-engine.
-- [ ] 1.14 Test a user project with a different compatible Panda version.
+- [x] 1.11 Add type tests for Emotion-only.
+- [x] 1.12 Add type tests for Panda-only.
+- [x] 1.13 Add type tests for dual-engine.
+- [x] 1.14 Test a user project with a different compatible Panda version.
 
 ## Gate
 
-The factory can consume stable, engine-neutral public types without requiring `@pandacss/dev`.
+The factory can consume stable, engine-neutral public types without requiring
+`@pandacss/dev`.
 
 ## Evidence
 
 - Generated type diff
 - Dependency tree
 - Type-test matrix
+
+The dependency tree and type-test matrix are recorded in
+[`packages/type-tests/README.md`](../../../packages/type-tests/README.md).

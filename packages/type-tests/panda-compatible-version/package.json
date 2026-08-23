@@ -1,0 +1,14 @@
+{
+  "name": "@chakra-ui/type-test-panda-compatible-version",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "@chakra-ui/panda": "workspace:*",
+    "@chakra-ui/react": "workspace:*",
+    "@pandacss/types": "1.11.0",
+    "react": "19.2.6"
+  }
+}
