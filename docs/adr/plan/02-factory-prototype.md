@@ -12,10 +12,10 @@ A minimal, engine-neutral Chakra factory consumes the StyleSystem adapter method
 
 ## Tasks
 
-- [ ] 2.1 Map each factory operation to one StyleSystem method.
-- [ ] 2.2 Map each factory API to one generated public type.
-- [ ] 2.3 Write the smallest factory API needed by `chakra("button")`.
-- [ ] 2.4 Keep Emotion and Panda imports out of the factory package.
+- [x] 2.1 Map each factory operation to one StyleSystem method.
+- [x] 2.2 Map each factory API to one generated public type.
+- [x] 2.3 Write the smallest factory API needed by `chakra("button")`.
+- [x] 2.4 Keep Emotion and Panda imports out of the factory package.
 - [ ] 2.5 Implement intrinsic element creation.
 - [ ] 2.6 Forward refs.
 - [ ] 2.7 Preserve intrinsic HTML props.

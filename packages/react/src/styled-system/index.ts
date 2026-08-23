@@ -25,6 +25,7 @@ export type {
 } from "./composition"
 export * from "./empty"
 export { chakra } from "./factory"
+export type { IntrinsicChakraFactory } from "./factory.contract"
 export type {
   ChakraComponent,
   ChakraIntrinsicElementProps,
