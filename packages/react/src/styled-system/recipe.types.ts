@@ -69,6 +69,8 @@ export type RecipeCompoundVariant<T> = T & {
 export interface RecipeDefinition<
   T extends RecipeVariantRecord = RecipeVariantRecord,
 > {
+  /** Panda extraction hint. Emotion accepts and safely ignores this field. */
+  jsx?: string[] | undefined
   /**
    * The class name of the recipe.
    */
@@ -139,6 +141,8 @@ export interface SlotRecipeDefinition<
   S extends string = string,
   T extends SlotRecipeVariantRecord<S> = SlotRecipeVariantRecord<S>,
 > {
+  /** Panda extraction hint. Emotion accepts and safely ignores this field. */
+  jsx?: string[] | undefined
   /**
    * The class name of the recipe. Useful for targeting slots.
    *

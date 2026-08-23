@@ -16,12 +16,12 @@ The StyleSystem and factory types exist before component implementation starts.
 - [x] 1.2 Use `@pandacss/types` where a Panda type is required.
 - [x] 1.3 Keep `@pandacss/dev` out of runtime dependencies.
 - [x] 1.4 Generate Chakra-owned public aliases.
-- [ ] 1.5 Generate intrinsic factory prop types.
-- [ ] 1.6 Generate polymorphic `as` types.
-- [ ] 1.7 Generate Ark `asChild` types.
-- [ ] 1.8 Generate recipe and slot-recipe prop helpers.
-- [ ] 1.9 Generate JSX style props for Emotion parity.
-- [ ] 1.10 Make unused engine-specific props safe no-ops.
+- [x] 1.5 Generate intrinsic factory prop types.
+- [x] 1.6 Generate polymorphic `as` types.
+- [x] 1.7 Generate Ark `asChild` types.
+- [x] 1.8 Generate recipe and slot-recipe prop helpers.
+- [x] 1.9 Generate JSX style props for Emotion parity.
+- [x] 1.10 Make unused engine-specific props safe no-ops.
 - [ ] 1.11 Add type tests for Emotion-only.
 - [ ] 1.12 Add type tests for Panda-only.
 - [ ] 1.13 Add type tests for dual-engine.

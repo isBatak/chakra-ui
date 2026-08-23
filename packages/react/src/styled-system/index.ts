@@ -27,6 +27,10 @@ export * from "./empty"
 export { chakra } from "./factory"
 export type {
   ChakraComponent,
+  ChakraIntrinsicElementProps,
+  ChakraJsxStyleProps,
+  ChakraRecipeProps,
+  ChakraSlotRecipeProps,
   HTMLChakraProps,
   InferRecipeProps,
   UnstyledProp,
@@ -35,6 +39,8 @@ export type {
   JsxFactory,
   JsxElement,
   PolymorphicProps,
+  PolymorphicRef,
+  ArkAsChildProps,
   HtmlProp,
   HtmlProps,
   JsxFactoryOptions,
