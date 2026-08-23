@@ -14,13 +14,13 @@ A v3 Emotion application can adopt v4 without destructive CLI behavior.
 
 ## Tasks
 
-- [ ] 7.1 Assume Emotion for the default migration path.
-- [ ] 7.2 Detect `panda.config.*` when Panda is present.
-- [ ] 7.3 Preserve the user-owned ChakraProvider.
-- [ ] 7.4 Do not overwrite existing theme files.
-- [ ] 7.5 Add only missing imports or dependencies.
-- [ ] 7.6 Produce a readable proposed diff.
-- [ ] 7.7 Keep automatic diff application out of scope.
+- [x] 7.1 Assume Emotion for the default migration path.
+- [x] 7.2 Detect `panda.config.*` when Panda is present.
+- [x] 7.3 Preserve the user-owned ChakraProvider.
+- [x] 7.4 Do not overwrite existing theme files.
+- [x] 7.5 Add only missing imports or dependencies.
+- [x] 7.6 Produce a readable proposed diff.
+- [x] 7.7 Keep automatic diff application out of scope.
 - [x] 7.8 Document manual Panda and dual-engine opt-in.
 - [x] 7.9 Document how to share or extend theme definitions.
 - [x] 7.10 Exclude CLI integration tests from this plan.
@@ -34,3 +34,16 @@ user code.
 
 - Example migration diff
 - [Manual engine migration and verification checklist](../manual-engine-migration.md)
+
+The `chakra migrate` command is a read-only analyzer. It prints the selected
+engine, a focused `package.json` dependency diff, missing Provider imports, and
+manual Provider/theme steps. It always ends with `No files were changed.`
+
+Focused evidence:
+
+```sh
+vitest run packages/cli/__tests__/migration.test.ts \
+  packages/cli/__tests__/context.test.ts \
+  packages/cli/__tests__/snippet.test.ts
+tsc --noEmit -p packages/cli/tsconfig.json
+```

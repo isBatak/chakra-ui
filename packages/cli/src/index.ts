@@ -6,6 +6,7 @@ import { BlocksCommand } from "./commands/blocks.js"
 import { ComponentCommand } from "./commands/component.js"
 import { DocsCommand } from "./commands/docs.js"
 import { EjectCommand } from "./commands/eject.js"
+import { MigrateCommand } from "./commands/migrate.js"
 import { SnippetCommand } from "./commands/snippet.js"
 import { ThemeCommand } from "./commands/theme.js"
 import { TypegenCommand } from "./commands/typegen.js"
@@ -29,6 +30,7 @@ export async function run() {
     .addCommand(SnippetCommand)
     .addCommand(BlocksCommand)
     .addCommand(EjectCommand)
+    .addCommand(MigrateCommand)
     .addCommand(ComponentCommand)
     .addCommand(ThemeCommand)
     .addCommand(DocsCommand)
