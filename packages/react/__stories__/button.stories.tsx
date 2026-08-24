@@ -1,16 +1,36 @@
 import type { Meta } from "@storybook/react-vite"
-import { Box } from "../src"
+import { EmotionStylingEngine } from "../../emotion/src"
+import { createPandaStylingEngine } from "../../panda/src"
+import { Box, Button, defaultSystem } from "../src"
+
+const PandaStylingEngine = createPandaStylingEngine<Record<string, unknown>>({
+  isStyleProp: defaultSystem.isValidProperty,
+  css: () => "panda-story-style",
+  recipes: { button: () => "panda-story-button" },
+  slotRecipes: {},
+  token: defaultSystem.token,
+})
 
 export default {
   title: "Components / Button",
   decorators: [
     (Story) => (
-      <Box p="10">
-        <Story />
-      </Box>
+      <EmotionStylingEngine>
+        <Box p="10">
+          <Story />
+        </Box>
+      </EmotionStylingEngine>
     ),
   ],
 } satisfies Meta
+
+export function PandaEngineBoundary() {
+  return (
+    <PandaStylingEngine>
+      <Button>Panda button</Button>
+    </PandaStylingEngine>
+  )
+}
 
 export { ButtonBasic as Basic } from "compositions/examples/button-basic"
 export { ButtonSizeTable as Sizes } from "compositions/examples/button-size-table"

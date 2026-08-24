@@ -4,3 +4,4 @@ export type {
   PandaRecipe,
   PandaSlotRecipe,
 } from "./adapter"
+export { createPandaStylingEngine } from "./styling-engine"

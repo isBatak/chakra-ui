@@ -53,7 +53,7 @@ export interface ButtonProps extends HTMLChakraProps<
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(inProps, ref) {
-    const system = useStylingEngine()
+    const engine = useStylingEngine()
     const propsContext = useButtonPropsContext()
     const props = useMemo<ButtonProps>(
       () => mergeProps(propsContext, inProps) as ButtonProps,
@@ -72,7 +72,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     } = props
     const recipe = unstyled
       ? undefined
-      : system.recipe({ name: "button", props: { size, variant } })
+      : engine.recipe({ name: "button", props: { size, variant } })
 
     return (
       <>
@@ -83,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {...rest}
           data-loading={dataAttr(loading)}
           disabled={loading || rest.disabled}
-          className={system.cx(recipe?.className, props.className)}
+          className={engine.cx(recipe?.className, props.className)}
         >
           {!props.asChild && loading ? (
             <Loader

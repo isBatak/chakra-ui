@@ -1,5 +1,12 @@
-export { StylingEngineProvider, useStylingEngine } from "./provider"
-export type { StylingEngineProviderProps } from "./provider"
+export {
+  createStylingEngineBoundary,
+  StylingEngineProvider,
+  useStylingEngine,
+} from "./provider"
+export type {
+  StylingEngineBoundaryProps,
+  StylingEngineProviderProps,
+} from "./provider"
 export type {
   StylingEngineAdapter,
   StylingEngineClassName,

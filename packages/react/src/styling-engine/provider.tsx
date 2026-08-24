@@ -11,6 +11,10 @@ export interface StylingEngineProviderProps {
   children: ReactNode
 }
 
+export interface StylingEngineBoundaryProps {
+  children: ReactNode
+}
+
 /** Provides the fixed styling adapter used by the nearest Chakra subtree. */
 export function StylingEngineProvider(props: StylingEngineProviderProps) {
   return (
@@ -18,6 +22,23 @@ export function StylingEngineProvider(props: StylingEngineProviderProps) {
       {props.children}
     </StylingEngineContext.Provider>
   )
+}
+
+/** Creates a boundary whose adapter cannot be changed through component props. */
+export function createStylingEngineBoundary(
+  adapter: StylingEngineAdapter,
+  displayName = "StylingEngineBoundary",
+) {
+  function StylingEngineBoundary(props: StylingEngineBoundaryProps) {
+    return (
+      <StylingEngineProvider value={adapter}>
+        {props.children}
+      </StylingEngineProvider>
+    )
+  }
+
+  StylingEngineBoundary.displayName = displayName
+  return StylingEngineBoundary
 }
 
 /** Resolves the adapter selected by the nearest styling-engine boundary. */
