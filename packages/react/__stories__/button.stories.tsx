@@ -1,16 +1,35 @@
 import type { Meta } from "@storybook/react-vite"
-import { Box } from "../src"
+import { css, cx } from "../../../styled-system/css"
+import { button } from "../../../styled-system/recipes"
+import { Box, Button, VStack } from "../src"
+import { EmotionStylingEngine } from "../src/styling-engine/emotion"
+import { PandaStylingEngine } from "../src/styling-engine/panda"
 
 export default {
   title: "Components / Button",
   decorators: [
     (Story) => (
-      <Box p="10">
-        <Story />
-      </Box>
+      <EmotionStylingEngine>
+        <Box p="10">
+          <Story />
+        </Box>
+      </EmotionStylingEngine>
     ),
   ],
 } satisfies Meta
+
+export const Test = () => (
+  <VStack gap="4">
+    <Button>Emotion Button</Button>
+
+    <PandaStylingEngine>
+      <Button>Panda Button</Button>
+      <button className={cx(css({ colorPalette: "blue" }), button())}>
+        Button
+      </button>
+    </PandaStylingEngine>
+  </VStack>
+)
 
 export { ButtonBasic as Basic } from "compositions/examples/button-basic"
 export { ButtonSizeTable as Sizes } from "compositions/examples/button-size-table"
