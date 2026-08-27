@@ -19,6 +19,7 @@ import {
 import * as React from "react"
 import { mergeProps } from "../merge-props"
 import { mergeRefs } from "../merge-refs"
+import { useStyledEngine } from "../styled-engine/styled-engine"
 import { compact, cx, getElementRef, interopDefault, uniq } from "../utils"
 import type { JsxFactory, StyledFactoryFn } from "./factory.types"
 import { useChakraContext } from "./provider"
@@ -326,7 +327,33 @@ const chakraImpl = new Proxy(styledFn, {
   },
 })
 
-export const chakra = chakraImpl as unknown as StyledFactoryFn
+export const emotionStyled = chakraImpl as unknown as StyledFactoryFn
+
+const adapterCache = new Map()
+
+const createAdapterStyled = (tag: any, config: any = {}, options: any = {}) => {
+  return React.forwardRef<any, any>(function AdapterStyled(props, ref) {
+    const { styled } = useStyledEngine()
+    const Styled = React.useMemo(() => styled(tag, config, options), [styled])
+    return <Styled {...props} ref={ref} />
+  })
+}
+
+const adapterStyledFn = createAdapterStyled as unknown as JsxFactory
+
+const adapterChakraImpl = new Proxy(adapterStyledFn, {
+  apply(target, thisArg, args) {
+    return Reflect.apply(target, thisArg, args)
+  },
+  get(_, el) {
+    if (!adapterCache.has(el)) {
+      adapterCache.set(el, adapterStyledFn(el as any))
+    }
+    return adapterCache.get(el)
+  },
+})
+
+export const chakra = adapterChakraImpl as unknown as StyledFactoryFn
 
 const mergeCva = (cvaA: any, cvaB: any) => {
   if (cvaA && !cvaB) return cvaA

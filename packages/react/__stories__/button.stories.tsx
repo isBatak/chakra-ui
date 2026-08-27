@@ -1,19 +1,17 @@
 import type { Meta } from "@storybook/react-vite"
-import { css, cx } from "../../../styled-system/css"
-import { button } from "../../../styled-system/recipes"
 import { Box, Button, VStack } from "../src"
-import { EmotionStylingEngine } from "../src/styling-engine/emotion"
-import { PandaStylingEngine } from "../src/styling-engine/panda"
+import { EmotionStyledEngine } from "../src/styled-engine/emotion"
+import { PandaStyledEngine } from "../src/styled-engine/panda"
 
 export default {
   title: "Components / Button",
   decorators: [
     (Story) => (
-      <EmotionStylingEngine>
+      <EmotionStyledEngine>
         <Box p="10">
           <Story />
         </Box>
-      </EmotionStylingEngine>
+      </EmotionStyledEngine>
     ),
   ],
 } satisfies Meta
@@ -22,12 +20,9 @@ export const Test = () => (
   <VStack gap="4">
     <Button>Emotion Button</Button>
 
-    <PandaStylingEngine>
+    <PandaStyledEngine>
       <Button>Panda Button</Button>
-      <button className={cx(css({ colorPalette: "blue" }), button())}>
-        Button
-      </button>
-    </PandaStylingEngine>
+    </PandaStyledEngine>
   </VStack>
 )
 
