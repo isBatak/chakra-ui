@@ -288,6 +288,7 @@ const docsLinks: NavItem = {
           title: "Concepts",
           items: [
             { title: "Overview", url: "overview" },
+            { title: "Styled Engine", url: "styled-engine" },
             { title: "Chakra Factory", url: "chakra-factory" },
             { title: "Responsive Design", url: "responsive-design" },
             { title: "CSS Variables", url: "css-variables" },

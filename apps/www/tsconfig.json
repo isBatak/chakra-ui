@@ -34,6 +34,9 @@
       "@chakra-ui/react": [
         "../../packages/react/src"
       ],
+      "@chakra-ui/react/styled-engine": [
+        "../../packages/react/src/styled-engine"
+      ],
       "@chakra-ui/charts": [
         "../../packages/charts/src"
       ],
