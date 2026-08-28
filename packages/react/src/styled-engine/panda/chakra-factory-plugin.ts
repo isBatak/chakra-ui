@@ -1,13 +1,13 @@
 import { definePlugin } from "@pandacss/dev"
 
 const chakraFactoryImport =
-  /import\s*{[^}]*\bchakra\b[^}]*}\s*from\s*["'](?:@chakra-ui\/react(?:\/styled-system)?|(?:\.\.\/)+styled-system)["']/
+  /import\s*{[^}]*\bchakra\b[^}]*}\s*from\s*["'](?:@chakra-ui\/react(?:\/styled-system)?|(?:\.\.?\/)+(?:[^/"']+\/)*styled-system)["']/
 
 export interface ChakraFactoryPluginOptions {
   jsxFactory: string
 }
 
-/** Teach Panda extraction that Chakra's public `chakra()` is its JSX factory. */
+/** Teach Panda extraction that Chakra's public `chakra()` and `chakra.*` use its JSX factory. */
 export function createChakraFactoryPlugin({
   jsxFactory,
 }: ChakraFactoryPluginOptions) {
@@ -23,7 +23,7 @@ export function createChakraFactoryPlugin({
 
         return [
           `import { ${jsxFactory} as __chakraPandaExtract } from "styled-system/jsx"`,
-          content.replace(/\bchakra(\s*)\(/g, "__chakraPandaExtract$1("),
+          content.replace(/\bchakra(?=\s*(?:\(|\.))/g, "__chakraPandaExtract"),
         ].join("\n")
       },
     },

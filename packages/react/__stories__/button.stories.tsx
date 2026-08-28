@@ -2,6 +2,7 @@ import type { Meta } from "@storybook/react-vite"
 import { Box, Button, VStack } from "../src"
 import { EmotionStyledEngine } from "../src/styled-engine/emotion"
 import { PandaStyledEngine } from "../src/styled-engine/panda"
+import { chakra } from "../src/styled-system"
 
 export default {
   title: "Components / Button",
@@ -24,12 +25,20 @@ export const Test = () => (
       Emotion Loading Text Button
     </Button>
 
+    <chakra.div scrollMarginBlockEnd="73px">
+      Emotion-only extraction probe
+    </chakra.div>
+
     <PandaStyledEngine>
       <Button>Panda Button</Button>
       <Button loading>Panda Loading Button</Button>
       <Button loading loadingText="Loading">
         Panda Loading Text Button
       </Button>
+
+      <chakra.div scrollMarginBlockEnd="73px">
+        Panda-only extraction probe
+      </chakra.div>
     </PandaStyledEngine>
   </VStack>
 )
