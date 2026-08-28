@@ -19,9 +19,17 @@ export default {
 export const Test = () => (
   <VStack gap="4">
     <Button>Emotion Button</Button>
+    <Button loading>Emotion Loading Button</Button>
+    <Button loading loadingText="Loading">
+      Emotion Loading Text Button
+    </Button>
 
     <PandaStyledEngine>
       <Button>Panda Button</Button>
+      <Button loading>Panda Loading Button</Button>
+      <Button loading loadingText="Loading">
+        Panda Loading Text Button
+      </Button>
     </PandaStyledEngine>
   </VStack>
 )

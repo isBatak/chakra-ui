@@ -2,7 +2,6 @@
 
 import { forwardRef, useMemo } from "react"
 import { mergeProps } from "../../merge-props"
-import { useStyledEngine } from "../../styled-engine/styled-engine"
 import {
   type HTMLChakraProps,
   type RecipeProps,
@@ -13,9 +12,11 @@ import {
 import { cx, dataAttr } from "../../utils"
 import { Loader } from "../loader"
 
-const { PropsProvider, usePropsContext } = createRecipeContext({
-  key: "button",
-})
+const { useRecipeResult, PropsProvider, usePropsContext } = createRecipeContext(
+  {
+    key: "button",
+  },
+)
 
 export interface ButtonLoadingProps {
   /**
@@ -48,13 +49,12 @@ export interface ButtonProps extends HTMLChakraProps<
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(inProps, ref) {
-    const { recipe } = useStyledEngine()
     const propsContext = usePropsContext()
     const props = useMemo(
       () => mergeProps(propsContext, inProps),
       [propsContext, inProps],
     )
-    const result = useMemo(() => recipe("button", props), [recipe, props])
+    const result = useRecipeResult(props)
     const {
       loading,
       loadingText,

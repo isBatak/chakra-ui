@@ -1,6 +1,8 @@
 import { defineConfig } from "@pandacss/dev"
 import { buttonTracking } from "./packages/react/src/components/button/tracking"
+import { spinnerTracking } from "./packages/react/src/components/spinner/tracking"
 import { defaultBaseConfig } from "./packages/react/src/preset-base"
+import { createChakraFactoryPlugin } from "./packages/react/src/styled-engine/panda/chakra-factory-plugin"
 import {
   animationStyles,
   breakpoints,
@@ -11,15 +13,23 @@ import {
   keyframes,
   layerStyles,
   semanticTokens,
+  spinnerRecipe,
   textStyles,
   tokens,
 } from "./packages/react/src/theme"
 
+const jsxFactory = "styled"
+
 export default defineConfig({
   presets: ["@pandacss/preset-base"],
   preflight: true,
+  plugins: [createChakraFactoryPlugin({ jsxFactory })],
   jsxFramework: "react",
-  include: ["./packages/react/__stories__/button.stories.tsx"],
+  jsxFactory,
+  include: [
+    "./packages/react/__stories__/button.stories.tsx",
+    "./packages/react/src/components/{absolute-center,loader,span,spinner}/**/*.{ts,tsx}",
+  ],
   prefix: { cssVar: cssVarsPrefix },
   cssVarRoot: cssVarsRoot,
   globalCss,
@@ -46,6 +56,10 @@ export default defineConfig({
         button: {
           jsx: [...buttonTracking],
           ...buttonRecipe,
+        },
+        spinner: {
+          jsx: [...spinnerTracking],
+          ...spinnerRecipe,
         },
       },
     },

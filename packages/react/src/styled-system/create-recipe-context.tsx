@@ -3,6 +3,7 @@
 import { forwardRef, useMemo } from "react"
 import { createContext } from "../create-context"
 import { mergeProps } from "../merge-props"
+import { useStyledEngine } from "../styled-engine/styled-engine"
 import { cx } from "../utils"
 import { getElementTypeDisplayName, upperFirst } from "./display-name"
 import { EMPTY_STYLES } from "./empty"
@@ -26,7 +27,12 @@ export function createRecipeContext<K extends RecipeKey>(
     providerName: `${contextName}PropsContext`,
   })
 
-  function useRecipeResult(props: any) {
+  function useAdapterRecipeResult(props: any) {
+    const engine = useStyledEngine()
+    return engine.recipe(recipeKey!, props)
+  }
+
+  function useLegacyRecipeResult(props: any) {
     const { unstyled, ...restProps } = props
 
     const recipe = useRecipe({
@@ -47,6 +53,9 @@ export function createRecipeContext<K extends RecipeKey>(
       props: otherProps,
     }
   }
+
+  const useRecipeResult =
+    recipeKey != null ? useAdapterRecipeResult : useLegacyRecipeResult
 
   const withContext = <T, P>(
     Component: React.ElementType<any>,
