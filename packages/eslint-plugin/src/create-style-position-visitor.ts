@@ -16,12 +16,13 @@ import {
 
 const DEFAULT_OPTIONS: Required<RuleOptions> = {
   checkConditionals: true,
-  styleFunctions: ["css", "chakra"],
   componentFactories: ["chakra"],
   styleProps: "generated",
   typeAware: true,
   generatedTypePatterns: ["styled-system"],
 }
+
+const CHAKRA_PACKAGE = "@chakra-ui/react"
 
 const RUNTIME_NOTE =
   "This value causes a new style object to be allocated on every render."
@@ -31,11 +32,6 @@ export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
     type: "object",
     properties: {
       checkConditionals: { type: "boolean" },
-      styleFunctions: {
-        type: "array",
-        items: { type: "string" },
-        minItems: 1,
-      },
       componentFactories: {
         type: "array",
         items: { type: "string" },
@@ -70,11 +66,74 @@ export function createStylePositionVisitor(
     options.styleProps === "generated"
       ? getGeneratedStyleProps()
       : new Set(options.styleProps)
-  const styleFunctionNames = new Set(options.styleFunctions)
   const componentFactoryNames = new Set(options.componentFactories)
-  const trackedStyleFunctions = new Set<string>()
   const trackedComponentFactories = new Set<string>()
+  const trackedCreateSystemFunctions = new Set<string>()
+  const trackedUseChakraContextFunctions = new Set<string>()
+  const trackedSystemObjects = new Set<string>()
+  const trackedSystemCssFunctions = new Set<string>()
+  const trackedChakraNamespaces = new Set<string>()
   const typeInfo = options.typeAware ? getTypeInfo(context) : null
+
+  function memberPropertyName(node: TSESTree.MemberExpression) {
+    if (!node.computed && node.property.type === "Identifier") {
+      return node.property.name
+    }
+    if (node.computed && node.property.type === "Literal") {
+      return typeof node.property.value === "string"
+        ? node.property.value
+        : null
+    }
+    return null
+  }
+
+  function isChakraNamespaceMember(node: TSESTree.Node, propertyName: string) {
+    return (
+      node.type === "MemberExpression" &&
+      node.object.type === "Identifier" &&
+      trackedChakraNamespaces.has(node.object.name) &&
+      memberPropertyName(node) === propertyName
+    )
+  }
+
+  function isCreateSystemCall(node: TSESTree.Node) {
+    if (node.type !== "CallExpression") return false
+    return (
+      (node.callee.type === "Identifier" &&
+        trackedCreateSystemFunctions.has(node.callee.name)) ||
+      isChakraNamespaceMember(node.callee, "createSystem")
+    )
+  }
+
+  function isUseChakraContextCall(node: TSESTree.Node) {
+    if (node.type !== "CallExpression") return false
+    return (
+      (node.callee.type === "Identifier" &&
+        trackedUseChakraContextFunctions.has(node.callee.name)) ||
+      isChakraNamespaceMember(node.callee, "useChakraContext")
+    )
+  }
+
+  function isSystemObject(node: TSESTree.Node): boolean {
+    if (node.type === "Identifier") {
+      return trackedSystemObjects.has(node.name)
+    }
+    return (
+      isCreateSystemCall(node) ||
+      isUseChakraContextCall(node) ||
+      isChakraNamespaceMember(node, "defaultSystem")
+    )
+  }
+
+  function isSystemCssMember(
+    node: TSESTree.Node,
+  ): node is TSESTree.MemberExpression {
+    return (
+      node.type === "MemberExpression" &&
+      memberPropertyName(node) === "css" &&
+      isSystemObject(node.object)
+    )
+  }
 
   function report(
     node: TSESTree.Node,
@@ -122,18 +181,55 @@ export function createStylePositionVisitor(
 
   return {
     ImportDeclaration(node) {
+      const isChakraImport = node.source.value === CHAKRA_PACKAGE
+
       for (const specifier of node.specifiers) {
+        if (isChakraImport && specifier.type === "ImportNamespaceSpecifier") {
+          trackedChakraNamespaces.add(specifier.local.name)
+          continue
+        }
         if (
           specifier.type !== "ImportSpecifier" ||
           specifier.imported.type !== "Identifier"
         ) {
           continue
         }
-        if (styleFunctionNames.has(specifier.imported.name)) {
-          trackedStyleFunctions.add(specifier.local.name)
+        if (isChakraImport && specifier.imported.name === "defaultSystem") {
+          trackedSystemObjects.add(specifier.local.name)
+        }
+        if (isChakraImport && specifier.imported.name === "createSystem") {
+          trackedCreateSystemFunctions.add(specifier.local.name)
+        }
+        if (isChakraImport && specifier.imported.name === "useChakraContext") {
+          trackedUseChakraContextFunctions.add(specifier.local.name)
         }
         if (componentFactoryNames.has(specifier.imported.name)) {
           trackedComponentFactories.add(specifier.local.name)
+        }
+      }
+    },
+
+    VariableDeclarator(node) {
+      if (!node.init) return
+
+      if (node.id.type === "Identifier") {
+        if (isSystemObject(node.init)) {
+          trackedSystemObjects.add(node.id.name)
+        } else if (isSystemCssMember(node.init)) {
+          trackedSystemCssFunctions.add(node.id.name)
+        }
+        return
+      }
+
+      if (node.id.type !== "ObjectPattern" || !isSystemObject(node.init)) return
+      for (const property of node.id.properties) {
+        if (
+          property.type === "Property" &&
+          property.key.type === "Identifier" &&
+          property.key.name === "css" &&
+          property.value.type === "Identifier"
+        ) {
+          trackedSystemCssFunctions.add(property.value.name)
         }
       }
     },
@@ -200,18 +296,26 @@ export function createStylePositionVisitor(
     },
 
     CallExpression(node) {
-      if (isRawCallExpression(node) || node.callee.type !== "Identifier") return
+      if (isRawCallExpression(node)) return
 
-      const calleeName = node.callee.name
-      const isFactory = trackedComponentFactories.has(calleeName)
-      if (!isFactory && !trackedStyleFunctions.has(calleeName)) return
+      const calleeName =
+        node.callee.type === "Identifier" ? node.callee.name : null
+      const isFactory =
+        calleeName !== null && trackedComponentFactories.has(calleeName)
+      const isSystemCss =
+        (calleeName !== null && trackedSystemCssFunctions.has(calleeName)) ||
+        isSystemCssMember(node.callee)
+      if (!isFactory && !isSystemCss) return
 
       const styleArguments = isFactory
         ? node.arguments.slice(1)
         : node.arguments
+      const subject = isFactory
+        ? `${calleeName}(...)`
+        : `${context.sourceCode.getText(node.callee)}(...)`
       for (const argument of styleArguments) {
         if (argument.type !== "SpreadElement") {
-          checkValue(argument, `${calleeName}(...)`)
+          checkValue(argument, subject)
         }
       }
     },

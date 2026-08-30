@@ -24,6 +24,9 @@ ruleTester.run(
         code: "function Component({ active }) { return <Box bg={active ? 'blue.500' : 'gray.100'} /> }",
         options: [{ checkConditionals: false }],
       },
+      "import { css } from './styled-system/css'; const value = css({ color: colors[type] ?? 'gray.100' })",
+      "const utility = { css: (value) => value }; utility.css({ color: active ? 'red' : 'blue' })",
+      "import { useChakraContext } from './local-hooks'; useChakraContext().css({ color: active ? 'red' : 'blue' })",
     ],
     invalid: [
       {
@@ -38,7 +41,42 @@ ruleTester.run(
         errors: [{ messageId: "dynamicConditional" }],
       },
       {
-        code: "import { css } from './styled-system/css'; const value = css({ color: colors[type] ?? 'gray.100' })",
+        code: "import { defaultSystem } from '@chakra-ui/react'; defaultSystem.css({ color: colors[type] ?? 'gray.100' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import { defaultSystem as system } from '@chakra-ui/react'; const chakraCss = system.css; chakraCss({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import { createSystem as makeSystem } from '@chakra-ui/react'; const system = makeSystem({}); system.css({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import * as Chakra from '@chakra-ui/react'; Chakra.createSystem({}).css({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import { defaultSystem } from '@chakra-ui/react'; const { css: chakraCss } = defaultSystem; chakraCss({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import { useChakraContext } from '@chakra-ui/react'; const system = useChakraContext(); system.css({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import { useChakraContext as useSystem } from '@chakra-ui/react'; const { css: chakraCss } = useSystem(); chakraCss({ color: active ? 'red.500' : 'gray.500' })",
+        output: null,
+        errors: [{ messageId: "dynamicConditional" }],
+      },
+      {
+        code: "import * as Chakra from '@chakra-ui/react'; Chakra.useChakraContext().css({ color: active ? 'red.500' : 'gray.500' })",
         output: null,
         errors: [{ messageId: "dynamicConditional" }],
       },
