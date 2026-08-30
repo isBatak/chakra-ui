@@ -674,6 +674,25 @@ importers:
         specifier: ^7.7.1
         version: 7.7.1
 
+  packages/eslint-plugin:
+    dependencies:
+      '@pandacss/is-valid-prop':
+        specifier: ^1.4.2
+        version: 1.11.1
+      '@pandacss/preset-base':
+        specifier: ^1.4.2
+        version: 1.11.1
+      '@typescript-eslint/utils':
+        specifier: 8.60.1
+        version: 8.60.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+    devDependencies:
+      eslint:
+        specifier: 9.39.4
+        version: 9.39.4(jiti@2.6.1)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
   packages/panda-preset:
     dependencies:
       '@pandacss/types':
