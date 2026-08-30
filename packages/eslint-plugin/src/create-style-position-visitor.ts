@@ -1,5 +1,4 @@
 import type { JSONSchema, TSESLint, TSESTree } from "@typescript-eslint/utils"
-import { createConditionalDataAttributeFix } from "./conditional-fix"
 import { getGeneratedStyleProps } from "./style-props"
 import {
   getPropsType,
@@ -15,7 +14,6 @@ import {
 } from "./utils"
 
 const DEFAULT_OPTIONS: Required<RuleOptions> = {
-  checkConditionals: true,
   typeAware: true,
 }
 
@@ -28,7 +26,6 @@ export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
   {
     type: "object",
     properties: {
-      checkConditionals: { type: "boolean" },
       typeAware: { type: "boolean" },
     },
     additionalProperties: false,
@@ -112,26 +109,16 @@ export function createStylePositionVisitor(
     )
   }
 
-  function report(
-    node: TSESTree.Node,
-    messageId: MessageId,
-    subject: string,
-    fix?: TSESLint.ReportFixFunction | null,
-  ) {
+  function report(node: TSESTree.Node, messageId: MessageId, subject: string) {
     if (!reportableMessageIds.has(messageId)) return
     context.report({
       node,
       messageId,
       data: { subject, runtimeNote: RUNTIME_NOTE },
-      fix: fix ?? undefined,
     })
   }
 
-  function checkValue(
-    node: TSESTree.Node,
-    subject: string,
-    getFix?: () => TSESLint.ReportFixFunction | null,
-  ) {
+  function checkValue(node: TSESTree.Node, subject: string) {
     if (node.type === "ObjectExpression") {
       for (const property of node.properties) {
         if (property.type !== "Property") continue
@@ -143,17 +130,12 @@ export function createStylePositionVisitor(
       }
       return
     }
-    if (isStaticValue(context, node, options)) return
+    if (isStaticValue(context, node)) return
 
     const messageId = isConditionalLike(node)
       ? "dynamicConditional"
       : "dynamicStyleValue"
-    report(
-      node,
-      messageId,
-      subject,
-      messageId === "dynamicConditional" ? getFix?.() : null,
-    )
+    report(node, messageId, subject)
   }
 
   return {
@@ -255,15 +237,7 @@ export function createStylePositionVisitor(
         const expression = attribute.value.expression
         if (expression.type === "JSXEmptyExpression") continue
 
-        checkValue(expression, propName, () =>
-          createConditionalDataAttributeFix(
-            context,
-            node,
-            attribute,
-            expression,
-            propName,
-          ),
-        )
+        checkValue(expression, propName)
       }
     },
 

@@ -1,7 +1,6 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 
 export interface RuleOptions {
-  checkConditionals?: boolean
   typeAware?: boolean
 }
 

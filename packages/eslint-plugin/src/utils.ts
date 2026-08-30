@@ -1,5 +1,5 @@
 import type { TSESTree } from "@typescript-eslint/utils"
-import type { RuleContext, RuleOptions } from "./types"
+import type { RuleContext } from "./types"
 
 export function jsxName(node: TSESTree.JSXTagNameExpression): string {
   if (node.type === "JSXIdentifier") return node.name
@@ -48,7 +48,6 @@ function resolveVariable(
 function isStaticConstIdentifier(
   context: RuleContext,
   node: TSESTree.Identifier,
-  options: Required<RuleOptions>,
 ): boolean {
   const variable = resolveVariable(context, node)
   if (!variable || variable.defs.length !== 1) return false
@@ -62,13 +61,12 @@ function isStaticConstIdentifier(
   ) {
     return false
   }
-  return isStaticValue(context, def.node.init, options)
+  return isStaticValue(context, def.node.init)
 }
 
 export function isStaticValue(
   context: RuleContext,
   node: TSESTree.Node,
-  options: Required<RuleOptions>,
 ): boolean {
   switch (node.type) {
     case "Literal":
@@ -80,37 +78,30 @@ export function isStaticValue(
         (property) =>
           property.type === "Property" &&
           !property.computed &&
-          isStaticValue(context, property.value, options),
+          isStaticValue(context, property.value),
       )
     case "ArrayExpression":
       return node.elements.every(
         (element) =>
           element !== null &&
           element.type !== "SpreadElement" &&
-          isStaticValue(context, element, options),
+          isStaticValue(context, element),
       )
     case "ConditionalExpression":
     case "LogicalExpression": {
-      if (options.checkConditionals) return false
       const [left, right] =
         node.type === "ConditionalExpression"
           ? [node.consequent, node.alternate]
           : [node.left, node.right]
-      return (
-        isStaticValue(context, left, options) &&
-        isStaticValue(context, right, options)
-      )
+      return isStaticValue(context, left) && isStaticValue(context, right)
     }
     case "UnaryExpression":
       return (
         (node.operator === "-" || node.operator === "+") &&
-        isStaticValue(context, node.argument, options)
+        isStaticValue(context, node.argument)
       )
     case "Identifier":
-      return (
-        node.name === "undefined" ||
-        isStaticConstIdentifier(context, node, options)
-      )
+      return node.name === "undefined" || isStaticConstIdentifier(context, node)
     case "CallExpression":
       return isRawCallExpression(node)
     default:

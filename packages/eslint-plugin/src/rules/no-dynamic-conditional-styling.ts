@@ -13,15 +13,14 @@ export const noDynamicConditionalStyling: TSESLint.RuleModule<
 > = {
   meta: {
     type: "suggestion",
-    fixable: "code",
     docs: {
       description:
-        "Disallow a ternary or `??`/`||` fallback in a Chakra/Panda style position, isolated so it can be given a stricter severity.",
+        "Disallow runtime-computed branches in a ternary or `??`/`||` fallback in a Chakra style position.",
     },
     schema: STYLE_POSITION_SCHEMA,
     messages: {
       dynamicConditional:
-        "Conditional value for '{{subject}}' forces a runtime style branch on every render. Prefer a data-* attribute selector or a recipe variant (e.g. `<Component variant={...} />`) instead of a ternary or `??`/`||` fallback in a style position.",
+        "Conditional value for '{{subject}}' includes a runtime-computed style value that cannot be statically analyzed. Ensure every possible style value is statically defined, or use a CSS variable or recipe variant.",
       dynamicPropName:
         "Dynamic property name in '{{subject}}'. {{runtimeNote}}",
       dynamicStyleValue:

@@ -43,12 +43,10 @@ export default [
 
 ### `@chakra-ui/no-dynamic-conditional-styling`
 
-Reports ternaries and `??`/`||` fallbacks in Chakra style props, `chakra(...)`
-factory styles, and Chakra system CSS calls. System calls include
-`defaultSystem.css(...)` and systems created with `createSystem(...)` or
-returned by `useChakraContext()`. Safe top-level JSX ternaries can be
-automatically rewritten to a `data-*` selector; ambiguous cases remain
-diagnostic-only.
+Reports ternaries and `??`/`||` fallbacks containing runtime-computed style
+values in Chakra style props, `chakra(...)` factory styles, and Chakra system
+CSS calls. System calls include `defaultSystem.css(...)` and systems created
+with `createSystem(...)` or returned by `useChakraContext()`. Conditionals whose
+possible style values are all statically analyzable are allowed.
 
-The rule accepts an options object with `checkConditionals` and `typeAware`
-settings.
+The rule accepts an options object with a `typeAware` setting.
