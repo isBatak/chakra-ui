@@ -16,7 +16,6 @@ import {
 
 const DEFAULT_OPTIONS: Required<RuleOptions> = {
   checkConditionals: true,
-  componentFactories: ["chakra"],
   styleProps: "generated",
   typeAware: true,
   generatedTypePatterns: ["styled-system"],
@@ -32,11 +31,6 @@ export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
     type: "object",
     properties: {
       checkConditionals: { type: "boolean" },
-      componentFactories: {
-        type: "array",
-        items: { type: "string" },
-        minItems: 1,
-      },
       styleProps: {
         oneOf: [
           { type: "string", enum: ["generated"] },
@@ -66,7 +60,6 @@ export function createStylePositionVisitor(
     options.styleProps === "generated"
       ? getGeneratedStyleProps()
       : new Set(options.styleProps)
-  const componentFactoryNames = new Set(options.componentFactories)
   const trackedComponentFactories = new Set<string>()
   const trackedCreateSystemFunctions = new Set<string>()
   const trackedUseChakraContextFunctions = new Set<string>()
@@ -203,7 +196,7 @@ export function createStylePositionVisitor(
         if (isChakraImport && specifier.imported.name === "useChakraContext") {
           trackedUseChakraContextFunctions.add(specifier.local.name)
         }
-        if (componentFactoryNames.has(specifier.imported.name)) {
+        if (isChakraImport && specifier.imported.name === "chakra") {
           trackedComponentFactories.add(specifier.local.name)
         }
       }
@@ -301,7 +294,8 @@ export function createStylePositionVisitor(
       const calleeName =
         node.callee.type === "Identifier" ? node.callee.name : null
       const isFactory =
-        calleeName !== null && trackedComponentFactories.has(calleeName)
+        (calleeName !== null && trackedComponentFactories.has(calleeName)) ||
+        isChakraNamespaceMember(node.callee, "chakra")
       const isSystemCss =
         (calleeName !== null && trackedSystemCssFunctions.has(calleeName)) ||
         isSystemCssMember(node.callee)
@@ -311,7 +305,7 @@ export function createStylePositionVisitor(
         ? node.arguments.slice(1)
         : node.arguments
       const subject = isFactory
-        ? `${calleeName}(...)`
+        ? `${context.sourceCode.getText(node.callee)}(...)`
         : `${context.sourceCode.getText(node.callee)}(...)`
       for (const argument of styleArguments) {
         if (argument.type !== "SpreadElement") {
