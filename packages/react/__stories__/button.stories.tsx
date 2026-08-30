@@ -1,16 +1,47 @@
 import type { Meta } from "@storybook/react-vite"
-import { Box } from "../src"
+import { Box, Button, VStack } from "../src"
+import { EmotionStyledEngine } from "../src/styled-engine/emotion"
+import { PandaStyledEngine } from "../src/styled-engine/panda"
+import { chakra } from "../src/styled-system"
 
 export default {
   title: "Components / Button",
   decorators: [
     (Story) => (
-      <Box p="10">
-        <Story />
-      </Box>
+      <EmotionStyledEngine>
+        <Box p="10">
+          <Story />
+        </Box>
+      </EmotionStyledEngine>
     ),
   ],
 } satisfies Meta
+
+export const Test = () => (
+  <VStack gap="4">
+    <Button>Emotion Button</Button>
+    <Button loading>Emotion Loading Button</Button>
+    <Button loading loadingText="Loading">
+      Emotion Loading Text Button
+    </Button>
+
+    <chakra.div scrollMarginBlockEnd="73px">
+      Emotion-only extraction probe
+    </chakra.div>
+
+    <PandaStyledEngine>
+      <Button>Panda Button</Button>
+      <Button loading>Panda Loading Button</Button>
+      <Button loading loadingText="Loading">
+        Panda Loading Text Button
+      </Button>
+
+      <chakra.div scrollMarginBlockEnd="73px">
+        Panda-only extraction probe
+      </chakra.div>
+    </PandaStyledEngine>
+  </VStack>
+)
 
 export { ButtonBasic as Basic } from "compositions/examples/button-basic"
 export { ButtonSizeTable as Sizes } from "compositions/examples/button-size-table"

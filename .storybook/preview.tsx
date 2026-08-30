@@ -7,6 +7,7 @@ import {
   createSystem,
   defaultConfig,
 } from "../packages/react/src"
+import "../styled-system/styles.css"
 
 const system = createSystem(defaultConfig, {
   theme: {

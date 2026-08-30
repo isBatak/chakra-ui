@@ -1,0 +1,158 @@
+---
+title: Styled Engine
+description: Select how Chakra components generate styles at runtime
+---
+
+## Overview
+
+A styled engine connects Chakra components to a styling implementation. Chakra
+components keep the same imports and style props while the nearest engine
+boundary decides how those styles are rendered.
+
+Chakra currently provides two boundaries:
+
+- `EmotionStyledEngine` generates and inserts styles at runtime.
+- `PandaStyledEngine` returns class names backed by Panda's generated CSS.
+
+The boundary affects styling only. `ChakraProvider` still owns the design
+system, theme, global styles, and color mode.
+
+::::warning
+
+The styled-engine adapter contract is experimental. Emotion and Panda are the
+first integrations, and the API may evolve as more adapters are validated.
+
+::::
+
+## Setup
+
+Place one engine boundary above every Chakra component. With the current
+integration, mount it inside `ChakraProvider` so the engine can access the
+active Chakra system.
+
+### Emotion
+
+Use Emotion when migrating an existing Chakra application or when you need
+runtime-generated styles.
+
+```tsx
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import { EmotionStyledEngine } from "@chakra-ui/react/styled-engine"
+
+export function Provider(props: React.PropsWithChildren) {
+  return (
+    <ChakraProvider value={defaultSystem}>
+      <EmotionStyledEngine>{props.children}</EmotionStyledEngine>
+    </ChakraProvider>
+  )
+}
+```
+
+### Panda
+
+Before mounting the Panda boundary:
+
+1. Configure Panda with the Chakra preset and include your component sources.
+2. Enable Chakra's Panda extraction integration so Panda recognizes the public
+   `chakra()` and `chakra.element` factory forms.
+3. Generate the Panda styled system and import its CSS once at the application
+   root.
+
+The [Styling Performance guide](/guides/styling-performance) shows the basic
+Panda and Chakra preset configuration.
+
+```tsx
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import { PandaStyledEngine } from "@chakra-ui/react/styled-engine"
+import "styled-system/styles.css"
+
+export function Provider(props: React.PropsWithChildren) {
+  return (
+    <ChakraProvider value={defaultSystem}>
+      <PandaStyledEngine>{props.children}</PandaStyledEngine>
+    </ChakraProvider>
+  )
+}
+```
+
+If Panda does not extract a style, the component can produce a class name
+without a corresponding CSS rule. Keep Panda's source configuration and the
+generated CSS synchronized with your application build.
+
+## Incremental migration
+
+Engine boundaries can be nested. A component always uses the nearest boundary,
+which allows a Panda application to retain an Emotion subtree during migration.
+
+```tsx
+<ChakraProvider value={defaultSystem}>
+  <PandaStyledEngine>
+    <MigratedApp />
+
+    <EmotionStyledEngine>
+      <LegacyPage />
+
+      <PandaStyledEngine>
+        <MigratedSection />
+      </PandaStyledEngine>
+    </EmotionStyledEngine>
+  </PandaStyledEngine>
+</ChakraProvider>
+```
+
+Prefer a boundary around a feature or route. Wrap a compound component at its
+root so all of its parts resolve the same engine.
+
+## Panda extraction limitation
+
+`PandaStyledEngine` is a React runtime boundary, but Panda extracts CSS by
+scanning source files at build time. Panda cannot determine whether a `chakra()`
+call will eventually render inside a Panda or Emotion boundary.
+
+As a result, every recognized Chakra style in a file scanned by Panda is added
+to the generated CSS, including styles used only below an `EmotionStyledEngine`.
+
+```tsx
+<EmotionStyledEngine>
+  <chakra.div scrollMarginBlockEnd="73px" />
+</EmotionStyledEngine>
+
+<PandaStyledEngine>
+  <chakra.div scrollMarginBlockEnd="79px" />
+</PandaStyledEngine>
+```
+
+When this file is included in Panda's source configuration, both utilities are
+extracted. The extra rule does not style the Emotion component because Emotion
+uses its own class name, but it remains in the generated Panda stylesheet.
+Atomic utilities shared by multiple components are emitted only once.
+
+This behavior cannot be corrected reliably with a React directive or a PostCSS
+unused-CSS pass. Neither has enough information to reconstruct the runtime
+component tree, and aggressive pruning can remove rules needed by conditional or
+lazily rendered Panda components.
+
+If exact CSS separation is required, use a static boundary instead:
+
+- Keep Panda-authored UI in dedicated files or package entry points.
+- Restrict Panda's `include` and `exclude` globs to those sources.
+- Generate and load CSS for the relevant Panda entry point.
+
+Runtime engine boundaries intentionally favor incremental migration over exact
+per-subtree CSS extraction.
+
+## Adapter authors
+
+`StyledEngine` accepts an adapter that implements Chakra's engine-neutral
+factory and recipe contract. This low-level API is intended for adapter authors,
+not normal component usage, and remains experimental while additional styling
+engines are evaluated.
+
+Future documentation will cover adapter conformance, server rendering, framework
+integration, and migration tooling as those contracts stabilize.
+
+## Related guides
+
+- [Chakra Factory](/docs/styling/chakra-factory)
+- [Styling Performance](/guides/styling-performance)
+- [Panda CSS documentation](https://panda-css.com/docs)

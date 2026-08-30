@@ -248,6 +248,10 @@ generates static CSS files with zero runtime overhead. You can use the
 `@chakra-ui/panda-preset` to get all of Chakra UI's design tokens, recipes, and
 patterns in a zero-runtime environment.
 
+This approach uses Panda's generated functions directly. To render Chakra
+components through Emotion and Panda during an incremental migration, see the
+[Styled Engine](/docs/styling/styled-engine) guide.
+
 ```bash
 # Install dependencies
 npm install -D @pandacss/dev @chakra-ui/panda-preset

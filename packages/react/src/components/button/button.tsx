@@ -13,7 +13,9 @@ import { cx, dataAttr } from "../../utils"
 import { Loader } from "../loader"
 
 const { useRecipeResult, PropsProvider, usePropsContext } = createRecipeContext(
-  { key: "button" },
+  {
+    key: "button",
+  },
 )
 
 export interface ButtonLoadingProps {
