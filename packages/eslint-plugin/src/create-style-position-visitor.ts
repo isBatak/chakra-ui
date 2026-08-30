@@ -16,9 +16,7 @@ import {
 
 const DEFAULT_OPTIONS: Required<RuleOptions> = {
   checkConditionals: true,
-  styleProps: "generated",
   typeAware: true,
-  generatedTypePatterns: ["styled-system"],
 }
 
 const CHAKRA_PACKAGE = "@chakra-ui/react"
@@ -31,18 +29,7 @@ export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
     type: "object",
     properties: {
       checkConditionals: { type: "boolean" },
-      styleProps: {
-        oneOf: [
-          { type: "string", enum: ["generated"] },
-          { type: "array", items: { type: "string" } },
-        ],
-      },
       typeAware: { type: "boolean" },
-      generatedTypePatterns: {
-        type: "array",
-        items: { type: "string" },
-        minItems: 1,
-      },
     },
     additionalProperties: false,
   },
@@ -56,10 +43,7 @@ export function createStylePositionVisitor(
     ...DEFAULT_OPTIONS,
     ...context.options[0],
   }
-  const styleProps =
-    options.styleProps === "generated"
-      ? getGeneratedStyleProps()
-      : new Set(options.styleProps)
+  const styleProps = getGeneratedStyleProps()
   const trackedComponentFactories = new Set<string>()
   const trackedCreateSystemFunctions = new Set<string>()
   const trackedUseChakraContextFunctions = new Set<string>()
@@ -263,12 +247,7 @@ export function createStylePositionVisitor(
         if (
           typeInfo &&
           resolvedPropsType &&
-          isDeclaredOutsideGeneratedTypes(
-            typeInfo,
-            resolvedPropsType,
-            propName,
-            options.generatedTypePatterns,
-          )
+          isDeclaredOutsideGeneratedTypes(typeInfo, resolvedPropsType, propName)
         ) {
           continue
         }

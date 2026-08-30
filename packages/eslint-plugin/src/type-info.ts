@@ -9,6 +9,8 @@ interface TypeInfo {
   }
 }
 
+const GENERATED_TYPE_PATTERN = "styled-system"
+
 export function getTypeInfo(context: RuleContext): TypeInfo | null {
   const parserServices =
     context.sourceCode?.parserServices ?? context.parserServices
@@ -46,7 +48,6 @@ export function isDeclaredOutsideGeneratedTypes(
   typeInfo: TypeInfo,
   propsType: ts.Type,
   propName: string,
-  generatedTypePatterns: string[],
 ) {
   const declarations = typeInfo.checker.getPropertyOfType(
     propsType,
@@ -56,6 +57,6 @@ export function isDeclaredOutsideGeneratedTypes(
 
   return !declarations.some((declaration) => {
     const fileName = declaration.getSourceFile().fileName
-    return generatedTypePatterns.some((pattern) => fileName.includes(pattern))
+    return fileName.includes(GENERATED_TYPE_PATTERN)
   })
 }

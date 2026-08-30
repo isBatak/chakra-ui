@@ -2,9 +2,7 @@ import type { TSESLint } from "@typescript-eslint/utils"
 
 export interface RuleOptions {
   checkConditionals?: boolean
-  styleProps?: "generated" | string[]
   typeAware?: boolean
-  generatedTypePatterns?: string[]
 }
 
 export type Options = [RuleOptions?]

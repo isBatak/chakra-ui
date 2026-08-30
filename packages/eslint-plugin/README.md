@@ -50,5 +50,5 @@ returned by `useChakraContext()`. Safe top-level JSX ternaries can be
 automatically rewritten to a `data-*` selector; ambiguous cases remain
 diagnostic-only.
 
-The rule accepts an options object with `checkConditionals`, `styleProps`,
-`typeAware`, and `generatedTypePatterns` settings.
+The rule accepts an options object with `checkConditionals` and `typeAware`
+settings.
