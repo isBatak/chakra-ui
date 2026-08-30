@@ -1,10 +1,6 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 
-export interface RuleOptions {
-  typeAware?: boolean
-}
-
-export type Options = [RuleOptions?]
+export type Options = []
 export type MessageId =
   | "dynamicConditional"
   | "dynamicPropName"

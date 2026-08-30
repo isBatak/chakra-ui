@@ -47,6 +47,6 @@ Reports ternaries and `??`/`||` fallbacks containing runtime-computed style
 values in Chakra style props, `chakra(...)` factory styles, and Chakra system
 CSS calls. System calls include `defaultSystem.css(...)` and systems created
 with `createSystem(...)` or returned by `useChakraContext()`. Conditionals whose
-possible style values are all statically analyzable are allowed.
-
-The rule accepts an options object with a `typeAware` setting.
+possible style values are all statically analyzable are allowed. Type-aware
+filtering is used automatically when TypeScript parser services are available;
+otherwise the rule falls back to syntax-only detection.

@@ -1,11 +1,11 @@
-import type { JSONSchema, TSESLint, TSESTree } from "@typescript-eslint/utils"
+import type { TSESLint, TSESTree } from "@typescript-eslint/utils"
 import { getGeneratedStyleProps } from "./style-props"
 import {
   getPropsType,
   getTypeInfo,
   isDeclaredOutsideGeneratedTypes,
 } from "./type-info"
-import type { MessageId, RuleContext, RuleOptions } from "./types"
+import type { MessageId, RuleContext } from "./types"
 import {
   isConditionalLike,
   isRawCallExpression,
@@ -13,33 +13,15 @@ import {
   jsxName,
 } from "./utils"
 
-const DEFAULT_OPTIONS: Required<RuleOptions> = {
-  typeAware: true,
-}
-
 const CHAKRA_PACKAGE = "@chakra-ui/react"
 
 const RUNTIME_NOTE =
   "This value causes a new style object to be allocated on every render."
 
-export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
-  {
-    type: "object",
-    properties: {
-      typeAware: { type: "boolean" },
-    },
-    additionalProperties: false,
-  },
-]
-
 export function createStylePositionVisitor(
   context: RuleContext,
   reportableMessageIds: ReadonlySet<MessageId>,
 ): TSESLint.RuleListener {
-  const options: Required<RuleOptions> = {
-    ...DEFAULT_OPTIONS,
-    ...context.options[0],
-  }
   const styleProps = getGeneratedStyleProps()
   const trackedComponentFactories = new Set<string>()
   const trackedCreateSystemFunctions = new Set<string>()
@@ -47,7 +29,7 @@ export function createStylePositionVisitor(
   const trackedSystemObjects = new Set<string>()
   const trackedSystemCssFunctions = new Set<string>()
   const trackedChakraNamespaces = new Set<string>()
-  const typeInfo = options.typeAware ? getTypeInfo(context) : null
+  const typeInfo = getTypeInfo(context)
 
   function memberPropertyName(node: TSESTree.MemberExpression) {
     if (!node.computed && node.property.type === "Identifier") {
