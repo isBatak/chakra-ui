@@ -1,9 +1,6 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 
-export type Engine = "emotion" | "panda" | "both"
-
 export interface RuleOptions {
-  engine?: Engine
   checkConditionals?: boolean
   styleFunctions?: string[]
   componentFactories?: string[]

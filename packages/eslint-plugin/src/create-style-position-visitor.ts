@@ -15,7 +15,6 @@ import {
 } from "./utils"
 
 const DEFAULT_OPTIONS: Required<RuleOptions> = {
-  engine: "both",
   checkConditionals: true,
   styleFunctions: ["css", "chakra"],
   componentFactories: ["chakra"],
@@ -24,18 +23,13 @@ const DEFAULT_OPTIONS: Required<RuleOptions> = {
   generatedTypePatterns: ["styled-system"],
 }
 
-const ENGINE_NOTES = {
-  emotion:
-    "Emotion reallocates a new style object for this value on every render.",
-  panda: "Panda can't statically extract this value at build time.",
-  both: "Emotion reallocates a new style object for this value on every render, and Panda can't statically extract it at build time.",
-} as const
+const RUNTIME_NOTE =
+  "This value causes a new style object to be allocated on every render."
 
 export const STYLE_POSITION_SCHEMA: readonly JSONSchema.JSONSchema4[] = [
   {
     type: "object",
     properties: {
-      engine: { type: "string", enum: ["emotion", "panda", "both"] },
       checkConditionals: { type: "boolean" },
       styleFunctions: {
         type: "array",
@@ -92,7 +86,7 @@ export function createStylePositionVisitor(
     context.report({
       node,
       messageId,
-      data: { subject, engineNote: ENGINE_NOTES[options.engine] },
+      data: { subject, runtimeNote: RUNTIME_NOTE },
       fix: fix ?? undefined,
     })
   }

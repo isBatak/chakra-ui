@@ -47,6 +47,6 @@ Reports ternaries and `??`/`||` fallbacks in Chakra style props and imported
 Panda style functions. Safe top-level JSX ternaries can be automatically
 rewritten to a `data-*` selector; ambiguous cases remain diagnostic-only.
 
-The rule accepts an options object with `engine`, `checkConditionals`,
-`styleFunctions`, `componentFactories`, `styleProps`, `typeAware`, and
-`generatedTypePatterns` settings.
+The rule accepts an options object with `checkConditionals`, `styleFunctions`,
+`componentFactories`, `styleProps`, `typeAware`, and `generatedTypePatterns`
+settings.

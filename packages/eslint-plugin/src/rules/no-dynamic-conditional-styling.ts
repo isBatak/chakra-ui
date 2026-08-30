@@ -22,9 +22,10 @@ export const noDynamicConditionalStyling: TSESLint.RuleModule<
     messages: {
       dynamicConditional:
         "Conditional value for '{{subject}}' forces a runtime style branch on every render. Prefer a data-* attribute selector or a recipe variant (e.g. `<Component variant={...} />`) instead of a ternary or `??`/`||` fallback in a style position.",
-      dynamicPropName: "Dynamic property name in '{{subject}}'. {{engineNote}}",
+      dynamicPropName:
+        "Dynamic property name in '{{subject}}'. {{runtimeNote}}",
       dynamicStyleValue:
-        "Dynamic style value for '{{subject}}'. {{engineNote}}",
+        "Dynamic style value for '{{subject}}'. {{runtimeNote}}",
     },
   },
   defaultOptions: [],
