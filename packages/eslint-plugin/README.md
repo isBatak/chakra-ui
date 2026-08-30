@@ -1,17 +1,17 @@
-# eslint-plugin-chakra-ui
+# @chakra-ui/eslint-plugin
 
 ESLint rules for Chakra UI styling patterns.
 
 ## Installation
 
 ```sh
-pnpm add -D eslint-plugin-chakra-ui eslint
+pnpm add -D @chakra-ui/eslint-plugin eslint
 ```
 
 ## Flat config
 
 ```js
-import chakraUi from "eslint-plugin-chakra-ui"
+import chakraUi from "@chakra-ui/eslint-plugin"
 
 export default [chakraUi.configs["flat/recommended"]]
 ```
@@ -19,13 +19,13 @@ export default [chakraUi.configs["flat/recommended"]]
 Or configure the rule directly:
 
 ```js
-import chakraUi from "eslint-plugin-chakra-ui"
+import chakraUi from "@chakra-ui/eslint-plugin"
 
 export default [
   {
-    plugins: { "chakra-ui": chakraUi },
+    plugins: { "@chakra-ui": chakraUi },
     rules: {
-      "chakra-ui/no-dynamic-conditional-styling": "warn",
+      "@chakra-ui/no-dynamic-conditional-styling": "warn",
     },
   },
 ]
@@ -35,13 +35,13 @@ export default [
 
 ```json
 {
-  "extends": ["plugin:chakra-ui/recommended"]
+  "extends": ["plugin:@chakra-ui/recommended"]
 }
 ```
 
 ## Rules
 
-### `chakra-ui/no-dynamic-conditional-styling`
+### `@chakra-ui/no-dynamic-conditional-styling`
 
 Reports ternaries and `??`/`||` fallbacks in Chakra style props and Chakra
 system CSS calls, including `defaultSystem.css(...)` and systems created with

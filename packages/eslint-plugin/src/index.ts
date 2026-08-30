@@ -5,7 +5,7 @@ export const rules = {
 }
 
 const recommendedRules = {
-  "chakra-ui/no-dynamic-conditional-styling": "warn",
+  "@chakra-ui/no-dynamic-conditional-styling": "warn",
 } as const
 
 interface Plugin {
@@ -17,14 +17,14 @@ interface Plugin {
       rules: typeof recommendedRules
     }
     "flat/recommended": {
-      plugins: { "chakra-ui": Plugin }
+      plugins: { "@chakra-ui": Plugin }
       rules: typeof recommendedRules
     }
   }
 }
 
 export const meta = {
-  name: "eslint-plugin-chakra-ui",
+  name: "@chakra-ui/eslint-plugin",
 }
 
 const plugin: Plugin = {
@@ -34,11 +34,11 @@ const plugin: Plugin = {
 }
 
 plugin.configs.recommended = {
-  plugins: ["chakra-ui"],
+  plugins: ["@chakra-ui"],
   rules: recommendedRules,
 }
 plugin.configs["flat/recommended"] = {
-  plugins: { "chakra-ui": plugin },
+  plugins: { "@chakra-ui": plugin },
   rules: recommendedRules,
 }
 
