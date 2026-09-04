@@ -1,0 +1,52 @@
+# @chakra-ui/eslint-plugin
+
+ESLint rules for Chakra UI styling patterns.
+
+## Installation
+
+```sh
+pnpm add -D @chakra-ui/eslint-plugin eslint
+```
+
+## Flat config
+
+```js
+import chakraUi from "@chakra-ui/eslint-plugin"
+
+export default [chakraUi.configs["flat/recommended"]]
+```
+
+Or configure the rule directly:
+
+```js
+import chakraUi from "@chakra-ui/eslint-plugin"
+
+export default [
+  {
+    plugins: { "@chakra-ui": chakraUi },
+    rules: {
+      "@chakra-ui/no-dynamic-conditional-styling": "warn",
+    },
+  },
+]
+```
+
+## Legacy config
+
+```json
+{
+  "extends": ["plugin:@chakra-ui/recommended"]
+}
+```
+
+## Rules
+
+### `@chakra-ui/no-dynamic-conditional-styling`
+
+Reports ternaries and `??`/`||` fallbacks containing runtime-computed style
+values in Chakra style props, `chakra(...)` factory styles, and Chakra system
+CSS calls. System calls include `defaultSystem.css(...)` and systems created
+with `createSystem(...)` or returned by `useChakraContext()`. Conditionals whose
+possible style values are all statically analyzable are allowed. Type-aware
+filtering is used automatically when TypeScript parser services are available;
+otherwise the rule falls back to syntax-only detection.

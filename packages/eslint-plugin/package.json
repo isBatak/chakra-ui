@@ -1,0 +1,71 @@
+{
+  "name": "@chakra-ui/eslint-plugin",
+  "version": "3.37.0",
+  "description": "ESLint rules for Chakra UI styling patterns",
+  "type": "module",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Segun Adebayo <sage@adebayosegun.com>",
+  "license": "MIT",
+  "homepage": "https://chakra-ui.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chakra-ui/chakra-ui",
+    "directory": "packages/eslint-plugin"
+  },
+  "keywords": [
+    "chakra-ui",
+    "eslint",
+    "eslintplugin",
+    "panda-css"
+  ],
+  "scripts": {
+    "prepack": "tsx ../../scripts/conditions.ts",
+    "postpack": "tsx ../../scripts/conditions.ts --restore",
+    "build:fast": "tsx ../../scripts/build/main.ts",
+    "build": "tsx ../../scripts/build/main.ts --dts",
+    "dev": "pnpm build:fast --watch",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@pandacss/is-valid-prop": "^1.4.2",
+    "@pandacss/preset-base": "^1.4.2",
+    "@typescript-eslint/utils": "8.60.1"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "workspace:*",
+    "@typescript-eslint/parser": "8.60.1",
+    "eslint": "9.39.4",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.57.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
