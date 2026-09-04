@@ -38,7 +38,6 @@
     "prepack": "tsx ../../scripts/conditions.ts",
     "postpack": "tsx ../../scripts/conditions.ts --restore",
     "build:fast": "tsx ../../scripts/build/main.ts",
-    "prebuild": "pnpm clean && pnpm theme",
     "build": "tsx ../../scripts/build/main.ts --dts",
     "dev": "pnpm build:fast --watch",
     "clean": "tsx scripts/clean.ts",

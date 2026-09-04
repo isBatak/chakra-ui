@@ -1,3 +1,4 @@
+export type * from "./canonical.types"
 export * from "./config"
 export { createRecipeContext } from "./create-recipe-context"
 export { createSlotRecipeContext } from "./create-slot-recipe-context"

@@ -113,6 +113,17 @@
         "default": "./dist/cjs/preset-base.cjs"
       }
     },
+    "./styling-engine": {
+      "dev": "./src/styling-engine/index.ts",
+      "import": {
+        "types": "./dist/types/styling-engine/index.d.ts",
+        "default": "./dist/esm/styling-engine/index.js"
+      },
+      "require": {
+        "types": "./dist/types/styling-engine/index.d.ts",
+        "default": "./dist/cjs/styling-engine/index.cjs"
+      }
+    },
     "./styled-system": {
       "dev": "./src/styled-system/index.ts",
       "import": {

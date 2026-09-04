@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+      - v4
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build packages
-        run: pnpm build
+        run: pnpm --recursive --filter './packages/*' build
 
   tests:
     name: Tests
